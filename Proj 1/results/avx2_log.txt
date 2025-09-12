@@ -1,0 +1,1878 @@
+SIMD Performance Analysis Project
+=================================
+
+Detected CPU frequency: 3.69 GHz
+CPU Model: 12th Gen Intel(R) Core(TM) i5-12600KF
+Compiler: Clang 19.1.5
+Running comprehensive experiments with flags: avx2
+Run 0: Scalar AXPY f32 size=1024 time=0.000000s GFLOP/s=25575.011 BW=149.854 GB/s
+Run 1: Scalar Dot Product f32 size=1024 time=0.000000s GFLOP/s=35544.854 BW=138.847 GB/s
+Run 2: Scalar Elementwise Multiply f32 size=1024 time=0.000000s GFLOP/s=16384.024 BW=192.000 GB/s
+Run 3: Scalar 3-Point Stencil f32 size=1024 time=0.000000s GFLOP/s=59578.122 BW=139.636 GB/s
+Run 4: Scalar Memory Bandwidth f32 size=1024 time=0.000000s GFLOP/s=14979.668 BW=117.029 GB/s
+Run 5: Vectorized AXPY f32 size=1024 time=0.000000s GFLOP/s=29537.369 BW=173.071 GB/s
+Run 6: Vectorized Dot Product f32 size=1024 time=0.000000s GFLOP/s=35544.854 BW=138.847 GB/s
+Run 7: Vectorized Elementwise Multiply f32 size=1024 time=0.000000s GFLOP/s=19064.974 BW=223.418 GB/s
+Run 8: Vectorized 3-Point Stencil f32 size=1024 time=0.000000s GFLOP/s=60262.933 BW=141.241 GB/s
+Run 9: Vectorized Memory Bandwidth f32 size=1024 time=0.000000s GFLOP/s=14979.668 BW=117.029 GB/s
+Run 10: Scalar AXPY f32 size=1024 time=0.000000s GFLOP/s=53773.120 BW=315.077 GB/s
+Run 11: Scalar Dot Product f32 size=1024 time=0.000000s GFLOP/s=39569.039 BW=154.567 GB/s
+Run 12: Scalar Elementwise Multiply f32 size=1024 time=0.000000s GFLOP/s=25575.011 BW=299.707 GB/s
+Run 13: Scalar 3-Point Stencil f32 size=1024 time=0.000000s GFLOP/s=63167.191 BW=148.048 GB/s
+Run 14: Scalar Memory Bandwidth f32 size=1024 time=0.000000s GFLOP/s=45590.491 BW=356.176 GB/s
+Run 15: Vectorized AXPY f32 size=1024 time=0.000000s GFLOP/s=55188.213 BW=323.368 GB/s
+Run 16: Vectorized Dot Product f32 size=1024 time=0.000000s GFLOP/s=39568.822 BW=154.566 GB/s
+Run 17: Vectorized Elementwise Multiply f32 size=1024 time=0.000000s GFLOP/s=25575.011 BW=299.707 GB/s
+Run 18: Vectorized 3-Point Stencil f32 size=1024 time=0.000000s GFLOP/s=63937.528 BW=149.854 GB/s
+Run 19: Vectorized Memory Bandwidth f32 size=1024 time=0.000000s GFLOP/s=41943.209 BW=327.681 GB/s
+Run 20: Scalar AXPY f64 size=1024 time=0.000000s GFLOP/s=14873.428 BW=174.298 GB/s
+Run 21: Scalar Dot Product f64 size=1024 time=0.000000s GFLOP/s=19418.083 BW=151.704 GB/s
+Run 22: Scalar Elementwise Multiply f64 size=1024 time=0.000000s GFLOP/s=13617.869 BW=319.169 GB/s
+Run 23: Scalar 3-Point Stencil f64 size=1024 time=0.000000s GFLOP/s=56375.154 BW=264.259 GB/s
+Run 24: Scalar Memory Bandwidth f64 size=1024 time=0.000000s GFLOP/s=10485.772 BW=163.840 GB/s
+Run 25: Vectorized AXPY f64 size=1024 time=0.000000s GFLOP/s=20763.903 BW=243.327 GB/s
+Run 26: Vectorized Dot Product f64 size=1024 time=0.000000s GFLOP/s=23831.249 BW=186.182 GB/s
+Run 27: Vectorized Elementwise Multiply f64 size=1024 time=0.000000s GFLOP/s=13617.869 BW=319.169 GB/s
+Run 28: Vectorized 3-Point Stencil f64 size=1024 time=0.000000s GFLOP/s=58908.701 BW=276.135 GB/s
+Run 29: Vectorized Memory Bandwidth f64 size=1024 time=0.000000s GFLOP/s=10381.951 BW=162.218 GB/s
+Run 30: Scalar AXPY f64 size=1024 time=0.000000s GFLOP/s=39568.822 BW=463.697 GB/s
+Run 31: Scalar Dot Product f64 size=1024 time=0.000000s GFLOP/s=24105.173 BW=188.322 GB/s
+Run 32: Scalar Elementwise Multiply f64 size=1024 time=0.000000s GFLOP/s=16384.024 BW=384.001 GB/s
+Run 33: Scalar 3-Point Stencil f64 size=1024 time=0.000000s GFLOP/s=46397.173 BW=217.487 GB/s
+Run 34: Scalar Memory Bandwidth f64 size=1024 time=0.000000s GFLOP/s=29959.335 BW=468.115 GB/s
+Run 35: Vectorized AXPY f64 size=1024 time=0.000000s GFLOP/s=38836.271 BW=455.113 GB/s
+Run 36: Vectorized Dot Product f64 size=1024 time=0.000000s GFLOP/s=24672.442 BW=192.753 GB/s
+Run 37: Vectorized Elementwise Multiply f64 size=1024 time=0.000000s GFLOP/s=16912.467 BW=396.386 GB/s
+Run 38: Vectorized 3-Point Stencil f64 size=1024 time=0.000000s GFLOP/s=46397.173 BW=217.487 GB/s
+Run 39: Vectorized Memory Bandwidth f64 size=1024 time=0.000000s GFLOP/s=29959.335 BW=468.115 GB/s
+Run 40: Scalar AXPY f32 size=4096 time=0.000000s GFLOP/s=165292.695 BW=242.128 GB/s
+Run 41: Scalar Dot Product f32 size=4096 time=0.000000s GFLOP/s=167772.103 BW=163.840 GB/s
+Run 42: Scalar Elementwise Multiply f32 size=4096 time=0.000000s GFLOP/s=104206.459 BW=305.292 GB/s
+Run 43: Scalar 3-Point Stencil f32 size=4096 time=0.000000s GFLOP/s=332881.426 BW=195.048 GB/s
+Run 44: Scalar Memory Bandwidth f32 size=4096 time=0.000000s GFLOP/s=84733.392 BW=165.495 GB/s
+Run 45: Vectorized AXPY f32 size=4096 time=0.000000s GFLOP/s=165292.695 BW=242.128 GB/s
+Run 46: Vectorized Dot Product f32 size=4096 time=0.000000s GFLOP/s=168615.185 BW=164.663 GB/s
+Run 47: Vectorized Elementwise Multiply f32 size=4096 time=0.000000s GFLOP/s=104206.271 BW=305.292 GB/s
+Run 48: Vectorized 3-Point Stencil f32 size=4096 time=0.000000s GFLOP/s=334207.658 BW=195.825 GB/s
+Run 49: Vectorized Memory Bandwidth f32 size=4096 time=0.000000s GFLOP/s=84307.716 BW=164.664 GB/s
+Run 50: Scalar AXPY f32 size=4096 time=0.000000s GFLOP/s=322638.118 BW=472.614 GB/s
+Run 51: Scalar Dot Product f32 size=4096 time=0.000000s GFLOP/s=172960.970 BW=168.907 GB/s
+Run 52: Scalar Elementwise Multiply f32 size=4096 time=0.000000s GFLOP/s=133152.417 BW=390.095 GB/s
+Run 53: Scalar 3-Point Stencil f32 size=4096 time=0.000000s GFLOP/s=360026.051 BW=210.953 GB/s
+Run 54: Scalar Memory Bandwidth f32 size=4096 time=0.000000s GFLOP/s=279619.494 BW=546.132 GB/s
+Run 55: Vectorized AXPY f32 size=4096 time=0.000000s GFLOP/s=322639.021 BW=472.616 GB/s
+Run 56: Vectorized Dot Product f32 size=4096 time=0.000000s GFLOP/s=172074.241 BW=168.041 GB/s
+Run 57: Vectorized Elementwise Multiply f32 size=4096 time=0.000000s GFLOP/s=131071.896 BW=384.000 GB/s
+Run 58: Vectorized 3-Point Stencil f32 size=4096 time=0.000000s GFLOP/s=363143.183 BW=212.779 GB/s
+Run 59: Vectorized Memory Bandwidth f32 size=4096 time=0.000000s GFLOP/s=284360.233 BW=555.391 GB/s
+Run 60: Scalar AXPY f64 size=4096 time=0.000001s GFLOP/s=55461.876 BW=162.486 GB/s
+Run 61: Scalar Dot Product f64 size=4096 time=0.000001s GFLOP/s=56299.366 BW=109.960 GB/s
+Run 62: Scalar Elementwise Multiply f64 size=4096 time=0.000001s GFLOP/s=23899.164 BW=140.034 GB/s
+Run 63: Scalar 3-Point Stencil f64 size=4096 time=0.000001s GFLOP/s=154771.350 BW=181.373 GB/s
+Run 64: Scalar Memory Bandwidth f64 size=4096 time=0.000001s GFLOP/s=26092.095 BW=101.922 GB/s
+Run 65: Vectorized AXPY f64 size=4096 time=0.000001s GFLOP/s=55553.701 BW=162.755 GB/s
+Run 66: Vectorized Dot Product f64 size=4096 time=0.000001s GFLOP/s=56299.394 BW=109.960 GB/s
+Run 67: Vectorized Elementwise Multiply f64 size=4096 time=0.000001s GFLOP/s=23865.168 BW=139.835 GB/s
+Run 68: Vectorized 3-Point Stencil f64 size=4096 time=0.000001s GFLOP/s=154486.318 BW=181.039 GB/s
+Run 69: Vectorized Memory Bandwidth f64 size=4096 time=0.000001s GFLOP/s=26296.580 BW=102.721 GB/s
+Run 70: Scalar AXPY f64 size=4096 time=0.000000s GFLOP/s=78033.602 BW=228.614 GB/s
+Run 71: Scalar Dot Product f64 size=4096 time=0.000000s GFLOP/s=79512.870 BW=155.299 GB/s
+Run 72: Scalar Elementwise Multiply f64 size=4096 time=0.000001s GFLOP/s=28826.828 BW=168.907 GB/s
+Run 73: Scalar 3-Point Stencil f64 size=4096 time=0.000001s GFLOP/s=133789.638 BW=156.785 GB/s
+Run 74: Scalar Memory Bandwidth f64 size=4096 time=0.000001s GFLOP/s=32263.866 BW=126.031 GB/s
+Run 75: Vectorized AXPY f64 size=4096 time=0.000000s GFLOP/s=77492.897 BW=227.030 GB/s
+Run 76: Vectorized Dot Product f64 size=4096 time=0.000000s GFLOP/s=79701.738 BW=155.667 GB/s
+Run 77: Vectorized Elementwise Multiply f64 size=4096 time=0.000001s GFLOP/s=28197.008 BW=165.217 GB/s
+Run 78: Vectorized 3-Point Stencil f64 size=4096 time=0.000001s GFLOP/s=133576.534 BW=156.535 GB/s
+Run 79: Vectorized Memory Bandwidth f64 size=4096 time=0.000001s GFLOP/s=32263.884 BW=126.031 GB/s
+Run 80: Scalar AXPY f32 size=16384 time=0.000001s GFLOP/s=437547.595 BW=160.235 GB/s
+Run 81: Scalar Dot Product f32 size=16384 time=0.000001s GFLOP/s=436835.551 BW=106.649 GB/s
+Run 82: Scalar Elementwise Multiply f32 size=16384 time=0.000001s GFLOP/s=191739.586 BW=140.434 GB/s
+Run 83: Scalar 3-Point Stencil f32 size=16384 time=0.000001s GFLOP/s=949877.770 BW=139.142 GB/s
+Run 84: Scalar Memory Bandwidth f32 size=16384 time=0.000002s GFLOP/s=176834.961 BW=86.345 GB/s
+Run 85: Vectorized AXPY f32 size=16384 time=0.000001s GFLOP/s=437191.283 BW=160.104 GB/s
+Run 86: Vectorized Dot Product f32 size=16384 time=0.000001s GFLOP/s=437904.488 BW=106.910 GB/s
+Run 87: Vectorized Elementwise Multiply f32 size=16384 time=0.000001s GFLOP/s=191602.766 BW=140.334 GB/s
+Run 88: Vectorized 3-Point Stencil f32 size=16384 time=0.000001s GFLOP/s=951223.973 BW=139.339 GB/s
+Run 89: Vectorized Memory Bandwidth f32 size=16384 time=0.000001s GFLOP/s=209224.802 BW=102.161 GB/s
+Run 90: Scalar AXPY f32 size=16384 time=0.000001s GFLOP/s=548947.667 BW=201.031 GB/s
+Run 91: Scalar Dot Product f32 size=16384 time=0.000001s GFLOP/s=625723.579 BW=152.765 GB/s
+Run 92: Scalar Elementwise Multiply f32 size=16384 time=0.000001s GFLOP/s=231409.856 BW=169.490 GB/s
+Run 93: Scalar 3-Point Stencil f32 size=16384 time=0.000001s GFLOP/s=1069463.761 BW=156.660 GB/s
+Run 94: Scalar Memory Bandwidth f32 size=16384 time=0.000001s GFLOP/s=258359.497 BW=126.152 GB/s
+Run 95: Vectorized AXPY f32 size=16384 time=0.000001s GFLOP/s=554618.656 BW=203.107 GB/s
+Run 96: Vectorized Dot Product f32 size=16384 time=0.000001s GFLOP/s=625723.791 BW=152.765 GB/s
+Run 97: Vectorized Elementwise Multiply f32 size=16384 time=0.000001s GFLOP/s=228650.319 BW=167.468 GB/s
+Run 98: Vectorized 3-Point Stencil f32 size=16384 time=0.000001s GFLOP/s=1071171.068 BW=156.910 GB/s
+Run 99: Vectorized Memory Bandwidth f32 size=16384 time=0.000001s GFLOP/s=258608.328 BW=126.274 GB/s
+Run 100: Scalar AXPY f64 size=16384 time=0.000002s GFLOP/s=219668.951 BW=160.890 GB/s
+Run 101: Scalar Dot Product f64 size=16384 time=0.000002s GFLOP/s=220029.067 BW=107.436 GB/s
+Run 102: Scalar Elementwise Multiply f64 size=16384 time=0.000003s GFLOP/s=94987.777 BW=139.142 GB/s
+Run 103: Scalar 3-Point Stencil f64 size=16384 time=0.000002s GFLOP/s=593883.742 BW=173.989 GB/s
+Run 104: Scalar Memory Bandwidth f64 size=16384 time=0.000003s GFLOP/s=105600.107 BW=103.125 GB/s
+Run 105: Vectorized AXPY f64 size=16384 time=0.000002s GFLOP/s=218240.225 BW=159.844 GB/s
+Run 106: Vectorized Dot Product f64 size=16384 time=0.000002s GFLOP/s=219579.106 BW=107.216 GB/s
+Run 107: Vectorized Elementwise Multiply f64 size=16384 time=0.000003s GFLOP/s=96144.504 BW=140.837 GB/s
+Run 108: Vectorized 3-Point Stencil f64 size=16384 time=0.000002s GFLOP/s=567276.964 BW=166.194 GB/s
+Run 109: Vectorized Memory Bandwidth f64 size=16384 time=0.000003s GFLOP/s=105268.810 BW=102.802 GB/s
+Run 110: Scalar AXPY f64 size=16384 time=0.000002s GFLOP/s=278604.546 BW=204.056 GB/s
+Run 111: Scalar Dot Product f64 size=16384 time=0.000002s GFLOP/s=309435.716 BW=151.092 GB/s
+Run 112: Scalar Elementwise Multiply f64 size=16384 time=0.000002s GFLOP/s=115307.328 BW=168.907 GB/s
+Run 113: Scalar 3-Point Stencil f64 size=16384 time=0.000003s GFLOP/s=534518.985 BW=156.597 GB/s
+Run 114: Scalar Memory Bandwidth f64 size=16384 time=0.000002s GFLOP/s=129678.961 BW=126.640 GB/s
+Run 115: Vectorized AXPY f64 size=16384 time=0.000002s GFLOP/s=278315.642 BW=203.844 GB/s
+Run 116: Vectorized Dot Product f64 size=16384 time=0.000002s GFLOP/s=308192.228 BW=150.484 GB/s
+Run 117: Vectorized Elementwise Multiply f64 size=16384 time=0.000002s GFLOP/s=115804.775 BW=169.636 GB/s
+Run 118: Vectorized 3-Point Stencil f64 size=16384 time=0.000003s GFLOP/s=536227.409 BW=157.098 GB/s
+Run 119: Vectorized Memory Bandwidth f64 size=16384 time=0.000002s GFLOP/s=129616.344 BW=126.578 GB/s
+Run 120: Scalar AXPY f32 size=65536 time=0.000005s GFLOP/s=1756632.847 BW=160.825 GB/s
+Run 121: Scalar Dot Product f32 size=65536 time=0.000005s GFLOP/s=1749121.227 BW=106.758 GB/s
+Run 122: Scalar Elementwise Multiply f32 size=65536 time=0.000006s GFLOP/s=760440.394 BW=139.241 GB/s
+Run 123: Scalar 3-Point Stencil f32 size=65536 time=0.000006s GFLOP/s=3787449.242 BW=138.701 GB/s
+Run 124: Scalar Memory Bandwidth f32 size=65536 time=0.000005s GFLOP/s=817310.641 BW=99.769 GB/s
+Run 125: Vectorized AXPY f32 size=65536 time=0.000005s GFLOP/s=1708759.565 BW=156.442 GB/s
+Run 126: Vectorized Dot Product f32 size=65536 time=0.000005s GFLOP/s=1746276.631 BW=106.584 GB/s
+Run 127: Vectorized Elementwise Multiply f32 size=65536 time=0.000006s GFLOP/s=691843.945 BW=126.680 GB/s
+Run 128: Vectorized 3-Point Stencil f32 size=65536 time=0.000006s GFLOP/s=3702558.061 BW=135.592 GB/s
+Run 129: Vectorized Memory Bandwidth f32 size=65536 time=0.000005s GFLOP/s=900412.442 BW=109.914 GB/s
+Run 130: Scalar AXPY f32 size=65536 time=0.000004s GFLOP/s=2061419.385 BW=188.729 GB/s
+Run 131: Scalar Dot Product f32 size=65536 time=0.000004s GFLOP/s=2410871.496 BW=147.148 GB/s
+Run 132: Scalar Elementwise Multiply f32 size=65536 time=0.000005s GFLOP/s=901735.754 BW=165.113 GB/s
+Run 133: Scalar 3-Point Stencil f32 size=65536 time=0.000005s GFLOP/s=4583743.233 BW=167.862 GB/s
+Run 134: Scalar Memory Bandwidth f32 size=65536 time=0.000004s GFLOP/s=998365.278 BW=121.871 GB/s
+Run 135: Vectorized AXPY f32 size=65536 time=0.000004s GFLOP/s=2059936.482 BW=188.593 GB/s
+Run 136: Vectorized Dot Product f32 size=65536 time=0.000004s GFLOP/s=2258132.204 BW=137.825 GB/s
+Run 137: Vectorized Elementwise Multiply f32 size=65536 time=0.000005s GFLOP/s=881018.904 BW=161.319 GB/s
+Run 138: Vectorized 3-Point Stencil f32 size=65536 time=0.000005s GFLOP/s=4477655.516 BW=163.977 GB/s
+Run 139: Vectorized Memory Bandwidth f32 size=65536 time=0.000004s GFLOP/s=971272.588 BW=118.564 GB/s
+Run 140: Scalar AXPY f64 size=65536 time=0.000008s GFLOP/s=1057743.474 BW=193.679 GB/s
+Run 141: Scalar Dot Product f64 size=65536 time=0.000007s GFLOP/s=1159391.862 BW=141.527 GB/s
+Run 142: Scalar Elementwise Multiply f64 size=65536 time=0.000019s GFLOP/s=224151.520 BW=82.087 GB/s
+Run 143: Scalar 3-Point Stencil f64 size=65536 time=0.000010s GFLOP/s=2156974.305 BW=157.982 GB/s
+Run 144: Scalar Memory Bandwidth f64 size=65536 time=0.000009s GFLOP/s=497621.055 BW=121.490 GB/s
+Run 145: Vectorized AXPY f64 size=65536 time=0.000008s GFLOP/s=1054885.740 BW=193.155 GB/s
+Run 146: Vectorized Dot Product f64 size=65536 time=0.000007s GFLOP/s=1173969.447 BW=143.307 GB/s
+Run 147: Vectorized Elementwise Multiply f64 size=65536 time=0.000019s GFLOP/s=230354.911 BW=84.358 GB/s
+Run 148: Vectorized 3-Point Stencil f64 size=65536 time=0.000010s GFLOP/s=2174446.763 BW=159.261 GB/s
+Run 149: Vectorized Memory Bandwidth f64 size=65536 time=0.000009s GFLOP/s=487178.675 BW=118.940 GB/s
+Run 150: Scalar AXPY f64 size=65536 time=0.000009s GFLOP/s=975685.459 BW=178.653 GB/s
+Run 151: Scalar Dot Product f64 size=65536 time=0.000007s GFLOP/s=1201221.495 BW=146.633 GB/s
+Run 152: Scalar Elementwise Multiply f64 size=65536 time=0.000018s GFLOP/s=234941.594 BW=86.038 GB/s
+Run 153: Scalar 3-Point Stencil f64 size=65536 time=0.000010s GFLOP/s=2154161.560 BW=157.776 GB/s
+Run 154: Scalar Memory Bandwidth f64 size=65536 time=0.000009s GFLOP/s=501455.608 BW=122.426 GB/s
+Run 155: Vectorized AXPY f64 size=65536 time=0.000008s GFLOP/s=1073205.205 BW=196.510 GB/s
+Run 156: Vectorized Dot Product f64 size=65536 time=0.000008s GFLOP/s=1057613.241 BW=129.103 GB/s
+Run 157: Vectorized Elementwise Multiply f64 size=65536 time=0.000019s GFLOP/s=230986.730 BW=84.590 GB/s
+Run 158: Vectorized 3-Point Stencil f64 size=65536 time=0.000010s GFLOP/s=2153081.663 BW=157.696 GB/s
+Run 159: Vectorized Memory Bandwidth f64 size=65536 time=0.000009s GFLOP/s=500637.281 BW=122.226 GB/s
+Run 160: Scalar AXPY f32 size=262144 time=0.000043s GFLOP/s=3228615.981 BW=73.897 GB/s
+Run 161: Scalar Dot Product f32 size=262144 time=0.000024s GFLOP/s=5612043.851 BW=85.633 GB/s
+Run 162: Scalar Elementwise Multiply f32 size=262144 time=0.000048s GFLOP/s=1428412.082 BW=65.388 GB/s
+Run 163: Scalar 3-Point Stencil f32 size=262144 time=0.000035s GFLOP/s=9836459.991 BW=90.055 GB/s
+Run 164: Scalar Memory Bandwidth f32 size=262144 time=0.000034s GFLOP/s=1996498.443 BW=60.928 GB/s
+Run 165: Vectorized AXPY f32 size=262144 time=0.000042s GFLOP/s=3288642.660 BW=75.271 GB/s
+Run 166: Vectorized Dot Product f32 size=262144 time=0.000028s GFLOP/s=4905730.778 BW=74.856 GB/s
+Run 167: Vectorized Elementwise Multiply f32 size=262144 time=0.000049s GFLOP/s=1403756.114 BW=64.259 GB/s
+Run 168: Vectorized 3-Point Stencil f32 size=262144 time=0.000035s GFLOP/s=9693818.183 BW=88.750 GB/s
+Run 169: Vectorized Memory Bandwidth f32 size=262144 time=0.000039s GFLOP/s=1751171.612 BW=53.442 GB/s
+Run 170: Scalar AXPY f32 size=262144 time=0.000041s GFLOP/s=3389202.838 BW=77.573 GB/s
+Run 171: Scalar Dot Product f32 size=262144 time=0.000024s GFLOP/s=5728293.763 BW=87.407 GB/s
+Run 172: Scalar Elementwise Multiply f32 size=262144 time=0.000046s GFLOP/s=1478092.511 BW=67.662 GB/s
+Run 173: Scalar 3-Point Stencil f32 size=262144 time=0.000036s GFLOP/s=9486137.451 BW=86.848 GB/s
+Run 174: Scalar Memory Bandwidth f32 size=262144 time=0.000034s GFLOP/s=1997601.137 BW=60.962 GB/s
+Run 175: Vectorized AXPY f32 size=262144 time=0.000040s GFLOP/s=3399177.741 BW=77.801 GB/s
+Run 176: Vectorized Dot Product f32 size=262144 time=0.000031s GFLOP/s=4471013.440 BW=68.222 GB/s
+Run 177: Vectorized Elementwise Multiply f32 size=262144 time=0.000046s GFLOP/s=1493999.099 BW=68.390 GB/s
+Run 178: Vectorized 3-Point Stencil f32 size=262144 time=0.000037s GFLOP/s=9356208.043 BW=85.659 GB/s
+Run 179: Vectorized Memory Bandwidth f32 size=262144 time=0.000034s GFLOP/s=2040485.678 BW=62.271 GB/s
+Run 180: Scalar AXPY f64 size=262144 time=0.000082s GFLOP/s=1678295.233 BW=76.826 GB/s
+Run 181: Scalar Dot Product f64 size=262144 time=0.000050s GFLOP/s=2753680.624 BW=84.036 GB/s
+Run 182: Scalar Elementwise Multiply f64 size=262144 time=0.000103s GFLOP/s=665447.929 BW=60.924 GB/s
+Run 183: Scalar 3-Point Stencil f64 size=262144 time=0.000080s GFLOP/s=4274875.383 BW=78.275 GB/s
+Run 184: Scalar Memory Bandwidth f64 size=262144 time=0.000071s GFLOP/s=966246.858 BW=58.975 GB/s
+Run 185: Vectorized AXPY f64 size=262144 time=0.000082s GFLOP/s=1675104.246 BW=76.680 GB/s
+Run 186: Vectorized Dot Product f64 size=262144 time=0.000053s GFLOP/s=2586842.715 BW=78.944 GB/s
+Run 187: Vectorized Elementwise Multiply f64 size=262144 time=0.000104s GFLOP/s=663629.291 BW=60.757 GB/s
+Run 188: Vectorized 3-Point Stencil f64 size=262144 time=0.000075s GFLOP/s=4564440.440 BW=83.577 GB/s
+Run 189: Vectorized Memory Bandwidth f64 size=262144 time=0.000071s GFLOP/s=972454.600 BW=59.354 GB/s
+Run 190: Scalar AXPY f64 size=262144 time=0.000082s GFLOP/s=1673594.818 BW=76.611 GB/s
+Run 191: Scalar Dot Product f64 size=262144 time=0.000050s GFLOP/s=2761648.366 BW=84.279 GB/s
+Run 192: Scalar Elementwise Multiply f64 size=262144 time=0.000099s GFLOP/s=694697.502 BW=63.601 GB/s
+Run 193: Scalar 3-Point Stencil f64 size=262144 time=0.000087s GFLOP/s=3952666.396 BW=72.375 GB/s
+Run 194: Scalar Memory Bandwidth f64 size=262144 time=0.000072s GFLOP/s=951463.850 BW=58.073 GB/s
+Run 195: Vectorized AXPY f64 size=262144 time=0.000082s GFLOP/s=1683083.962 BW=77.045 GB/s
+Run 196: Vectorized Dot Product f64 size=262144 time=0.000051s GFLOP/s=2711201.808 BW=82.739 GB/s
+Run 197: Vectorized Elementwise Multiply f64 size=262144 time=0.000100s GFLOP/s=684341.065 BW=62.653 GB/s
+Run 198: Vectorized 3-Point Stencil f64 size=262144 time=0.000076s GFLOP/s=4539774.640 BW=83.126 GB/s
+Run 199: Vectorized Memory Bandwidth f64 size=262144 time=0.000086s GFLOP/s=803032.156 BW=49.013 GB/s
+Run 200: Scalar AXPY f32 size=1048576 time=0.000176s GFLOP/s=12468238.690 BW=71.344 GB/s
+Run 201: Scalar Dot Product f32 size=1048576 time=0.000115s GFLOP/s=19131423.871 BW=72.981 GB/s
+Run 202: Scalar Elementwise Multiply f32 size=1048576 time=0.000252s GFLOP/s=4363054.815 BW=49.931 GB/s
+Run 203: Scalar 3-Point Stencil f32 size=1048576 time=0.000169s GFLOP/s=32571752.723 BW=74.551 GB/s
+Run 204: Scalar Memory Bandwidth f32 size=1048576 time=0.000151s GFLOP/s=7276377.844 BW=55.514 GB/s
+Run 205: Vectorized AXPY f32 size=1048576 time=0.000169s GFLOP/s=13031789.503 BW=74.568 GB/s
+Run 206: Vectorized Dot Product f32 size=1048576 time=0.000107s GFLOP/s=20571806.513 BW=78.475 GB/s
+Run 207: Vectorized Elementwise Multiply f32 size=1048576 time=0.000244s GFLOP/s=4513798.356 BW=51.656 GB/s
+Run 208: Vectorized 3-Point Stencil f32 size=1048576 time=0.000171s GFLOP/s=32183151.584 BW=73.661 GB/s
+Run 209: Vectorized Memory Bandwidth f32 size=1048576 time=0.000165s GFLOP/s=6653464.525 BW=50.762 GB/s
+Run 210: Scalar AXPY f32 size=1048576 time=0.000176s GFLOP/s=12516140.202 BW=71.618 GB/s
+Run 211: Scalar Dot Product f32 size=1048576 time=0.000109s GFLOP/s=20175265.674 BW=76.963 GB/s
+Run 212: Scalar Elementwise Multiply f32 size=1048576 time=0.000215s GFLOP/s=5111059.802 BW=58.491 GB/s
+Run 213: Scalar 3-Point Stencil f32 size=1048576 time=0.000153s GFLOP/s=35930343.568 BW=82.238 GB/s
+Run 214: Scalar Memory Bandwidth f32 size=1048576 time=0.000141s GFLOP/s=7806924.468 BW=59.562 GB/s
+Run 215: Vectorized AXPY f32 size=1048576 time=0.000178s GFLOP/s=12329542.696 BW=70.550 GB/s
+Run 216: Vectorized Dot Product f32 size=1048576 time=0.000100s GFLOP/s=21913098.479 BW=83.592 GB/s
+Run 217: Vectorized Elementwise Multiply f32 size=1048576 time=0.000213s GFLOP/s=5165615.676 BW=59.116 GB/s
+Run 218: Vectorized 3-Point Stencil f32 size=1048576 time=0.000150s GFLOP/s=36537608.204 BW=83.628 GB/s
+Run 219: Vectorized Memory Bandwidth f32 size=1048576 time=0.000140s GFLOP/s=7852588.786 BW=59.910 GB/s
+Run 220: Scalar AXPY f64 size=1048576 time=0.000387s GFLOP/s=5681995.717 BW=65.025 GB/s
+Run 221: Scalar Dot Product f64 size=1048576 time=0.000315s GFLOP/s=6989724.531 BW=53.327 GB/s
+Run 222: Scalar Elementwise Multiply f64 size=1048576 time=0.000732s GFLOP/s=1502611.096 BW=34.392 GB/s
+Run 223: Scalar 3-Point Stencil f64 size=1048576 time=0.000365s GFLOP/s=15061968.177 BW=68.948 GB/s
+Run 224: Scalar Memory Bandwidth f64 size=1048576 time=0.000335s GFLOP/s=3283280.762 BW=50.099 GB/s
+Run 225: Vectorized AXPY f64 size=1048576 time=0.000391s GFLOP/s=5617046.768 BW=64.282 GB/s
+Run 226: Vectorized Dot Product f64 size=1048576 time=0.000388s GFLOP/s=5669572.980 BW=43.255 GB/s
+Run 227: Vectorized Elementwise Multiply f64 size=1048576 time=0.000781s GFLOP/s=1408148.125 BW=32.230 GB/s
+Run 228: Vectorized 3-Point Stencil f64 size=1048576 time=0.000347s GFLOP/s=15864274.641 BW=72.621 GB/s
+Run 229: Vectorized Memory Bandwidth f64 size=1048576 time=0.000345s GFLOP/s=3189440.087 BW=48.667 GB/s
+Run 230: Scalar AXPY f64 size=1048576 time=0.000361s GFLOP/s=6085223.370 BW=69.640 GB/s
+Run 231: Scalar Dot Product f64 size=1048576 time=0.000260s GFLOP/s=8460287.304 BW=64.547 GB/s
+Run 232: Scalar Elementwise Multiply f64 size=1048576 time=0.000729s GFLOP/s=1509146.922 BW=34.542 GB/s
+Run 233: Scalar 3-Point Stencil f64 size=1048576 time=0.000363s GFLOP/s=15139074.618 BW=69.301 GB/s
+Run 234: Scalar Memory Bandwidth f64 size=1048576 time=0.000314s GFLOP/s=3506352.914 BW=53.503 GB/s
+Run 235: Vectorized AXPY f64 size=1048576 time=0.000366s GFLOP/s=6003355.878 BW=68.703 GB/s
+Run 236: Vectorized Dot Product f64 size=1048576 time=0.000286s GFLOP/s=7702088.389 BW=58.762 GB/s
+Run 237: Vectorized Elementwise Multiply f64 size=1048576 time=0.000766s GFLOP/s=1436278.788 BW=32.874 GB/s
+Run 238: Vectorized 3-Point Stencil f64 size=1048576 time=0.000390s GFLOP/s=14078542.292 BW=64.446 GB/s
+Run 239: Vectorized Memory Bandwidth f64 size=1048576 time=0.000354s GFLOP/s=3104903.770 BW=47.377 GB/s
+Run 240: Scalar AXPY f32 size=4194304 time=0.001358s GFLOP/s=25899598.962 BW=37.050 GB/s
+Run 241: Scalar Dot Product f32 size=4194304 time=0.000941s GFLOP/s=37380991.282 BW=35.649 GB/s
+Run 242: Scalar Elementwise Multiply f32 size=4194304 time=0.002100s GFLOP/s=8376732.835 BW=23.966 GB/s
+Run 243: Scalar 3-Point Stencil f32 size=4194304 time=0.001329s GFLOP/s=66168475.239 BW=37.862 GB/s
+Run 244: Scalar Memory Bandwidth f32 size=4194304 time=0.001396s GFLOP/s=12605888.880 BW=24.044 GB/s
+Run 245: Vectorized AXPY f32 size=4194304 time=0.001252s GFLOP/s=28113424.197 BW=40.217 GB/s
+Run 246: Vectorized Dot Product f32 size=4194304 time=0.000963s GFLOP/s=36518654.153 BW=34.827 GB/s
+Run 247: Vectorized Elementwise Multiply f32 size=4194304 time=0.002096s GFLOP/s=8392057.417 BW=24.010 GB/s
+Run 248: Vectorized 3-Point Stencil f32 size=4194304 time=0.001415s GFLOP/s=62156173.309 BW=35.566 GB/s
+Run 249: Vectorized Memory Bandwidth f32 size=4194304 time=0.001622s GFLOP/s=10842641.630 BW=20.681 GB/s
+Run 250: Scalar AXPY f32 size=4194304 time=0.001934s GFLOP/s=18195249.390 BW=26.029 GB/s
+Run 251: Scalar Dot Product f32 size=4194304 time=0.001084s GFLOP/s=32450573.520 BW=30.947 GB/s
+Run 252: Scalar Elementwise Multiply f32 size=4194304 time=0.002870s GFLOP/s=6130354.392 BW=17.539 GB/s
+Run 253: Scalar 3-Point Stencil f32 size=4194304 time=0.001897s GFLOP/s=46371690.910 BW=26.534 GB/s
+Run 254: Scalar Memory Bandwidth f32 size=4194304 time=0.001586s GFLOP/s=11091711.217 BW=21.156 GB/s
+Run 255: Vectorized AXPY f32 size=4194304 time=0.001387s GFLOP/s=25374693.288 BW=36.299 GB/s
+Run 256: Vectorized Dot Product f32 size=4194304 time=0.000990s GFLOP/s=35555680.056 BW=33.909 GB/s
+Run 257: Vectorized Elementwise Multiply f32 size=4194304 time=0.002393s GFLOP/s=7350963.443 BW=21.031 GB/s
+Run 258: Vectorized 3-Point Stencil f32 size=4194304 time=0.001659s GFLOP/s=53007320.206 BW=30.331 GB/s
+Run 259: Vectorized Memory Bandwidth f32 size=4194304 time=0.001435s GFLOP/s=12260166.203 BW=23.384 GB/s
+Run 260: Scalar AXPY f64 size=4194304 time=0.003746s GFLOP/s=9391444.888 BW=26.869 GB/s
+Run 261: Scalar Dot Product f64 size=4194304 time=0.002616s GFLOP/s=13448603.931 BW=25.651 GB/s
+Run 262: Scalar Elementwise Multiply f64 size=4194304 time=0.005178s GFLOP/s=3397375.799 BW=19.440 GB/s
+Run 263: Scalar 3-Point Stencil f64 size=4194304 time=0.003761s GFLOP/s=23390287.449 BW=26.768 GB/s
+Run 264: Scalar Memory Bandwidth f64 size=4194304 time=0.003506s GFLOP/s=5017689.806 BW=19.141 GB/s
+Run 265: Vectorized AXPY f64 size=4194304 time=0.003298s GFLOP/s=10669418.928 BW=30.525 GB/s
+Run 266: Vectorized Dot Product f64 size=4194304 time=0.002321s GFLOP/s=15157223.551 BW=28.910 GB/s
+Run 267: Vectorized Elementwise Multiply f64 size=4194304 time=0.004900s GFLOP/s=3590228.861 BW=20.543 GB/s
+Run 268: Vectorized 3-Point Stencil f64 size=4194304 time=0.003387s GFLOP/s=25968434.402 BW=29.719 GB/s
+Run 269: Vectorized Memory Bandwidth f64 size=4194304 time=0.003405s GFLOP/s=5166099.576 BW=19.707 GB/s
+Run 270: Scalar AXPY f64 size=4194304 time=0.003677s GFLOP/s=9569705.633 BW=27.379 GB/s
+Run 271: Scalar Dot Product f64 size=4194304 time=0.002711s GFLOP/s=12978196.936 BW=24.754 GB/s
+Run 272: Scalar Elementwise Multiply f64 size=4194304 time=0.005479s GFLOP/s=3210953.713 BW=18.373 GB/s
+Run 273: Scalar 3-Point Stencil f64 size=4194304 time=0.004223s GFLOP/s=20828832.478 BW=23.837 GB/s
+Run 274: Scalar Memory Bandwidth f64 size=4194304 time=0.004122s GFLOP/s=4268134.112 BW=16.282 GB/s
+Run 275: Vectorized AXPY f64 size=4194304 time=0.004067s GFLOP/s=8650526.291 BW=24.749 GB/s
+Run 276: Vectorized Dot Product f64 size=4194304 time=0.002454s GFLOP/s=14338231.861 BW=27.348 GB/s
+Run 277: Vectorized Elementwise Multiply f64 size=4194304 time=0.006142s GFLOP/s=2864119.861 BW=16.389 GB/s
+Run 278: Vectorized 3-Point Stencil f64 size=4194304 time=0.003977s GFLOP/s=22120021.784 BW=25.314 GB/s
+Run 279: Vectorized Memory Bandwidth f64 size=4194304 time=0.004351s GFLOP/s=4042916.707 BW=15.423 GB/s
+Run 280: Scalar AXPY f32 size=16777216 time=0.008625s GFLOP/s=65272602.090 BW=23.343 GB/s
+Run 281: Scalar Dot Product f32 size=16777216 time=0.005699s GFLOP/s=98787846.685 BW=23.553 GB/s
+Run 282: Scalar Elementwise Multiply f32 size=16777216 time=0.010461s GFLOP/s=26906582.242 BW=19.245 GB/s
+Run 283: Scalar 3-Point Stencil f32 size=16777216 time=0.007753s GFLOP/s=181533889.883 BW=25.969 GB/s
+Run 284: Scalar Memory Bandwidth f32 size=16777216 time=0.008006s GFLOP/s=35159988.636 BW=16.766 GB/s
+Run 285: Vectorized AXPY f32 size=16777216 time=0.008412s GFLOP/s=66922216.564 BW=23.933 GB/s
+Run 286: Vectorized Dot Product f32 size=16777216 time=0.005449s GFLOP/s=103305662.828 BW=24.630 GB/s
+Run 287: Vectorized Elementwise Multiply f32 size=16777216 time=0.010562s GFLOP/s=26649197.193 BW=19.061 GB/s
+Run 288: Vectorized 3-Point Stencil f32 size=16777216 time=0.007329s GFLOP/s=192028909.311 BW=27.470 GB/s
+Run 289: Vectorized Memory Bandwidth f32 size=16777216 time=0.007505s GFLOP/s=37507297.477 BW=17.885 GB/s
+Run 290: Scalar AXPY f32 size=16777216 time=0.007280s GFLOP/s=77332411.868 BW=27.656 GB/s
+Run 291: Scalar Dot Product f32 size=16777216 time=0.005029s GFLOP/s=111945609.368 BW=26.690 GB/s
+Run 292: Scalar Elementwise Multiply f32 size=16777216 time=0.010431s GFLOP/s=26984084.274 BW=19.301 GB/s
+Run 293: Scalar 3-Point Stencil f32 size=16777216 time=0.007855s GFLOP/s=179172406.236 BW=25.631 GB/s
+Run 294: Scalar Memory Bandwidth f32 size=16777216 time=0.007727s GFLOP/s=36428859.336 BW=17.371 GB/s
+Run 295: Vectorized AXPY f32 size=16777216 time=0.007313s GFLOP/s=76978345.478 BW=27.530 GB/s
+Run 296: Vectorized Dot Product f32 size=16777216 time=0.005037s GFLOP/s=111754092.427 BW=26.644 GB/s
+Run 297: Vectorized Elementwise Multiply f32 size=16777216 time=0.010123s GFLOP/s=27804270.633 BW=19.887 GB/s
+Run 298: Vectorized 3-Point Stencil f32 size=16777216 time=0.007391s GFLOP/s=190420217.800 BW=27.240 GB/s
+Run 299: Vectorized Memory Bandwidth f32 size=16777216 time=0.007486s GFLOP/s=37602439.247 BW=17.930 GB/s
+Run 300: Scalar AXPY f64 size=16777216 time=0.015032s GFLOP/s=37451132.300 BW=26.787 GB/s
+Run 301: Scalar Dot Product f64 size=16777216 time=0.010439s GFLOP/s=53928298.054 BW=25.715 GB/s
+Run 302: Scalar Elementwise Multiply f64 size=16777216 time=0.020682s GFLOP/s=13609930.568 BW=19.469 GB/s
+Run 303: Scalar 3-Point Stencil f64 size=16777216 time=0.015075s GFLOP/s=93360455.505 BW=26.711 GB/s
+Run 304: Scalar Memory Bandwidth f64 size=16777216 time=0.015476s GFLOP/s=18187469.891 BW=17.345 GB/s
+Run 305: Vectorized AXPY f64 size=16777216 time=0.014951s GFLOP/s=37652898.466 BW=26.931 GB/s
+Run 306: Vectorized Dot Product f64 size=16777216 time=0.010207s GFLOP/s=55154569.818 BW=26.300 GB/s
+Run 307: Vectorized Elementwise Multiply f64 size=16777216 time=0.020043s GFLOP/s=14043335.885 BW=20.089 GB/s
+Run 308: Vectorized 3-Point Stencil f64 size=16777216 time=0.014876s GFLOP/s=94609042.603 BW=27.068 GB/s
+Run 309: Vectorized Memory Bandwidth f64 size=16777216 time=0.015150s GFLOP/s=18579575.522 BW=17.719 GB/s
+Run 310: Scalar AXPY f64 size=16777216 time=0.014774s GFLOP/s=38103162.446 BW=27.254 GB/s
+Run 311: Scalar Dot Product f64 size=16777216 time=0.010144s GFLOP/s=55493880.138 BW=26.462 GB/s
+Run 312: Scalar Elementwise Multiply f64 size=16777216 time=0.020014s GFLOP/s=14063563.300 BW=20.118 GB/s
+Run 313: Scalar 3-Point Stencil f64 size=16777216 time=0.015120s GFLOP/s=93083329.093 BW=26.631 GB/s
+Run 314: Scalar Memory Bandwidth f64 size=16777216 time=0.015392s GFLOP/s=18287428.352 BW=17.440 GB/s
+Run 315: Vectorized AXPY f64 size=16777216 time=0.014996s GFLOP/s=37541229.231 BW=26.852 GB/s
+Run 316: Vectorized Dot Product f64 size=16777216 time=0.010249s GFLOP/s=54927680.590 BW=26.192 GB/s
+Run 317: Vectorized Elementwise Multiply f64 size=16777216 time=0.020299s GFLOP/s=13866248.060 BW=19.836 GB/s
+Run 318: Vectorized 3-Point Stencil f64 size=16777216 time=0.015043s GFLOP/s=93559022.648 BW=26.767 GB/s
+Run 319: Vectorized Memory Bandwidth f64 size=16777216 time=0.015427s GFLOP/s=18245967.572 BW=17.401 GB/s
+Run 320: Scalar AXPY f32 size=1024 time=0.000000s GFLOP/s=24385.468 BW=142.884 GB/s
+Run 321: Scalar Dot Product f32 size=1024 time=0.000000s GFLOP/s=36157.881 BW=141.242 GB/s
+Run 322: Scalar Elementwise Multiply f32 size=1024 time=0.000000s GFLOP/s=15196.766 BW=178.087 GB/s
+Run 323: Scalar 3-Point Stencil f32 size=1024 time=0.000000s GFLOP/s=59578.122 BW=139.636 GB/s
+Run 324: Scalar Memory Bandwidth f32 size=1024 time=0.000000s GFLOP/s=16912.546 BW=132.129 GB/s
+Run 325: Vectorized AXPY f32 size=1024 time=0.000000s GFLOP/s=33288.181 BW=195.048 GB/s
+Run 326: Vectorized Dot Product f32 size=1024 time=0.000000s GFLOP/s=36792.048 BW=143.719 GB/s
+Run 327: Vectorized Elementwise Multiply f32 size=1024 time=0.000000s GFLOP/s=15196.766 BW=178.087 GB/s
+Run 328: Vectorized 3-Point Stencil f32 size=1024 time=0.000000s GFLOP/s=60262.933 BW=141.241 GB/s
+Run 329: Vectorized Memory Bandwidth f32 size=1024 time=0.000000s GFLOP/s=16644.091 BW=130.032 GB/s
+Run 330: Scalar AXPY f32 size=1024 time=0.000000s GFLOP/s=56679.798 BW=332.108 GB/s
+Run 331: Scalar Dot Product f32 size=1024 time=0.000000s GFLOP/s=41120.784 BW=160.628 GB/s
+Run 332: Scalar Elementwise Multiply f32 size=1024 time=0.000000s GFLOP/s=22310.096 BW=261.446 GB/s
+Run 333: Scalar 3-Point Stencil f32 size=1024 time=0.000000s GFLOP/s=60963.669 BW=142.884 GB/s
+Run 334: Scalar Memory Bandwidth f32 size=1024 time=0.000000s GFLOP/s=61680.472 BW=481.879 GB/s
+Run 335: Vectorized AXPY f32 size=1024 time=0.000000s GFLOP/s=74898.494 BW=438.858 GB/s
+Run 336: Vectorized Dot Product f32 size=1024 time=0.000000s GFLOP/s=56679.798 BW=221.405 GB/s
+Run 337: Vectorized Elementwise Multiply f32 size=1024 time=0.000000s GFLOP/s=31775.069 BW=372.364 GB/s
+Run 338: Vectorized 3-Point Stencil f32 size=1024 time=0.000000s GFLOP/s=81919.749 BW=191.999 GB/s
+Run 339: Vectorized Memory Bandwidth f32 size=1024 time=0.000000s GFLOP/s=65535.501 BW=511.996 GB/s
+Run 340: Scalar AXPY f64 size=1024 time=0.000000s GFLOP/s=23301.662 BW=273.066 GB/s
+Run 341: Scalar Dot Product f64 size=1024 time=0.000000s GFLOP/s=24385.468 BW=190.511 GB/s
+Run 342: Scalar Elementwise Multiply f64 size=1024 time=0.000000s GFLOP/s=10485.741 BW=245.760 GB/s
+Run 343: Scalar 3-Point Stencil f64 size=1024 time=0.000000s GFLOP/s=44431.177 BW=208.271 GB/s
+Run 344: Scalar Memory Bandwidth f64 size=1024 time=0.000000s GFLOP/s=11650.831 BW=182.044 GB/s
+Run 345: Vectorized AXPY f64 size=1024 time=0.000000s GFLOP/s=23301.738 BW=273.067 GB/s
+Run 346: Vectorized Dot Product f64 size=1024 time=0.000000s GFLOP/s=24672.442 BW=192.753 GB/s
+Run 347: Vectorized Elementwise Multiply f64 size=1024 time=0.000000s GFLOP/s=10591.658 BW=248.242 GB/s
+Run 348: Vectorized 3-Point Stencil f64 size=1024 time=0.000000s GFLOP/s=43690.652 BW=204.800 GB/s
+Run 349: Vectorized Memory Bandwidth f64 size=1024 time=0.000000s GFLOP/s=11650.831 BW=182.044 GB/s
+Run 350: Scalar AXPY f64 size=1024 time=0.000000s GFLOP/s=41120.549 BW=481.881 GB/s
+Run 351: Scalar Dot Product f64 size=1024 time=0.000000s GFLOP/s=25575.011 BW=199.805 GB/s
+Run 352: Scalar Elementwise Multiply f64 size=1024 time=0.000000s GFLOP/s=16644.091 BW=390.096 GB/s
+Run 353: Scalar 3-Point Stencil f64 size=1024 time=0.000000s GFLOP/s=45197.237 BW=211.862 GB/s
+Run 354: Scalar Memory Bandwidth f64 size=1024 time=0.000000s GFLOP/s=36157.881 BW=564.967 GB/s
+Run 355: Vectorized AXPY f64 size=1024 time=0.000000s GFLOP/s=41120.784 BW=481.884 GB/s
+Run 356: Vectorized Dot Product f64 size=1024 time=0.000000s GFLOP/s=26214.391 BW=204.800 GB/s
+Run 357: Vectorized Elementwise Multiply f64 size=1024 time=0.000000s GFLOP/s=17189.804 BW=402.886 GB/s
+Run 358: Vectorized 3-Point Stencil f64 size=1024 time=0.000000s GFLOP/s=44810.933 BW=210.051 GB/s
+Run 359: Vectorized Memory Bandwidth f64 size=1024 time=0.000000s GFLOP/s=30840.500 BW=481.883 GB/s
+Run 360: Scalar AXPY f32 size=4096 time=0.000000s GFLOP/s=186413.599 BW=273.067 GB/s
+Run 361: Scalar Dot Product f32 size=4096 time=0.000000s GFLOP/s=174762.660 BW=170.667 GB/s
+Run 362: Scalar Elementwise Multiply f32 size=4096 time=0.000000s GFLOP/s=67108.900 BW=196.608 GB/s
+Run 363: Scalar 3-Point Stencil f32 size=4096 time=0.000000s GFLOP/s=349525.215 BW=204.800 GB/s
+Run 364: Scalar Memory Bandwidth f32 size=4096 time=0.000000s GFLOP/s=93206.799 BW=182.045 GB/s
+Run 365: Vectorized AXPY f32 size=4096 time=0.000000s GFLOP/s=187455.024 BW=274.592 GB/s
+Run 366: Vectorized Dot Product f32 size=4096 time=0.000000s GFLOP/s=173857.148 BW=169.782 GB/s
+Run 367: Vectorized Elementwise Multiply f32 size=4096 time=0.000000s GFLOP/s=67378.337 BW=197.397 GB/s
+Run 368: Vectorized 3-Point Stencil f32 size=4096 time=0.000000s GFLOP/s=353949.617 BW=207.392 GB/s
+Run 369: Vectorized Memory Bandwidth f32 size=4096 time=0.000000s GFLOP/s=93206.649 BW=182.044 GB/s
+Run 370: Scalar AXPY f32 size=4096 time=0.000000s GFLOP/s=328965.331 BW=481.883 GB/s
+Run 371: Scalar Dot Product f32 size=4096 time=0.000000s GFLOP/s=156796.497 BW=153.122 GB/s
+Run 372: Scalar Elementwise Multiply f32 size=4096 time=0.000000s GFLOP/s=130055.828 BW=381.023 GB/s
+Run 373: Scalar 3-Point Stencil f32 size=4096 time=0.000000s GFLOP/s=356961.977 BW=209.157 GB/s
+Run 374: Scalar Memory Bandwidth f32 size=4096 time=0.000000s GFLOP/s=299593.976 BW=585.144 GB/s
+Run 375: Vectorized AXPY f32 size=4096 time=0.000000s GFLOP/s=319566.243 BW=468.115 GB/s
+Run 376: Vectorized Dot Product f32 size=4096 time=0.000000s GFLOP/s=177536.692 BW=173.376 GB/s
+Run 377: Vectorized Elementwise Multiply f32 size=4096 time=0.000000s GFLOP/s=132103.965 BW=387.023 GB/s
+Run 378: Vectorized 3-Point Stencil f32 size=4096 time=0.000000s GFLOP/s=363143.183 BW=212.779 GB/s
+Run 379: Vectorized Memory Bandwidth f32 size=4096 time=0.000000s GFLOP/s=204600.090 BW=399.610 GB/s
+Run 380: Scalar AXPY f64 size=4096 time=0.000001s GFLOP/s=55924.062 BW=163.840 GB/s
+Run 381: Scalar Dot Product f64 size=4096 time=0.000001s GFLOP/s=56205.089 BW=109.776 GB/s
+Run 382: Scalar Elementwise Multiply f64 size=4096 time=0.000001s GFLOP/s=23530.451 BW=137.874 GB/s
+Run 383: Scalar 3-Point Stencil f64 size=4096 time=0.000001s GFLOP/s=120699.437 BW=141.445 GB/s
+Run 384: Scalar Memory Bandwidth f64 size=4096 time=0.000001s GFLOP/s=27594.106 BW=107.789 GB/s
+Run 385: Vectorized AXPY f64 size=4096 time=0.000001s GFLOP/s=55924.062 BW=163.840 GB/s
+Run 386: Vectorized Dot Product f64 size=4096 time=0.000001s GFLOP/s=56205.089 BW=109.776 GB/s
+Run 387: Vectorized Elementwise Multiply f64 size=4096 time=0.000001s GFLOP/s=23497.504 BW=137.681 GB/s
+Run 388: Vectorized 3-Point Stencil f64 size=4096 time=0.000001s GFLOP/s=120699.386 BW=141.445 GB/s
+Run 389: Vectorized Memory Bandwidth f64 size=4096 time=0.000001s GFLOP/s=27730.938 BW=108.324 GB/s
+Run 390: Scalar AXPY f64 size=4096 time=0.000000s GFLOP/s=77314.393 BW=226.507 GB/s
+Run 391: Scalar Dot Product f64 size=4096 time=0.000000s GFLOP/s=81840.094 BW=159.844 GB/s
+Run 392: Scalar Elementwise Multiply f64 size=4096 time=0.000001s GFLOP/s=29433.714 BW=172.463 GB/s
+Run 393: Scalar 3-Point Stencil f64 size=4096 time=0.000001s GFLOP/s=134217.769 BW=157.286 GB/s
+Run 394: Scalar Memory Bandwidth f64 size=4096 time=0.000001s GFLOP/s=32767.993 BW=128.000 GB/s
+Run 395: Vectorized AXPY f64 size=4096 time=0.000000s GFLOP/s=77672.280 BW=227.556 GB/s
+Run 396: Vectorized Dot Product f64 size=4096 time=0.000000s GFLOP/s=81840.094 BW=159.844 GB/s
+Run 397: Vectorized Elementwise Multiply f64 size=4096 time=0.000001s GFLOP/s=29433.714 BW=172.463 GB/s
+Run 398: Vectorized 3-Point Stencil f64 size=4096 time=0.000001s GFLOP/s=134432.800 BW=157.538 GB/s
+Run 399: Vectorized Memory Bandwidth f64 size=4096 time=0.000001s GFLOP/s=32832.137 BW=128.251 GB/s
+Run 400: Scalar AXPY f32 size=16384 time=0.000001s GFLOP/s=440058.133 BW=161.154 GB/s
+Run 401: Scalar Dot Product f32 size=16384 time=0.000001s GFLOP/s=441869.086 BW=107.878 GB/s
+Run 402: Scalar Elementwise Multiply f32 size=16384 time=0.000001s GFLOP/s=189039.048 BW=138.456 GB/s
+Run 403: Scalar 3-Point Stencil f32 size=16384 time=0.000001s GFLOP/s=968381.823 BW=141.853 GB/s
+Run 404: Scalar Memory Bandwidth f32 size=16384 time=0.000001s GFLOP/s=224069.699 BW=109.409 GB/s
+Run 405: Vectorized AXPY f32 size=16384 time=0.000001s GFLOP/s=440058.133 BW=161.154 GB/s
+Run 406: Vectorized Dot Product f32 size=16384 time=0.000001s GFLOP/s=441869.086 BW=107.878 GB/s
+Run 407: Vectorized Elementwise Multiply f32 size=16384 time=0.000001s GFLOP/s=188906.014 BW=138.359 GB/s
+Run 408: Vectorized 3-Point Stencil f32 size=16384 time=0.000001s GFLOP/s=969081.224 BW=141.955 GB/s
+Run 409: Vectorized Memory Bandwidth f32 size=16384 time=0.000001s GFLOP/s=228067.519 BW=111.361 GB/s
+Run 410: Scalar AXPY f32 size=16384 time=0.000001s GFLOP/s=567516.689 BW=207.831 GB/s
+Run 411: Scalar Dot Product f32 size=16384 time=0.000001s GFLOP/s=594541.503 BW=145.152 GB/s
+Run 412: Scalar Elementwise Multiply f32 size=16384 time=0.000001s GFLOP/s=235883.543 BW=172.766 GB/s
+Run 413: Scalar 3-Point Stencil f32 size=16384 time=0.000001s GFLOP/s=1083274.535 BW=158.683 GB/s
+Run 414: Scalar Memory Bandwidth f32 size=16384 time=0.000001s GFLOP/s=263948.288 BW=128.881 GB/s
+Run 415: Vectorized AXPY f32 size=16384 time=0.000001s GFLOP/s=567516.864 BW=207.831 GB/s
+Run 416: Vectorized Dot Product f32 size=16384 time=0.000001s GFLOP/s=639893.827 BW=156.224 GB/s
+Run 417: Vectorized Elementwise Multiply f32 size=16384 time=0.000001s GFLOP/s=236091.006 BW=172.918 GB/s
+Run 418: Vectorized 3-Point Stencil f32 size=16384 time=0.000001s GFLOP/s=1061009.684 BW=155.421 GB/s
+Run 419: Vectorized Memory Bandwidth f32 size=16384 time=0.000001s GFLOP/s=263689.081 BW=128.754 GB/s
+Run 420: Scalar AXPY f64 size=16384 time=0.000002s GFLOP/s=220752.852 BW=161.684 GB/s
+Run 421: Scalar Dot Product f64 size=16384 time=0.000002s GFLOP/s=221572.823 BW=108.190 GB/s
+Run 422: Scalar Elementwise Multiply f64 size=16384 time=0.000003s GFLOP/s=96943.110 BW=142.007 GB/s
+Run 423: Scalar 3-Point Stencil f64 size=16384 time=0.000003s GFLOP/s=487709.767 BW=142.884 GB/s
+Run 424: Scalar Memory Bandwidth f64 size=16384 time=0.000002s GFLOP/s=114276.490 BW=111.598 GB/s
+Run 425: Vectorized AXPY f64 size=16384 time=0.000003s GFLOP/s=183608.374 BW=134.479 GB/s
+Run 426: Vectorized Dot Product f64 size=16384 time=0.000002s GFLOP/s=221664.281 BW=108.235 GB/s
+Run 427: Vectorized Elementwise Multiply f64 size=16384 time=0.000003s GFLOP/s=95938.331 BW=140.535 GB/s
+Run 428: Vectorized 3-Point Stencil f64 size=16384 time=0.000003s GFLOP/s=472431.269 BW=138.408 GB/s
+Run 429: Vectorized Memory Bandwidth f64 size=16384 time=0.000002s GFLOP/s=114373.857 BW=111.693 GB/s
+Run 430: Scalar AXPY f64 size=16384 time=0.000002s GFLOP/s=284510.315 BW=208.382 GB/s
+Run 431: Scalar Dot Product f64 size=16384 time=0.000002s GFLOP/s=316924.960 BW=154.749 GB/s
+Run 432: Scalar Elementwise Multiply f64 size=16384 time=0.000002s GFLOP/s=117118.437 BW=171.560 GB/s
+Run 433: Scalar 3-Point Stencil f64 size=16384 time=0.000002s GFLOP/s=541418.839 BW=158.619 GB/s
+Run 434: Scalar Memory Bandwidth f64 size=16384 time=0.000002s GFLOP/s=131328.511 BW=128.250 GB/s
+Run 435: Vectorized AXPY f64 size=16384 time=0.000002s GFLOP/s=284661.126 BW=208.492 GB/s
+Run 436: Vectorized Dot Product f64 size=16384 time=0.000002s GFLOP/s=313592.780 BW=153.121 GB/s
+Run 437: Vectorized Elementwise Multiply f64 size=16384 time=0.000002s GFLOP/s=118045.488 BW=172.918 GB/s
+Run 438: Vectorized 3-Point Stencil f64 size=16384 time=0.000002s GFLOP/s=541637.267 BW=158.683 GB/s
+Run 439: Vectorized Memory Bandwidth f64 size=16384 time=0.000002s GFLOP/s=132039.080 BW=128.944 GB/s
+Run 440: Scalar AXPY f32 size=65536 time=0.000005s GFLOP/s=1775880.675 BW=162.587 GB/s
+Run 441: Scalar Dot Product f32 size=65536 time=0.000005s GFLOP/s=1776247.792 BW=108.414 GB/s
+Run 442: Scalar Elementwise Multiply f32 size=65536 time=0.000006s GFLOP/s=740256.312 BW=135.545 GB/s
+Run 443: Scalar 3-Point Stencil f32 size=65536 time=0.000005s GFLOP/s=3925929.863 BW=143.772 GB/s
+Run 444: Scalar Memory Bandwidth f32 size=65536 time=0.000005s GFLOP/s=915966.542 BW=111.812 GB/s
+Run 445: Vectorized AXPY f32 size=65536 time=0.000005s GFLOP/s=1775880.675 BW=162.587 GB/s
+Run 446: Vectorized Dot Product f32 size=65536 time=0.000005s GFLOP/s=1778086.191 BW=108.526 GB/s
+Run 447: Vectorized Elementwise Multiply f32 size=65536 time=0.000006s GFLOP/s=744232.767 BW=136.273 GB/s
+Run 448: Vectorized 3-Point Stencil f32 size=65536 time=0.000006s GFLOP/s=3891778.917 BW=142.521 GB/s
+Run 449: Vectorized Memory Bandwidth f32 size=65536 time=0.000005s GFLOP/s=907834.994 BW=110.820 GB/s
+Run 450: Scalar AXPY f32 size=65536 time=0.000004s GFLOP/s=2274274.480 BW=208.216 GB/s
+Run 451: Scalar Dot Product f32 size=65536 time=0.000004s GFLOP/s=2443793.632 BW=149.157 GB/s
+Run 452: Scalar Elementwise Multiply f32 size=65536 time=0.000005s GFLOP/s=944779.435 BW=172.994 GB/s
+Run 453: Scalar 3-Point Stencil f32 size=65536 time=0.000005s GFLOP/s=4771125.400 BW=174.724 GB/s
+Run 454: Scalar Memory Bandwidth f32 size=65536 time=0.000004s GFLOP/s=1045258.492 BW=127.595 GB/s
+Run 455: Vectorized AXPY f32 size=65536 time=0.000004s GFLOP/s=2232891.648 BW=204.427 GB/s
+Run 456: Vectorized Dot Product f32 size=65536 time=0.000003s GFLOP/s=2518303.845 BW=153.705 GB/s
+Run 457: Vectorized Elementwise Multiply f32 size=65536 time=0.000005s GFLOP/s=923251.800 BW=169.052 GB/s
+Run 458: Vectorized 3-Point Stencil f32 size=65536 time=0.000004s GFLOP/s=4804213.993 BW=175.936 GB/s
+Run 459: Vectorized Memory Bandwidth f32 size=65536 time=0.000005s GFLOP/s=946862.238 BW=115.584 GB/s
+Run 460: Scalar AXPY f64 size=65536 time=0.000008s GFLOP/s=1132937.809 BW=207.447 GB/s
+Run 461: Scalar Dot Product f64 size=65536 time=0.000007s GFLOP/s=1247992.817 BW=152.343 GB/s
+Run 462: Scalar Elementwise Multiply f64 size=65536 time=0.000017s GFLOP/s=251889.466 BW=92.245 GB/s
+Run 463: Scalar 3-Point Stencil f64 size=65536 time=0.000009s GFLOP/s=2330421.823 BW=170.685 GB/s
+Run 464: Scalar Memory Bandwidth f64 size=65536 time=0.000008s GFLOP/s=521044.182 BW=127.208 GB/s
+Run 465: Vectorized AXPY f64 size=65536 time=0.000008s GFLOP/s=1131892.794 BW=207.256 GB/s
+Run 466: Vectorized Dot Product f64 size=65536 time=0.000007s GFLOP/s=1245820.805 BW=152.078 GB/s
+Run 467: Vectorized Elementwise Multiply f64 size=65536 time=0.000018s GFLOP/s=243561.718 BW=89.195 GB/s
+Run 468: Vectorized 3-Point Stencil f64 size=65536 time=0.000009s GFLOP/s=2375272.293 BW=173.970 GB/s
+Run 469: Vectorized Memory Bandwidth f64 size=65536 time=0.000008s GFLOP/s=523011.120 BW=127.688 GB/s
+Run 470: Scalar AXPY f64 size=65536 time=0.000008s GFLOP/s=1066675.113 BW=195.314 GB/s
+Run 471: Scalar Dot Product f64 size=65536 time=0.000007s GFLOP/s=1188918.281 BW=145.132 GB/s
+Run 472: Scalar Elementwise Multiply f64 size=65536 time=0.000018s GFLOP/s=242229.277 BW=88.707 GB/s
+Run 473: Scalar 3-Point Stencil f64 size=65536 time=0.000010s GFLOP/s=2227218.104 BW=163.126 GB/s
+Run 474: Scalar Memory Bandwidth f64 size=65536 time=0.000008s GFLOP/s=524224.001 BW=127.984 GB/s
+Run 475: Vectorized AXPY f64 size=65536 time=0.000008s GFLOP/s=1125958.107 BW=206.169 GB/s
+Run 476: Vectorized Dot Product f64 size=65536 time=0.000007s GFLOP/s=1247811.527 BW=152.321 GB/s
+Run 477: Vectorized Elementwise Multiply f64 size=65536 time=0.000018s GFLOP/s=242133.684 BW=88.672 GB/s
+Run 478: Vectorized 3-Point Stencil f64 size=65536 time=0.000010s GFLOP/s=2235332.248 BW=163.721 GB/s
+Run 479: Vectorized Memory Bandwidth f64 size=65536 time=0.000008s GFLOP/s=523584.951 BW=127.828 GB/s
+Run 480: Scalar AXPY f32 size=262144 time=0.000043s GFLOP/s=3231576.622 BW=73.965 GB/s
+Run 481: Scalar Dot Product f32 size=262144 time=0.000032s GFLOP/s=4332333.674 BW=66.106 GB/s
+Run 482: Scalar Elementwise Multiply f32 size=262144 time=0.000047s GFLOP/s=1465796.615 BW=67.099 GB/s
+Run 483: Scalar 3-Point Stencil f32 size=262144 time=0.000057s GFLOP/s=6017045.805 BW=55.088 GB/s
+Run 484: Scalar Memory Bandwidth f32 size=262144 time=0.000037s GFLOP/s=1876504.647 BW=57.266 GB/s
+Run 485: Vectorized AXPY f32 size=262144 time=0.000047s GFLOP/s=2900045.441 BW=66.377 GB/s
+Run 486: Vectorized Dot Product f32 size=262144 time=0.000027s GFLOP/s=5178949.224 BW=79.024 GB/s
+Run 487: Vectorized Elementwise Multiply f32 size=262144 time=0.000046s GFLOP/s=1487563.358 BW=68.095 GB/s
+Run 488: Vectorized 3-Point Stencil f32 size=262144 time=0.000035s GFLOP/s=9903083.479 BW=90.665 GB/s
+Run 489: Vectorized Memory Bandwidth f32 size=262144 time=0.000034s GFLOP/s=2046257.820 BW=62.447 GB/s
+Run 490: Scalar AXPY f32 size=262144 time=0.000041s GFLOP/s=3324599.732 BW=76.094 GB/s
+Run 491: Scalar Dot Product f32 size=262144 time=0.000033s GFLOP/s=4219672.508 BW=64.387 GB/s
+Run 492: Scalar Elementwise Multiply f32 size=262144 time=0.000045s GFLOP/s=1512811.821 BW=69.251 GB/s
+Run 493: Scalar 3-Point Stencil f32 size=262144 time=0.000035s GFLOP/s=9713000.283 BW=88.925 GB/s
+Run 494: Scalar Memory Bandwidth f32 size=262144 time=0.000032s GFLOP/s=2149364.332 BW=65.593 GB/s
+Run 495: Vectorized AXPY f32 size=262144 time=0.000040s GFLOP/s=3453934.293 BW=79.054 GB/s
+Run 496: Vectorized Dot Product f32 size=262144 time=0.000026s GFLOP/s=5219068.637 BW=79.637 GB/s
+Run 497: Vectorized Elementwise Multiply f32 size=262144 time=0.000044s GFLOP/s=1552807.068 BW=71.082 GB/s
+Run 498: Vectorized 3-Point Stencil f32 size=262144 time=0.000037s GFLOP/s=9291940.679 BW=85.070 GB/s
+Run 499: Vectorized Memory Bandwidth f32 size=262144 time=0.000034s GFLOP/s=2003658.528 BW=61.147 GB/s
+Run 500: Scalar AXPY f64 size=262144 time=0.000081s GFLOP/s=1702895.014 BW=77.952 GB/s
+Run 501: Scalar Dot Product f64 size=262144 time=0.000050s GFLOP/s=2766707.322 BW=84.433 GB/s
+Run 502: Scalar Elementwise Multiply f64 size=262144 time=0.000104s GFLOP/s=661527.501 BW=60.565 GB/s
+Run 503: Scalar 3-Point Stencil f64 size=262144 time=0.000078s GFLOP/s=4408033.362 BW=80.714 GB/s
+Run 504: Scalar Memory Bandwidth f64 size=262144 time=0.000066s GFLOP/s=1035415.283 BW=63.197 GB/s
+Run 505: Vectorized AXPY f64 size=262144 time=0.000084s GFLOP/s=1641807.069 BW=75.156 GB/s
+Run 506: Vectorized Dot Product f64 size=262144 time=0.000054s GFLOP/s=2555719.982 BW=77.994 GB/s
+Run 507: Vectorized Elementwise Multiply f64 size=262144 time=0.000091s GFLOP/s=756747.423 BW=69.282 GB/s
+Run 508: Vectorized 3-Point Stencil f64 size=262144 time=0.000069s GFLOP/s=4948760.415 BW=90.615 GB/s
+Run 509: Vectorized Memory Bandwidth f64 size=262144 time=0.000066s GFLOP/s=1041646.103 BW=63.577 GB/s
+Run 510: Scalar AXPY f64 size=262144 time=0.000081s GFLOP/s=1694120.986 BW=77.551 GB/s
+Run 511: Scalar Dot Product f64 size=262144 time=0.000050s GFLOP/s=2772455.843 BW=84.609 GB/s
+Run 512: Scalar Elementwise Multiply f64 size=262144 time=0.000091s GFLOP/s=755491.170 BW=69.167 GB/s
+Run 513: Scalar 3-Point Stencil f64 size=262144 time=0.000078s GFLOP/s=4422785.813 BW=80.984 GB/s
+Run 514: Scalar Memory Bandwidth f64 size=262144 time=0.000070s GFLOP/s=985550.456 BW=60.153 GB/s
+Run 515: Vectorized AXPY f64 size=262144 time=0.000084s GFLOP/s=1635593.880 BW=74.872 GB/s
+Run 516: Vectorized Dot Product f64 size=262144 time=0.000049s GFLOP/s=2820996.571 BW=86.090 GB/s
+Run 517: Vectorized Elementwise Multiply f64 size=262144 time=0.000089s GFLOP/s=769948.872 BW=70.491 GB/s
+Run 518: Vectorized 3-Point Stencil f64 size=262144 time=0.000070s GFLOP/s=4906571.421 BW=89.842 GB/s
+Run 519: Vectorized Memory Bandwidth f64 size=262144 time=0.000067s GFLOP/s=1032692.305 BW=63.031 GB/s
+Run 520: Scalar AXPY f32 size=1048576 time=0.000164s GFLOP/s=13405081.904 BW=76.704 GB/s
+Run 521: Scalar Dot Product f32 size=1048576 time=0.000094s GFLOP/s=23475779.926 BW=89.553 GB/s
+Run 522: Scalar Elementwise Multiply f32 size=1048576 time=0.000182s GFLOP/s=6052679.656 BW=69.267 GB/s
+Run 523: Scalar 3-Point Stencil f32 size=1048576 time=0.000145s GFLOP/s=37879188.529 BW=86.699 GB/s
+Run 524: Scalar Memory Bandwidth f32 size=1048576 time=0.000133s GFLOP/s=8292818.458 BW=63.269 GB/s
+Run 525: Vectorized AXPY f32 size=1048576 time=0.000164s GFLOP/s=13393651.350 BW=76.639 GB/s
+Run 526: Vectorized Dot Product f32 size=1048576 time=0.000098s GFLOP/s=22529590.984 BW=85.944 GB/s
+Run 527: Vectorized Elementwise Multiply f32 size=1048576 time=0.000184s GFLOP/s=5987060.181 BW=68.516 GB/s
+Run 528: Vectorized 3-Point Stencil f32 size=1048576 time=0.000167s GFLOP/s=33007661.979 BW=75.549 GB/s
+Run 529: Vectorized Memory Bandwidth f32 size=1048576 time=0.000132s GFLOP/s=8329949.065 BW=63.552 GB/s
+Run 530: Scalar AXPY f32 size=1048576 time=0.000162s GFLOP/s=13579079.274 BW=77.700 GB/s
+Run 531: Scalar Dot Product f32 size=1048576 time=0.000099s GFLOP/s=22251464.712 BW=84.883 GB/s
+Run 532: Scalar Elementwise Multiply f32 size=1048576 time=0.000186s GFLOP/s=5916537.760 BW=67.709 GB/s
+Run 533: Scalar 3-Point Stencil f32 size=1048576 time=0.000141s GFLOP/s=38880027.540 BW=88.989 GB/s
+Run 534: Scalar Memory Bandwidth f32 size=1048576 time=0.000149s GFLOP/s=7394408.885 BW=56.415 GB/s
+Run 535: Vectorized AXPY f32 size=1048576 time=0.000167s GFLOP/s=13145213.056 BW=75.218 GB/s
+Run 536: Vectorized Dot Product f32 size=1048576 time=0.000100s GFLOP/s=21914408.678 BW=83.597 GB/s
+Run 537: Vectorized Elementwise Multiply f32 size=1048576 time=0.000189s GFLOP/s=5825628.403 BW=66.669 GB/s
+Run 538: Vectorized 3-Point Stencil f32 size=1048576 time=0.000142s GFLOP/s=38844588.956 BW=88.908 GB/s
+Run 539: Vectorized Memory Bandwidth f32 size=1048576 time=0.000148s GFLOP/s=7417154.911 BW=56.588 GB/s
+Run 540: Scalar AXPY f64 size=1048576 time=0.000360s GFLOP/s=6116213.095 BW=69.995 GB/s
+Run 541: Scalar Dot Product f64 size=1048576 time=0.000232s GFLOP/s=9496723.276 BW=72.454 GB/s
+Run 542: Scalar Elementwise Multiply f64 size=1048576 time=0.000611s GFLOP/s=1800757.027 BW=41.216 GB/s
+Run 543: Scalar 3-Point Stencil f64 size=1048576 time=0.000313s GFLOP/s=17557576.548 BW=80.372 GB/s
+Run 544: Scalar Memory Bandwidth f64 size=1048576 time=0.000326s GFLOP/s=3377220.750 BW=51.532 GB/s
+Run 545: Vectorized AXPY f64 size=1048576 time=0.000361s GFLOP/s=6088626.806 BW=69.679 GB/s
+Run 546: Vectorized Dot Product f64 size=1048576 time=0.000249s GFLOP/s=8825003.741 BW=67.329 GB/s
+Run 547: Vectorized Elementwise Multiply f64 size=1048576 time=0.000595s GFLOP/s=1848900.639 BW=42.318 GB/s
+Run 548: Vectorized 3-Point Stencil f64 size=1048576 time=0.000328s GFLOP/s=16737527.702 BW=76.618 GB/s
+Run 549: Vectorized Memory Bandwidth f64 size=1048576 time=0.000292s GFLOP/s=3763440.176 BW=57.426 GB/s
+Run 550: Scalar AXPY f64 size=1048576 time=0.000353s GFLOP/s=6221596.421 BW=71.201 GB/s
+Run 551: Scalar Dot Product f64 size=1048576 time=0.000235s GFLOP/s=9361848.240 BW=71.425 GB/s
+Run 552: Scalar Elementwise Multiply f64 size=1048576 time=0.000601s GFLOP/s=1829680.325 BW=41.878 GB/s
+Run 553: Scalar 3-Point Stencil f64 size=1048576 time=0.000329s GFLOP/s=16689459.834 BW=76.398 GB/s
+Run 554: Scalar Memory Bandwidth f64 size=1048576 time=0.000295s GFLOP/s=3725895.046 BW=56.853 GB/s
+Run 555: Vectorized AXPY f64 size=1048576 time=0.000355s GFLOP/s=6190421.011 BW=70.844 GB/s
+Run 556: Vectorized Dot Product f64 size=1048576 time=0.000229s GFLOP/s=9593337.761 BW=73.191 GB/s
+Run 557: Vectorized Elementwise Multiply f64 size=1048576 time=0.000593s GFLOP/s=1855568.634 BW=42.471 GB/s
+Run 558: Vectorized 3-Point Stencil f64 size=1048576 time=0.000317s GFLOP/s=17355813.740 BW=79.449 GB/s
+Run 559: Vectorized Memory Bandwidth f64 size=1048576 time=0.000285s GFLOP/s=3859154.216 BW=58.886 GB/s
+Run 560: Scalar AXPY f32 size=4194304 time=0.001215s GFLOP/s=28953326.653 BW=41.418 GB/s
+Run 561: Scalar Dot Product f32 size=4194304 time=0.000867s GFLOP/s=40596915.212 BW=38.716 GB/s
+Run 562: Scalar Elementwise Multiply f32 size=4194304 time=0.002025s GFLOP/s=8686534.110 BW=24.852 GB/s
+Run 563: Scalar 3-Point Stencil f32 size=4194304 time=0.001254s GFLOP/s=70167391.833 BW=40.150 GB/s
+Run 564: Scalar Memory Bandwidth f32 size=4194304 time=0.001220s GFLOP/s=14419517.323 BW=27.503 GB/s
+Run 565: Vectorized AXPY f32 size=4194304 time=0.001218s GFLOP/s=28897206.808 BW=41.338 GB/s
+Run 566: Vectorized Dot Product f32 size=4194304 time=0.000846s GFLOP/s=41610733.826 BW=39.683 GB/s
+Run 567: Vectorized Elementwise Multiply f32 size=4194304 time=0.002043s GFLOP/s=8609208.626 BW=24.631 GB/s
+Run 568: Vectorized 3-Point Stencil f32 size=4194304 time=0.001252s GFLOP/s=70266155.595 BW=40.207 GB/s
+Run 569: Vectorized Memory Bandwidth f32 size=4194304 time=0.001194s GFLOP/s=14736366.611 BW=28.107 GB/s
+Run 570: Scalar AXPY f32 size=4194304 time=0.001187s GFLOP/s=29649568.531 BW=42.414 GB/s
+Run 571: Scalar Dot Product f32 size=4194304 time=0.000888s GFLOP/s=39602284.102 BW=37.768 GB/s
+Run 572: Scalar Elementwise Multiply f32 size=4194304 time=0.002036s GFLOP/s=8641496.647 BW=24.724 GB/s
+Run 573: Scalar 3-Point Stencil f32 size=4194304 time=0.001240s GFLOP/s=70929484.301 BW=40.586 GB/s
+Run 574: Scalar Memory Bandwidth f32 size=4194304 time=0.001265s GFLOP/s=13909846.333 BW=26.531 GB/s
+Run 575: Vectorized AXPY f32 size=4194304 time=0.001266s GFLOP/s=27801315.687 BW=39.770 GB/s
+Run 576: Vectorized Dot Product f32 size=4194304 time=0.000855s GFLOP/s=41155018.750 BW=39.248 GB/s
+Run 577: Vectorized Elementwise Multiply f32 size=4194304 time=0.002080s GFLOP/s=8457688.230 BW=24.198 GB/s
+Run 578: Vectorized 3-Point Stencil f32 size=4194304 time=0.001249s GFLOP/s=70410427.140 BW=40.289 GB/s
+Run 579: Vectorized Memory Bandwidth f32 size=4194304 time=0.001236s GFLOP/s=14232584.478 BW=27.147 GB/s
+Run 580: Scalar AXPY f64 size=4194304 time=0.003253s GFLOP/s=10815793.797 BW=30.944 GB/s
+Run 581: Scalar Dot Product f64 size=4194304 time=0.002345s GFLOP/s=15004118.195 BW=28.618 GB/s
+Run 582: Scalar Elementwise Multiply f64 size=4194304 time=0.004721s GFLOP/s=3726462.507 BW=21.323 GB/s
+Run 583: Scalar 3-Point Stencil f64 size=4194304 time=0.003314s GFLOP/s=26542576.372 BW=30.376 GB/s
+Run 584: Scalar Memory Bandwidth f64 size=4194304 time=0.003346s GFLOP/s=5258129.225 BW=20.058 GB/s
+Run 585: Vectorized AXPY f64 size=4194304 time=0.003272s GFLOP/s=10752522.568 BW=30.763 GB/s
+Run 586: Vectorized Dot Product f64 size=4194304 time=0.002296s GFLOP/s=15322742.339 BW=29.226 GB/s
+Run 587: Vectorized Elementwise Multiply f64 size=4194304 time=0.004702s GFLOP/s=3741311.632 BW=21.408 GB/s
+Run 588: Vectorized 3-Point Stencil f64 size=4194304 time=0.003289s GFLOP/s=26742949.410 BW=30.605 GB/s
+Run 589: Vectorized Memory Bandwidth f64 size=4194304 time=0.003361s GFLOP/s=5234679.098 BW=19.969 GB/s
+Run 590: Scalar AXPY f64 size=4194304 time=0.003317s GFLOP/s=10605851.692 BW=30.344 GB/s
+Run 591: Scalar Dot Product f64 size=4194304 time=0.002259s GFLOP/s=15574439.530 BW=29.706 GB/s
+Run 592: Scalar Elementwise Multiply f64 size=4194304 time=0.004774s GFLOP/s=3684620.985 BW=21.084 GB/s
+Run 593: Scalar 3-Point Stencil f64 size=4194304 time=0.003345s GFLOP/s=26297350.719 BW=30.095 GB/s
+Run 594: Scalar Memory Bandwidth f64 size=4194304 time=0.003354s GFLOP/s=5245522.269 BW=20.010 GB/s
+Run 595: Vectorized AXPY f64 size=4194304 time=0.003243s GFLOP/s=10850459.311 BW=31.043 GB/s
+Run 596: Vectorized Dot Product f64 size=4194304 time=0.002280s GFLOP/s=15432019.650 BW=29.434 GB/s
+Run 597: Vectorized Elementwise Multiply f64 size=4194304 time=0.004741s GFLOP/s=3710643.339 BW=21.232 GB/s
+Run 598: Vectorized 3-Point Stencil f64 size=4194304 time=0.003351s GFLOP/s=26247239.524 BW=30.038 GB/s
+Run 599: Vectorized Memory Bandwidth f64 size=4194304 time=0.003342s GFLOP/s=5264109.680 BW=20.081 GB/s
+Run 600: Scalar AXPY f32 size=16777216 time=0.007198s GFLOP/s=78211250.199 BW=27.971 GB/s
+Run 601: Scalar Dot Product f32 size=16777216 time=0.005088s GFLOP/s=110645397.817 BW=26.380 GB/s
+Run 602: Scalar Elementwise Multiply f32 size=16777216 time=0.009954s GFLOP/s=28276529.130 BW=20.225 GB/s
+Run 603: Scalar 3-Point Stencil f32 size=16777216 time=0.007302s GFLOP/s=192747223.346 BW=27.573 GB/s
+Run 604: Scalar Memory Bandwidth f32 size=16777216 time=0.007478s GFLOP/s=37642860.228 BW=17.950 GB/s
+Run 605: Vectorized AXPY f32 size=16777216 time=0.007216s GFLOP/s=78014712.612 BW=27.900 GB/s
+Run 606: Vectorized Dot Product f32 size=16777216 time=0.005068s GFLOP/s=111081525.778 BW=26.484 GB/s
+Run 607: Vectorized Elementwise Multiply f32 size=16777216 time=0.010013s GFLOP/s=28112264.570 BW=20.107 GB/s
+Run 608: Vectorized 3-Point Stencil f32 size=16777216 time=0.007336s GFLOP/s=191845518.059 BW=27.444 GB/s
+Run 609: Vectorized Memory Bandwidth f32 size=16777216 time=0.007426s GFLOP/s=37902849.755 BW=18.073 GB/s
+Run 610: Scalar AXPY f32 size=16777216 time=0.007181s GFLOP/s=78393013.882 BW=28.036 GB/s
+Run 611: Scalar Dot Product f32 size=16777216 time=0.005023s GFLOP/s=112085270.710 BW=26.723 GB/s
+Run 612: Scalar Elementwise Multiply f32 size=16777216 time=0.010022s GFLOP/s=28084680.666 BW=20.088 GB/s
+Run 613: Scalar 3-Point Stencil f32 size=16777216 time=0.007347s GFLOP/s=191570356.882 BW=27.404 GB/s
+Run 614: Scalar Memory Bandwidth f32 size=16777216 time=0.007499s GFLOP/s=37536358.055 BW=17.899 GB/s
+Run 615: Vectorized AXPY f32 size=16777216 time=0.007197s GFLOP/s=78222639.399 BW=27.975 GB/s
+Run 616: Vectorized Dot Product f32 size=16777216 time=0.004934s GFLOP/s=114093075.678 BW=27.202 GB/s
+Run 617: Vectorized Elementwise Multiply f32 size=16777216 time=0.009882s GFLOP/s=28484036.563 BW=20.373 GB/s
+Run 618: Vectorized 3-Point Stencil f32 size=16777216 time=0.007300s GFLOP/s=192782153.867 BW=27.578 GB/s
+Run 619: Vectorized Memory Bandwidth f32 size=16777216 time=0.007404s GFLOP/s=38014904.884 BW=18.127 GB/s
+Run 620: Scalar AXPY f64 size=16777216 time=0.014977s GFLOP/s=37588672.813 BW=26.886 GB/s
+Run 621: Scalar Dot Product f64 size=16777216 time=0.010313s GFLOP/s=54587265.494 BW=26.029 GB/s
+Run 622: Scalar Elementwise Multiply f64 size=16777216 time=0.020225s GFLOP/s=13917462.688 BW=19.909 GB/s
+Run 623: Scalar 3-Point Stencil f64 size=16777216 time=0.015037s GFLOP/s=93596168.324 BW=26.778 GB/s
+Run 624: Scalar Memory Bandwidth f64 size=16777216 time=0.015273s GFLOP/s=18429380.990 BW=17.576 GB/s
+Run 625: Vectorized AXPY f64 size=16777216 time=0.014901s GFLOP/s=37778189.526 BW=27.021 GB/s
+Run 626: Vectorized Dot Product f64 size=16777216 time=0.010261s GFLOP/s=54864641.227 BW=26.161 GB/s
+Run 627: Vectorized Elementwise Multiply f64 size=16777216 time=0.020247s GFLOP/s=13901962.974 BW=19.887 GB/s
+Run 628: Vectorized 3-Point Stencil f64 size=16777216 time=0.015126s GFLOP/s=93042018.838 BW=26.620 GB/s
+Run 629: Vectorized Memory Bandwidth f64 size=16777216 time=0.015345s GFLOP/s=18342822.491 BW=17.493 GB/s
+Run 630: Scalar AXPY f64 size=16777216 time=0.014901s GFLOP/s=37779353.219 BW=27.022 GB/s
+Run 631: Scalar Dot Product f64 size=16777216 time=0.010232s GFLOP/s=55019371.220 BW=26.235 GB/s
+Run 632: Scalar Elementwise Multiply f64 size=16777216 time=0.020234s GFLOP/s=13910779.189 BW=19.900 GB/s
+Run 633: Scalar 3-Point Stencil f64 size=16777216 time=0.015078s GFLOP/s=93337930.028 BW=26.704 GB/s
+Run 634: Scalar Memory Bandwidth f64 size=16777216 time=0.015394s GFLOP/s=18285117.723 BW=17.438 GB/s
+Run 635: Vectorized AXPY f64 size=16777216 time=0.014947s GFLOP/s=37663322.545 BW=26.939 GB/s
+Run 636: Vectorized Dot Product f64 size=16777216 time=0.010189s GFLOP/s=55252751.639 BW=26.347 GB/s
+Run 637: Vectorized Elementwise Multiply f64 size=16777216 time=0.020285s GFLOP/s=13876070.337 BW=19.850 GB/s
+Run 638: Vectorized 3-Point Stencil f64 size=16777216 time=0.015040s GFLOP/s=93578450.451 BW=26.773 GB/s
+Run 639: Vectorized Memory Bandwidth f64 size=16777216 time=0.015334s GFLOP/s=18355816.700 BW=17.505 GB/s
+Run 640: Scalar AXPY f32 size=1024 time=0.000000s GFLOP/s=25266.876 BW=148.048 GB/s
+Run 641: Scalar Dot Product f32 size=1024 time=0.000000s GFLOP/s=37449.052 BW=146.285 GB/s
+Run 642: Scalar Elementwise Multiply f32 size=1024 time=0.000000s GFLOP/s=13797.053 BW=161.684 GB/s
+Run 643: Scalar 3-Point Stencil f32 size=1024 time=0.000000s GFLOP/s=51909.756 BW=121.663 GB/s
+Run 644: Scalar Memory Bandwidth f32 size=1024 time=0.000000s GFLOP/s=18078.850 BW=141.241 GB/s
+Run 645: Vectorized AXPY f32 size=1024 time=0.000000s GFLOP/s=30840.500 BW=180.706 GB/s
+Run 646: Vectorized Dot Product f32 size=1024 time=0.000000s GFLOP/s=38130.150 BW=148.946 GB/s
+Run 647: Vectorized Elementwise Multiply f32 size=1024 time=0.000000s GFLOP/s=13981.015 BW=163.840 GB/s
+Run 648: Vectorized 3-Point Stencil f32 size=1024 time=0.000000s GFLOP/s=52428.706 BW=122.880 GB/s
+Run 649: Vectorized Memory Bandwidth f32 size=1024 time=0.000000s GFLOP/s=18724.623 BW=146.286 GB/s
+Run 650: Scalar AXPY f32 size=1024 time=0.000000s GFLOP/s=48770.935 BW=285.767 GB/s
+Run 651: Scalar Dot Product f32 size=1024 time=0.000000s GFLOP/s=46603.324 BW=182.044 GB/s
+Run 652: Scalar Elementwise Multiply f32 size=1024 time=0.000000s GFLOP/s=18724.526 BW=219.428 GB/s
+Run 653: Scalar 3-Point Stencil f32 size=1024 time=0.000000s GFLOP/s=68089.347 BW=159.584 GB/s
+Run 654: Scalar Memory Bandwidth f32 size=1024 time=0.000000s GFLOP/s=49931.810 BW=390.092 GB/s
+Run 655: Vectorized AXPY f32 size=1024 time=0.000000s GFLOP/s=61680.999 BW=361.412 GB/s
+Run 656: Vectorized Dot Product f32 size=1024 time=0.000000s GFLOP/s=56679.798 BW=221.405 GB/s
+Run 657: Vectorized Elementwise Multiply f32 size=1024 time=0.000000s GFLOP/s=28339.899 BW=332.108 GB/s
+Run 658: Vectorized 3-Point Stencil f32 size=1024 time=0.000000s GFLOP/s=67216.400 BW=157.538 GB/s
+Run 659: Vectorized Memory Bandwidth f32 size=1024 time=0.000000s GFLOP/s=65536.693 BW=512.005 GB/s
+Run 660: Scalar AXPY f64 size=1024 time=0.000000s GFLOP/s=19599.562 BW=229.682 GB/s
+Run 661: Scalar Dot Product f64 size=1024 time=0.000000s GFLOP/s=24672.358 BW=192.753 GB/s
+Run 662: Scalar Elementwise Multiply f64 size=1024 time=0.000000s GFLOP/s=9118.052 BW=213.704 GB/s
+Run 663: Scalar 3-Point Stencil f64 size=1024 time=0.000000s GFLOP/s=34721.063 BW=162.755 GB/s
+Run 664: Scalar Memory Bandwidth f64 size=1024 time=0.000000s GFLOP/s=11781.779 BW=184.090 GB/s
+Run 665: Vectorized AXPY f64 size=1024 time=0.000000s GFLOP/s=19599.562 BW=229.682 GB/s
+Run 666: Vectorized Dot Product f64 size=1024 time=0.000000s GFLOP/s=25266.876 BW=197.397 GB/s
+Run 667: Vectorized Elementwise Multiply f64 size=1024 time=0.000000s GFLOP/s=9118.052 BW=213.704 GB/s
+Run 668: Vectorized 3-Point Stencil f64 size=1024 time=0.000000s GFLOP/s=34267.189 BW=160.627 GB/s
+Run 669: Vectorized Memory Bandwidth f64 size=1024 time=0.000000s GFLOP/s=11781.779 BW=184.090 GB/s
+Run 670: Scalar AXPY f64 size=1024 time=0.000000s GFLOP/s=32263.920 BW=378.093 GB/s
+Run 671: Scalar Dot Product f64 size=1024 time=0.000000s GFLOP/s=25890.847 BW=202.272 GB/s
+Run 672: Scalar Elementwise Multiply f64 size=1024 time=0.000000s GFLOP/s=14563.504 BW=341.332 GB/s
+Run 673: Scalar 3-Point Stencil f64 size=1024 time=0.000000s GFLOP/s=36663.516 BW=171.860 GB/s
+Run 674: Scalar Memory Bandwidth f64 size=1024 time=0.000000s GFLOP/s=32768.049 BW=512.001 GB/s
+Run 675: Vectorized AXPY f64 size=1024 time=0.000000s GFLOP/s=32263.776 BW=378.091 GB/s
+Run 676: Vectorized Dot Product f64 size=1024 time=0.000000s GFLOP/s=26886.560 BW=210.051 GB/s
+Run 677: Vectorized Elementwise Multiply f64 size=1024 time=0.000000s GFLOP/s=14768.685 BW=346.141 GB/s
+Run 678: Vectorized 3-Point Stencil f64 size=1024 time=0.000000s GFLOP/s=36157.736 BW=169.489 GB/s
+Run 679: Vectorized Memory Bandwidth f64 size=1024 time=0.000000s GFLOP/s=31775.069 BW=496.485 GB/s
+Run 680: Scalar AXPY f32 size=4096 time=0.000000s GFLOP/s=157532.421 BW=230.760 GB/s
+Run 681: Scalar Dot Product f32 size=4096 time=0.000000s GFLOP/s=177536.692 BW=173.376 GB/s
+Run 682: Scalar Elementwise Multiply f32 size=4096 time=0.000000s GFLOP/s=46994.990 BW=137.681 GB/s
+Run 683: Scalar 3-Point Stencil f32 size=4096 time=0.000000s GFLOP/s=272357.388 BW=159.584 GB/s
+Run 684: Scalar Memory Bandwidth f32 size=4096 time=0.000000s GFLOP/s=95324.996 BW=186.182 GB/s
+Run 685: Vectorized AXPY f32 size=4096 time=0.000000s GFLOP/s=157532.421 BW=230.760 GB/s
+Run 686: Vectorized Dot Product f32 size=4096 time=0.000000s GFLOP/s=178481.044 BW=174.298 GB/s
+Run 687: Vectorized Elementwise Multiply f32 size=4096 time=0.000000s GFLOP/s=61454.994 BW=180.044 GB/s
+Run 688: Vectorized 3-Point Stencil f32 size=4096 time=0.000000s GFLOP/s=276851.768 BW=162.218 GB/s
+Run 689: Vectorized Memory Bandwidth f32 size=4096 time=0.000000s GFLOP/s=95324.996 BW=186.182 GB/s
+Run 690: Scalar AXPY f32 size=4096 time=0.000000s GFLOP/s=260112.243 BW=381.024 GB/s
+Run 691: Scalar Dot Product f32 size=4096 time=0.000000s GFLOP/s=181375.354 BW=177.124 GB/s
+Run 692: Scalar Elementwise Multiply f32 size=4096 time=0.000000s GFLOP/s=113359.596 BW=332.108 GB/s
+Run 693: Scalar 3-Point Stencil f32 size=4096 time=0.000000s GFLOP/s=287281.199 BW=168.329 GB/s
+Run 694: Scalar Memory Bandwidth f32 size=4096 time=0.000000s GFLOP/s=289263.045 BW=564.967 GB/s
+Run 695: Vectorized AXPY f32 size=4096 time=0.000000s GFLOP/s=258110.784 BW=378.092 GB/s
+Run 696: Vectorized Dot Product f32 size=4096 time=0.000000s GFLOP/s=181375.354 BW=177.124 GB/s
+Run 697: Vectorized Elementwise Multiply f32 size=4096 time=0.000000s GFLOP/s=112598.787 BW=329.879 GB/s
+Run 698: Vectorized 3-Point Stencil f32 size=4096 time=0.000000s GFLOP/s=288268.139 BW=168.907 GB/s
+Run 699: Vectorized Memory Bandwidth f32 size=4096 time=0.000000s GFLOP/s=223696.246 BW=436.907 GB/s
+Run 700: Scalar AXPY f64 size=4096 time=0.000001s GFLOP/s=54917.238 BW=160.890 GB/s
+Run 701: Scalar Dot Product f64 size=4096 time=0.000001s GFLOP/s=57260.113 BW=111.836 GB/s
+Run 702: Scalar Elementwise Multiply f64 size=4096 time=0.000001s GFLOP/s=23967.448 BW=140.434 GB/s
+Run 703: Scalar 3-Point Stencil f64 size=4096 time=0.000001s GFLOP/s=106861.227 BW=125.228 GB/s
+Run 704: Scalar Memory Bandwidth f64 size=4096 time=0.000001s GFLOP/s=28196.994 BW=110.145 GB/s
+Run 705: Vectorized AXPY f64 size=4096 time=0.000001s GFLOP/s=54827.503 BW=160.627 GB/s
+Run 706: Vectorized Dot Product f64 size=4096 time=0.000001s GFLOP/s=57456.211 BW=112.219 GB/s
+Run 707: Vectorized Elementwise Multiply f64 size=4096 time=0.000001s GFLOP/s=24001.737 BW=140.635 GB/s
+Run 708: Vectorized 3-Point Stencil f64 size=4096 time=0.000001s GFLOP/s=105783.213 BW=123.965 GB/s
+Run 709: Vectorized Memory Bandwidth f64 size=4096 time=0.000001s GFLOP/s=28292.108 BW=110.516 GB/s
+Run 710: Scalar AXPY f64 size=4096 time=0.000000s GFLOP/s=78951.652 BW=231.304 GB/s
+Run 711: Scalar Dot Product f64 size=4096 time=0.000000s GFLOP/s=83468.765 BW=163.025 GB/s
+Run 712: Scalar Elementwise Multiply f64 size=4096 time=0.000001s GFLOP/s=29959.304 BW=175.543 GB/s
+Run 713: Scalar 3-Point Stencil f64 size=4096 time=0.000001s GFLOP/s=107546.280 BW=126.031 GB/s
+Run 714: Scalar Memory Bandwidth f64 size=4096 time=0.000001s GFLOP/s=33487.455 BW=130.810 GB/s
+Run 715: Vectorized AXPY f64 size=4096 time=0.000000s GFLOP/s=79701.738 BW=233.501 GB/s
+Run 716: Vectorized Dot Product f64 size=4096 time=0.000000s GFLOP/s=83468.705 BW=163.025 GB/s
+Run 717: Vectorized Elementwise Multiply f64 size=4096 time=0.000001s GFLOP/s=30066.686 BW=176.172 GB/s
+Run 718: Vectorized 3-Point Stencil f64 size=4096 time=0.000001s GFLOP/s=112598.743 BW=131.952 GB/s
+Run 719: Vectorized Memory Bandwidth f64 size=4096 time=0.000000s GFLOP/s=33621.674 BW=131.335 GB/s
+Run 720: Scalar AXPY f32 size=16384 time=0.000001s GFLOP/s=439697.722 BW=161.022 GB/s
+Run 721: Scalar Dot Product f32 size=16384 time=0.000001s GFLOP/s=451531.453 BW=110.237 GB/s
+Run 722: Scalar Elementwise Multiply f32 size=16384 time=0.000001s GFLOP/s=189439.274 BW=138.749 GB/s
+Run 723: Scalar 3-Point Stencil f32 size=16384 time=0.000002s GFLOP/s=842546.839 BW=123.420 GB/s
+Run 724: Scalar Memory Bandwidth f32 size=16384 time=0.000001s GFLOP/s=232210.646 BW=113.384 GB/s
+Run 725: Vectorized AXPY f32 size=16384 time=0.000001s GFLOP/s=439337.902 BW=160.890 GB/s
+Run 726: Vectorized Dot Product f32 size=16384 time=0.000001s GFLOP/s=451531.453 BW=110.237 GB/s
+Run 727: Vectorized Elementwise Multiply f32 size=16384 time=0.000001s GFLOP/s=192564.871 BW=141.039 GB/s
+Run 728: Vectorized 3-Point Stencil f32 size=16384 time=0.000002s GFLOP/s=837290.889 BW=122.650 GB/s
+Run 729: Vectorized Memory Bandwidth f32 size=16384 time=0.000001s GFLOP/s=232814.783 BW=113.679 GB/s
+Run 730: Scalar AXPY f32 size=16384 time=0.000001s GFLOP/s=579148.726 BW=212.091 GB/s
+Run 731: Scalar Dot Product f32 size=16384 time=0.000001s GFLOP/s=653127.744 BW=159.455 GB/s
+Run 732: Scalar Elementwise Multiply f32 size=16384 time=0.000001s GFLOP/s=240965.391 BW=176.488 GB/s
+Run 733: Scalar 3-Point Stencil f32 size=16384 time=0.000001s GFLOP/s=898378.351 BW=131.598 GB/s
+Run 734: Scalar Memory Bandwidth f32 size=16384 time=0.000001s GFLOP/s=268704.149 BW=131.203 GB/s
+Run 735: Vectorized AXPY f32 size=16384 time=0.000002s GFLOP/s=347264.467 BW=127.172 GB/s
+Run 736: Vectorized Dot Product f32 size=16384 time=0.000001s GFLOP/s=653127.744 BW=159.455 GB/s
+Run 737: Vectorized Elementwise Multiply f32 size=16384 time=0.000001s GFLOP/s=240749.277 BW=176.330 GB/s
+Run 738: Vectorized 3-Point Stencil f32 size=16384 time=0.000002s GFLOP/s=873813.302 BW=128.000 GB/s
+Run 739: Vectorized Memory Bandwidth f32 size=16384 time=0.000001s GFLOP/s=239888.683 BW=117.133 GB/s
+Run 740: Scalar AXPY f64 size=16384 time=0.000002s GFLOP/s=214834.289 BW=157.349 GB/s
+Run 741: Scalar Dot Product f64 size=16384 time=0.000002s GFLOP/s=226241.427 BW=110.469 GB/s
+Run 742: Scalar Elementwise Multiply f64 size=16384 time=0.000003s GFLOP/s=100125.122 BW=146.668 GB/s
+Run 743: Scalar 3-Point Stencil f64 size=16384 time=0.000003s GFLOP/s=423533.383 BW=124.082 GB/s
+Run 744: Scalar Memory Bandwidth f64 size=16384 time=0.000002s GFLOP/s=116660.358 BW=113.926 GB/s
+Run 745: Vectorized AXPY f64 size=16384 time=0.000002s GFLOP/s=218684.683 BW=160.169 GB/s
+Run 746: Vectorized Dot Product f64 size=16384 time=0.000002s GFLOP/s=226241.427 BW=110.469 GB/s
+Run 747: Vectorized Elementwise Multiply f64 size=16384 time=0.000003s GFLOP/s=99494.232 BW=145.744 GB/s
+Run 748: Vectorized 3-Point Stencil f64 size=16384 time=0.000003s GFLOP/s=423399.775 BW=124.043 GB/s
+Run 749: Vectorized Memory Bandwidth f64 size=16384 time=0.000002s GFLOP/s=116660.358 BW=113.926 GB/s
+Run 750: Scalar AXPY f64 size=16384 time=0.000002s GFLOP/s=287712.180 BW=210.727 GB/s
+Run 751: Scalar Dot Product f64 size=16384 time=0.000002s GFLOP/s=323611.136 BW=158.013 GB/s
+Run 752: Scalar Elementwise Multiply f64 size=16384 time=0.000002s GFLOP/s=120590.947 BW=176.647 GB/s
+Run 753: Scalar 3-Point Stencil f64 size=16384 time=0.000003s GFLOP/s=439050.469 BW=128.628 GB/s
+Run 754: Scalar Memory Bandwidth f64 size=16384 time=0.000002s GFLOP/s=134083.656 BW=130.941 GB/s
+Run 755: Vectorized AXPY f64 size=16384 time=0.000002s GFLOP/s=290514.593 BW=212.779 GB/s
+Run 756: Vectorized Dot Product f64 size=16384 time=0.000002s GFLOP/s=323611.136 BW=158.013 GB/s
+Run 757: Vectorized Elementwise Multiply f64 size=16384 time=0.000002s GFLOP/s=120590.947 BW=176.647 GB/s
+Run 758: Vectorized 3-Point Stencil f64 size=16384 time=0.000003s GFLOP/s=433100.119 BW=126.885 GB/s
+Run 759: Vectorized Memory Bandwidth f64 size=16384 time=0.000002s GFLOP/s=134554.109 BW=131.400 GB/s
+Run 760: Scalar AXPY f32 size=65536 time=0.000005s GFLOP/s=1728357.058 BW=158.236 GB/s
+Run 761: Scalar Dot Product f32 size=65536 time=0.000005s GFLOP/s=1822604.377 BW=111.243 GB/s
+Run 762: Scalar Elementwise Multiply f32 size=65536 time=0.000006s GFLOP/s=755624.096 BW=138.359 GB/s
+Run 763: Scalar 3-Point Stencil f32 size=65536 time=0.000006s GFLOP/s=3434874.745 BW=125.789 GB/s
+Run 764: Scalar Memory Bandwidth f32 size=65536 time=0.000005s GFLOP/s=939612.209 BW=114.699 GB/s
+Run 765: Vectorized AXPY f32 size=65536 time=0.000005s GFLOP/s=1691598.004 BW=154.870 GB/s
+Run 766: Vectorized Dot Product f32 size=65536 time=0.000005s GFLOP/s=1783254.120 BW=108.841 GB/s
+Run 767: Vectorized Elementwise Multiply f32 size=65536 time=0.000006s GFLOP/s=757890.813 BW=138.774 GB/s
+Run 768: Vectorized 3-Point Stencil f32 size=65536 time=0.000006s GFLOP/s=3457549.023 BW=126.619 GB/s
+Run 769: Vectorized Memory Bandwidth f32 size=65536 time=0.000005s GFLOP/s=941465.848 BW=114.925 GB/s
+Run 770: Scalar AXPY f32 size=65536 time=0.000004s GFLOP/s=2301080.850 BW=210.670 GB/s
+Run 771: Scalar Dot Product f32 size=65536 time=0.000003s GFLOP/s=2574148.745 BW=157.114 GB/s
+Run 772: Scalar Elementwise Multiply f32 size=65536 time=0.000004s GFLOP/s=960627.891 BW=175.896 GB/s
+Run 773: Scalar 3-Point Stencil f32 size=65536 time=0.000006s GFLOP/s=3756312.217 BW=137.560 GB/s
+Run 774: Scalar Memory Bandwidth f32 size=65536 time=0.000004s GFLOP/s=1066277.926 BW=130.161 GB/s
+Run 775: Vectorized AXPY f32 size=65536 time=0.000004s GFLOP/s=2324116.374 BW=212.779 GB/s
+Run 776: Vectorized Dot Product f32 size=65536 time=0.000003s GFLOP/s=2572606.865 BW=157.019 GB/s
+Run 777: Vectorized Elementwise Multiply f32 size=65536 time=0.000004s GFLOP/s=962134.264 BW=176.172 GB/s
+Run 778: Vectorized 3-Point Stencil f32 size=65536 time=0.000006s GFLOP/s=3757626.772 BW=137.608 GB/s
+Run 779: Vectorized Memory Bandwidth f32 size=65536 time=0.000004s GFLOP/s=1062059.188 BW=129.646 GB/s
+Run 780: Scalar AXPY f64 size=65536 time=0.000007s GFLOP/s=1156270.624 BW=211.719 GB/s
+Run 781: Scalar Dot Product f64 size=65536 time=0.000007s GFLOP/s=1221549.289 BW=149.115 GB/s
+Run 782: Scalar Elementwise Multiply f64 size=65536 time=0.000017s GFLOP/s=252793.835 BW=92.576 GB/s
+Run 783: Scalar 3-Point Stencil f64 size=65536 time=0.000012s GFLOP/s=1763267.646 BW=129.146 GB/s
+Run 784: Scalar Memory Bandwidth f64 size=65536 time=0.000008s GFLOP/s=510454.870 BW=124.623 GB/s
+Run 785: Vectorized AXPY f64 size=65536 time=0.000007s GFLOP/s=1155959.420 BW=211.662 GB/s
+Run 786: Vectorized Dot Product f64 size=65536 time=0.000007s GFLOP/s=1275606.552 BW=155.714 GB/s
+Run 787: Vectorized Elementwise Multiply f64 size=65536 time=0.000018s GFLOP/s=241303.855 BW=88.368 GB/s
+Run 788: Vectorized 3-Point Stencil f64 size=65536 time=0.000012s GFLOP/s=1778159.849 BW=130.236 GB/s
+Run 789: Vectorized Memory Bandwidth f64 size=65536 time=0.000008s GFLOP/s=532543.992 BW=130.016 GB/s
+Run 790: Scalar AXPY f64 size=65536 time=0.000007s GFLOP/s=1157361.205 BW=211.919 GB/s
+Run 791: Scalar Dot Product f64 size=65536 time=0.000007s GFLOP/s=1283612.457 BW=156.691 GB/s
+Run 792: Scalar Elementwise Multiply f64 size=65536 time=0.000022s GFLOP/s=191474.625 BW=70.120 GB/s
+Run 793: Scalar 3-Point Stencil f64 size=65536 time=0.000022s GFLOP/s=985717.272 BW=72.196 GB/s
+Run 794: Scalar Memory Bandwidth f64 size=65536 time=0.000016s GFLOP/s=262608.823 BW=64.113 GB/s
+Run 795: Vectorized AXPY f64 size=65536 time=0.000015s GFLOP/s=570949.462 BW=104.544 GB/s
+Run 796: Vectorized Dot Product f64 size=65536 time=0.000007s GFLOP/s=1250354.394 BW=152.631 GB/s
+Run 797: Vectorized Elementwise Multiply f64 size=65536 time=0.000018s GFLOP/s=242038.167 BW=88.637 GB/s
+Run 798: Vectorized 3-Point Stencil f64 size=65536 time=0.000010s GFLOP/s=2256234.132 BW=165.252 GB/s
+Run 799: Vectorized Memory Bandwidth f64 size=65536 time=0.000008s GFLOP/s=562462.982 BW=137.320 GB/s
+Run 800: Scalar AXPY f32 size=262144 time=0.000043s GFLOP/s=3210965.437 BW=73.493 GB/s
+Run 801: Scalar Dot Product f32 size=262144 time=0.000023s GFLOP/s=5938940.212 BW=90.621 GB/s
+Run 802: Scalar Elementwise Multiply f32 size=262144 time=0.000045s GFLOP/s=1522633.095 BW=69.701 GB/s
+Run 803: Scalar 3-Point Stencil f32 size=262144 time=0.000035s GFLOP/s=9777399.763 BW=89.515 GB/s
+Run 804: Scalar Memory Bandwidth f32 size=262144 time=0.000033s GFLOP/s=2108476.832 BW=64.346 GB/s
+Run 805: Vectorized AXPY f32 size=262144 time=0.000039s GFLOP/s=3540963.388 BW=81.046 GB/s
+Run 806: Vectorized Dot Product f32 size=262144 time=0.000024s GFLOP/s=5690111.516 BW=86.824 GB/s
+Run 807: Vectorized Elementwise Multiply f32 size=262144 time=0.000045s GFLOP/s=1538139.911 BW=70.410 GB/s
+Run 808: Vectorized 3-Point Stencil f32 size=262144 time=0.000037s GFLOP/s=9255646.984 BW=84.738 GB/s
+Run 809: Vectorized Memory Bandwidth f32 size=262144 time=0.000032s GFLOP/s=2130704.355 BW=65.024 GB/s
+Run 810: Scalar AXPY f32 size=262144 time=0.000041s GFLOP/s=3360612.110 BW=76.918 GB/s
+Run 811: Scalar Dot Product f32 size=262144 time=0.000029s GFLOP/s=4686750.367 BW=71.514 GB/s
+Run 812: Scalar Elementwise Multiply f32 size=262144 time=0.000044s GFLOP/s=1548538.133 BW=70.886 GB/s
+Run 813: Scalar 3-Point Stencil f32 size=262144 time=0.000037s GFLOP/s=9396378.824 BW=86.026 GB/s
+Run 814: Scalar Memory Bandwidth f32 size=262144 time=0.000032s GFLOP/s=2153405.515 BW=65.717 GB/s
+Run 815: Vectorized AXPY f32 size=262144 time=0.000040s GFLOP/s=3444067.393 BW=78.828 GB/s
+Run 816: Vectorized Dot Product f32 size=262144 time=0.000023s GFLOP/s=5876473.133 BW=89.668 GB/s
+Run 817: Vectorized Elementwise Multiply f32 size=262144 time=0.000045s GFLOP/s=1543148.224 BW=70.640 GB/s
+Run 818: Vectorized 3-Point Stencil f32 size=262144 time=0.000037s GFLOP/s=9369985.890 BW=85.785 GB/s
+Run 819: Vectorized Memory Bandwidth f32 size=262144 time=0.000034s GFLOP/s=2049125.611 BW=62.534 GB/s
+Run 820: Scalar AXPY f64 size=262144 time=0.000079s GFLOP/s=1738787.166 BW=79.595 GB/s
+Run 821: Scalar Dot Product f64 size=262144 time=0.000048s GFLOP/s=2869468.930 BW=87.569 GB/s
+Run 822: Scalar Elementwise Multiply f64 size=262144 time=0.000089s GFLOP/s=768579.668 BW=70.366 GB/s
+Run 823: Scalar 3-Point Stencil f64 size=262144 time=0.000071s GFLOP/s=4808786.082 BW=88.052 GB/s
+Run 824: Scalar Memory Bandwidth f64 size=262144 time=0.000066s GFLOP/s=1039235.943 BW=63.430 GB/s
+Run 825: Vectorized AXPY f64 size=262144 time=0.000081s GFLOP/s=1699084.600 BW=77.778 GB/s
+Run 826: Vectorized Dot Product f64 size=262144 time=0.000059s GFLOP/s=2343734.815 BW=71.525 GB/s
+Run 827: Vectorized Elementwise Multiply f64 size=262144 time=0.000089s GFLOP/s=771522.136 BW=70.635 GB/s
+Run 828: Vectorized 3-Point Stencil f64 size=262144 time=0.000073s GFLOP/s=4704622.285 BW=86.144 GB/s
+Run 829: Vectorized Memory Bandwidth f64 size=262144 time=0.000065s GFLOP/s=1049649.098 BW=64.065 GB/s
+Run 830: Scalar AXPY f64 size=262144 time=0.000080s GFLOP/s=1719276.373 BW=78.702 GB/s
+Run 831: Scalar Dot Product f64 size=262144 time=0.000061s GFLOP/s=2266286.636 BW=69.162 GB/s
+Run 832: Scalar Elementwise Multiply f64 size=262144 time=0.000092s GFLOP/s=745362.887 BW=68.240 GB/s
+Run 833: Scalar 3-Point Stencil f64 size=262144 time=0.000071s GFLOP/s=4856706.061 BW=88.929 GB/s
+Run 834: Scalar Memory Bandwidth f64 size=262144 time=0.000066s GFLOP/s=1035321.685 BW=63.191 GB/s
+Run 835: Vectorized AXPY f64 size=262144 time=0.000079s GFLOP/s=1730990.992 BW=79.238 GB/s
+Run 836: Vectorized Dot Product f64 size=262144 time=0.000051s GFLOP/s=2671207.210 BW=81.519 GB/s
+Run 837: Vectorized Elementwise Multiply f64 size=262144 time=0.000089s GFLOP/s=768846.237 BW=70.390 GB/s
+Run 838: Vectorized 3-Point Stencil f64 size=262144 time=0.000071s GFLOP/s=4850946.406 BW=88.823 GB/s
+Run 839: Vectorized Memory Bandwidth f64 size=262144 time=0.000066s GFLOP/s=1040447.504 BW=63.504 GB/s
+Run 840: Scalar AXPY f32 size=1048576 time=0.000161s GFLOP/s=13687008.729 BW=78.318 GB/s
+Run 841: Scalar Dot Product f32 size=1048576 time=0.000098s GFLOP/s=22418881.618 BW=85.521 GB/s
+Run 842: Scalar Elementwise Multiply f32 size=1048576 time=0.000187s GFLOP/s=5865970.410 BW=67.131 GB/s
+Run 843: Scalar 3-Point Stencil f32 size=1048576 time=0.000144s GFLOP/s=38243616.664 BW=87.533 GB/s
+Run 844: Scalar Memory Bandwidth f32 size=1048576 time=0.000133s GFLOP/s=8262345.509 BW=63.037 GB/s
+Run 845: Vectorized AXPY f32 size=1048576 time=0.000161s GFLOP/s=13687860.661 BW=78.323 GB/s
+Run 846: Vectorized Dot Product f32 size=1048576 time=0.000097s GFLOP/s=22626489.456 BW=86.313 GB/s
+Run 847: Vectorized Elementwise Multiply f32 size=1048576 time=0.000193s GFLOP/s=5709227.761 BW=65.337 GB/s
+Run 848: Vectorized 3-Point Stencil f32 size=1048576 time=0.000143s GFLOP/s=38496149.623 BW=88.111 GB/s
+Run 849: Vectorized Memory Bandwidth f32 size=1048576 time=0.000133s GFLOP/s=8277024.285 BW=63.149 GB/s
+Run 850: Scalar AXPY f32 size=1048576 time=0.000158s GFLOP/s=13875802.209 BW=79.398 GB/s
+Run 851: Scalar Dot Product f32 size=1048576 time=0.000098s GFLOP/s=22331003.711 BW=85.186 GB/s
+Run 852: Scalar Elementwise Multiply f32 size=1048576 time=0.000189s GFLOP/s=5804285.611 BW=66.425 GB/s
+Run 853: Scalar 3-Point Stencil f32 size=1048576 time=0.000141s GFLOP/s=38881952.431 BW=88.994 GB/s
+Run 854: Scalar Memory Bandwidth f32 size=1048576 time=0.000131s GFLOP/s=8392129.462 BW=64.027 GB/s
+Run 855: Vectorized AXPY f32 size=1048576 time=0.000162s GFLOP/s=13564588.457 BW=77.617 GB/s
+Run 856: Vectorized Dot Product f32 size=1048576 time=0.000100s GFLOP/s=22084311.712 BW=84.245 GB/s
+Run 857: Vectorized Elementwise Multiply f32 size=1048576 time=0.000181s GFLOP/s=6086149.678 BW=69.650 GB/s
+Run 858: Vectorized 3-Point Stencil f32 size=1048576 time=0.000141s GFLOP/s=39100141.762 BW=89.493 GB/s
+Run 859: Vectorized Memory Bandwidth f32 size=1048576 time=0.000151s GFLOP/s=7269113.878 BW=55.459 GB/s
+Run 860: Scalar AXPY f64 size=1048576 time=0.000360s GFLOP/s=6107719.298 BW=69.897 GB/s
+Run 861: Scalar Dot Product f64 size=1048576 time=0.000302s GFLOP/s=7271397.340 BW=55.476 GB/s
+Run 862: Scalar Elementwise Multiply f64 size=1048576 time=0.000616s GFLOP/s=1786371.450 BW=40.887 GB/s
+Run 863: Scalar 3-Point Stencil f64 size=1048576 time=0.000312s GFLOP/s=17647585.339 BW=80.784 GB/s
+Run 864: Scalar Memory Bandwidth f64 size=1048576 time=0.000332s GFLOP/s=3314527.478 BW=50.576 GB/s
+Run 865: Vectorized AXPY f64 size=1048576 time=0.000354s GFLOP/s=6208527.688 BW=71.051 GB/s
+Run 866: Vectorized Dot Product f64 size=1048576 time=0.000245s GFLOP/s=8981030.399 BW=68.520 GB/s
+Run 867: Vectorized Elementwise Multiply f64 size=1048576 time=0.000596s GFLOP/s=1843964.252 BW=42.205 GB/s
+Run 868: Vectorized 3-Point Stencil f64 size=1048576 time=0.000319s GFLOP/s=17213004.231 BW=78.795 GB/s
+Run 869: Vectorized Memory Bandwidth f64 size=1048576 time=0.000311s GFLOP/s=3536646.696 BW=53.965 GB/s
+Run 870: Scalar AXPY f64 size=1048576 time=0.000342s GFLOP/s=6424107.108 BW=73.518 GB/s
+Run 871: Scalar Dot Product f64 size=1048576 time=0.000221s GFLOP/s=9931367.503 BW=75.770 GB/s
+Run 872: Scalar Elementwise Multiply f64 size=1048576 time=0.000586s GFLOP/s=1876491.838 BW=42.949 GB/s
+Run 873: Scalar 3-Point Stencil f64 size=1048576 time=0.000332s GFLOP/s=16562002.967 BW=75.815 GB/s
+Run 874: Scalar Memory Bandwidth f64 size=1048576 time=0.000293s GFLOP/s=3749425.836 BW=57.212 GB/s
+Run 875: Vectorized AXPY f64 size=1048576 time=0.000340s GFLOP/s=6467354.047 BW=74.013 GB/s
+Run 876: Vectorized Dot Product f64 size=1048576 time=0.000240s GFLOP/s=9169282.827 BW=69.956 GB/s
+Run 877: Vectorized Elementwise Multiply f64 size=1048576 time=0.000587s GFLOP/s=1872216.612 BW=42.852 GB/s
+Run 878: Vectorized 3-Point Stencil f64 size=1048576 time=0.000342s GFLOP/s=16085266.780 BW=73.633 GB/s
+Run 879: Vectorized Memory Bandwidth f64 size=1048576 time=0.000302s GFLOP/s=3639296.798 BW=55.531 GB/s
+Run 880: Scalar AXPY f32 size=4194304 time=0.001607s GFLOP/s=21900181.745 BW=31.328 GB/s
+Run 881: Scalar Dot Product f32 size=4194304 time=0.000932s GFLOP/s=37769303.193 BW=36.020 GB/s
+Run 882: Scalar Elementwise Multiply f32 size=4194304 time=0.002019s GFLOP/s=8712129.871 BW=24.926 GB/s
+Run 883: Scalar 3-Point Stencil f32 size=4194304 time=0.001221s GFLOP/s=72056479.872 BW=41.231 GB/s
+Run 884: Scalar Memory Bandwidth f32 size=4194304 time=0.001224s GFLOP/s=14373370.364 BW=27.415 GB/s
+Run 885: Vectorized AXPY f32 size=4194304 time=0.001151s GFLOP/s=30567011.091 BW=43.726 GB/s
+Run 886: Vectorized Dot Product f32 size=4194304 time=0.000872s GFLOP/s=40360112.563 BW=38.490 GB/s
+Run 887: Vectorized Elementwise Multiply f32 size=4194304 time=0.002011s GFLOP/s=8747013.529 BW=25.025 GB/s
+Run 888: Vectorized 3-Point Stencil f32 size=4194304 time=0.001259s GFLOP/s=69886693.710 BW=39.989 GB/s
+Run 889: Vectorized Memory Bandwidth f32 size=4194304 time=0.001212s GFLOP/s=14519653.194 BW=27.694 GB/s
+Run 890: Scalar AXPY f32 size=4194304 time=0.001215s GFLOP/s=28964290.663 BW=41.434 GB/s
+Run 891: Scalar Dot Product f32 size=4194304 time=0.000851s GFLOP/s=41339540.261 BW=39.424 GB/s
+Run 892: Scalar Elementwise Multiply f32 size=4194304 time=0.002043s GFLOP/s=8609592.040 BW=24.632 GB/s
+Run 893: Scalar 3-Point Stencil f32 size=4194304 time=0.001221s GFLOP/s=72019370.544 BW=41.210 GB/s
+Run 894: Scalar Memory Bandwidth f32 size=4194304 time=0.001245s GFLOP/s=14129441.442 BW=26.950 GB/s
+Run 895: Vectorized AXPY f32 size=4194304 time=0.001200s GFLOP/s=29326126.425 BW=41.951 GB/s
+Run 896: Vectorized Dot Product f32 size=4194304 time=0.000864s GFLOP/s=40720909.046 BW=38.834 GB/s
+Run 897: Vectorized Elementwise Multiply f32 size=4194304 time=0.002004s GFLOP/s=8776508.245 BW=25.110 GB/s
+Run 898: Vectorized 3-Point Stencil f32 size=4194304 time=0.001257s GFLOP/s=69984501.279 BW=40.045 GB/s
+Run 899: Vectorized Memory Bandwidth f32 size=4194304 time=0.001248s GFLOP/s=14101794.485 BW=26.897 GB/s
+Run 900: Scalar AXPY f64 size=4194304 time=0.003252s GFLOP/s=10819838.279 BW=30.956 GB/s
+Run 901: Scalar Dot Product f64 size=4194304 time=0.002290s GFLOP/s=15366642.845 BW=29.310 GB/s
+Run 902: Scalar Elementwise Multiply f64 size=4194304 time=0.004759s GFLOP/s=3696892.883 BW=21.154 GB/s
+Run 903: Scalar 3-Point Stencil f64 size=4194304 time=0.003326s GFLOP/s=26447208.739 BW=30.266 GB/s
+Run 904: Scalar Memory Bandwidth f64 size=4194304 time=0.003344s GFLOP/s=5260180.966 BW=20.066 GB/s
+Run 905: Vectorized AXPY f64 size=4194304 time=0.003333s GFLOP/s=10556212.071 BW=30.202 GB/s
+Run 906: Vectorized Dot Product f64 size=4194304 time=0.002308s GFLOP/s=15247541.146 BW=29.082 GB/s
+Run 907: Vectorized Elementwise Multiply f64 size=4194304 time=0.004709s GFLOP/s=3735836.757 BW=21.377 GB/s
+Run 908: Vectorized 3-Point Stencil f64 size=4194304 time=0.003354s GFLOP/s=26222552.535 BW=30.009 GB/s
+Run 909: Vectorized Memory Bandwidth f64 size=4194304 time=0.003381s GFLOP/s=5203983.539 BW=19.852 GB/s
+Run 910: Scalar AXPY f64 size=4194304 time=0.003226s GFLOP/s=10905696.384 BW=31.201 GB/s
+Run 911: Scalar Dot Product f64 size=4194304 time=0.002261s GFLOP/s=15559755.253 BW=29.678 GB/s
+Run 912: Scalar Elementwise Multiply f64 size=4194304 time=0.004684s GFLOP/s=3755784.779 BW=21.491 GB/s
+Run 913: Scalar 3-Point Stencil f64 size=4194304 time=0.003467s GFLOP/s=25372083.970 BW=29.036 GB/s
+Run 914: Scalar Memory Bandwidth f64 size=4194304 time=0.003341s GFLOP/s=5265393.764 BW=20.086 GB/s
+Run 915: Vectorized AXPY f64 size=4194304 time=0.003289s GFLOP/s=10696363.503 BW=30.603 GB/s
+Run 916: Vectorized Dot Product f64 size=4194304 time=0.002287s GFLOP/s=15385854.508 BW=29.346 GB/s
+Run 917: Vectorized Elementwise Multiply f64 size=4194304 time=0.004701s GFLOP/s=3741964.984 BW=21.412 GB/s
+Run 918: Vectorized 3-Point Stencil f64 size=4194304 time=0.003406s GFLOP/s=25822785.880 BW=29.552 GB/s
+Run 919: Vectorized Memory Bandwidth f64 size=4194304 time=0.003377s GFLOP/s=5208843.347 BW=19.870 GB/s
+Run 920: Scalar AXPY f32 size=16777216 time=0.007210s GFLOP/s=78082039.397 BW=27.924 GB/s
+Run 921: Scalar Dot Product f32 size=16777216 time=0.004994s GFLOP/s=112714923.906 BW=26.873 GB/s
+Run 922: Scalar Elementwise Multiply f32 size=16777216 time=0.009957s GFLOP/s=28269545.781 BW=20.220 GB/s
+Run 923: Scalar 3-Point Stencil f32 size=16777216 time=0.007327s GFLOP/s=192080854.405 BW=27.477 GB/s
+Run 924: Scalar Memory Bandwidth f32 size=16777216 time=0.007382s GFLOP/s=38128755.621 BW=18.181 GB/s
+Run 925: Vectorized AXPY f32 size=16777216 time=0.007267s GFLOP/s=77462786.130 BW=27.703 GB/s
+Run 926: Vectorized Dot Product f32 size=16777216 time=0.004974s GFLOP/s=113172603.249 BW=26.982 GB/s
+Run 927: Vectorized Elementwise Multiply f32 size=16777216 time=0.009937s GFLOP/s=28325888.451 BW=20.260 GB/s
+Run 928: Vectorized 3-Point Stencil f32 size=16777216 time=0.007294s GFLOP/s=192943611.119 BW=27.601 GB/s
+Run 929: Vectorized Memory Bandwidth f32 size=16777216 time=0.007403s GFLOP/s=38020435.160 BW=18.130 GB/s
+Run 930: Scalar AXPY f32 size=16777216 time=0.007174s GFLOP/s=78470346.434 BW=28.063 GB/s
+Run 931: Scalar Dot Product f32 size=16777216 time=0.004955s GFLOP/s=113614406.344 BW=27.088 GB/s
+Run 932: Scalar Elementwise Multiply f32 size=16777216 time=0.010302s GFLOP/s=27322465.762 BW=19.543 GB/s
+Run 933: Scalar 3-Point Stencil f32 size=16777216 time=0.007563s GFLOP/s=186088109.751 BW=26.620 GB/s
+Run 934: Scalar Memory Bandwidth f32 size=16777216 time=0.007415s GFLOP/s=37962378.260 BW=18.102 GB/s
+Run 935: Vectorized AXPY f32 size=16777216 time=0.007357s GFLOP/s=76524031.147 BW=27.367 GB/s
+Run 936: Vectorized Dot Product f32 size=16777216 time=0.004969s GFLOP/s=113290397.241 BW=27.011 GB/s
+Run 937: Vectorized Elementwise Multiply f32 size=16777216 time=0.009943s GFLOP/s=28307739.291 BW=20.247 GB/s
+Run 938: Vectorized 3-Point Stencil f32 size=16777216 time=0.007307s GFLOP/s=192610500.995 BW=27.553 GB/s
+Run 939: Vectorized Memory Bandwidth f32 size=16777216 time=0.007414s GFLOP/s=37962792.982 BW=18.102 GB/s
+Run 940: Scalar AXPY f64 size=16777216 time=0.014994s GFLOP/s=37544316.297 BW=26.854 GB/s
+Run 941: Scalar Dot Product f64 size=16777216 time=0.010347s GFLOP/s=54407590.584 BW=25.944 GB/s
+Run 942: Scalar Elementwise Multiply f64 size=16777216 time=0.020182s GFLOP/s=13946717.253 BW=19.951 GB/s
+Run 943: Scalar 3-Point Stencil f64 size=16777216 time=0.015099s GFLOP/s=93212536.162 BW=26.668 GB/s
+Run 944: Scalar Memory Bandwidth f64 size=16777216 time=0.015337s GFLOP/s=18352666.639 BW=17.502 GB/s
+Run 945: Vectorized AXPY f64 size=16777216 time=0.014896s GFLOP/s=37792775.099 BW=27.031 GB/s
+Run 946: Vectorized Dot Product f64 size=16777216 time=0.010246s GFLOP/s=54944900.241 BW=26.200 GB/s
+Run 947: Vectorized Elementwise Multiply f64 size=16777216 time=0.020174s GFLOP/s=13952507.130 BW=19.959 GB/s
+Run 948: Vectorized 3-Point Stencil f64 size=16777216 time=0.015045s GFLOP/s=93545814.111 BW=26.764 GB/s
+Run 949: Vectorized Memory Bandwidth f64 size=16777216 time=0.015298s GFLOP/s=18399847.344 BW=17.547 GB/s
+Run 950: Scalar AXPY f64 size=16777216 time=0.014893s GFLOP/s=37800484.562 BW=27.037 GB/s
+Run 951: Scalar Dot Product f64 size=16777216 time=0.010204s GFLOP/s=55167347.181 BW=26.306 GB/s
+Run 952: Scalar Elementwise Multiply f64 size=16777216 time=0.020226s GFLOP/s=13916711.962 BW=19.908 GB/s
+Run 953: Scalar 3-Point Stencil f64 size=16777216 time=0.015083s GFLOP/s=93306092.178 BW=26.695 GB/s
+Run 954: Scalar Memory Bandwidth f64 size=16777216 time=0.015278s GFLOP/s=18423172.449 BW=17.570 GB/s
+Run 955: Vectorized AXPY f64 size=16777216 time=0.015088s GFLOP/s=37310066.489 BW=26.686 GB/s
+Run 956: Vectorized Dot Product f64 size=16777216 time=0.010234s GFLOP/s=55007409.406 BW=26.230 GB/s
+Run 957: Vectorized Elementwise Multiply f64 size=16777216 time=0.020270s GFLOP/s=13886118.218 BW=19.864 GB/s
+Run 958: Vectorized 3-Point Stencil f64 size=16777216 time=0.015071s GFLOP/s=93383772.588 BW=26.717 GB/s
+Run 959: Vectorized Memory Bandwidth f64 size=16777216 time=0.015355s GFLOP/s=18330972.349 BW=17.482 GB/s
+Running locality sweep with flags: avx2
+Run 0: Scalar AXPY f32 size=1024 time=0.000000s GFLOP/s=26886.560 BW=157.538 GB/s
+Run 1: Scalar Memory Bandwidth f32 size=1024 time=0.000000s GFLOP/s=47662.813 BW=372.366 GB/s
+Run 2: Vectorized AXPY f32 size=1024 time=0.000000s GFLOP/s=48770.935 BW=285.767 GB/s
+Run 3: Vectorized Memory Bandwidth f32 size=1024 time=0.000000s GFLOP/s=49932.502 BW=390.098 GB/s
+Run 4: Scalar AXPY f64 size=1024 time=0.000000s GFLOP/s=25266.965 BW=296.097 GB/s
+Run 5: Scalar Memory Bandwidth f64 size=1024 time=0.000000s GFLOP/s=26214.391 BW=409.600 GB/s
+Run 6: Vectorized AXPY f64 size=1024 time=0.000000s GFLOP/s=25266.876 BW=296.096 GB/s
+Run 7: Vectorized Memory Bandwidth f64 size=1024 time=0.000000s GFLOP/s=26886.560 BW=420.103 GB/s
+Run 8: Scalar AXPY f32 size=4096 time=0.000000s GFLOP/s=260111.656 BW=381.023 GB/s
+Run 9: Scalar Memory Bandwidth f32 size=4096 time=0.000000s GFLOP/s=209715.129 BW=409.600 GB/s
+Run 10: Vectorized AXPY f32 size=4096 time=0.000000s GFLOP/s=258111.361 BW=378.093 GB/s
+Run 11: Vectorized Memory Bandwidth f32 size=4096 time=0.000000s GFLOP/s=209715.129 BW=409.600 GB/s
+Run 12: Scalar AXPY f64 size=4096 time=0.000000s GFLOP/s=74731.487 BW=218.940 GB/s
+Run 13: Scalar Memory Bandwidth f64 size=4096 time=0.000001s GFLOP/s=33354.303 BW=130.290 GB/s
+Run 14: Vectorized AXPY f64 size=4096 time=0.000000s GFLOP/s=79701.738 BW=233.501 GB/s
+Run 15: Vectorized Memory Bandwidth f64 size=4096 time=0.000001s GFLOP/s=33554.430 BW=131.072 GB/s
+Run 16: Scalar AXPY f32 size=16384 time=0.000001s GFLOP/s=579148.726 BW=212.091 GB/s
+Run 17: Scalar Memory Bandwidth f32 size=16384 time=0.000001s GFLOP/s=264208.082 BW=129.008 GB/s
+Run 18: Vectorized AXPY f32 size=16384 time=0.000001s GFLOP/s=579148.908 BW=212.091 GB/s
+Run 19: Vectorized Memory Bandwidth f32 size=16384 time=0.000001s GFLOP/s=269513.584 BW=131.598 GB/s
+Run 20: Scalar AXPY f64 size=16384 time=0.000002s GFLOP/s=290357.426 BW=212.664 GB/s
+Run 21: Scalar Memory Bandwidth f64 size=16384 time=0.000002s GFLOP/s=132823.088 BW=129.710 GB/s
+Run 22: Vectorized AXPY f64 size=16384 time=0.000002s GFLOP/s=290514.547 BW=212.779 GB/s
+Run 23: Vectorized Memory Bandwidth f64 size=16384 time=0.000002s GFLOP/s=134621.589 BW=131.466 GB/s
+Run 24: Scalar AXPY f32 size=32768 time=0.000002s GFLOP/s=1160801.898 BW=212.549 GB/s
+Run 25: Scalar Memory Bandwidth f32 size=32768 time=0.000002s GFLOP/s=441869.086 BW=107.878 GB/s
+Run 26: Vectorized AXPY f32 size=32768 time=0.000002s GFLOP/s=1161429.703 BW=212.664 GB/s
+Run 27: Vectorized Memory Bandwidth f32 size=32768 time=0.000002s GFLOP/s=539297.745 BW=131.664 GB/s
+Run 28: Scalar AXPY f64 size=32768 time=0.000004s GFLOP/s=576041.727 BW=210.953 GB/s
+Run 29: Scalar Memory Bandwidth f64 size=32768 time=0.000004s GFLOP/s=266107.009 BW=129.935 GB/s
+Run 30: Vectorized AXPY f64 size=32768 time=0.000004s GFLOP/s=579930.777 BW=212.377 GB/s
+Run 31: Vectorized Memory Bandwidth f64 size=32768 time=0.000004s GFLOP/s=265449.156 BW=129.614 GB/s
+Run 32: Scalar AXPY f32 size=65536 time=0.000004s GFLOP/s=2323487.903 BW=212.722 GB/s
+Run 33: Scalar Memory Bandwidth f32 size=65536 time=0.000004s GFLOP/s=1063373.953 BW=129.806 GB/s
+Run 34: Vectorized AXPY f32 size=65536 time=0.000004s GFLOP/s=2323487.903 BW=212.722 GB/s
+Run 35: Vectorized Memory Bandwidth f32 size=65536 time=0.000004s GFLOP/s=1062059.188 BW=129.646 GB/s
+Run 36: Scalar AXPY f64 size=65536 time=0.000007s GFLOP/s=1148386.991 BW=210.276 GB/s
+Run 37: Scalar Memory Bandwidth f64 size=65536 time=0.000008s GFLOP/s=520539.003 BW=127.085 GB/s
+Run 38: Vectorized AXPY f64 size=65536 time=0.000007s GFLOP/s=1155803.881 BW=211.634 GB/s
+Run 39: Vectorized Memory Bandwidth f64 size=65536 time=0.000008s GFLOP/s=532610.032 BW=130.032 GB/s
+Run 40: Scalar AXPY f32 size=131072 time=0.000007s GFLOP/s=4624460.005 BW=211.691 GB/s
+Run 41: Scalar Memory Bandwidth f32 size=131072 time=0.000017s GFLOP/s=1007321.555 BW=61.482 GB/s
+Run 42: Vectorized AXPY f32 size=131072 time=0.000017s GFLOP/s=2022826.924 BW=92.598 GB/s
+Run 43: Vectorized Memory Bandwidth f32 size=131072 time=0.000020s GFLOP/s=870572.064 BW=53.136 GB/s
+Run 44: Scalar AXPY f64 size=131072 time=0.000046s GFLOP/s=754545.497 BW=69.081 GB/s
+Run 45: Scalar Memory Bandwidth f64 size=131072 time=0.000033s GFLOP/s=523632.818 BW=63.920 GB/s
+Run 46: Vectorized AXPY f64 size=131072 time=0.000040s GFLOP/s=864243.739 BW=79.124 GB/s
+Run 47: Vectorized Memory Bandwidth f64 size=131072 time=0.000034s GFLOP/s=501484.884 BW=61.216 GB/s
+Run 48: Scalar AXPY f32 size=262144 time=0.000039s GFLOP/s=3516321.774 BW=80.482 GB/s
+Run 49: Scalar Memory Bandwidth f32 size=262144 time=0.000033s GFLOP/s=2055131.175 BW=62.718 GB/s
+Run 50: Vectorized AXPY f32 size=262144 time=0.000042s GFLOP/s=3272979.468 BW=74.913 GB/s
+Run 51: Vectorized Memory Bandwidth f32 size=262144 time=0.000034s GFLOP/s=2047294.185 BW=62.478 GB/s
+Run 52: Scalar AXPY f64 size=262144 time=0.000081s GFLOP/s=1705451.845 BW=78.069 GB/s
+Run 53: Scalar Memory Bandwidth f64 size=262144 time=0.000066s GFLOP/s=1040967.609 BW=63.536 GB/s
+Run 54: Vectorized AXPY f64 size=262144 time=0.000079s GFLOP/s=1732256.382 BW=79.296 GB/s
+Run 55: Vectorized Memory Bandwidth f64 size=262144 time=0.000066s GFLOP/s=1046898.686 BW=63.898 GB/s
+Run 56: Scalar AXPY f32 size=524288 time=0.000079s GFLOP/s=6973853.090 BW=79.809 GB/s
+Run 57: Scalar Memory Bandwidth f32 size=524288 time=0.000066s GFLOP/s=4157635.388 BW=63.440 GB/s
+Run 58: Vectorized AXPY f32 size=524288 time=0.000080s GFLOP/s=6842780.323 BW=78.309 GB/s
+Run 59: Vectorized Memory Bandwidth f32 size=524288 time=0.000066s GFLOP/s=4181861.029 BW=63.810 GB/s
+Run 60: Scalar AXPY f64 size=524288 time=0.000158s GFLOP/s=3471601.143 BW=79.459 GB/s
+Run 61: Scalar Memory Bandwidth f64 size=524288 time=0.000145s GFLOP/s=1895513.615 BW=57.846 GB/s
+Run 62: Vectorized AXPY f64 size=524288 time=0.000159s GFLOP/s=3447717.626 BW=78.912 GB/s
+Run 63: Vectorized Memory Bandwidth f64 size=524288 time=0.000134s GFLOP/s=2049400.615 BW=62.543 GB/s
+Run 64: Scalar AXPY f32 size=1048576 time=0.000168s GFLOP/s=13085140.318 BW=74.874 GB/s
+Run 65: Scalar Memory Bandwidth f32 size=1048576 time=0.000134s GFLOP/s=8207086.814 BW=62.615 GB/s
+Run 66: Vectorized AXPY f32 size=1048576 time=0.000164s GFLOP/s=13423821.114 BW=76.812 GB/s
+Run 67: Vectorized Memory Bandwidth f32 size=1048576 time=0.000133s GFLOP/s=8248461.178 BW=62.931 GB/s
+Run 68: Scalar AXPY f64 size=1048576 time=0.000356s GFLOP/s=6178610.977 BW=70.709 GB/s
+Run 69: Scalar Memory Bandwidth f64 size=1048576 time=0.000302s GFLOP/s=3640164.301 BW=55.544 GB/s
+Run 70: Vectorized AXPY f64 size=1048576 time=0.000341s GFLOP/s=6450867.311 BW=73.824 GB/s
+Run 71: Vectorized Memory Bandwidth f64 size=1048576 time=0.000330s GFLOP/s=3331520.266 BW=50.835 GB/s
+Run 72: Scalar AXPY f32 size=2097152 time=0.000344s GFLOP/s=25569889.189 BW=73.156 GB/s
+Run 73: Scalar Memory Bandwidth f32 size=2097152 time=0.000315s GFLOP/s=13953813.018 BW=53.230 GB/s
+Run 74: Vectorized AXPY f32 size=2097152 time=0.000345s GFLOP/s=25483955.434 BW=72.910 GB/s
+Run 75: Vectorized Memory Bandwidth f32 size=2097152 time=0.000288s GFLOP/s=15259391.339 BW=58.210 GB/s
+Run 76: Scalar AXPY f64 size=2097152 time=0.001204s GFLOP/s=7305967.824 BW=41.805 GB/s
+Run 77: Scalar Memory Bandwidth f64 size=2097152 time=0.001251s GFLOP/s=3516898.214 BW=26.832 GB/s
+Run 78: Vectorized AXPY f64 size=2097152 time=0.001180s GFLOP/s=7452421.436 BW=42.643 GB/s
+Run 79: Vectorized Memory Bandwidth f64 size=2097152 time=0.001218s GFLOP/s=3609405.785 BW=27.538 GB/s
+Run 80: Scalar AXPY f32 size=4194304 time=0.001198s GFLOP/s=29373279.887 BW=42.019 GB/s
+Run 81: Scalar Memory Bandwidth f32 size=4194304 time=0.001185s GFLOP/s=14839965.956 BW=28.305 GB/s
+Run 82: Vectorized AXPY f32 size=4194304 time=0.001184s GFLOP/s=29728431.898 BW=42.527 GB/s
+Run 83: Vectorized Memory Bandwidth f32 size=4194304 time=0.001239s GFLOP/s=14194183.643 BW=27.073 GB/s
+Run 84: Scalar AXPY f64 size=4194304 time=0.003313s GFLOP/s=10619856.994 BW=30.384 GB/s
+Run 85: Scalar Memory Bandwidth f64 size=4194304 time=0.003788s GFLOP/s=4643973.957 BW=17.715 GB/s
+Run 86: Vectorized AXPY f64 size=4194304 time=0.003213s GFLOP/s=10952320.087 BW=31.335 GB/s
+Run 87: Vectorized Memory Bandwidth f64 size=4194304 time=0.003324s GFLOP/s=5291788.593 BW=20.187 GB/s
+Run 88: Scalar AXPY f32 size=8388608 time=0.003253s GFLOP/s=43260834.646 BW=30.943 GB/s
+Run 89: Scalar Memory Bandwidth f32 size=8388608 time=0.003343s GFLOP/s=21047445.138 BW=20.072 GB/s
+Run 90: Vectorized AXPY f32 size=8388608 time=0.003246s GFLOP/s=43353759.421 BW=31.009 GB/s
+Run 91: Vectorized Memory Bandwidth f32 size=8388608 time=0.003344s GFLOP/s=21041409.641 BW=20.067 GB/s
+Run 92: Scalar AXPY f64 size=8388608 time=0.007197s GFLOP/s=19555173.468 BW=27.974 GB/s
+Run 93: Scalar Memory Bandwidth f64 size=8388608 time=0.007331s GFLOP/s=9598636.194 BW=18.308 GB/s
+Run 94: Vectorized AXPY f64 size=8388608 time=0.007184s GFLOP/s=19589646.833 BW=28.023 GB/s
+Run 95: Vectorized Memory Bandwidth f64 size=8388608 time=0.007399s GFLOP/s=9510540.262 BW=18.140 GB/s
+Run 96: Scalar AXPY f32 size=16777216 time=0.007206s GFLOP/s=78123139.594 BW=27.939 GB/s
+Run 97: Scalar Memory Bandwidth f32 size=16777216 time=0.007387s GFLOP/s=38102087.030 BW=18.168 GB/s
+Run 98: Vectorized AXPY f32 size=16777216 time=0.007170s GFLOP/s=78519949.178 BW=28.081 GB/s
+Run 99: Vectorized Memory Bandwidth f32 size=16777216 time=0.007440s GFLOP/s=37834799.082 BW=18.041 GB/s
+Run 100: Scalar AXPY f64 size=16777216 time=0.014854s GFLOP/s=37899506.981 BW=27.108 GB/s
+Run 101: Scalar Memory Bandwidth f64 size=16777216 time=0.015339s GFLOP/s=18349969.840 BW=17.500 GB/s
+Run 102: Vectorized AXPY f64 size=16777216 time=0.014929s GFLOP/s=37709163.185 BW=26.972 GB/s
+Run 103: Vectorized Memory Bandwidth f64 size=16777216 time=0.015334s GFLOP/s=18356311.090 BW=17.506 GB/s
+Run 104: Scalar AXPY f32 size=1024 time=0.000000s GFLOP/s=26546.221 BW=155.544 GB/s
+Run 105: Scalar Memory Bandwidth f32 size=1024 time=0.000000s GFLOP/s=47662.813 BW=372.366 GB/s
+Run 106: Vectorized AXPY f32 size=1024 time=0.000000s GFLOP/s=48770.935 BW=285.767 GB/s
+Run 107: Vectorized Memory Bandwidth f32 size=1024 time=0.000000s GFLOP/s=47662.183 BW=372.361 GB/s
+Run 108: Scalar AXPY f64 size=1024 time=0.000000s GFLOP/s=25575.011 BW=299.707 GB/s
+Run 109: Scalar Memory Bandwidth f64 size=1024 time=0.000000s GFLOP/s=26886.560 BW=420.103 GB/s
+Run 110: Vectorized AXPY f64 size=1024 time=0.000000s GFLOP/s=25575.011 BW=299.707 GB/s
+Run 111: Vectorized Memory Bandwidth f64 size=1024 time=0.000000s GFLOP/s=26886.560 BW=420.103 GB/s
+Run 112: Scalar AXPY f32 size=4096 time=0.000000s GFLOP/s=207126.035 BW=303.407 GB/s
+Run 113: Scalar Memory Bandwidth f32 size=4096 time=0.000000s GFLOP/s=155344.666 BW=303.408 GB/s
+Run 114: Vectorized AXPY f32 size=4096 time=0.000000s GFLOP/s=258110.784 BW=378.092 GB/s
+Run 115: Vectorized Memory Bandwidth f32 size=4096 time=0.000000s GFLOP/s=223696.246 BW=436.907 GB/s
+Run 116: Scalar AXPY f64 size=4096 time=0.000000s GFLOP/s=79324.895 BW=232.397 GB/s
+Run 117: Scalar Memory Bandwidth f64 size=4096 time=0.000001s GFLOP/s=33156.549 BW=129.518 GB/s
+Run 118: Vectorized AXPY f64 size=4096 time=0.000000s GFLOP/s=79512.870 BW=232.948 GB/s
+Run 119: Vectorized Memory Bandwidth f64 size=4096 time=0.000001s GFLOP/s=33354.303 BW=130.290 GB/s
+Run 120: Scalar AXPY f32 size=16384 time=0.000001s GFLOP/s=579148.726 BW=212.091 GB/s
+Run 121: Scalar Memory Bandwidth f32 size=16384 time=0.000001s GFLOP/s=269513.505 BW=131.598 GB/s
+Run 122: Vectorized AXPY f32 size=16384 time=0.000001s GFLOP/s=579774.162 BW=212.320 GB/s
+Run 123: Vectorized Memory Bandwidth f32 size=16384 time=0.000001s GFLOP/s=268973.394 BW=131.335 GB/s
+Run 124: Scalar AXPY f64 size=16384 time=0.000002s GFLOP/s=279911.876 BW=205.014 GB/s
+Run 125: Scalar Memory Bandwidth f64 size=16384 time=0.000002s GFLOP/s=134352.075 BW=131.203 GB/s
+Run 126: Vectorized AXPY f64 size=16384 time=0.000003s GFLOP/s=212875.065 BW=155.914 GB/s
+Run 127: Vectorized Memory Bandwidth f64 size=16384 time=0.000002s GFLOP/s=134419.352 BW=131.269 GB/s
+Run 128: Scalar AXPY f32 size=32768 time=0.000002s GFLOP/s=1141064.595 BW=208.935 GB/s
+Run 129: Scalar Memory Bandwidth f32 size=32768 time=0.000002s GFLOP/s=537139.458 BW=131.138 GB/s
+Run 130: Vectorized AXPY f32 size=32768 time=0.000002s GFLOP/s=1161429.703 BW=212.664 GB/s
+Run 131: Vectorized Memory Bandwidth f32 size=32768 time=0.000003s GFLOP/s=340006.923 BW=83.010 GB/s
+Run 132: Scalar AXPY f64 size=32768 time=0.000004s GFLOP/s=576970.334 BW=211.293 GB/s
+Run 133: Scalar Memory Bandwidth f64 size=32768 time=0.000004s GFLOP/s=265580.470 BW=129.678 GB/s
+Run 134: Vectorized AXPY f64 size=32768 time=0.000004s GFLOP/s=574347.065 BW=210.332 GB/s
+Run 135: Vectorized Memory Bandwidth f64 size=32768 time=0.000004s GFLOP/s=266701.887 BW=130.226 GB/s
+Run 136: Scalar AXPY f32 size=65536 time=0.000004s GFLOP/s=2310985.855 BW=211.577 GB/s
+Run 137: Scalar Memory Bandwidth f32 size=65536 time=0.000004s GFLOP/s=1067868.529 BW=130.355 GB/s
+Run 138: Vectorized AXPY f32 size=65536 time=0.000004s GFLOP/s=2323487.903 BW=212.722 GB/s
+Run 139: Vectorized Memory Bandwidth f32 size=65536 time=0.000004s GFLOP/s=1067603.086 BW=130.323 GB/s
+Run 140: Scalar AXPY f64 size=65536 time=0.000007s GFLOP/s=1152238.038 BW=210.981 GB/s
+Run 141: Scalar Memory Bandwidth f64 size=65536 time=0.000008s GFLOP/s=531686.957 BW=129.806 GB/s
+Run 142: Vectorized AXPY f64 size=65536 time=0.000008s GFLOP/s=1122280.485 BW=205.496 GB/s
+Run 143: Vectorized Memory Bandwidth f64 size=65536 time=0.000008s GFLOP/s=534067.071 BW=130.387 GB/s
+Run 144: Scalar AXPY f32 size=131072 time=0.000007s GFLOP/s=4634440.033 BW=212.148 GB/s
+Run 145: Scalar Memory Bandwidth f32 size=131072 time=0.000008s GFLOP/s=2128856.223 BW=129.935 GB/s
+Run 146: Vectorized AXPY f32 size=131072 time=0.000008s GFLOP/s=4466944.624 BW=204.480 GB/s
+Run 147: Vectorized Memory Bandwidth f32 size=131072 time=0.000008s GFLOP/s=2132555.775 BW=130.161 GB/s
+Run 148: Scalar AXPY f64 size=131072 time=0.000042s GFLOP/s=823619.019 BW=75.405 GB/s
+Run 149: Scalar Memory Bandwidth f64 size=131072 time=0.000033s GFLOP/s=523313.814 BW=63.881 GB/s
+Run 150: Vectorized AXPY f64 size=131072 time=0.000041s GFLOP/s=833873.034 BW=76.343 GB/s
+Run 151: Vectorized Memory Bandwidth f64 size=131072 time=0.000033s GFLOP/s=518888.192 BW=63.341 GB/s
+Run 152: Scalar AXPY f32 size=262144 time=0.000042s GFLOP/s=3310665.180 BW=75.775 GB/s
+Run 153: Scalar Memory Bandwidth f32 size=262144 time=0.000034s GFLOP/s=2047965.317 BW=62.499 GB/s
+Run 154: Vectorized AXPY f32 size=262144 time=0.000041s GFLOP/s=3313938.089 BW=75.850 GB/s
+Run 155: Vectorized Memory Bandwidth f32 size=262144 time=0.000040s GFLOP/s=1717471.679 BW=52.413 GB/s
+Run 156: Scalar AXPY f64 size=262144 time=0.000084s GFLOP/s=1638850.910 BW=75.021 GB/s
+Run 157: Scalar Memory Bandwidth f64 size=262144 time=0.000066s GFLOP/s=1034760.455 BW=63.157 GB/s
+Run 158: Vectorized AXPY f64 size=262144 time=0.000084s GFLOP/s=1641042.535 BW=75.121 GB/s
+Run 159: Vectorized Memory Bandwidth f64 size=262144 time=0.000067s GFLOP/s=1025571.989 BW=62.596 GB/s
+Run 160: Scalar AXPY f32 size=524288 time=0.000080s GFLOP/s=6914123.822 BW=79.126 GB/s
+Run 161: Scalar Memory Bandwidth f32 size=524288 time=0.000066s GFLOP/s=4190978.639 BW=63.949 GB/s
+Run 162: Vectorized AXPY f32 size=524288 time=0.000080s GFLOP/s=6851393.485 BW=78.408 GB/s
+Run 163: Vectorized Memory Bandwidth f32 size=524288 time=0.000065s GFLOP/s=4209075.849 BW=64.225 GB/s
+Run 164: Scalar AXPY f64 size=524288 time=0.000171s GFLOP/s=3220294.603 BW=73.707 GB/s
+Run 165: Scalar Memory Bandwidth f64 size=524288 time=0.000134s GFLOP/s=2049339.497 BW=62.541 GB/s
+Run 166: Vectorized AXPY f64 size=524288 time=0.000161s GFLOP/s=3410099.706 BW=78.051 GB/s
+Run 167: Vectorized Memory Bandwidth f64 size=524288 time=0.000133s GFLOP/s=2065446.683 BW=63.032 GB/s
+Run 168: Scalar AXPY f32 size=1048576 time=0.000161s GFLOP/s=13689053.554 BW=78.329 GB/s
+Run 169: Scalar Memory Bandwidth f32 size=1048576 time=0.000131s GFLOP/s=8405538.093 BW=64.129 GB/s
+Run 170: Vectorized AXPY f32 size=1048576 time=0.000161s GFLOP/s=13682410.019 BW=78.291 GB/s
+Run 171: Vectorized Memory Bandwidth f32 size=1048576 time=0.000132s GFLOP/s=8311625.022 BW=63.413 GB/s
+Run 172: Scalar AXPY f64 size=1048576 time=0.000358s GFLOP/s=6143741.514 BW=70.310 GB/s
+Run 173: Scalar Memory Bandwidth f64 size=1048576 time=0.000294s GFLOP/s=3742215.721 BW=57.102 GB/s
+Run 174: Vectorized AXPY f64 size=1048576 time=0.000341s GFLOP/s=6445440.771 BW=73.762 GB/s
+Run 175: Vectorized Memory Bandwidth f64 size=1048576 time=0.000308s GFLOP/s=3568487.388 BW=54.451 GB/s
+Run 176: Scalar AXPY f32 size=2097152 time=0.000351s GFLOP/s=25052813.777 BW=71.677 GB/s
+Run 177: Scalar Memory Bandwidth f32 size=2097152 time=0.000300s GFLOP/s=14658396.031 BW=55.917 GB/s
+Run 178: Vectorized AXPY f32 size=2097152 time=0.000345s GFLOP/s=25489346.277 BW=72.926 GB/s
+Run 179: Vectorized Memory Bandwidth f32 size=2097152 time=0.000293s GFLOP/s=14987737.003 BW=57.174 GB/s
+Run 180: Scalar AXPY f64 size=2097152 time=0.001190s GFLOP/s=7389886.332 BW=42.285 GB/s
+Run 181: Scalar Memory Bandwidth f64 size=2097152 time=0.001252s GFLOP/s=3513254.456 BW=26.804 GB/s
+Run 182: Vectorized AXPY f64 size=2097152 time=0.001208s GFLOP/s=7280165.914 BW=41.657 GB/s
+Run 183: Vectorized Memory Bandwidth f64 size=2097152 time=0.001218s GFLOP/s=3610505.089 BW=27.546 GB/s
+Run 184: Scalar AXPY f32 size=4194304 time=0.001182s GFLOP/s=29765024.344 BW=42.579 GB/s
+Run 185: Scalar Memory Bandwidth f32 size=4194304 time=0.001222s GFLOP/s=14397979.821 BW=27.462 GB/s
+Run 186: Vectorized AXPY f32 size=4194304 time=0.001215s GFLOP/s=28947299.988 BW=41.409 GB/s
+Run 187: Vectorized Memory Bandwidth f32 size=4194304 time=0.001276s GFLOP/s=13785359.122 BW=26.293 GB/s
+Run 188: Scalar AXPY f64 size=4194304 time=0.003231s GFLOP/s=10889498.353 BW=31.155 GB/s
+Run 189: Scalar Memory Bandwidth f64 size=4194304 time=0.003353s GFLOP/s=5246514.080 BW=20.014 GB/s
+Run 190: Vectorized AXPY f64 size=4194304 time=0.003298s GFLOP/s=10669697.182 BW=30.526 GB/s
+Run 191: Vectorized Memory Bandwidth f64 size=4194304 time=0.003413s GFLOP/s=5153888.782 BW=19.661 GB/s
+Run 192: Scalar AXPY f32 size=8388608 time=0.003253s GFLOP/s=43258986.327 BW=30.941 GB/s
+Run 193: Scalar Memory Bandwidth f32 size=8388608 time=0.003397s GFLOP/s=20716699.358 BW=19.757 GB/s
+Run 194: Vectorized AXPY f32 size=8388608 time=0.003276s GFLOP/s=42965066.328 BW=30.731 GB/s
+Run 195: Vectorized Memory Bandwidth f32 size=8388608 time=0.003328s GFLOP/s=21143120.230 BW=20.164 GB/s
+Run 196: Scalar AXPY f64 size=8388608 time=0.007207s GFLOP/s=19528784.846 BW=27.936 GB/s
+Run 197: Scalar Memory Bandwidth f64 size=8388608 time=0.007410s GFLOP/s=9496415.694 BW=18.113 GB/s
+Run 198: Vectorized AXPY f64 size=8388608 time=0.007216s GFLOP/s=19504524.185 BW=27.901 GB/s
+Run 199: Vectorized Memory Bandwidth f64 size=8388608 time=0.007426s GFLOP/s=9476451.289 BW=18.075 GB/s
+Run 200: Scalar AXPY f32 size=16777216 time=0.007202s GFLOP/s=78168884.994 BW=27.955 GB/s
+Run 201: Scalar Memory Bandwidth f32 size=16777216 time=0.007500s GFLOP/s=37531197.893 BW=17.896 GB/s
+Run 202: Vectorized AXPY f32 size=16777216 time=0.007204s GFLOP/s=78149048.541 BW=27.948 GB/s
+Run 203: Vectorized Memory Bandwidth f32 size=16777216 time=0.007464s GFLOP/s=37711024.899 BW=17.982 GB/s
+Run 204: Scalar AXPY f64 size=16777216 time=0.014991s GFLOP/s=37551356.106 BW=26.859 GB/s
+Run 205: Scalar Memory Bandwidth f64 size=16777216 time=0.015338s GFLOP/s=18351781.178 BW=17.502 GB/s
+Run 206: Vectorized AXPY f64 size=16777216 time=0.014913s GFLOP/s=37748442.096 BW=27.000 GB/s
+Run 207: Vectorized Memory Bandwidth f64 size=16777216 time=0.015342s GFLOP/s=18346822.981 BW=17.497 GB/s
+Run 208: Scalar AXPY f32 size=1024 time=0.000000s GFLOP/s=27594.106 BW=161.684 GB/s
+Run 209: Scalar Memory Bandwidth f32 size=1024 time=0.000000s GFLOP/s=43690.864 BW=341.335 GB/s
+Run 210: Vectorized AXPY f32 size=1024 time=0.000000s GFLOP/s=77672.542 BW=455.113 GB/s
+Run 211: Vectorized Memory Bandwidth f32 size=1024 time=0.000000s GFLOP/s=61680.472 BW=481.879 GB/s
+Run 212: Scalar AXPY f64 size=1024 time=0.000000s GFLOP/s=40329.991 BW=472.617 GB/s
+Run 213: Scalar Memory Bandwidth f64 size=1024 time=0.000000s GFLOP/s=34952.267 BW=546.129 GB/s
+Run 214: Vectorized AXPY f64 size=1024 time=0.000000s GFLOP/s=40329.765 BW=472.614 GB/s
+Run 215: Vectorized Memory Bandwidth f64 size=1024 time=0.000000s GFLOP/s=31775.069 BW=496.485 GB/s
+Run 216: Scalar AXPY f32 size=4096 time=0.000000s GFLOP/s=328965.331 BW=481.883 GB/s
+Run 217: Scalar Memory Bandwidth f32 size=4096 time=0.000000s GFLOP/s=299593.976 BW=585.144 GB/s
+Run 218: Vectorized AXPY f32 size=4096 time=0.000000s GFLOP/s=316551.442 BW=463.698 GB/s
+Run 219: Vectorized Memory Bandwidth f32 size=4096 time=0.000000s GFLOP/s=275035.546 BW=537.179 GB/s
+Run 220: Scalar AXPY f64 size=4096 time=0.000000s GFLOP/s=77136.657 BW=225.986 GB/s
+Run 221: Scalar Memory Bandwidth f64 size=4096 time=0.000001s GFLOP/s=32513.994 BW=127.008 GB/s
+Run 222: Vectorized AXPY f64 size=4096 time=0.000000s GFLOP/s=78215.447 BW=229.147 GB/s
+Run 223: Vectorized Memory Bandwidth f64 size=4096 time=0.000001s GFLOP/s=32768.011 BW=128.000 GB/s
+Run 224: Scalar AXPY f32 size=16384 time=0.000001s GFLOP/s=539568.751 BW=197.596 GB/s
+Run 225: Scalar Memory Bandwidth f32 size=16384 time=0.000001s GFLOP/s=262657.021 BW=128.250 GB/s
+Run 226: Vectorized AXPY f32 size=16384 time=0.000001s GFLOP/s=568117.415 BW=208.051 GB/s
+Run 227: Vectorized Memory Bandwidth f32 size=16384 time=0.000001s GFLOP/s=262143.941 BW=128.000 GB/s
+Run 228: Scalar AXPY f64 size=16384 time=0.000002s GFLOP/s=284510.315 BW=208.382 GB/s
+Run 229: Scalar Memory Bandwidth f64 size=16384 time=0.000002s GFLOP/s=130689.127 BW=127.626 GB/s
+Run 230: Vectorized AXPY f64 size=16384 time=0.000002s GFLOP/s=279329.287 BW=204.587 GB/s
+Run 231: Vectorized Memory Bandwidth f64 size=16384 time=0.000002s GFLOP/s=131715.134 BW=128.628 GB/s
+Run 232: Scalar AXPY f32 size=32768 time=0.000002s GFLOP/s=1137438.479 BW=208.271 GB/s
+Run 233: Scalar Memory Bandwidth f32 size=32768 time=0.000002s GFLOP/s=526860.537 BW=128.628 GB/s
+Run 234: Vectorized AXPY f32 size=32768 time=0.000002s GFLOP/s=1117898.784 BW=204.693 GB/s
+Run 235: Vectorized Memory Bandwidth f32 size=32768 time=0.000002s GFLOP/s=527637.317 BW=128.818 GB/s
+Run 236: Scalar AXPY f64 size=32768 time=0.000004s GFLOP/s=569322.296 BW=208.492 GB/s
+Run 237: Scalar Memory Bandwidth f64 size=32768 time=0.000004s GFLOP/s=256814.606 BW=125.398 GB/s
+Run 238: Vectorized AXPY f64 size=32768 time=0.000004s GFLOP/s=569473.271 BW=208.547 GB/s
+Run 239: Vectorized Memory Bandwidth f64 size=32768 time=0.000004s GFLOP/s=257430.308 BW=125.698 GB/s
+Run 240: Scalar AXPY f32 size=65536 time=0.000004s GFLOP/s=2278497.128 BW=208.603 GB/s
+Run 241: Scalar Memory Bandwidth f32 size=65536 time=0.000004s GFLOP/s=1036680.468 BW=126.548 GB/s
+Run 242: Vectorized AXPY f32 size=65536 time=0.000004s GFLOP/s=2277893.083 BW=208.547 GB/s
+Run 243: Vectorized Memory Bandwidth f32 size=65536 time=0.000004s GFLOP/s=1045004.243 BW=127.564 GB/s
+Run 244: Scalar AXPY f64 size=65536 time=0.000008s GFLOP/s=1140458.653 BW=208.824 GB/s
+Run 245: Scalar Memory Bandwidth f64 size=65536 time=0.000008s GFLOP/s=525828.519 BW=128.376 GB/s
+Run 246: Vectorized AXPY f64 size=65536 time=0.000008s GFLOP/s=1130552.074 BW=207.010 GB/s
+Run 247: Vectorized Memory Bandwidth f64 size=65536 time=0.000008s GFLOP/s=518903.856 BW=126.686 GB/s
+Run 248: Scalar AXPY f32 size=131072 time=0.000008s GFLOP/s=4521018.061 BW=206.956 GB/s
+Run 249: Scalar Memory Bandwidth f32 size=131072 time=0.000008s GFLOP/s=2082408.397 BW=127.100 GB/s
+Run 250: Vectorized AXPY f32 size=131072 time=0.000008s GFLOP/s=4427230.808 BW=202.663 GB/s
+Run 251: Vectorized Memory Bandwidth f32 size=131072 time=0.000008s GFLOP/s=2087722.641 BW=127.424 GB/s
+Run 252: Scalar AXPY f64 size=131072 time=0.000041s GFLOP/s=839024.669 BW=76.815 GB/s
+Run 253: Scalar Memory Bandwidth f64 size=131072 time=0.000034s GFLOP/s=507769.379 BW=61.984 GB/s
+Run 254: Vectorized AXPY f64 size=131072 time=0.000041s GFLOP/s=830165.942 BW=76.004 GB/s
+Run 255: Vectorized Memory Bandwidth f64 size=131072 time=0.000032s GFLOP/s=529360.608 BW=64.619 GB/s
+Run 256: Scalar AXPY f32 size=262144 time=0.000042s GFLOP/s=3301440.147 BW=75.564 GB/s
+Run 257: Scalar Memory Bandwidth f32 size=262144 time=0.000052s GFLOP/s=1320284.279 BW=40.292 GB/s
+Run 258: Vectorized AXPY f32 size=262144 time=0.000060s GFLOP/s=2281409.514 BW=52.217 GB/s
+Run 259: Vectorized Memory Bandwidth f32 size=262144 time=0.000037s GFLOP/s=1838008.897 BW=56.092 GB/s
+Run 260: Scalar AXPY f64 size=262144 time=0.000080s GFLOP/s=1709503.511 BW=78.255 GB/s
+Run 261: Scalar Memory Bandwidth f64 size=262144 time=0.000066s GFLOP/s=1035696.173 BW=63.214 GB/s
+Run 262: Vectorized AXPY f64 size=262144 time=0.000080s GFLOP/s=1711717.754 BW=78.356 GB/s
+Run 263: Vectorized Memory Bandwidth f64 size=262144 time=0.000066s GFLOP/s=1038466.416 BW=63.383 GB/s
+Run 264: Scalar AXPY f32 size=524288 time=0.000083s GFLOP/s=6623803.426 BW=75.803 GB/s
+Run 265: Scalar Memory Bandwidth f32 size=524288 time=0.000065s GFLOP/s=4218765.825 BW=64.373 GB/s
+Run 266: Vectorized AXPY f32 size=524288 time=0.000080s GFLOP/s=6910821.035 BW=79.088 GB/s
+Run 267: Vectorized Memory Bandwidth f32 size=524288 time=0.000066s GFLOP/s=4188105.172 BW=63.905 GB/s
+Run 268: Scalar AXPY f64 size=524288 time=0.000161s GFLOP/s=3416818.296 BW=78.205 GB/s
+Run 269: Scalar Memory Bandwidth f64 size=524288 time=0.000134s GFLOP/s=2054608.904 BW=62.702 GB/s
+Run 270: Vectorized AXPY f64 size=524288 time=0.000162s GFLOP/s=3392716.696 BW=77.653 GB/s
+Run 271: Vectorized Memory Bandwidth f64 size=524288 time=0.000133s GFLOP/s=2066689.025 BW=63.070 GB/s
+Run 272: Scalar AXPY f32 size=1048576 time=0.000163s GFLOP/s=13454044.763 BW=76.985 GB/s
+Run 273: Scalar Memory Bandwidth f32 size=1048576 time=0.000132s GFLOP/s=8334305.795 BW=63.586 GB/s
+Run 274: Vectorized AXPY f32 size=1048576 time=0.000180s GFLOP/s=12248983.471 BW=70.089 GB/s
+Run 275: Vectorized Memory Bandwidth f32 size=1048576 time=0.000133s GFLOP/s=8254219.987 BW=62.975 GB/s
+Run 276: Scalar AXPY f64 size=1048576 time=0.000351s GFLOP/s=6273620.706 BW=71.796 GB/s
+Run 277: Scalar Memory Bandwidth f64 size=1048576 time=0.000287s GFLOP/s=3824627.728 BW=58.359 GB/s
+Run 278: Vectorized AXPY f64 size=1048576 time=0.000347s GFLOP/s=6341171.779 BW=72.569 GB/s
+Run 279: Vectorized Memory Bandwidth f64 size=1048576 time=0.000285s GFLOP/s=3852474.484 BW=58.784 GB/s
+Run 280: Scalar AXPY f32 size=2097152 time=0.000360s GFLOP/s=24421448.833 BW=69.870 GB/s
+Run 281: Scalar Memory Bandwidth f32 size=2097152 time=0.000291s GFLOP/s=15120160.724 BW=57.679 GB/s
+Run 282: Vectorized AXPY f32 size=2097152 time=0.000368s GFLOP/s=23918675.800 BW=68.432 GB/s
+Run 283: Vectorized Memory Bandwidth f32 size=2097152 time=0.000304s GFLOP/s=14449576.537 BW=55.121 GB/s
+Run 284: Scalar AXPY f64 size=2097152 time=0.001236s GFLOP/s=7114939.534 BW=40.712 GB/s
+Run 285: Scalar Memory Bandwidth f64 size=2097152 time=0.001209s GFLOP/s=3637394.561 BW=27.751 GB/s
+Run 286: Vectorized AXPY f64 size=2097152 time=0.001203s GFLOP/s=7312411.951 BW=41.842 GB/s
+Run 287: Vectorized Memory Bandwidth f64 size=2097152 time=0.001212s GFLOP/s=3628427.922 BW=27.683 GB/s
+Run 288: Scalar AXPY f32 size=4194304 time=0.001199s GFLOP/s=29351128.760 BW=41.987 GB/s
+Run 289: Scalar Memory Bandwidth f32 size=4194304 time=0.001197s GFLOP/s=14695153.995 BW=28.029 GB/s
+Run 290: Vectorized AXPY f32 size=4194304 time=0.001173s GFLOP/s=30007353.437 BW=42.926 GB/s
+Run 291: Vectorized Memory Bandwidth f32 size=4194304 time=0.001216s GFLOP/s=14466722.898 BW=27.593 GB/s
+Run 292: Scalar AXPY f64 size=4194304 time=0.003265s GFLOP/s=10775197.857 BW=30.828 GB/s
+Run 293: Scalar Memory Bandwidth f64 size=4194304 time=0.003334s GFLOP/s=5276212.769 BW=20.127 GB/s
+Run 294: Vectorized AXPY f64 size=4194304 time=0.003205s GFLOP/s=10977411.771 BW=31.407 GB/s
+Run 295: Vectorized Memory Bandwidth f64 size=4194304 time=0.003387s GFLOP/s=5194265.005 BW=19.815 GB/s
+Run 296: Scalar AXPY f32 size=8388608 time=0.003281s GFLOP/s=42894745.483 BW=30.681 GB/s
+Run 297: Scalar Memory Bandwidth f32 size=8388608 time=0.003370s GFLOP/s=20880809.068 BW=19.913 GB/s
+Run 298: Vectorized AXPY f32 size=8388608 time=0.003280s GFLOP/s=42911316.256 BW=30.693 GB/s
+Run 299: Vectorized Memory Bandwidth f32 size=8388608 time=0.003358s GFLOP/s=20957736.565 BW=19.987 GB/s
+Run 300: Scalar AXPY f64 size=8388608 time=0.007202s GFLOP/s=19541399.077 BW=27.954 GB/s
+Run 301: Scalar Memory Bandwidth f64 size=8388608 time=0.007436s GFLOP/s=9462770.009 BW=18.049 GB/s
+Run 302: Vectorized AXPY f64 size=8388608 time=0.007179s GFLOP/s=19603219.024 BW=28.043 GB/s
+Run 303: Vectorized Memory Bandwidth f64 size=8388608 time=0.007424s GFLOP/s=9478765.567 BW=18.079 GB/s
+Run 304: Scalar AXPY f32 size=16777216 time=0.007328s GFLOP/s=76823660.163 BW=27.474 GB/s
+Run 305: Scalar Memory Bandwidth f32 size=16777216 time=0.007558s GFLOP/s=37240164.145 BW=17.757 GB/s
+Run 306: Vectorized AXPY f32 size=16777216 time=0.007425s GFLOP/s=75823189.577 BW=27.116 GB/s
+Run 307: Vectorized Memory Bandwidth f32 size=16777216 time=0.007441s GFLOP/s=37826155.518 BW=18.037 GB/s
+Run 308: Scalar AXPY f64 size=16777216 time=0.014920s GFLOP/s=37732466.796 BW=26.988 GB/s
+Run 309: Scalar Memory Bandwidth f64 size=16777216 time=0.015335s GFLOP/s=18355414.504 BW=17.505 GB/s
+Run 310: Vectorized AXPY f64 size=16777216 time=0.014991s GFLOP/s=37551741.857 BW=26.859 GB/s
+Run 311: Vectorized Memory Bandwidth f64 size=16777216 time=0.015382s GFLOP/s=18298577.467 BW=17.451 GB/s
+Running alignment study with flags: avx2
+Run 0: Scalar AXPY f32 size=1024 time=0.000000s GFLOP/s=25266.876 BW=148.048 GB/s
+Run 1: Scalar Dot Product f32 size=1024 time=0.000000s GFLOP/s=36157.881 BW=141.242 GB/s
+Run 2: Vectorized AXPY f32 size=1024 time=0.000000s GFLOP/s=36157.881 BW=211.863 GB/s
+Run 3: Vectorized Dot Product f32 size=1024 time=0.000000s GFLOP/s=51150.022 BW=199.805 GB/s
+Run 4: Scalar AXPY f64 size=1024 time=0.000000s GFLOP/s=23045.672 BW=270.066 GB/s
+Run 5: Scalar Dot Product f64 size=1024 time=0.000000s GFLOP/s=24105.173 BW=188.322 GB/s
+Run 6: Vectorized AXPY f64 size=1024 time=0.000000s GFLOP/s=23301.662 BW=273.066 GB/s
+Run 7: Vectorized Dot Product f64 size=1024 time=0.000000s GFLOP/s=24672.358 BW=192.753 GB/s
+Run 8: Scalar AXPY f32 size=1024 time=0.000000s GFLOP/s=74898.494 BW=438.858 GB/s
+Run 9: Scalar Dot Product f32 size=1024 time=0.000000s GFLOP/s=56679.798 BW=221.405 GB/s
+Run 10: Vectorized AXPY f32 size=1024 time=0.000000s GFLOP/s=77672.542 BW=455.113 GB/s
+Run 11: Vectorized Dot Product f32 size=1024 time=0.000000s GFLOP/s=56679.798 BW=221.405 GB/s
+Run 12: Scalar AXPY f64 size=1024 time=0.000000s GFLOP/s=41120.784 BW=481.884 GB/s
+Run 13: Scalar Dot Product f64 size=1024 time=0.000000s GFLOP/s=25266.965 BW=197.398 GB/s
+Run 14: Vectorized AXPY f64 size=1024 time=0.000000s GFLOP/s=37449.247 BW=438.858 GB/s
+Run 15: Vectorized Dot Product f64 size=1024 time=0.000000s GFLOP/s=25266.876 BW=197.397 GB/s
+Run 16: Scalar AXPY f32 size=4096 time=0.000000s GFLOP/s=186413.599 BW=273.067 GB/s
+Run 17: Scalar Dot Product f32 size=4096 time=0.000000s GFLOP/s=174762.925 BW=170.667 GB/s
+Run 18: Vectorized AXPY f32 size=4096 time=0.000000s GFLOP/s=186413.599 BW=273.067 GB/s
+Run 19: Vectorized Dot Product f32 size=4096 time=0.000000s GFLOP/s=173857.148 BW=169.782 GB/s
+Run 20: Scalar AXPY f64 size=4096 time=0.000001s GFLOP/s=56017.397 BW=164.113 GB/s
+Run 21: Scalar Dot Product f64 size=4096 time=0.000001s GFLOP/s=56299.394 BW=109.960 GB/s
+Run 22: Vectorized AXPY f64 size=4096 time=0.000001s GFLOP/s=55924.034 BW=163.840 GB/s
+Run 23: Vectorized Dot Product f64 size=4096 time=0.000001s GFLOP/s=56205.062 BW=109.776 GB/s
+Run 24: Scalar AXPY f32 size=4096 time=0.000000s GFLOP/s=332222.441 BW=486.654 GB/s
+Run 25: Scalar Dot Product f32 size=4096 time=0.000000s GFLOP/s=177536.692 BW=173.376 GB/s
+Run 26: Vectorized AXPY f32 size=4096 time=0.000000s GFLOP/s=328965.331 BW=481.883 GB/s
+Run 27: Vectorized Dot Product f32 size=4096 time=0.000000s GFLOP/s=176602.282 BW=172.463 GB/s
+Run 28: Scalar AXPY f64 size=4096 time=0.000000s GFLOP/s=77672.333 BW=227.556 GB/s
+Run 29: Scalar Dot Product f64 size=4096 time=0.000000s GFLOP/s=81840.094 BW=159.844 GB/s
+Run 30: Vectorized AXPY f64 size=4096 time=0.000000s GFLOP/s=77314.393 BW=226.507 GB/s
+Run 31: Vectorized Dot Product f64 size=4096 time=0.000000s GFLOP/s=82040.194 BW=160.235 GB/s
+Run 32: Scalar AXPY f32 size=16384 time=0.000001s GFLOP/s=440419.135 BW=161.286 GB/s
+Run 33: Scalar Dot Product f32 size=16384 time=0.000001s GFLOP/s=442233.066 BW=107.967 GB/s
+Run 34: Vectorized AXPY f32 size=16384 time=0.000001s GFLOP/s=440058.133 BW=161.154 GB/s
+Run 35: Vectorized Dot Product f32 size=16384 time=0.000001s GFLOP/s=435065.540 BW=106.217 GB/s
+Run 36: Scalar AXPY f64 size=16384 time=0.000002s GFLOP/s=219579.106 BW=160.825 GB/s
+Run 37: Scalar Dot Product f64 size=16384 time=0.000002s GFLOP/s=221116.533 BW=107.967 GB/s
+Run 38: Vectorized AXPY f64 size=16384 time=0.000002s GFLOP/s=217885.910 BW=159.584 GB/s
+Run 39: Vectorized Dot Product f64 size=16384 time=0.000002s GFLOP/s=221572.823 BW=108.190 GB/s
+Run 40: Scalar AXPY f32 size=16384 time=0.000001s GFLOP/s=566917.581 BW=207.611 GB/s
+Run 41: Scalar Dot Product f32 size=16384 time=0.000001s GFLOP/s=639893.827 BW=156.224 GB/s
+Run 42: Vectorized AXPY f32 size=16384 time=0.000001s GFLOP/s=497563.372 BW=182.213 GB/s
+Run 43: Vectorized Dot Product f32 size=16384 time=0.000001s GFLOP/s=639893.605 BW=156.224 GB/s
+Run 44: Scalar AXPY f64 size=16384 time=0.000002s GFLOP/s=277309.328 BW=203.107 GB/s
+Run 45: Scalar Dot Product f64 size=16384 time=0.000002s GFLOP/s=317112.159 BW=154.840 GB/s
+Run 46: Vectorized AXPY f64 size=16384 time=0.000002s GFLOP/s=284510.271 BW=208.382 GB/s
+Run 47: Vectorized Dot Product f64 size=16384 time=0.000002s GFLOP/s=317112.159 BW=154.840 GB/s
+Run 48: Scalar AXPY f32 size=65536 time=0.000005s GFLOP/s=1763122.815 BW=161.419 GB/s
+Run 49: Scalar Dot Product f32 size=65536 time=0.000005s GFLOP/s=1785106.950 BW=108.954 GB/s
+Run 50: Vectorized AXPY f32 size=65536 time=0.000005s GFLOP/s=1776982.695 BW=162.688 GB/s
+Run 51: Vectorized Dot Product f32 size=65536 time=0.000005s GFLOP/s=1777718.207 BW=108.503 GB/s
+Run 52: Scalar AXPY f64 size=65536 time=0.000008s GFLOP/s=1132191.173 BW=207.310 GB/s
+Run 53: Scalar Dot Product f64 size=65536 time=0.000007s GFLOP/s=1268074.182 BW=154.794 GB/s
+Run 54: Vectorized AXPY f64 size=65536 time=0.000008s GFLOP/s=1113118.391 BW=203.818 GB/s
+Run 55: Vectorized Dot Product f64 size=65536 time=0.000007s GFLOP/s=1239349.997 BW=151.288 GB/s
+Run 56: Scalar AXPY f32 size=65536 time=0.000004s GFLOP/s=2277893.083 BW=208.547 GB/s
+Run 57: Scalar Dot Product f32 size=65536 time=0.000003s GFLOP/s=2521260.490 BW=153.886 GB/s
+Run 58: Vectorized AXPY f32 size=65536 time=0.000004s GFLOP/s=2277289.183 BW=208.492 GB/s
+Run 59: Vectorized Dot Product f32 size=65536 time=0.000004s GFLOP/s=2212190.279 BW=135.021 GB/s
+Run 60: Scalar AXPY f64 size=65536 time=0.000008s GFLOP/s=1109380.654 BW=203.134 GB/s
+Run 61: Scalar Dot Product f64 size=65536 time=0.000007s GFLOP/s=1248537.005 BW=152.409 GB/s
+Run 62: Vectorized AXPY f64 size=65536 time=0.000008s GFLOP/s=1133236.740 BW=207.502 GB/s
+Run 63: Vectorized Dot Product f64 size=65536 time=0.000007s GFLOP/s=1246724.891 BW=152.188 GB/s
+Run 64: Scalar AXPY f32 size=262144 time=0.000041s GFLOP/s=3330965.148 BW=76.240 GB/s
+Run 65: Scalar Dot Product f32 size=262144 time=0.000030s GFLOP/s=4528914.011 BW=69.106 GB/s
+Run 66: Vectorized AXPY f32 size=262144 time=0.000041s GFLOP/s=3373231.727 BW=77.207 GB/s
+Run 67: Vectorized Dot Product f32 size=262144 time=0.000032s GFLOP/s=4352226.265 BW=66.410 GB/s
+Run 68: Scalar AXPY f64 size=262144 time=0.000081s GFLOP/s=1702072.542 BW=77.915 GB/s
+Run 69: Scalar Dot Product f64 size=262144 time=0.000048s GFLOP/s=2890044.438 BW=88.197 GB/s
+Run 70: Vectorized AXPY f64 size=262144 time=0.000081s GFLOP/s=1695374.856 BW=77.608 GB/s
+Run 71: Vectorized Dot Product f64 size=262144 time=0.000050s GFLOP/s=2758378.232 BW=84.179 GB/s
+Run 72: Scalar AXPY f32 size=262144 time=0.000040s GFLOP/s=3465954.330 BW=79.329 GB/s
+Run 73: Scalar Dot Product f32 size=262144 time=0.000025s GFLOP/s=5390819.903 BW=82.257 GB/s
+Run 74: Vectorized AXPY f32 size=262144 time=0.000045s GFLOP/s=3079036.530 BW=70.474 GB/s
+Run 75: Vectorized Dot Product f32 size=262144 time=0.000035s GFLOP/s=3939546.324 BW=60.113 GB/s
+Run 76: Scalar AXPY f64 size=262144 time=0.000084s GFLOP/s=1640944.575 BW=75.116 GB/s
+Run 77: Scalar Dot Product f64 size=262144 time=0.000048s GFLOP/s=2868869.959 BW=87.551 GB/s
+Run 78: Vectorized AXPY f64 size=262144 time=0.000082s GFLOP/s=1671152.855 BW=76.499 GB/s
+Run 79: Vectorized Dot Product f64 size=262144 time=0.000048s GFLOP/s=2858250.063 BW=87.227 GB/s
+Run 80: Scalar AXPY f32 size=1024 time=0.000000s GFLOP/s=38836.271 BW=227.556 GB/s
+Run 81: Scalar Dot Product f32 size=1024 time=0.000000s GFLOP/s=46603.324 BW=182.044 GB/s
+Run 82: Vectorized AXPY f32 size=1024 time=0.000000s GFLOP/s=41943.209 BW=245.761 GB/s
+Run 83: Vectorized Dot Product f32 size=1024 time=0.000000s GFLOP/s=46603.626 BW=182.045 GB/s
+Run 84: Scalar AXPY f64 size=1024 time=0.000000s GFLOP/s=21183.317 BW=248.242 GB/s
+Run 85: Scalar Dot Product f64 size=1024 time=0.000000s GFLOP/s=22310.165 BW=174.298 GB/s
+Run 86: Vectorized AXPY f64 size=1024 time=0.000000s GFLOP/s=20164.939 BW=236.308 GB/s
+Run 87: Vectorized Dot Product f64 size=1024 time=0.000000s GFLOP/s=24966.078 BW=195.047 GB/s
+Run 88: Scalar AXPY f32 size=1024 time=0.000000s GFLOP/s=74898.494 BW=438.858 GB/s
+Run 89: Scalar Dot Product f32 size=1024 time=0.000000s GFLOP/s=56679.798 BW=221.405 GB/s
+Run 90: Vectorized AXPY f32 size=1024 time=0.000000s GFLOP/s=77672.542 BW=455.113 GB/s
+Run 91: Vectorized Dot Product f32 size=1024 time=0.000000s GFLOP/s=56679.798 BW=221.405 GB/s
+Run 92: Scalar AXPY f64 size=1024 time=0.000000s GFLOP/s=41120.784 BW=481.884 GB/s
+Run 93: Scalar Dot Product f64 size=1024 time=0.000000s GFLOP/s=25266.965 BW=197.398 GB/s
+Run 94: Vectorized AXPY f64 size=1024 time=0.000000s GFLOP/s=41120.784 BW=481.884 GB/s
+Run 95: Vectorized Dot Product f64 size=1024 time=0.000000s GFLOP/s=26214.391 BW=204.800 GB/s
+Run 96: Scalar AXPY f32 size=4096 time=0.000000s GFLOP/s=187455.024 BW=274.592 GB/s
+Run 97: Scalar Dot Product f32 size=4096 time=0.000000s GFLOP/s=173857.148 BW=169.782 GB/s
+Run 98: Vectorized AXPY f32 size=4096 time=0.000000s GFLOP/s=187455.024 BW=274.592 GB/s
+Run 99: Vectorized Dot Product f32 size=4096 time=0.000000s GFLOP/s=173857.148 BW=169.782 GB/s
+Run 100: Scalar AXPY f64 size=4096 time=0.000001s GFLOP/s=55924.062 BW=163.840 GB/s
+Run 101: Scalar Dot Product f64 size=4096 time=0.000001s GFLOP/s=56205.089 BW=109.776 GB/s
+Run 102: Vectorized AXPY f64 size=4096 time=0.000001s GFLOP/s=56017.425 BW=164.114 GB/s
+Run 103: Vectorized Dot Product f64 size=4096 time=0.000001s GFLOP/s=56205.089 BW=109.776 GB/s
+Run 104: Scalar AXPY f32 size=4096 time=0.000000s GFLOP/s=322639.021 BW=472.616 GB/s
+Run 105: Scalar Dot Product f32 size=4096 time=0.000000s GFLOP/s=178481.044 BW=174.298 GB/s
+Run 106: Vectorized AXPY f32 size=4096 time=0.000000s GFLOP/s=322639.021 BW=472.616 GB/s
+Run 107: Vectorized Dot Product f32 size=4096 time=0.000000s GFLOP/s=176602.282 BW=172.463 GB/s
+Run 108: Scalar AXPY f64 size=4096 time=0.000000s GFLOP/s=77492.897 BW=227.030 GB/s
+Run 109: Scalar Dot Product f64 size=4096 time=0.000000s GFLOP/s=81840.036 BW=159.844 GB/s
+Run 110: Vectorized AXPY f64 size=4096 time=0.000000s GFLOP/s=77852.496 BW=228.083 GB/s
+Run 111: Vectorized Dot Product f64 size=4096 time=0.000000s GFLOP/s=81840.094 BW=159.844 GB/s
+Run 112: Scalar AXPY f32 size=16384 time=0.000001s GFLOP/s=426088.029 BW=156.038 GB/s
+Run 113: Scalar Dot Product f32 size=16384 time=0.000001s GFLOP/s=441869.086 BW=107.878 GB/s
+Run 114: Vectorized AXPY f32 size=16384 time=0.000001s GFLOP/s=440419.135 BW=161.286 GB/s
+Run 115: Vectorized Dot Product f32 size=16384 time=0.000001s GFLOP/s=442232.960 BW=107.967 GB/s
+Run 116: Scalar AXPY f64 size=16384 time=0.000002s GFLOP/s=220662.118 BW=161.618 GB/s
+Run 117: Scalar Dot Product f64 size=16384 time=0.000002s GFLOP/s=217356.654 BW=106.131 GB/s
+Run 118: Vectorized AXPY f64 size=16384 time=0.000002s GFLOP/s=220390.365 BW=161.419 GB/s
+Run 119: Vectorized Dot Product f64 size=16384 time=0.000002s GFLOP/s=221390.055 BW=108.101 GB/s
+Run 120: Scalar AXPY f32 size=16384 time=0.000001s GFLOP/s=568117.240 BW=208.051 GB/s
+Run 121: Scalar Dot Product f32 size=16384 time=0.000001s GFLOP/s=640657.430 BW=156.411 GB/s
+Run 122: Vectorized AXPY f32 size=16384 time=0.000001s GFLOP/s=551202.254 BW=201.856 GB/s
+Run 123: Vectorized Dot Product f32 size=16384 time=0.000001s GFLOP/s=640657.207 BW=156.410 GB/s
+Run 124: Scalar AXPY f64 size=16384 time=0.000002s GFLOP/s=284510.271 BW=208.382 GB/s
+Run 125: Scalar Dot Product f64 size=16384 time=0.000002s GFLOP/s=316924.960 BW=154.749 GB/s
+Run 126: Vectorized AXPY f64 size=16384 time=0.000002s GFLOP/s=279620.299 BW=204.800 GB/s
+Run 127: Vectorized Dot Product f64 size=16384 time=0.000002s GFLOP/s=292095.160 BW=142.625 GB/s
+Run 128: Scalar AXPY f32 size=65536 time=0.000005s GFLOP/s=1600509.570 BW=146.531 GB/s
+Run 129: Scalar Dot Product f32 size=65536 time=0.000005s GFLOP/s=1711142.315 BW=104.440 GB/s
+Run 130: Vectorized AXPY f32 size=65536 time=0.000005s GFLOP/s=1776615.167 BW=162.654 GB/s
+Run 131: Vectorized Dot Product f32 size=65536 time=0.000005s GFLOP/s=1784365.313 BW=108.909 GB/s
+Run 132: Scalar AXPY f64 size=65536 time=0.000008s GFLOP/s=1131594.615 BW=207.201 GB/s
+Run 133: Scalar Dot Product f64 size=65536 time=0.000007s GFLOP/s=1256757.082 BW=153.413 GB/s
+Run 134: Vectorized AXPY f64 size=65536 time=0.000008s GFLOP/s=1122427.090 BW=205.523 GB/s
+Run 135: Vectorized Dot Product f64 size=65536 time=0.000007s GFLOP/s=1256757.082 BW=153.413 GB/s
+Run 136: Scalar AXPY f32 size=65536 time=0.000004s GFLOP/s=2252211.519 BW=206.196 GB/s
+Run 137: Scalar Dot Product f32 size=65536 time=0.000003s GFLOP/s=2521260.490 BW=153.886 GB/s
+Run 138: Vectorized AXPY f32 size=65536 time=0.000004s GFLOP/s=2253393.171 BW=206.304 GB/s
+Run 139: Vectorized Dot Product f32 size=65536 time=0.000003s GFLOP/s=2519781.300 BW=153.795 GB/s
+Run 140: Scalar AXPY f64 size=65536 time=0.000008s GFLOP/s=1119355.573 BW=204.960 GB/s
+Run 141: Scalar Dot Product f64 size=65536 time=0.000007s GFLOP/s=1256757.082 BW=153.413 GB/s
+Run 142: Vectorized AXPY f64 size=65536 time=0.000008s GFLOP/s=1140155.900 BW=208.769 GB/s
+Run 143: Vectorized Dot Product f64 size=65536 time=0.000007s GFLOP/s=1257124.934 BW=153.458 GB/s
+Run 144: Scalar AXPY f32 size=262144 time=0.000044s GFLOP/s=3124038.584 BW=71.504 GB/s
+Run 145: Scalar Dot Product f32 size=262144 time=0.000024s GFLOP/s=5754195.253 BW=87.802 GB/s
+Run 146: Vectorized AXPY f32 size=262144 time=0.000041s GFLOP/s=3313458.696 BW=75.839 GB/s
+Run 147: Vectorized Dot Product f32 size=262144 time=0.000023s GFLOP/s=5993064.731 BW=91.447 GB/s
+Run 148: Scalar AXPY f64 size=262144 time=0.000084s GFLOP/s=1632349.769 BW=74.723 GB/s
+Run 149: Scalar Dot Product f64 size=262144 time=0.000046s GFLOP/s=3007219.500 BW=91.773 GB/s
+Run 150: Vectorized AXPY f64 size=262144 time=0.000078s GFLOP/s=1759624.025 BW=80.549 GB/s
+Run 151: Vectorized Dot Product f64 size=262144 time=0.000046s GFLOP/s=2974225.351 BW=90.766 GB/s
+Run 152: Scalar AXPY f32 size=262144 time=0.000038s GFLOP/s=3582964.986 BW=82.008 GB/s
+Run 153: Scalar Dot Product f32 size=262144 time=0.000023s GFLOP/s=6083523.076 BW=92.827 GB/s
+Run 154: Vectorized AXPY f32 size=262144 time=0.000040s GFLOP/s=3457496.754 BW=79.136 GB/s
+Run 155: Vectorized Dot Product f32 size=262144 time=0.000024s GFLOP/s=5756846.462 BW=87.843 GB/s
+Run 156: Scalar AXPY f64 size=262144 time=0.000081s GFLOP/s=1698076.968 BW=77.732 GB/s
+Run 157: Scalar Dot Product f64 size=262144 time=0.000050s GFLOP/s=2771673.100 BW=84.585 GB/s
+Run 158: Vectorized AXPY f64 size=262144 time=0.000081s GFLOP/s=1694664.105 BW=77.576 GB/s
+Run 159: Vectorized Dot Product f64 size=262144 time=0.000050s GFLOP/s=2758655.063 BW=84.187 GB/s
+Run 160: Scalar AXPY f32 size=1024 time=0.000000s GFLOP/s=37449.247 BW=219.429 GB/s
+Run 161: Scalar Dot Product f32 size=1024 time=0.000000s GFLOP/s=39568.822 BW=154.566 GB/s
+Run 162: Vectorized AXPY f32 size=1024 time=0.000000s GFLOP/s=35545.029 BW=208.272 GB/s
+Run 163: Vectorized Dot Product f32 size=1024 time=0.000000s GFLOP/s=46603.324 BW=182.044 GB/s
+Run 164: Scalar AXPY f64 size=1024 time=0.000000s GFLOP/s=18558.869 BW=217.487 GB/s
+Run 165: Scalar Dot Product f64 size=1024 time=0.000000s GFLOP/s=23563.480 BW=184.090 GB/s
+Run 166: Vectorized AXPY f64 size=1024 time=0.000000s GFLOP/s=18236.104 BW=213.704 GB/s
+Run 167: Vectorized Dot Product f64 size=1024 time=0.000000s GFLOP/s=24105.173 BW=188.322 GB/s
+Run 168: Scalar AXPY f32 size=1024 time=0.000000s GFLOP/s=59918.671 BW=351.086 GB/s
+Run 169: Scalar Dot Product f32 size=1024 time=0.000000s GFLOP/s=55188.213 BW=215.579 GB/s
+Run 170: Vectorized AXPY f32 size=1024 time=0.000000s GFLOP/s=59918.671 BW=351.086 GB/s
+Run 171: Vectorized Dot Product f32 size=1024 time=0.000000s GFLOP/s=55188.213 BW=215.579 GB/s
+Run 172: Scalar AXPY f64 size=1024 time=0.000000s GFLOP/s=30840.500 BW=361.412 GB/s
+Run 173: Scalar Dot Product f64 size=1024 time=0.000000s GFLOP/s=24966.165 BW=195.048 GB/s
+Run 174: Vectorized AXPY f64 size=1024 time=0.000000s GFLOP/s=31775.069 BW=372.364 GB/s
+Run 175: Vectorized Dot Product f64 size=1024 time=0.000000s GFLOP/s=26886.560 BW=210.051 GB/s
+Run 176: Scalar AXPY f32 size=4096 time=0.000000s GFLOP/s=159783.122 BW=234.057 GB/s
+Run 177: Scalar Dot Product f32 size=4096 time=0.000000s GFLOP/s=178481.044 BW=174.298 GB/s
+Run 178: Vectorized AXPY f32 size=4096 time=0.000000s GFLOP/s=157532.637 BW=230.761 GB/s
+Run 179: Vectorized Dot Product f32 size=4096 time=0.000000s GFLOP/s=177536.692 BW=173.376 GB/s
+Run 180: Scalar AXPY f64 size=4096 time=0.000001s GFLOP/s=54738.061 BW=160.365 GB/s
+Run 181: Scalar Dot Product f64 size=4096 time=0.000001s GFLOP/s=57456.211 BW=112.219 GB/s
+Run 182: Vectorized AXPY f64 size=4096 time=0.000001s GFLOP/s=54827.503 BW=160.627 GB/s
+Run 183: Vectorized Dot Product f64 size=4096 time=0.000001s GFLOP/s=57456.211 BW=112.219 GB/s
+Run 184: Scalar AXPY f32 size=4096 time=0.000000s GFLOP/s=260111.656 BW=381.023 GB/s
+Run 185: Scalar Dot Product f32 size=4096 time=0.000000s GFLOP/s=181375.354 BW=177.124 GB/s
+Run 186: Vectorized AXPY f32 size=4096 time=0.000000s GFLOP/s=260111.656 BW=381.023 GB/s
+Run 187: Vectorized Dot Product f32 size=4096 time=0.000000s GFLOP/s=181375.068 BW=177.124 GB/s
+Run 188: Scalar AXPY f64 size=4096 time=0.000000s GFLOP/s=79137.806 BW=231.849 GB/s
+Run 189: Scalar Dot Product f64 size=4096 time=0.000000s GFLOP/s=83676.919 BW=163.431 GB/s
+Run 190: Vectorized AXPY f64 size=4096 time=0.000000s GFLOP/s=79512.870 BW=232.948 GB/s
+Run 191: Vectorized Dot Product f64 size=4096 time=0.000000s GFLOP/s=83468.765 BW=163.025 GB/s
+Run 192: Scalar AXPY f32 size=16384 time=0.000001s GFLOP/s=436480.398 BW=159.844 GB/s
+Run 193: Scalar Dot Product f32 size=16384 time=0.000001s GFLOP/s=451531.453 BW=110.237 GB/s
+Run 194: Vectorized AXPY f32 size=16384 time=0.000001s GFLOP/s=437191.283 BW=160.104 GB/s
+Run 195: Vectorized Dot Product f32 size=16384 time=0.000001s GFLOP/s=451152.012 BW=110.145 GB/s
+Run 196: Scalar AXPY f64 size=16384 time=0.000003s GFLOP/s=214063.372 BW=156.785 GB/s
+Run 197: Scalar Dot Product f64 size=16384 time=0.000002s GFLOP/s=226336.808 BW=110.516 GB/s
+Run 198: Vectorized AXPY f64 size=16384 time=0.000002s GFLOP/s=218863.010 BW=160.300 GB/s
+Run 199: Vectorized Dot Product f64 size=16384 time=0.000002s GFLOP/s=226241.427 BW=110.469 GB/s
+Run 200: Scalar AXPY f32 size=16384 time=0.000001s GFLOP/s=566917.581 BW=207.611 GB/s
+Run 201: Scalar Dot Product f32 size=16384 time=0.000001s GFLOP/s=653923.278 BW=159.649 GB/s
+Run 202: Vectorized AXPY f32 size=16384 time=0.000001s GFLOP/s=578524.639 BW=211.862 GB/s
+Run 203: Vectorized Dot Product f32 size=16384 time=0.000001s GFLOP/s=653923.278 BW=159.649 GB/s
+Run 204: Scalar AXPY f64 size=16384 time=0.000002s GFLOP/s=290357.426 BW=212.664 GB/s
+Run 205: Scalar Dot Product f64 size=16384 time=0.000002s GFLOP/s=323611.136 BW=158.013 GB/s
+Run 206: Vectorized AXPY f64 size=16384 time=0.000002s GFLOP/s=287404.134 BW=210.501 GB/s
+Run 207: Vectorized Dot Product f64 size=16384 time=0.000002s GFLOP/s=323611.136 BW=158.013 GB/s
+Run 208: Scalar AXPY f32 size=65536 time=0.000005s GFLOP/s=1735340.270 BW=158.875 GB/s
+Run 209: Scalar Dot Product f32 size=65536 time=0.000005s GFLOP/s=1814902.743 BW=110.773 GB/s
+Run 210: Vectorized AXPY f32 size=65536 time=0.000005s GFLOP/s=1735340.270 BW=158.875 GB/s
+Run 211: Vectorized Dot Product f32 size=65536 time=0.000005s GFLOP/s=1821831.375 BW=111.196 GB/s
+Run 212: Scalar AXPY f64 size=65536 time=0.000007s GFLOP/s=1158453.755 BW=212.119 GB/s
+Run 213: Scalar Dot Product f64 size=65536 time=0.000007s GFLOP/s=1277693.683 BW=155.968 GB/s
+Run 214: Vectorized AXPY f64 size=65536 time=0.000007s GFLOP/s=1151929.001 BW=210.924 GB/s
+Run 215: Vectorized Dot Product f64 size=65536 time=0.000007s GFLOP/s=1275227.807 BW=155.667 GB/s
+Run 216: Scalar AXPY f32 size=65536 time=0.000004s GFLOP/s=2294933.112 BW=210.107 GB/s
+Run 217: Scalar Dot Product f32 size=65536 time=0.000003s GFLOP/s=2573377.574 BW=157.067 GB/s
+Run 218: Vectorized AXPY f32 size=65536 time=0.000004s GFLOP/s=2248673.987 BW=205.872 GB/s
+Run 219: Vectorized Dot Product f32 size=65536 time=0.000003s GFLOP/s=2572606.865 BW=157.019 GB/s
+Run 220: Scalar AXPY f64 size=65536 time=0.000007s GFLOP/s=1157673.120 BW=211.976 GB/s
+Run 221: Scalar Dot Product f64 size=65536 time=0.000007s GFLOP/s=1276744.141 BW=155.853 GB/s
+Run 222: Vectorized AXPY f64 size=65536 time=0.000007s GFLOP/s=1157361.205 BW=211.919 GB/s
+Run 223: Vectorized Dot Product f64 size=65536 time=0.000008s GFLOP/s=1132937.809 BW=138.298 GB/s
+Run 224: Scalar AXPY f32 size=262144 time=0.000042s GFLOP/s=3272278.126 BW=74.897 GB/s
+Run 225: Scalar Dot Product f32 size=262144 time=0.000023s GFLOP/s=5888558.370 BW=89.852 GB/s
+Run 226: Vectorized AXPY f32 size=262144 time=0.000041s GFLOP/s=3385446.051 BW=77.487 GB/s
+Run 227: Vectorized Dot Product f32 size=262144 time=0.000035s GFLOP/s=3948487.527 BW=60.249 GB/s
+Run 228: Scalar AXPY f64 size=262144 time=0.000079s GFLOP/s=1734683.245 BW=79.407 GB/s
+Run 229: Scalar Dot Product f64 size=262144 time=0.000061s GFLOP/s=2234961.436 BW=68.206 GB/s
+Run 230: Vectorized AXPY f64 size=262144 time=0.000084s GFLOP/s=1627517.298 BW=74.502 GB/s
+Run 231: Vectorized Dot Product f64 size=262144 time=0.000048s GFLOP/s=2845939.433 BW=86.851 GB/s
+Run 232: Scalar AXPY f32 size=262144 time=0.000039s GFLOP/s=3539504.341 BW=81.013 GB/s
+Run 233: Scalar Dot Product f32 size=262144 time=0.000023s GFLOP/s=5909827.687 BW=90.177 GB/s
+Run 234: Vectorized AXPY f32 size=262144 time=0.000040s GFLOP/s=3469541.642 BW=79.412 GB/s
+Run 235: Vectorized Dot Product f32 size=262144 time=0.000025s GFLOP/s=5395052.117 BW=82.322 GB/s
+Run 236: Scalar AXPY f64 size=262144 time=0.000078s GFLOP/s=1755286.765 BW=80.351 GB/s
+Run 237: Scalar Dot Product f64 size=262144 time=0.000050s GFLOP/s=2739191.886 BW=83.594 GB/s
+Run 238: Vectorized AXPY f64 size=262144 time=0.000079s GFLOP/s=1746764.872 BW=79.961 GB/s
+Run 239: Vectorized Dot Product f64 size=262144 time=0.000050s GFLOP/s=2731461.612 BW=83.358 GB/s
+Running stride study with flags: avx2
+Run 0: Scalar AXPY f32 size=1048576 time=0.000159s GFLOP/s=13816605.230 BW=79.059 GB/s
+Run 1: Scalar Dot Product f32 size=1048576 time=0.000108s GFLOP/s=20437968.822 BW=77.965 GB/s
+Run 2: Vectorized AXPY f32 size=1048576 time=0.000157s GFLOP/s=13974118.953 BW=79.961 GB/s
+Run 3: Vectorized Dot Product f32 size=1048576 time=0.000102s GFLOP/s=21458909.939 BW=81.859 GB/s
+Run 4: Scalar AXPY f64 size=1048576 time=0.000337s GFLOP/s=6518251.077 BW=74.595 GB/s
+Run 5: Scalar Dot Product f64 size=1048576 time=0.000226s GFLOP/s=9744506.332 BW=74.345 GB/s
+Run 6: Vectorized AXPY f64 size=1048576 time=0.000343s GFLOP/s=6414550.155 BW=73.409 GB/s
+Run 7: Vectorized Dot Product f64 size=1048576 time=0.000239s GFLOP/s=9205132.278 BW=70.230 GB/s
+Run 8: Scalar AXPY f32 size=1048576 time=0.000158s GFLOP/s=13956824.165 BW=79.862 GB/s
+Run 9: Scalar Dot Product f32 size=1048576 time=0.000100s GFLOP/s=21914190.353 BW=83.596 GB/s
+Run 10: Vectorized AXPY f32 size=1048576 time=0.000166s GFLOP/s=13209488.972 BW=75.585 GB/s
+Run 11: Vectorized Dot Product f32 size=1048576 time=0.000100s GFLOP/s=22078325.080 BW=84.222 GB/s
+Run 12: Scalar AXPY f64 size=1048576 time=0.000341s GFLOP/s=6458142.208 BW=73.908 GB/s
+Run 13: Scalar Dot Product f64 size=1048576 time=0.000230s GFLOP/s=9542922.107 BW=72.807 GB/s
+Run 14: Vectorized AXPY f64 size=1048576 time=0.000345s GFLOP/s=6379139.233 BW=73.003 GB/s
+Run 15: Vectorized Dot Product f64 size=1048576 time=0.000242s GFLOP/s=9099205.766 BW=69.421 GB/s
+Run 16: Scalar AXPY f32 size=1048576 time=0.000159s GFLOP/s=13830595.873 BW=79.139 GB/s
+Run 17: Scalar Dot Product f32 size=1048576 time=0.000107s GFLOP/s=20482323.876 BW=78.134 GB/s
+Run 18: Vectorized AXPY f32 size=1048576 time=0.000159s GFLOP/s=13872475.850 BW=79.379 GB/s
+Run 19: Vectorized Dot Product f32 size=1048576 time=0.000097s GFLOP/s=22780015.726 BW=86.899 GB/s
+Run 20: Scalar AXPY f64 size=1048576 time=0.000339s GFLOP/s=6479473.795 BW=74.152 GB/s
+Run 21: Scalar Dot Product f64 size=1048576 time=0.000237s GFLOP/s=9297527.262 BW=70.935 GB/s
+Run 22: Vectorized AXPY f64 size=1048576 time=0.000334s GFLOP/s=6576852.523 BW=75.266 GB/s
+Run 23: Vectorized Dot Product f64 size=1048576 time=0.000235s GFLOP/s=9357545.764 BW=71.392 GB/s
+Run 24: Scalar AXPY f32 size=1048576 time=0.000159s GFLOP/s=13822337.101 BW=79.092 GB/s
+Run 25: Scalar Dot Product f32 size=1048576 time=0.000098s GFLOP/s=22330776.876 BW=85.185 GB/s
+Run 26: Vectorized AXPY f32 size=1048576 time=0.000160s GFLOP/s=13750856.719 BW=78.683 GB/s
+Run 27: Vectorized Dot Product f32 size=1048576 time=0.000097s GFLOP/s=22701938.370 BW=86.601 GB/s
+Run 28: Scalar AXPY f64 size=1048576 time=0.000339s GFLOP/s=6478233.059 BW=74.137 GB/s
+Run 29: Scalar Dot Product f64 size=1048576 time=0.000226s GFLOP/s=9723479.614 BW=74.184 GB/s
+Run 30: Vectorized AXPY f64 size=1048576 time=0.000334s GFLOP/s=6587649.431 BW=75.390 GB/s
+Run 31: Vectorized Dot Product f64 size=1048576 time=0.000244s GFLOP/s=9030673.806 BW=68.899 GB/s
+Run 32: Scalar AXPY f32 size=1048576 time=0.000160s GFLOP/s=13766524.065 BW=78.773 GB/s
+Run 33: Scalar Dot Product f32 size=1048576 time=0.000098s GFLOP/s=22340759.047 BW=85.223 GB/s
+Run 34: Vectorized AXPY f32 size=1048576 time=0.000160s GFLOP/s=13782918.228 BW=78.866 GB/s
+Run 35: Vectorized Dot Product f32 size=1048576 time=0.000099s GFLOP/s=22243136.986 BW=84.851 GB/s
+Run 36: Scalar AXPY f64 size=1048576 time=0.000338s GFLOP/s=6506447.956 BW=74.460 GB/s
+Run 37: Scalar Dot Product f64 size=1048576 time=0.000249s GFLOP/s=8843174.081 BW=67.468 GB/s
+Run 38: Vectorized AXPY f64 size=1048576 time=0.000383s GFLOP/s=5735151.113 BW=65.634 GB/s
+Run 39: Vectorized Dot Product f64 size=1048576 time=0.000247s GFLOP/s=8912851.374 BW=68.000 GB/s
+Run 40: Scalar AXPY f32 size=1048576 time=0.000161s GFLOP/s=13639468.165 BW=78.046 GB/s
+Run 41: Scalar Dot Product f32 size=1048576 time=0.000096s GFLOP/s=23000891.783 BW=87.741 GB/s
+Run 42: Vectorized AXPY f32 size=1048576 time=0.000160s GFLOP/s=13780154.401 BW=78.851 GB/s
+Run 43: Vectorized Dot Product f32 size=1048576 time=0.000103s GFLOP/s=21312288.621 BW=81.300 GB/s
+Run 44: Scalar AXPY f64 size=1048576 time=0.000334s GFLOP/s=6586051.299 BW=75.371 GB/s
+Run 45: Scalar Dot Product f64 size=1048576 time=0.000235s GFLOP/s=9352809.671 BW=71.356 GB/s
+Run 46: Vectorized AXPY f64 size=1048576 time=0.000362s GFLOP/s=6078999.215 BW=69.569 GB/s
+Run 47: Vectorized Dot Product f64 size=1048576 time=0.000228s GFLOP/s=9624071.107 BW=73.426 GB/s
+Run 48: Scalar AXPY f32 size=1048576 time=0.000162s GFLOP/s=13567517.630 BW=77.634 GB/s
+Run 49: Scalar Dot Product f32 size=1048576 time=0.000097s GFLOP/s=22732211.959 BW=86.717 GB/s
+Run 50: Vectorized AXPY f32 size=1048576 time=0.000160s GFLOP/s=13778686.542 BW=78.842 GB/s
+Run 51: Vectorized Dot Product f32 size=1048576 time=0.000101s GFLOP/s=21780055.052 BW=83.084 GB/s
+Run 52: Scalar AXPY f64 size=1048576 time=0.000351s GFLOP/s=6261616.200 BW=71.659 GB/s
+Run 53: Scalar Dot Product f64 size=1048576 time=0.000232s GFLOP/s=9482717.639 BW=72.347 GB/s
+Run 54: Vectorized AXPY f64 size=1048576 time=0.000347s GFLOP/s=6332607.414 BW=72.471 GB/s
+Run 55: Vectorized Dot Product f64 size=1048576 time=0.000217s GFLOP/s=10143985.204 BW=77.392 GB/s
+Run 56: Scalar AXPY f32 size=1048576 time=0.000162s GFLOP/s=13533033.757 BW=77.437 GB/s
+Run 57: Scalar Dot Product f32 size=1048576 time=0.000098s GFLOP/s=22417967.346 BW=85.518 GB/s
+Run 58: Vectorized AXPY f32 size=1048576 time=0.000169s GFLOP/s=13010509.205 BW=74.447 GB/s
+Run 59: Vectorized Dot Product f32 size=1048576 time=0.000097s GFLOP/s=22561720.944 BW=86.066 GB/s
+Run 60: Scalar AXPY f64 size=1048576 time=0.000333s GFLOP/s=6599709.653 BW=75.528 GB/s
+Run 61: Scalar Dot Product f64 size=1048576 time=0.000226s GFLOP/s=9738335.403 BW=74.298 GB/s
+Run 62: Vectorized AXPY f64 size=1048576 time=0.000368s GFLOP/s=5977360.897 BW=68.405 GB/s
+Run 63: Vectorized Dot Product f64 size=1048576 time=0.000237s GFLOP/s=9297645.195 BW=70.935 GB/s
+Run 64: Scalar AXPY f32 size=1048576 time=0.000158s GFLOP/s=13880006.156 BW=79.422 GB/s
+Run 65: Scalar Dot Product f32 size=1048576 time=0.000104s GFLOP/s=21240444.872 BW=81.026 GB/s
+Run 66: Vectorized AXPY f32 size=1048576 time=0.000167s GFLOP/s=13130064.821 BW=75.131 GB/s
+Run 67: Vectorized Dot Product f32 size=1048576 time=0.000111s GFLOP/s=19788023.455 BW=75.485 GB/s
+Run 68: Scalar AXPY f64 size=1048576 time=0.000338s GFLOP/s=6508238.815 BW=74.481 GB/s
+Run 69: Scalar Dot Product f64 size=1048576 time=0.000218s GFLOP/s=10086105.973 BW=76.951 GB/s
+Run 70: Vectorized AXPY f64 size=1048576 time=0.000368s GFLOP/s=5968664.859 BW=68.306 GB/s
+Run 71: Vectorized Dot Product f64 size=1048576 time=0.000243s GFLOP/s=9050186.044 BW=69.047 GB/s
+Run 72: Scalar AXPY f32 size=1048576 time=0.000159s GFLOP/s=13802902.776 BW=78.981 GB/s
+Run 73: Scalar Dot Product f32 size=1048576 time=0.000095s GFLOP/s=23230509.410 BW=88.617 GB/s
+Run 74: Vectorized AXPY f32 size=1048576 time=0.000156s GFLOP/s=14134175.248 BW=80.876 GB/s
+Run 75: Vectorized Dot Product f32 size=1048576 time=0.000094s GFLOP/s=23462254.384 BW=89.501 GB/s
+Run 76: Scalar AXPY f64 size=1048576 time=0.000345s GFLOP/s=6377252.260 BW=72.982 GB/s
+Run 77: Scalar Dot Product f64 size=1048576 time=0.000219s GFLOP/s=10056309.502 BW=76.724 GB/s
+Run 78: Vectorized AXPY f64 size=1048576 time=0.000368s GFLOP/s=5968762.059 BW=68.307 GB/s
+Run 79: Vectorized Dot Product f64 size=1048576 time=0.000254s GFLOP/s=8646576.424 BW=65.968 GB/s
+Run 80: Scalar AXPY f32 size=1048576 time=0.000160s GFLOP/s=13754985.311 BW=78.707 GB/s
+Run 81: Scalar Dot Product f32 size=1048576 time=0.000096s GFLOP/s=22801273.849 BW=86.980 GB/s
+Run 82: Vectorized AXPY f32 size=1048576 time=0.000162s GFLOP/s=13586126.461 BW=77.740 GB/s
+Run 83: Vectorized Dot Product f32 size=1048576 time=0.000098s GFLOP/s=22448862.832 BW=85.636 GB/s
+Run 84: Scalar AXPY f64 size=1048576 time=0.000336s GFLOP/s=6543874.610 BW=74.889 GB/s
+Run 85: Scalar Dot Product f64 size=1048576 time=0.000232s GFLOP/s=9472832.157 BW=72.272 GB/s
+Run 86: Vectorized AXPY f64 size=1048576 time=0.000337s GFLOP/s=6521595.344 BW=74.634 GB/s
+Run 87: Vectorized Dot Product f64 size=1048576 time=0.000293s GFLOP/s=7515895.502 BW=57.342 GB/s
+Run 88: Scalar AXPY f32 size=1048576 time=0.000160s GFLOP/s=13786461.041 BW=78.887 GB/s
+Run 89: Scalar Dot Product f32 size=1048576 time=0.000103s GFLOP/s=21396063.864 BW=81.620 GB/s
+Run 90: Vectorized AXPY f32 size=1048576 time=0.000161s GFLOP/s=13688542.303 BW=78.326 GB/s
+Run 91: Vectorized Dot Product f32 size=1048576 time=0.000097s GFLOP/s=22592317.853 BW=86.183 GB/s
+Run 92: Scalar AXPY f64 size=1048576 time=0.000351s GFLOP/s=6259210.124 BW=71.631 GB/s
+Run 93: Scalar Dot Product f64 size=1048576 time=0.000230s GFLOP/s=9559765.323 BW=72.935 GB/s
+Run 94: Vectorized AXPY f64 size=1048576 time=0.000363s GFLOP/s=6056547.162 BW=69.312 GB/s
+Run 95: Vectorized Dot Product f64 size=1048576 time=0.000257s GFLOP/s=8571051.489 BW=65.392 GB/s
+Run 96: Scalar AXPY f32 size=1048576 time=0.000168s GFLOP/s=13077280.962 BW=74.829 GB/s
+Run 97: Scalar Dot Product f32 size=1048576 time=0.000098s GFLOP/s=22444280.321 BW=85.618 GB/s
+Run 98: Vectorized AXPY f32 size=1048576 time=0.000159s GFLOP/s=13867751.712 BW=79.352 GB/s
+Run 99: Vectorized Dot Product f32 size=1048576 time=0.000093s GFLOP/s=23553224.484 BW=89.848 GB/s
+Run 100: Scalar AXPY f64 size=1048576 time=0.000341s GFLOP/s=6446593.386 BW=73.775 GB/s
+Run 101: Scalar Dot Product f64 size=1048576 time=0.000271s GFLOP/s=8119510.456 BW=61.947 GB/s
+Run 102: Vectorized AXPY f64 size=1048576 time=0.000419s GFLOP/s=5249004.647 BW=60.070 GB/s
+Run 103: Vectorized Dot Product f64 size=1048576 time=0.000264s GFLOP/s=8323895.102 BW=63.506 GB/s
+Run 104: Scalar AXPY f32 size=1048576 time=0.000162s GFLOP/s=13569359.462 BW=77.644 GB/s
+Run 105: Scalar Dot Product f32 size=1048576 time=0.000099s GFLOP/s=22299753.129 BW=85.067 GB/s
+Run 106: Vectorized AXPY f32 size=1048576 time=0.000165s GFLOP/s=13366134.948 BW=76.482 GB/s
+Run 107: Vectorized Dot Product f32 size=1048576 time=0.000105s GFLOP/s=20874689.159 BW=79.631 GB/s
+Run 108: Scalar AXPY f64 size=1048576 time=0.000343s GFLOP/s=6409520.778 BW=73.351 GB/s
+Run 109: Scalar Dot Product f64 size=1048576 time=0.000233s GFLOP/s=9445327.018 BW=72.062 GB/s
+Run 110: Vectorized AXPY f64 size=1048576 time=0.000343s GFLOP/s=6409165.838 BW=73.347 GB/s
+Run 111: Vectorized Dot Product f64 size=1048576 time=0.000273s GFLOP/s=8062620.327 BW=61.513 GB/s
+Run 112: Scalar AXPY f32 size=1048576 time=0.000162s GFLOP/s=13562246.010 BW=77.604 GB/s
+Run 113: Scalar Dot Product f32 size=1048576 time=0.000108s GFLOP/s=20408379.086 BW=77.852 GB/s
+Run 114: Vectorized AXPY f32 size=1048576 time=0.000161s GFLOP/s=13697409.780 BW=78.377 GB/s
+Run 115: Vectorized Dot Product f32 size=1048576 time=0.000100s GFLOP/s=21978364.256 BW=83.841 GB/s
+Run 116: Scalar AXPY f64 size=1048576 time=0.000343s GFLOP/s=6405040.257 BW=73.300 GB/s
+Run 117: Scalar Dot Product f64 size=1048576 time=0.000246s GFLOP/s=8954735.110 BW=68.319 GB/s
+Run 118: Vectorized AXPY f64 size=1048576 time=0.000338s GFLOP/s=6498430.099 BW=74.369 GB/s
+Run 119: Vectorized Dot Product f64 size=1048576 time=0.000256s GFLOP/s=8589464.854 BW=65.532 GB/s
+Running data type study with flags: avx2
+Run 0: Scalar AXPY f32 size=1024 time=0.000000s GFLOP/s=41942.965 BW=245.760 GB/s
+Run 1: Scalar Dot Product f32 size=1024 time=0.000000s GFLOP/s=52428.782 BW=204.800 GB/s
+Run 2: Scalar Elementwise Multiply f32 size=1024 time=0.000000s GFLOP/s=22310.096 BW=261.446 GB/s
+Run 3: Vectorized AXPY f32 size=1024 time=0.000000s GFLOP/s=58254.250 BW=341.333 GB/s
+Run 4: Vectorized Dot Product f32 size=1024 time=0.000000s GFLOP/s=53773.120 BW=210.051 GB/s
+Run 5: Vectorized Elementwise Multiply f32 size=1024 time=0.000000s GFLOP/s=26214.391 BW=307.200 GB/s
+Run 6: Scalar AXPY f64 size=1024 time=0.000000s GFLOP/s=30840.500 BW=361.412 GB/s
+Run 7: Scalar Dot Product f64 size=1024 time=0.000000s GFLOP/s=24672.358 BW=192.753 GB/s
+Run 8: Scalar Elementwise Multiply f64 size=1024 time=0.000000s GFLOP/s=13797.053 BW=323.368 GB/s
+Run 9: Vectorized AXPY f64 size=1024 time=0.000000s GFLOP/s=30840.368 BW=361.411 GB/s
+Run 10: Vectorized Dot Product f64 size=1024 time=0.000000s GFLOP/s=26886.560 BW=210.051 GB/s
+Run 11: Vectorized Elementwise Multiply f64 size=1024 time=0.000000s GFLOP/s=14563.562 BW=341.333 GB/s
+Run 12: Scalar AXPY f32 size=4096 time=0.000000s GFLOP/s=256141.028 BW=375.207 GB/s
+Run 13: Scalar Dot Product f32 size=4096 time=0.000000s GFLOP/s=182361.097 BW=178.087 GB/s
+Run 14: Scalar Elementwise Multiply f32 size=4096 time=0.000000s GFLOP/s=113359.596 BW=332.108 GB/s
+Run 15: Vectorized AXPY f32 size=4096 time=0.000000s GFLOP/s=260112.243 BW=381.024 GB/s
+Run 16: Vectorized Dot Product f32 size=4096 time=0.000000s GFLOP/s=182361.097 BW=178.087 GB/s
+Run 17: Vectorized Elementwise Multiply f32 size=4096 time=0.000000s GFLOP/s=113359.373 BW=332.108 GB/s
+Run 18: Scalar AXPY f64 size=4096 time=0.000000s GFLOP/s=78766.264 BW=230.761 GB/s
+Run 19: Scalar Dot Product f64 size=4096 time=0.000000s GFLOP/s=83468.765 BW=163.025 GB/s
+Run 20: Scalar Elementwise Multiply f64 size=4096 time=0.000001s GFLOP/s=29959.320 BW=175.543 GB/s
+Run 21: Vectorized AXPY f64 size=4096 time=0.000000s GFLOP/s=79324.895 BW=232.397 GB/s
+Run 22: Vectorized Dot Product f64 size=4096 time=0.000000s GFLOP/s=83468.705 BW=163.025 GB/s
+Run 23: Vectorized Elementwise Multiply f64 size=4096 time=0.000001s GFLOP/s=29959.304 BW=175.543 GB/s
+Run 24: Scalar AXPY f32 size=16384 time=0.000001s GFLOP/s=579774.162 BW=212.320 GB/s
+Run 25: Scalar Dot Product f32 size=16384 time=0.000001s GFLOP/s=653127.513 BW=159.455 GB/s
+Run 26: Scalar Elementwise Multiply f32 size=16384 time=0.000001s GFLOP/s=231809.530 BW=169.782 GB/s
+Run 27: Vectorized AXPY f32 size=16384 time=0.000001s GFLOP/s=578524.639 BW=211.862 GB/s
+Run 28: Vectorized Dot Product f32 size=16384 time=0.000001s GFLOP/s=653127.513 BW=159.455 GB/s
+Run 29: Vectorized Elementwise Multiply f32 size=16384 time=0.000001s GFLOP/s=240749.277 BW=176.330 GB/s
+Run 30: Scalar AXPY f64 size=16384 time=0.000002s GFLOP/s=290200.475 BW=212.549 GB/s
+Run 31: Scalar Dot Product f64 size=16384 time=0.000002s GFLOP/s=323416.244 BW=157.918 GB/s
+Run 32: Scalar Elementwise Multiply f64 size=16384 time=0.000002s GFLOP/s=118829.328 BW=174.066 GB/s
+Run 33: Vectorized AXPY f64 size=16384 time=0.000002s GFLOP/s=290200.475 BW=212.549 GB/s
+Run 34: Vectorized Dot Product f64 size=16384 time=0.000002s GFLOP/s=323416.188 BW=157.918 GB/s
+Run 35: Vectorized Elementwise Multiply f64 size=16384 time=0.000002s GFLOP/s=120590.963 BW=176.647 GB/s
+Run 36: Scalar AXPY f32 size=65536 time=0.000004s GFLOP/s=2324116.557 BW=212.779 GB/s
+Run 37: Scalar Dot Product f32 size=65536 time=0.000003s GFLOP/s=2455670.365 BW=149.882 GB/s
+Run 38: Scalar Elementwise Multiply f32 size=65536 time=0.000004s GFLOP/s=962134.264 BW=176.172 GB/s
+Run 39: Vectorized AXPY f32 size=65536 time=0.000004s GFLOP/s=2324116.557 BW=212.779 GB/s
+Run 40: Vectorized Dot Product f32 size=65536 time=0.000003s GFLOP/s=2557289.276 BW=156.085 GB/s
+Run 41: Vectorized Elementwise Multiply f32 size=65536 time=0.000018s GFLOP/s=233118.068 BW=42.685 GB/s
+Run 42: Scalar AXPY f64 size=65536 time=0.000008s GFLOP/s=1118918.150 BW=204.880 GB/s
+Run 43: Scalar Dot Product f64 size=65536 time=0.000007s GFLOP/s=1278454.334 BW=156.061 GB/s
+Run 44: Scalar Elementwise Multiply f64 size=65536 time=0.000017s GFLOP/s=249881.738 BW=91.509 GB/s
+Run 45: Vectorized AXPY f64 size=65536 time=0.000007s GFLOP/s=1163474.812 BW=213.039 GB/s
+Run 46: Vectorized Dot Product f64 size=65536 time=0.000007s GFLOP/s=1256757.082 BW=153.413 GB/s
+Run 47: Vectorized Elementwise Multiply f64 size=65536 time=0.000017s GFLOP/s=248479.449 BW=90.996 GB/s
+Run 48: Scalar AXPY f32 size=262144 time=0.000038s GFLOP/s=3572441.098 BW=81.767 GB/s
+Run 49: Scalar Dot Product f32 size=262144 time=0.000025s GFLOP/s=5502840.837 BW=83.967 GB/s
+Run 50: Scalar Elementwise Multiply f32 size=262144 time=0.000052s GFLOP/s=1332134.239 BW=60.980 GB/s
+Run 51: Vectorized AXPY f32 size=262144 time=0.000040s GFLOP/s=3442169.751 BW=78.785 GB/s
+Run 52: Vectorized Dot Product f32 size=262144 time=0.000024s GFLOP/s=5794710.876 BW=88.420 GB/s
+Run 53: Vectorized Elementwise Multiply f32 size=262144 time=0.000045s GFLOP/s=1531762.852 BW=70.119 GB/s
+Run 54: Scalar AXPY f64 size=262144 time=0.000079s GFLOP/s=1731274.450 BW=79.251 GB/s
+Run 55: Scalar Dot Product f64 size=262144 time=0.000047s GFLOP/s=2893817.176 BW=88.312 GB/s
+Run 56: Scalar Elementwise Multiply f64 size=262144 time=0.000089s GFLOP/s=771695.413 BW=70.651 GB/s
+Run 57: Vectorized AXPY f64 size=262144 time=0.000080s GFLOP/s=1708632.154 BW=78.215 GB/s
+Run 58: Vectorized Dot Product f64 size=262144 time=0.000050s GFLOP/s=2772623.634 BW=84.614 GB/s
+Run 59: Vectorized Elementwise Multiply f64 size=262144 time=0.000090s GFLOP/s=763405.545 BW=69.892 GB/s
+Run 60: Scalar AXPY f32 size=1048576 time=0.000159s GFLOP/s=13841739.128 BW=79.203 GB/s
+Run 61: Scalar Dot Product f32 size=1048576 time=0.000098s GFLOP/s=22461244.897 BW=85.683 GB/s
+Run 62: Scalar Elementwise Multiply f32 size=1048576 time=0.000182s GFLOP/s=6034773.695 BW=69.063 GB/s
+Run 63: Vectorized AXPY f32 size=1048576 time=0.000157s GFLOP/s=13985672.670 BW=80.027 GB/s
+Run 64: Vectorized Dot Product f32 size=1048576 time=0.000100s GFLOP/s=22031210.642 BW=84.042 GB/s
+Run 65: Vectorized Elementwise Multiply f32 size=1048576 time=0.000183s GFLOP/s=5998950.412 BW=68.653 GB/s
+Run 66: Scalar AXPY f64 size=1048576 time=0.000373s GFLOP/s=5887848.922 BW=67.381 GB/s
+Run 67: Scalar Dot Product f64 size=1048576 time=0.000262s GFLOP/s=8386880.356 BW=63.987 GB/s
+Run 68: Scalar Elementwise Multiply f64 size=1048576 time=0.000590s GFLOP/s=1863058.005 BW=42.642 GB/s
+Run 69: Vectorized AXPY f64 size=1048576 time=0.000349s GFLOP/s=6297569.937 BW=72.070 GB/s
+Run 70: Vectorized Dot Product f64 size=1048576 time=0.000256s GFLOP/s=8585507.697 BW=65.502 GB/s
+Run 71: Vectorized Elementwise Multiply f64 size=1048576 time=0.000593s GFLOP/s=1854066.726 BW=42.436 GB/s
+Run 72: Scalar AXPY f32 size=1024 time=0.000000s GFLOP/s=58254.250 BW=341.333 GB/s
+Run 73: Scalar Dot Product f32 size=1024 time=0.000000s GFLOP/s=53773.120 BW=210.051 GB/s
+Run 74: Scalar Elementwise Multiply f32 size=1024 time=0.000000s GFLOP/s=24385.468 BW=285.767 GB/s
+Run 75: Vectorized AXPY f32 size=1024 time=0.000000s GFLOP/s=61680.999 BW=361.412 GB/s
+Run 76: Vectorized Dot Product f32 size=1024 time=0.000000s GFLOP/s=56679.798 BW=221.405 GB/s
+Run 77: Vectorized Elementwise Multiply f32 size=1024 time=0.000000s GFLOP/s=26886.560 BW=315.077 GB/s
+Run 78: Scalar AXPY f64 size=1024 time=0.000000s GFLOP/s=31300.674 BW=366.805 GB/s
+Run 79: Scalar Dot Product f64 size=1024 time=0.000000s GFLOP/s=25890.754 BW=202.272 GB/s
+Run 80: Scalar Elementwise Multiply f64 size=1024 time=0.000000s GFLOP/s=14563.504 BW=341.332 GB/s
+Run 81: Vectorized AXPY f64 size=1024 time=0.000000s GFLOP/s=31775.069 BW=372.364 GB/s
+Run 82: Vectorized Dot Product f64 size=1024 time=0.000000s GFLOP/s=26886.560 BW=210.051 GB/s
+Run 83: Vectorized Elementwise Multiply f64 size=1024 time=0.000000s GFLOP/s=14563.562 BW=341.333 GB/s
+Run 84: Scalar AXPY f32 size=4096 time=0.000000s GFLOP/s=258111.361 BW=378.093 GB/s
+Run 85: Scalar Dot Product f32 size=4096 time=0.000000s GFLOP/s=182361.097 BW=178.087 GB/s
+Run 86: Scalar Elementwise Multiply f32 size=4096 time=0.000000s GFLOP/s=112598.787 BW=329.879 GB/s
+Run 87: Vectorized AXPY f32 size=4096 time=0.000000s GFLOP/s=252288.698 BW=369.564 GB/s
+Run 88: Vectorized Dot Product f32 size=4096 time=0.000000s GFLOP/s=181375.068 BW=177.124 GB/s
+Run 89: Vectorized Elementwise Multiply f32 size=4096 time=0.000000s GFLOP/s=112598.787 BW=329.879 GB/s
+Run 90: Scalar AXPY f64 size=4096 time=0.000000s GFLOP/s=79137.806 BW=231.849 GB/s
+Run 91: Scalar Dot Product f64 size=4096 time=0.000000s GFLOP/s=83468.765 BW=163.025 GB/s
+Run 92: Scalar Elementwise Multiply f64 size=4096 time=0.000001s GFLOP/s=30012.899 BW=175.857 GB/s
+Run 93: Vectorized AXPY f64 size=4096 time=0.000000s GFLOP/s=74400.081 BW=217.969 GB/s
+Run 94: Vectorized Dot Product f64 size=4096 time=0.000000s GFLOP/s=83676.919 BW=163.431 GB/s
+Run 95: Vectorized Elementwise Multiply f64 size=4096 time=0.000001s GFLOP/s=30012.915 BW=175.857 GB/s
+Run 96: Scalar AXPY f32 size=16384 time=0.000001s GFLOP/s=579148.726 BW=212.091 GB/s
+Run 97: Scalar Dot Product f32 size=16384 time=0.000001s GFLOP/s=653923.278 BW=159.649 GB/s
+Run 98: Scalar Elementwise Multiply f32 size=16384 time=0.000001s GFLOP/s=240965.391 BW=176.488 GB/s
+Run 99: Vectorized AXPY f32 size=16384 time=0.000001s GFLOP/s=579774.162 BW=212.320 GB/s
+Run 100: Vectorized Dot Product f32 size=16384 time=0.000001s GFLOP/s=653127.513 BW=159.455 GB/s
+Run 101: Vectorized Elementwise Multiply f32 size=16384 time=0.000001s GFLOP/s=239460.752 BW=175.386 GB/s
+Run 102: Scalar AXPY f64 size=16384 time=0.000002s GFLOP/s=290043.693 BW=212.434 GB/s
+Run 103: Scalar Dot Product f64 size=16384 time=0.000002s GFLOP/s=323416.244 BW=157.918 GB/s
+Run 104: Scalar Elementwise Multiply f64 size=16384 time=0.000002s GFLOP/s=120590.947 BW=176.647 GB/s
+Run 105: Vectorized AXPY f64 size=16384 time=0.000002s GFLOP/s=290200.475 BW=212.549 GB/s
+Run 106: Vectorized Dot Product f64 size=16384 time=0.000002s GFLOP/s=318428.767 BW=155.483 GB/s
+Run 107: Vectorized Elementwise Multiply f64 size=16384 time=0.000002s GFLOP/s=120590.947 BW=176.647 GB/s
+Run 108: Scalar AXPY f32 size=65536 time=0.000004s GFLOP/s=2324116.374 BW=212.779 GB/s
+Run 109: Scalar Dot Product f32 size=65536 time=0.000004s GFLOP/s=2203112.230 BW=134.467 GB/s
+Run 110: Scalar Elementwise Multiply f32 size=65536 time=0.000005s GFLOP/s=926038.638 BW=169.563 GB/s
+Run 111: Vectorized AXPY f32 size=65536 time=0.000004s GFLOP/s=2323487.903 BW=212.722 GB/s
+Run 112: Vectorized Dot Product f32 size=65536 time=0.000003s GFLOP/s=2573377.574 BW=157.067 GB/s
+Run 113: Vectorized Elementwise Multiply f32 size=65536 time=0.000018s GFLOP/s=233042.175 BW=42.671 GB/s
+Run 114: Scalar AXPY f64 size=65536 time=0.000007s GFLOP/s=1155959.465 BW=211.662 GB/s
+Run 115: Scalar Dot Product f64 size=65536 time=0.000007s GFLOP/s=1277693.683 BW=155.968 GB/s
+Run 116: Scalar Elementwise Multiply f64 size=65536 time=0.000019s GFLOP/s=230095.750 BW=84.264 GB/s
+Run 117: Vectorized AXPY f64 size=65536 time=0.000007s GFLOP/s=1157361.160 BW=211.919 GB/s
+Run 118: Vectorized Dot Product f64 size=65536 time=0.000007s GFLOP/s=1269385.928 BW=154.954 GB/s
+Run 119: Vectorized Elementwise Multiply f64 size=65536 time=0.000018s GFLOP/s=242024.532 BW=88.632 GB/s
+Run 120: Scalar AXPY f32 size=262144 time=0.000039s GFLOP/s=3552587.544 BW=81.312 GB/s
+Run 121: Scalar Dot Product f32 size=262144 time=0.000023s GFLOP/s=5862936.381 BW=89.461 GB/s
+Run 122: Scalar Elementwise Multiply f32 size=262144 time=0.000045s GFLOP/s=1523983.785 BW=69.762 GB/s
+Run 123: Vectorized AXPY f32 size=262144 time=0.000041s GFLOP/s=3340843.339 BW=76.466 GB/s
+Run 124: Vectorized Dot Product f32 size=262144 time=0.000023s GFLOP/s=5924603.569 BW=90.402 GB/s
+Run 125: Vectorized Elementwise Multiply f32 size=262144 time=0.000045s GFLOP/s=1521823.823 BW=69.664 GB/s
+Run 126: Scalar AXPY f64 size=262144 time=0.000079s GFLOP/s=1748431.484 BW=80.037 GB/s
+Run 127: Scalar Dot Product f64 size=262144 time=0.000050s GFLOP/s=2751530.602 BW=83.970 GB/s
+Run 128: Scalar Elementwise Multiply f64 size=262144 time=0.000089s GFLOP/s=769156.036 BW=70.418 GB/s
+Run 129: Vectorized AXPY f64 size=262144 time=0.000079s GFLOP/s=1747275.626 BW=79.984 GB/s
+Run 130: Vectorized Dot Product f64 size=262144 time=0.000051s GFLOP/s=2682520.814 BW=81.864 GB/s
+Run 131: Vectorized Elementwise Multiply f64 size=262144 time=0.000089s GFLOP/s=767935.506 BW=70.307 GB/s
+Run 132: Scalar AXPY f32 size=1048576 time=0.000159s GFLOP/s=13809837.317 BW=79.021 GB/s
+Run 133: Scalar Dot Product f32 size=1048576 time=0.000117s GFLOP/s=18761876.494 BW=71.571 GB/s
+Run 134: Scalar Elementwise Multiply f32 size=1048576 time=0.000183s GFLOP/s=6010723.673 BW=68.787 GB/s
+Run 135: Vectorized AXPY f32 size=1048576 time=0.000158s GFLOP/s=13934448.914 BW=79.734 GB/s
+Run 136: Vectorized Dot Product f32 size=1048576 time=0.000113s GFLOP/s=19442832.619 BW=74.169 GB/s
+Run 137: Vectorized Elementwise Multiply f32 size=1048576 time=0.000187s GFLOP/s=5877415.508 BW=67.262 GB/s
+Run 138: Scalar AXPY f64 size=1048576 time=0.000344s GFLOP/s=6395298.110 BW=73.188 GB/s
+Run 139: Scalar Dot Product f64 size=1048576 time=0.000245s GFLOP/s=8973956.845 BW=68.466 GB/s
+Run 140: Scalar Elementwise Multiply f64 size=1048576 time=0.000579s GFLOP/s=1900017.501 BW=43.488 GB/s
+Run 141: Vectorized AXPY f64 size=1048576 time=0.000356s GFLOP/s=6169389.196 BW=70.603 GB/s
+Run 142: Vectorized Dot Product f64 size=1048576 time=0.000235s GFLOP/s=9365636.083 BW=71.454 GB/s
+Run 143: Vectorized Elementwise Multiply f64 size=1048576 time=0.000578s GFLOP/s=1901999.418 BW=43.533 GB/s
+Run 144: Scalar AXPY f32 size=1024 time=0.000000s GFLOP/s=58254.250 BW=341.333 GB/s
+Run 145: Scalar Dot Product f32 size=1024 time=0.000000s GFLOP/s=55188.213 BW=215.579 GB/s
+Run 146: Scalar Elementwise Multiply f32 size=1024 time=0.000000s GFLOP/s=24966.078 BW=292.571 GB/s
+Run 147: Vectorized AXPY f32 size=1024 time=0.000000s GFLOP/s=61680.999 BW=361.412 GB/s
+Run 148: Vectorized Dot Product f32 size=1024 time=0.000000s GFLOP/s=56679.798 BW=221.405 GB/s
+Run 149: Vectorized Elementwise Multiply f32 size=1024 time=0.000000s GFLOP/s=27594.106 BW=323.368 GB/s
+Run 150: Scalar AXPY f64 size=1024 time=0.000000s GFLOP/s=31775.069 BW=372.364 GB/s
+Run 151: Scalar Dot Product f64 size=1024 time=0.000000s GFLOP/s=25575.011 BW=199.805 GB/s
+Run 152: Scalar Elementwise Multiply f64 size=1024 time=0.000000s GFLOP/s=14364.003 BW=336.656 GB/s
+Run 153: Vectorized AXPY f64 size=1024 time=0.000000s GFLOP/s=31775.069 BW=372.364 GB/s
+Run 154: Vectorized Dot Product f64 size=1024 time=0.000000s GFLOP/s=26546.221 BW=207.392 GB/s
+Run 155: Vectorized Elementwise Multiply f64 size=1024 time=0.000000s GFLOP/s=14563.562 BW=341.333 GB/s
+Run 156: Scalar AXPY f32 size=4096 time=0.000000s GFLOP/s=260111.656 BW=381.023 GB/s
+Run 157: Scalar Dot Product f32 size=4096 time=0.000000s GFLOP/s=181375.354 BW=177.124 GB/s
+Run 158: Scalar Elementwise Multiply f32 size=4096 time=0.000000s GFLOP/s=112598.787 BW=329.879 GB/s
+Run 159: Vectorized AXPY f32 size=4096 time=0.000000s GFLOP/s=260112.243 BW=381.024 GB/s
+Run 160: Vectorized Dot Product f32 size=4096 time=0.000000s GFLOP/s=180400.210 BW=176.172 GB/s
+Run 161: Vectorized Elementwise Multiply f32 size=4096 time=0.000000s GFLOP/s=111848.123 BW=327.680 GB/s
+Run 162: Scalar AXPY f64 size=4096 time=0.000000s GFLOP/s=79137.806 BW=231.849 GB/s
+Run 163: Scalar Dot Product f64 size=4096 time=0.000000s GFLOP/s=83468.765 BW=163.025 GB/s
+Run 164: Scalar Elementwise Multiply f64 size=4096 time=0.000001s GFLOP/s=29959.320 BW=175.543 GB/s
+Run 165: Vectorized AXPY f64 size=4096 time=0.000000s GFLOP/s=79324.895 BW=232.397 GB/s
+Run 166: Vectorized Dot Product f64 size=4096 time=0.000000s GFLOP/s=83676.919 BW=163.431 GB/s
+Run 167: Vectorized Elementwise Multiply f64 size=4096 time=0.000001s GFLOP/s=30012.899 BW=175.857 GB/s
+Run 168: Scalar AXPY f32 size=16384 time=0.000001s GFLOP/s=579148.726 BW=212.091 GB/s
+Run 169: Scalar Dot Product f32 size=16384 time=0.000001s GFLOP/s=610774.644 BW=149.115 GB/s
+Run 170: Scalar Elementwise Multiply f32 size=16384 time=0.000001s GFLOP/s=240103.254 BW=175.857 GB/s
+Run 171: Vectorized AXPY f32 size=16384 time=0.000001s GFLOP/s=578524.639 BW=211.862 GB/s
+Run 172: Vectorized Dot Product f32 size=16384 time=0.000001s GFLOP/s=653923.046 BW=159.649 GB/s
+Run 173: Vectorized Elementwise Multiply f32 size=16384 time=0.000001s GFLOP/s=240533.550 BW=176.172 GB/s
+Run 174: Scalar AXPY f64 size=16384 time=0.000002s GFLOP/s=260743.527 BW=190.974 GB/s
+Run 175: Scalar Dot Product f64 size=16384 time=0.000002s GFLOP/s=312134.251 BW=152.409 GB/s
+Run 176: Scalar Elementwise Multiply f64 size=16384 time=0.000002s GFLOP/s=120482.696 BW=176.488 GB/s
+Run 177: Vectorized AXPY f64 size=16384 time=0.000002s GFLOP/s=290200.520 BW=212.549 GB/s
+Run 178: Vectorized Dot Product f64 size=16384 time=0.000002s GFLOP/s=323611.136 BW=158.013 GB/s
+Run 179: Vectorized Elementwise Multiply f64 size=16384 time=0.000002s GFLOP/s=118410.004 BW=173.452 GB/s
+Run 180: Scalar AXPY f32 size=65536 time=0.000004s GFLOP/s=2315970.495 BW=212.033 GB/s
+Run 181: Scalar Dot Product f32 size=65536 time=0.000003s GFLOP/s=2571836.842 BW=156.972 GB/s
+Run 182: Scalar Elementwise Multiply f32 size=65536 time=0.000004s GFLOP/s=964944.383 BW=176.687 GB/s
+Run 183: Vectorized AXPY f32 size=65536 time=0.000004s GFLOP/s=2324116.374 BW=212.779 GB/s
+Run 184: Vectorized Dot Product f32 size=65536 time=0.000003s GFLOP/s=2573377.799 BW=157.067 GB/s
+Run 185: Vectorized Elementwise Multiply f32 size=65536 time=0.000005s GFLOP/s=875808.976 BW=160.365 GB/s
+Run 186: Scalar AXPY f64 size=65536 time=0.000007s GFLOP/s=1148233.483 BW=210.248 GB/s
+Run 187: Scalar Dot Product f64 size=65536 time=0.000007s GFLOP/s=1275985.523 BW=155.760 GB/s
+Run 188: Scalar Elementwise Multiply f64 size=65536 time=0.000018s GFLOP/s=244797.224 BW=89.647 GB/s
+Run 189: Vectorized AXPY f64 size=65536 time=0.000008s GFLOP/s=1112397.641 BW=203.686 GB/s
+Run 190: Vectorized Dot Product f64 size=65536 time=0.000007s GFLOP/s=1260075.468 BW=153.818 GB/s
+Run 191: Vectorized Elementwise Multiply f64 size=65536 time=0.000017s GFLOP/s=246865.575 BW=90.405 GB/s
+Run 192: Scalar AXPY f32 size=262144 time=0.000041s GFLOP/s=3354051.136 BW=76.768 GB/s
+Run 193: Scalar Dot Product f32 size=262144 time=0.000025s GFLOP/s=5404811.553 BW=82.471 GB/s
+Run 194: Scalar Elementwise Multiply f32 size=262144 time=0.000044s GFLOP/s=1554739.299 BW=71.170 GB/s
+Run 195: Vectorized AXPY f32 size=262144 time=0.000039s GFLOP/s=3480700.841 BW=79.667 GB/s
+Run 196: Vectorized Dot Product f32 size=262144 time=0.000024s GFLOP/s=5636671.188 BW=86.009 GB/s
+Run 197: Vectorized Elementwise Multiply f32 size=262144 time=0.000048s GFLOP/s=1438819.893 BW=65.864 GB/s
+Run 198: Scalar AXPY f64 size=262144 time=0.000079s GFLOP/s=1736963.241 BW=79.512 GB/s
+Run 199: Scalar Dot Product f64 size=262144 time=0.000047s GFLOP/s=2926723.870 BW=89.317 GB/s
+Run 200: Scalar Elementwise Multiply f64 size=262144 time=0.000090s GFLOP/s=764484.111 BW=69.991 GB/s
+Run 201: Vectorized AXPY f64 size=262144 time=0.000079s GFLOP/s=1741761.973 BW=79.732 GB/s
+Run 202: Vectorized Dot Product f64 size=262144 time=0.000064s GFLOP/s=2156717.090 BW=65.818 GB/s
+Run 203: Vectorized Elementwise Multiply f64 size=262144 time=0.000103s GFLOP/s=669904.532 BW=61.332 GB/s
+Run 204: Scalar AXPY f32 size=1048576 time=0.000160s GFLOP/s=13722882.196 BW=78.523 GB/s
+Run 205: Scalar Dot Product f32 size=1048576 time=0.000100s GFLOP/s=22062155.195 BW=84.160 GB/s
+Run 206: Scalar Elementwise Multiply f32 size=1048576 time=0.000191s GFLOP/s=5763545.775 BW=65.959 GB/s
+Run 207: Vectorized AXPY f32 size=1048576 time=0.000159s GFLOP/s=13808189.715 BW=79.011 GB/s
+Run 208: Vectorized Dot Product f32 size=1048576 time=0.000097s GFLOP/s=22780251.644 BW=86.900 GB/s
+Run 209: Vectorized Elementwise Multiply f32 size=1048576 time=0.000194s GFLOP/s=5664986.825 BW=64.831 GB/s
+Run 210: Scalar AXPY f64 size=1048576 time=0.000335s GFLOP/s=6569229.372 BW=75.179 GB/s
+Run 211: Scalar Dot Product f64 size=1048576 time=0.000236s GFLOP/s=9324809.735 BW=71.143 GB/s
+Run 212: Scalar Elementwise Multiply f64 size=1048576 time=0.000602s GFLOP/s=1827423.913 BW=41.826 GB/s
+Run 213: Vectorized AXPY f64 size=1048576 time=0.000338s GFLOP/s=6508315.863 BW=74.482 GB/s
+Run 214: Vectorized Dot Product f64 size=1048576 time=0.000240s GFLOP/s=9180307.240 BW=70.040 GB/s
+Run 215: Vectorized Elementwise Multiply f64 size=1048576 time=0.000581s GFLOP/s=1891668.707 BW=43.297 GB/s
+Results saved to simd_performance_avx2.csv
+
+=== RESULTS SUMMARY ===
+CPU: 12th Gen Intel(R) Core(TM) i5-12600KF
+CPU Frequency: 3.69 GHz
+Compiler: Clang 19.1.5
+Total runs: 1848
+AXPY (Scalar): Avg Time=0.000988s, Avg GFLOP/s=8031621.558, Avg BW=153.882 GB/s (n=300)
+AXPY (Vectorized): Avg Time=0.000986s, Avg GFLOP/s=8046732.252, Avg BW=156.374 GB/s (n=300)
+Dot Product (Scalar): Avg Time=0.000550s, Avg GFLOP/s=10084569.290, Avg BW=114.854 GB/s (n=222)
+Dot Product (Vectorized): Avg Time=0.000545s, Avg GFLOP/s=10130586.974, Avg BW=115.962 GB/s (n=222)
+Elementwise Multiply (Scalar): Avg Time=0.001775s, Avg GFLOP/s=3190493.136, Avg BW=129.285 GB/s (n=132)
+Elementwise Multiply (Vectorized): Avg Time=0.001767s, Avg GFLOP/s=3203091.839, Avg BW=130.753 GB/s (n=132)
+3-Point Stencil (Scalar): Avg Time=0.001760s, Avg GFLOP/s=27913839.922, Avg BW=106.924 GB/s (n=96)
+3-Point Stencil (Vectorized): Avg Time=0.001737s, Avg GFLOP/s=28263195.738, Avg BW=108.944 GB/s (n=96)
+Memory Bandwidth (Scalar): Avg Time=0.001678s, Avg GFLOP/s=5716387.735, Avg BW=114.913 GB/s (n=174)
+Memory Bandwidth (Vectorized): Avg Time=0.001671s, Avg GFLOP/s=5735512.730, Avg BW=114.728 GB/s (n=174)
+
+Experiment completed successfully!
