@@ -1,0 +1,23 @@
+SIMD Vectorization Verification Summary
+==================================================
+
+COMPILER VECTORIZATION REPORTS
+----------------------------------------
+
+SCALAR Configuration:
+  Vectorized loops: 0
+  Missed optimizations: 0
+
+VECTORIZED Configuration:
+  Vectorized loops: 6
+  Missed optimizations: 18
+
+AVX2 Configuration:
+  Vectorized loops: 6
+  Missed optimizations: 18
+
+
+VECTORIZATION VERIFICATION:
+------------------------------
+Compiler reports vectorized loops in vectorized config
+Compiler reports vectorized loops in avx2 config

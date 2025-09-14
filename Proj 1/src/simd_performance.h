@@ -29,9 +29,9 @@ typedef int32_t i32;
 typedef enum {
     KERNEL_AXPY,
     KERNEL_DOT_PRODUCT,
-    KERNEL_ELEMENTWISE_MULTIPLY,
+    KERNEL_ELEMENTWISE_MULTIPLY/*,
     KERNEL_STENCIL_3POINT,
-    KERNEL_MEMORY_BANDWIDTH
+    KERNEL_MEMORY_BANDWIDTH*/
 } kernel_type_t;
 
 // Implementation types
@@ -109,10 +109,10 @@ void run_dot_product_experiment(size_t n, data_type_t data_type, int aligned, in
                                implementation_t impl, int run_id, const char* compiler_flags);
 void run_elementwise_multiply_experiment(size_t n, data_type_t data_type, int aligned, int stride,
                                         implementation_t impl, int run_id, const char* compiler_flags);
-void run_stencil_experiment(size_t n, data_type_t data_type, int aligned, int stride,
+/*void run_stencil_experiment(size_t n, data_type_t data_type, int aligned, int stride,
                            implementation_t impl, int run_id, const char* compiler_flags);
 void run_memory_bandwidth_experiment(size_t n, data_type_t data_type, int aligned, int stride,
-                                    implementation_t impl, int run_id, const char* compiler_flags);
+                                    implementation_t impl, int run_id, const char* compiler_flags);*/
 
 // Experiment runners
 void run_comprehensive_experiments(const char* compiler_flags);
@@ -120,3 +120,8 @@ void run_locality_sweep(const char* compiler_flags);
 void run_alignment_study(const char* compiler_flags);
 void run_stride_study(const char* compiler_flags);
 void run_data_type_study(const char* compiler_flags);
+
+// Core pinning
+void set_cpu_affinity(int core_id);
+void print_cpu_info();
+void set_high_priority();

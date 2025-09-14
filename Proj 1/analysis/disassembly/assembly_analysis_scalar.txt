@@ -1,0 +1,11 @@
+Assembly Analysis - SCALAR
+==================================================
+
+File: C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\vectorization_scalar.s
+
+VECTOR INSTRUCTIONS FOUND:
+------------------------------
+
+TOTAL VECTOR INSTRUCTIONS: 0
+TOTAL INSTRUCTIONS: 0
+VECTORIZATION RATIO: 0.0%

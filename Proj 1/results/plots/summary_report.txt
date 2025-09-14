@@ -2,8 +2,8 @@ SIMD Performance Analysis Summary Report
 ==================================================
 
 Basic Statistics:
-Total measurements: 5542
-Number of kernels: 5
+Total measurements: 4390
+Number of kernels: 3
 Number of compiler configurations: 3
 Data types: f32, f64
 
@@ -11,41 +11,31 @@ Performance Summary by Kernel:
 ----------------------------------------
 
 axpy:
-  scalar: 7047930.49 GFLOP/s
-  vectorized: 7052966.64 GFLOP/s, Speedup: 1.05x
+  scalar: 7335448.92 GFLOP/s
+  vectorized: 7343565.83 GFLOP/s, Speedup: 1.13x
 
 dot_product:
-  scalar: 7701065.42 GFLOP/s
-  vectorized: 7713613.52 GFLOP/s, Speedup: 1.07x
+  scalar: 9027967.04 GFLOP/s
+  vectorized: 9042478.71 GFLOP/s, Speedup: 1.14x
 
 elementwise_multiply:
-  scalar: 2992251.32 GFLOP/s
-  vectorized: 3001292.29 GFLOP/s, Speedup: 1.07x
-
-stencil_3point:
-  scalar: 22806606.99 GFLOP/s
-  vectorized: 22834718.50 GFLOP/s, Speedup: 1.04x
-
-memory_bandwidth:
-  scalar: 5461741.42 GFLOP/s
-  vectorized: 5468937.24 GFLOP/s, Speedup: 1.07x
+  scalar: 3141162.22 GFLOP/s
+  vectorized: 3133814.36 GFLOP/s, Speedup: 1.06x
 
 Best and Worst Cases:
 ----------------------------------------
-Best performance: 193288201.31 GFLOP/s (stencil_3point, vectorized, f32, size=16777216)
-Worst performance: 1307.45 GFLOP/s (elementwise_multiply, scalar, f64, size=1024)
+Best performance: 108978360.63 GFLOP/s (dot_product, scalar, f32, size=16777216)
+Worst performance: 1151.02 GFLOP/s (elementwise_multiply, vectorized, f64, size=1024)
 
 Speedup Analysis (Vectorized vs Scalar):
 ----------------------------------------
-Average speedup: 1.06x
-Maximum speedup: 3.68x
-Minimum speedup: 0.21x
+Average speedup: 1.12x
+Maximum speedup: 8.29x
+Minimum speedup: 0.26x
 
 Speedup by kernel:
-  axpy: 1.05x
-  dot_product: 1.07x
-  elementwise_multiply: 1.07x
-  stencil_3point: 1.04x
-  memory_bandwidth: 1.07x
+  axpy: 1.13x
+  dot_product: 1.14x
+  elementwise_multiply: 1.06x
 
 Report generated successfully!

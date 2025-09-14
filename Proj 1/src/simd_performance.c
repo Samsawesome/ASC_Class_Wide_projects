@@ -264,7 +264,7 @@ void elementwise_multiply_vectorized_f64(f64* x, f64* y, f64* z, size_t n) {
         z[i] = x[i] * y[i];
     }
 }
-
+/*
 // 3-point stencil kernels
 void stencil_3point_scalar_f32(f32* x, f32* y, size_t n) {
     for (size_t i = 1; i < n - 1; i++) {
@@ -314,7 +314,7 @@ void memory_bandwidth_test_vectorized_f64(f64* x, f64* y, size_t n) {
         y[i] = x[i];
     }
 }
-
+*/
 // ==================== RESULTS COLLECTION ====================
 void results_init(results_collector_t* collector, double cpu_freq_ghz, const char* compiler_flags) {
     collector->count = 0;
@@ -365,8 +365,8 @@ void results_save_csv(const results_collector_t* collector, const char* filename
             case KERNEL_AXPY: kernel_str = "axpy"; break;
             case KERNEL_DOT_PRODUCT: kernel_str = "dot_product"; break;
             case KERNEL_ELEMENTWISE_MULTIPLY: kernel_str = "elementwise_multiply"; break;
-            case KERNEL_STENCIL_3POINT: kernel_str = "stencil_3point"; break;
-            case KERNEL_MEMORY_BANDWIDTH: kernel_str = "memory_bandwidth"; break;
+            //case KERNEL_STENCIL_3POINT: kernel_str = "stencil_3point"; break;
+            //case KERNEL_MEMORY_BANDWIDTH: kernel_str = "memory_bandwidth"; break;
             default: kernel_str = "unknown";
         }
         
@@ -397,7 +397,7 @@ void results_print_summary(const results_collector_t* collector) {
     printf("Total runs: %d\n", collector->count);
     
     // Group by kernel and implementation
-    for (int kernel = KERNEL_AXPY; kernel <= KERNEL_MEMORY_BANDWIDTH; kernel++) {
+    for (int kernel = KERNEL_AXPY; kernel <= KERNEL_ELEMENTWISE_MULTIPLY; kernel++) {
         for (int impl = IMPL_SCALAR; impl <= IMPL_VECTORIZED; impl++) {
             double total_time = 0.0;
             double total_gflops = 0.0;
@@ -420,8 +420,8 @@ void results_print_summary(const results_collector_t* collector) {
                     case KERNEL_AXPY: kernel_str = "AXPY"; break;
                     case KERNEL_DOT_PRODUCT: kernel_str = "Dot Product"; break;
                     case KERNEL_ELEMENTWISE_MULTIPLY: kernel_str = "Elementwise Multiply"; break;
-                    case KERNEL_STENCIL_3POINT: kernel_str = "3-Point Stencil"; break;
-                    case KERNEL_MEMORY_BANDWIDTH: kernel_str = "Memory Bandwidth"; break;
+                    //case KERNEL_STENCIL_3POINT: kernel_str = "3-Point Stencil"; break;
+                    //case KERNEL_MEMORY_BANDWIDTH: kernel_str = "Memory Bandwidth"; break;
                     default: kernel_str = "Unknown";
                 }
                 
@@ -493,14 +493,14 @@ void run_kernel(experiment_data_t* data, perf_metrics_t* metrics) {
             operations = data->n * 1; // 1 FLOP per element
             bytes_accessed = data->n * 3 * ((data->data_type == TYPE_F32) ? sizeof(f32) : sizeof(f64));
             break;
-        case KERNEL_STENCIL_3POINT:
+        /*case KERNEL_STENCIL_3POINT:
             operations = data->n * 5; // 5 FLOPs per element
             bytes_accessed = data->n * 3 * ((data->data_type == TYPE_F32) ? sizeof(f32) : sizeof(f64));
             break;
         case KERNEL_MEMORY_BANDWIDTH:
             operations = data->n * 1; // 1 operation per element
             bytes_accessed = data->n * 2 * ((data->data_type == TYPE_F32) ? sizeof(f32) : sizeof(f64));
-            break;
+            break;*/
     }
     
     perf_init(metrics, operations * ITERATIONS, data->n, global_collector.cpu_freq_ghz);
@@ -550,7 +550,7 @@ void run_kernel(experiment_data_t* data, perf_metrics_t* metrics) {
                 }
                 break;
                 
-            case KERNEL_STENCIL_3POINT:
+            /*case KERNEL_STENCIL_3POINT:
                 if (data->data_type == TYPE_F32) {
                     if (data->implementation == IMPL_SCALAR)
                         stencil_3point_scalar_f32(data->x, data->y, data->n);
@@ -576,7 +576,7 @@ void run_kernel(experiment_data_t* data, perf_metrics_t* metrics) {
                     else
                         memory_bandwidth_test_vectorized_f64(data->x, data->y, data->n);
                 }
-                break;
+                break;*/
         }
     }
     
@@ -626,7 +626,7 @@ void run_kernel(experiment_data_t* data, perf_metrics_t* metrics) {
                 }
                 break;
                 
-            case KERNEL_STENCIL_3POINT:
+            /*case KERNEL_STENCIL_3POINT:
                 if (data->data_type == TYPE_F32) {
                     if (data->implementation == IMPL_SCALAR)
                         stencil_3point_scalar_f32(data->x, data->y, data->n);
@@ -652,7 +652,7 @@ void run_kernel(experiment_data_t* data, perf_metrics_t* metrics) {
                     else
                         memory_bandwidth_test_vectorized_f64(data->x, data->y, data->n);
                 }
-                break;
+                break;*/
         }
     }
     double end = get_time();
@@ -694,8 +694,8 @@ void run_experiment(experiment_data_t* data) {
         case KERNEL_AXPY: kernel_str = "AXPY"; break;
         case KERNEL_DOT_PRODUCT: kernel_str = "Dot Product"; break;
         case KERNEL_ELEMENTWISE_MULTIPLY: kernel_str = "Elementwise Multiply"; break;
-        case KERNEL_STENCIL_3POINT: kernel_str = "3-Point Stencil"; break;
-        case KERNEL_MEMORY_BANDWIDTH: kernel_str = "Memory Bandwidth"; break;
+        //case KERNEL_STENCIL_3POINT: kernel_str = "3-Point Stencil"; break;
+        //case KERNEL_MEMORY_BANDWIDTH: kernel_str = "Memory Bandwidth"; break;
         default: kernel_str = "Unknown";
     }
     
@@ -835,7 +835,7 @@ void run_elementwise_multiply_experiment(size_t n, data_type_t data_type, int al
     }
 }
 
-void run_stencil_experiment(size_t n, data_type_t data_type, int aligned, int stride,
+/*void run_stencil_experiment(size_t n, data_type_t data_type, int aligned, int stride,
                            implementation_t impl, int run_id, const char* compiler_flags) {
     experiment_data_t data;
     data.n = n;
@@ -911,6 +911,173 @@ void run_memory_bandwidth_experiment(size_t n, data_type_t data_type, int aligne
         free(data.x);
         free(data.y);
     }
+}*/
+
+// ==================== CPU AFFINITY AND PRIORITY FUNCTIONS ====================
+
+void set_cpu_affinity(int core_id) {
+    DWORD_PTR process_affinity_mask = 0;
+    DWORD_PTR system_affinity_mask = 0;
+    
+    // Get current process handle
+    HANDLE current_process = GetCurrentProcess();
+    
+    // Get number of processors
+    SYSTEM_INFO sys_info;
+    GetSystemInfo(&sys_info);
+    int num_processors = sys_info.dwNumberOfProcessors;
+    
+    printf("System has %d processors\n", num_processors);
+    
+    // Validate core_id
+    if (core_id < 0 || core_id >= num_processors) {
+        printf("Warning: Core ID %d is invalid. Using core 0 instead.\n", core_id);
+        core_id = 0;
+    }
+    
+    // Create affinity mask for the specified core
+    DWORD_PTR affinity_mask = (DWORD_PTR)1 << core_id;
+    
+    // Set process affinity
+    if (SetProcessAffinityMask(current_process, affinity_mask)) {
+        printf("Successfully pinned process to core %d\n", core_id);
+    } else {
+        DWORD error = GetLastError();
+        printf("Warning: Failed to set CPU affinity (Error %lu). Continuing without affinity.\n", error);
+    }
+    
+    // Verify the affinity was set
+    if (GetProcessAffinityMask(current_process, &process_affinity_mask, &system_affinity_mask)) {
+        printf("Process affinity mask: 0x%I64x\n", process_affinity_mask);
+        printf("System affinity mask: 0x%I64x\n", system_affinity_mask);
+    }
+}
+
+void set_thread_affinity(int core_id) {
+    // Get number of processors
+    SYSTEM_INFO sys_info;
+    GetSystemInfo(&sys_info);
+    int num_processors = sys_info.dwNumberOfProcessors;
+    
+    // Validate core_id
+    if (core_id < 0 || core_id >= num_processors) {
+        printf("Warning: Core ID %d is invalid. Using core 0 instead.\n", core_id);
+        core_id = 0;
+    }
+    
+    // Create affinity mask for the specified core
+    DWORD_PTR affinity_mask = (DWORD_PTR)1 << core_id;
+    
+    // Set thread affinity
+    HANDLE current_thread = GetCurrentThread();
+    if (SetThreadAffinityMask(current_thread, affinity_mask)) {
+        printf("Successfully pinned thread to core %d\n", core_id);
+    } else {
+        DWORD error = GetLastError();
+        printf("Warning: Failed to set thread affinity (Error %lu). Continuing without affinity.\n", error);
+    }
+}
+
+void set_high_priority() {
+    HANDLE current_process = GetCurrentProcess();
+    
+    // Set high priority class
+    if (SetPriorityClass(current_process, HIGH_PRIORITY_CLASS)) {
+        printf("Set process priority to HIGH\n");
+    } else {
+        DWORD error = GetLastError();
+        printf("Warning: Failed to set high priority (Error %lu)\n", error);
+    }
+    
+    // Also set thread priority
+    HANDLE current_thread = GetCurrentThread();
+    if (SetThreadPriority(current_thread, THREAD_PRIORITY_HIGHEST)) {
+        printf("Set thread priority to HIGHEST\n");
+    } else {
+        DWORD error = GetLastError();
+        printf("Warning: Failed to set thread priority (Error %lu)\n", error);
+    }
+}
+
+void print_cpu_info() {
+    SYSTEM_INFO sys_info;
+    GetSystemInfo(&sys_info);
+    
+    printf("CPU Information:\n");
+    printf("  Number of processors: %d\n", sys_info.dwNumberOfProcessors);
+    printf("  Processor architecture: %d\n", sys_info.wProcessorArchitecture);
+    printf("  Page size: %lu bytes\n", sys_info.dwPageSize);
+    
+    // Get detailed CPU information using CPUID
+    int cpuInfo[4] = {0};
+    char cpuBrandString[0x40] = {0};
+    
+    __cpuid(cpuInfo, 0x80000000);
+    if ((unsigned)cpuInfo[0] >= 0x80000004) {
+        __cpuid(cpuInfo, 0x80000002);
+        memcpy(cpuBrandString, cpuInfo, sizeof(cpuInfo));
+        __cpuid(cpuInfo, 0x80000003);
+        memcpy(cpuBrandString + 16, cpuInfo, sizeof(cpuInfo));
+        __cpuid(cpuInfo, 0x80000004);
+        memcpy(cpuBrandString + 32, cpuInfo, sizeof(cpuInfo));
+        
+        // Clean up the brand string
+        for (int i = 0; i < sizeof(cpuBrandString); i++) {
+            if (cpuBrandString[i] == 0) break;
+            if (cpuBrandString[i] < 32 || cpuBrandString[i] > 126) {
+                cpuBrandString[i] = ' ';
+            }
+        }
+        
+        printf("  CPU: %s\n", cpuBrandString);
+    }
+}
+
+void disable_smt() {
+    // This is a best-effort attempt to disable SMT (Simultaneous Multi-Threading)
+    // by using only physical cores
+    
+    SYSTEM_INFO sys_info;
+    GetSystemInfo(&sys_info);
+    int num_processors = sys_info.dwNumberOfProcessors;
+    
+    // Typically, physical cores are the first half of the logical processors
+    int physical_cores = num_processors / 2;
+    
+    if (physical_cores > 0) {
+        printf("Disabling SMT - using only %d physical cores\n", physical_cores);
+        
+        DWORD_PTR affinity_mask = 0;
+        for (int i = 0; i < physical_cores; i++) {
+            affinity_mask |= (DWORD_PTR)1 << i;
+        }
+        
+        HANDLE current_process = GetCurrentProcess();
+        if (SetProcessAffinityMask(current_process, affinity_mask)) {
+            printf("Using physical cores only (mask: 0x%I64x)\n", affinity_mask);
+        }
+    }
+}
+
+void fix_cpu_frequency() {
+    // This is a best-effort attempt to fix CPU frequency
+    // Note: This requires administrator privileges and may not work on all systems
+    
+    printf("Attempting to set high performance power plan...\n");
+    
+    // Try to set high performance power plan
+    // This is a simplified approach - in practice, you might want to use powercfg
+    SYSTEM_POWER_STATUS power_status;
+    if (GetSystemPowerStatus(&power_status)) {
+        if (power_status.ACLineStatus == 1) {
+            printf("Running on AC power - good for consistent performance\n");
+        } else {
+            printf("Running on battery - performance may vary\n");
+        }
+    }
+    
+    printf("For best results, manually set Windows power plan to 'High Performance'\n");
+    printf("and ensure CPU frequency scaling is disabled in BIOS if possible.\n");
 }
 
 // ==================== EXPERIMENT SETS ====================
@@ -934,8 +1101,8 @@ void run_comprehensive_experiments(const char* compiler_flags) {
                         run_axpy_experiment(n, data_type, aligned, 1, impl, run_id++, compiler_flags);
                         run_dot_product_experiment(n, data_type, aligned, 1, impl, run_id++, compiler_flags);
                         run_elementwise_multiply_experiment(n, data_type, aligned, 1, impl, run_id++, compiler_flags);
-                        run_stencil_experiment(n, data_type, aligned, 1, impl, run_id++, compiler_flags);
-                        run_memory_bandwidth_experiment(n, data_type, aligned, 1, impl, run_id++, compiler_flags);
+                        //run_stencil_experiment(n, data_type, aligned, 1, impl, run_id++, compiler_flags);
+                        //run_memory_bandwidth_experiment(n, data_type, aligned, 1, impl, run_id++, compiler_flags);
                     }
                 }
             }
@@ -974,7 +1141,8 @@ void run_locality_sweep(const char* compiler_flags) {
             for (int data_type = TYPE_F32; data_type <= TYPE_F64; data_type++) {
                 for (int impl = IMPL_SCALAR; impl <= IMPL_VECTORIZED; impl++) {
                     run_axpy_experiment(n, data_type, 1, 1, impl, run_id++, compiler_flags);
-                    run_memory_bandwidth_experiment(n, data_type, 1, 1, impl, run_id++, compiler_flags);
+                    run_dot_product_experiment(n, data_type, 1, 1, impl, run_id++, compiler_flags);
+                    //run_memory_bandwidth_experiment(n, data_type, 1, 1, impl, run_id++, compiler_flags);
                 }
             }
         }
@@ -1056,6 +1224,29 @@ int main(int argc, char* argv[]) {
     printf("SIMD Performance Analysis Project\n");
     printf("=================================\n\n");
     
+    // CPU configuration
+    print_cpu_info();
+    
+    // Set CPU affinity to core 0 (you can make this configurable)
+    int target_core = 0;
+    if (argc > 2) {
+        target_core = atoi(argv[2]);
+    }
+    set_cpu_affinity(target_core);
+    
+    // Set high priority
+    set_high_priority();
+    
+    // Optional: Disable SMT for more consistent results
+    if (argc > 3 && strcmp(argv[3], "nosmt") == 0) {
+        disable_smt();
+    }
+    
+    // Optional: Attempt to fix CPU frequency
+    if (argc > 4 && strcmp(argv[4], "fixfreq") == 0) {
+        fix_cpu_frequency();
+    }
+    
     double cpu_freq_ghz = detect_cpu_frequency();
     printf("Detected CPU frequency: %.2f GHz\n", cpu_freq_ghz);
     
@@ -1074,26 +1265,29 @@ int main(int argc, char* argv[]) {
     }
     
     // Initialize results collector
+    results_collector_t global_collector;
     results_init(&global_collector, cpu_freq_ghz, compiler_flags);
     
     // Run different experiment sets
-    run_comprehensive_experiments(compiler_flags);
-    run_locality_sweep(compiler_flags);
-    run_alignment_study(compiler_flags);
-    run_stride_study(compiler_flags);
-    run_data_type_study(compiler_flags);
+    run_comprehensive_experiments(&global_collector, compiler_flags);
+    run_locality_sweep(&global_collector, compiler_flags);
+    run_alignment_study(&global_collector, compiler_flags);
+    run_stride_study(&global_collector, compiler_flags);
+    run_data_type_study(&global_collector, compiler_flags);
     
     // Calculate speedups
     calculate_speedups(&global_collector);
     
-    // Save results to CSV
-    char filename[256];
-    snprintf(filename, sizeof(filename), "simd_performance_%s.csv", compiler_flags);
-    results_save_csv(&global_collector, filename);
-    
-    // Print summary
-    results_print_summary(&global_collector);
+    // Finalize and save any remaining results
+    results_finalize(&global_collector);
     
     printf("\nExperiment completed successfully!\n");
+    
+    // Restore normal priority (optional)
+    HANDLE current_process = GetCurrentProcess();
+    SetPriorityClass(current_process, NORMAL_PRIORITY_CLASS);
+    
     return 0;
 }
+
+

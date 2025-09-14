@@ -1,0 +1,45 @@
+Compiler Vectorization Report - VECTORIZED
+==================================================
+
+Command: clang -O3 -march=native -ffast-math -Rpass=vectorize -Rpass-missed=vectorize -Rpass-analysis=vectorize -S -o C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\vectorization_vectorized.s C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c
+
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:9:5: remark: vectorized loop (vectorization width: 8, interleaved count: 4) [-Rpass=loop-vectorize]
+    9 |     for (size_t i = 0; i < n; i++) {
+      |     ^
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:9:5: remark: List vectorization was possible but not beneficial with cost 0 >= 0 [-Rpass-missed=slp-vectorizer]
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:9:5: remark: Cannot SLP vectorize list: vectorization was impossible with available vectorization factors [-Rpass-missed=slp-vectorizer]
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:9:5: remark: List vectorization was possible but not beneficial with cost 0 >= 0 [-Rpass-missed=slp-vectorizer]
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:9:5: remark: List vectorization was possible but not beneficial with cost 0 >= 0 [-Rpass-missed=slp-vectorizer]
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:15:5: remark: vectorized loop (vectorization width: 8, interleaved count: 4) [-Rpass=loop-vectorize]
+   15 |     for (size_t i = 0; i < n; i++) {
+      |     ^
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:15:5: remark: List vectorization was possible but not beneficial with cost 0 >= 0 [-Rpass-missed=slp-vectorizer]
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:15:5: remark: Cannot SLP vectorize list: vectorization was impossible with available vectorization factors [-Rpass-missed=slp-vectorizer]
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:15:5: remark: List vectorization was possible but not beneficial with cost 0 >= 0 [-Rpass-missed=slp-vectorizer]
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:15:5: remark: List vectorization was possible but not beneficial with cost 0 >= 0 [-Rpass-missed=slp-vectorizer]
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:21:5: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+   21 |     for (size_t i = 0; i < n; i++) {
+      |     ^
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:21:5: remark: List vectorization was possible but not beneficial with cost 0 >= 0 [-Rpass-missed=slp-vectorizer]
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:21:5: remark: Cannot SLP vectorize list: vectorization was impossible with available vectorization factors [-Rpass-missed=slp-vectorizer]
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:21:5: remark: List vectorization was possible but not beneficial with cost 0 >= 0 [-Rpass-missed=slp-vectorizer]
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:21:5: remark: List vectorization was possible but not beneficial with cost 0 >= 0 [-Rpass-missed=slp-vectorizer]
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:27:5: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+   27 |     for (size_t i = 0; i < n; i++) {
+      |     ^
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:27:5: remark: List vectorization was possible but not beneficial with cost 0 >= 0 [-Rpass-missed=slp-vectorizer]
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:27:5: remark: Cannot SLP vectorize list: vectorization was impossible with available vectorization factors [-Rpass-missed=slp-vectorizer]
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:27:5: remark: List vectorization was possible but not beneficial with cost 0 >= 0 [-Rpass-missed=slp-vectorizer]
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:27:5: remark: List vectorization was possible but not beneficial with cost 0 >= 0 [-Rpass-missed=slp-vectorizer]
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:35:5: remark: vectorized loop (vectorization width: 8, interleaved count: 2) [-Rpass=loop-vectorize]
+   35 |     for (size_t i = 0; i < n; i++) {
+      |     ^
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:36:23: remark: Cannot SLP vectorize list: vectorization was impossible with available vectorization factors [-Rpass-missed=slp-vectorizer]
+   36 |         sum += x[i] * y[i];
+      |                       ^
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:43:5: remark: vectorized loop (vectorization width: 8, interleaved count: 2) [-Rpass=loop-vectorize]
+   43 |     for (size_t i = 0; i < n; i++) {
+      |     ^
+C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c:44:23: remark: Cannot SLP vectorize list: vectorization was impossible with available vectorization factors [-Rpass-missed=slp-vectorizer]
+   44 |         sum += x[i] * y[i];
+      |                       ^

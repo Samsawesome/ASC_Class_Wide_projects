@@ -1,0 +1,5 @@
+Compiler Vectorization Report - SCALAR
+==================================================
+
+Command: clang -O2 -fno-tree-vectorize -mno-sse -mno-avx -Rpass=vectorize -Rpass-missed=vectorize -Rpass-analysis=vectorize -S -o C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\vectorization_scalar.s C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 1\analysis\vectorization_reports\test_kernels.c
+
