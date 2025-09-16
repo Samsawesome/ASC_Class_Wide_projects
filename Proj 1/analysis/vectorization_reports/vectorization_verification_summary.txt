@@ -21,3 +21,7 @@ VECTORIZATION VERIFICATION:
 ------------------------------
 Compiler reports vectorized loops in vectorized config
 Compiler reports vectorized loops in avx2 config
+Vector instructions found in avx2 assembly
+Advanced vector extensions detected in avx2
+Vector instructions found in vectorized assembly
+Advanced vector extensions detected in vectorized

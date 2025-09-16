@@ -264,57 +264,7 @@ void elementwise_multiply_vectorized_f64(f64* x, f64* y, f64* z, size_t n) {
         z[i] = x[i] * y[i];
     }
 }
-/*
-// 3-point stencil kernels
-void stencil_3point_scalar_f32(f32* x, f32* y, size_t n) {
-    for (size_t i = 1; i < n - 1; i++) {
-        y[i] = 0.25f * x[i - 1] + 0.5f * x[i] + 0.25f * x[i + 1];
-    }
-}
 
-void stencil_3point_scalar_f64(f64* x, f64* y, size_t n) {
-    for (size_t i = 1; i < n - 1; i++) {
-        y[i] = 0.25 * x[i - 1] + 0.5 * x[i] + 0.25 * x[i + 1];
-    }
-}
-
-void stencil_3point_vectorized_f32(f32* x, f32* y, size_t n) {
-    for (size_t i = 1; i < n - 1; i++) {
-        y[i] = 0.25f * x[i - 1] + 0.5f * x[i] + 0.25f * x[i + 1];
-    }
-}
-
-void stencil_3point_vectorized_f64(f64* x, f64* y, size_t n) {
-    for (size_t i = 1; i < n - 1; i++) {
-        y[i] = 0.25 * x[i - 1] + 0.5 * x[i] + 0.25 * x[i + 1];
-    }
-}
-
-// Memory bandwidth test
-void memory_bandwidth_test_scalar_f32(f32* x, f32* y, size_t n) {
-    for (size_t i = 0; i < n; i++) {
-        y[i] = x[i];
-    }
-}
-
-void memory_bandwidth_test_scalar_f64(f64* x, f64* y, size_t n) {
-    for (size_t i = 0; i < n; i++) {
-        y[i] = x[i];
-    }
-}
-
-void memory_bandwidth_test_vectorized_f32(f32* x, f32* y, size_t n) {
-    for (size_t i = 0; i < n; i++) {
-        y[i] = x[i];
-    }
-}
-
-void memory_bandwidth_test_vectorized_f64(f64* x, f64* y, size_t n) {
-    for (size_t i = 0; i < n; i++) {
-        y[i] = x[i];
-    }
-}
-*/
 // ==================== RESULTS COLLECTION ====================
 void results_init(results_collector_t* collector, double cpu_freq_ghz, const char* compiler_flags) {
     collector->count = 0;
@@ -365,8 +315,6 @@ void results_save_csv(const results_collector_t* collector, const char* filename
             case KERNEL_AXPY: kernel_str = "axpy"; break;
             case KERNEL_DOT_PRODUCT: kernel_str = "dot_product"; break;
             case KERNEL_ELEMENTWISE_MULTIPLY: kernel_str = "elementwise_multiply"; break;
-            //case KERNEL_STENCIL_3POINT: kernel_str = "stencil_3point"; break;
-            //case KERNEL_MEMORY_BANDWIDTH: kernel_str = "memory_bandwidth"; break;
             default: kernel_str = "unknown";
         }
         
@@ -386,7 +334,7 @@ void results_save_csv(const results_collector_t* collector, const char* filename
     }
     
     fclose(file);
-    printf("Results saved to %s\n", filename);
+    printf("Results saved to %s (%d records)\n", filename, collector->count);
 }
 
 void results_print_summary(const results_collector_t* collector) {
@@ -493,14 +441,6 @@ void run_kernel(experiment_data_t* data, perf_metrics_t* metrics) {
             operations = data->n * 1; // 1 FLOP per element
             bytes_accessed = data->n * 3 * ((data->data_type == TYPE_F32) ? sizeof(f32) : sizeof(f64));
             break;
-        /*case KERNEL_STENCIL_3POINT:
-            operations = data->n * 5; // 5 FLOPs per element
-            bytes_accessed = data->n * 3 * ((data->data_type == TYPE_F32) ? sizeof(f32) : sizeof(f64));
-            break;
-        case KERNEL_MEMORY_BANDWIDTH:
-            operations = data->n * 1; // 1 operation per element
-            bytes_accessed = data->n * 2 * ((data->data_type == TYPE_F32) ? sizeof(f32) : sizeof(f64));
-            break;*/
     }
     
     perf_init(metrics, operations * ITERATIONS, data->n, global_collector.cpu_freq_ghz);
@@ -549,34 +489,6 @@ void run_kernel(experiment_data_t* data, perf_metrics_t* metrics) {
                         elementwise_multiply_vectorized_f64(data->x, data->y, data->z, data->n);
                 }
                 break;
-                
-            /*case KERNEL_STENCIL_3POINT:
-                if (data->data_type == TYPE_F32) {
-                    if (data->implementation == IMPL_SCALAR)
-                        stencil_3point_scalar_f32(data->x, data->y, data->n);
-                    else
-                        stencil_3point_vectorized_f32(data->x, data->y, data->n);
-                } else {
-                    if (data->implementation == IMPL_SCALAR)
-                        stencil_3point_scalar_f64(data->x, data->y, data->n);
-                    else
-                        stencil_3point_vectorized_f64(data->x, data->y, data->n);
-                }
-                break;
-                
-            case KERNEL_MEMORY_BANDWIDTH:
-                if (data->data_type == TYPE_F32) {
-                    if (data->implementation == IMPL_SCALAR)
-                        memory_bandwidth_test_scalar_f32(data->x, data->y, data->n);
-                    else
-                        memory_bandwidth_test_vectorized_f32(data->x, data->y, data->n);
-                } else {
-                    if (data->implementation == IMPL_SCALAR)
-                        memory_bandwidth_test_scalar_f64(data->x, data->y, data->n);
-                    else
-                        memory_bandwidth_test_vectorized_f64(data->x, data->y, data->n);
-                }
-                break;*/
         }
     }
     
@@ -625,34 +537,6 @@ void run_kernel(experiment_data_t* data, perf_metrics_t* metrics) {
                         elementwise_multiply_vectorized_f64(data->x, data->y, data->z, data->n);
                 }
                 break;
-                
-            /*case KERNEL_STENCIL_3POINT:
-                if (data->data_type == TYPE_F32) {
-                    if (data->implementation == IMPL_SCALAR)
-                        stencil_3point_scalar_f32(data->x, data->y, data->n);
-                    else
-                        stencil_3point_vectorized_f32(data->x, data->y, data->n);
-                } else {
-                    if (data->implementation == IMPL_SCALAR)
-                        stencil_3point_scalar_f64(data->x, data->y, data->n);
-                    else
-                        stencil_3point_vectorized_f64(data->x, data->y, data->n);
-                }
-                break;
-                
-            case KERNEL_MEMORY_BANDWIDTH:
-                if (data->data_type == TYPE_F32) {
-                    if (data->implementation == IMPL_SCALAR)
-                        memory_bandwidth_test_scalar_f32(data->x, data->y, data->n);
-                    else
-                        memory_bandwidth_test_vectorized_f32(data->x, data->y, data->n);
-                } else {
-                    if (data->implementation == IMPL_SCALAR)
-                        memory_bandwidth_test_scalar_f64(data->x, data->y, data->n);
-                    else
-                        memory_bandwidth_test_vectorized_f64(data->x, data->y, data->n);
-                }
-                break;*/
         }
     }
     double end = get_time();
@@ -707,7 +591,7 @@ void run_experiment(experiment_data_t* data) {
            data->n, metrics.time_seconds, metrics.gflops, metrics.bandwidth_gbs);
 }
 
-void run_axpy_experiment(size_t n, data_type_t data_type, int aligned, int stride, 
+void run_axpy_experiment(results_collector_t* collector, size_t n, data_type_t data_type, int aligned, int stride, 
                          implementation_t impl, int run_id, const char* compiler_flags) {
     experiment_data_t data;
     data.n = n;
@@ -747,7 +631,7 @@ void run_axpy_experiment(size_t n, data_type_t data_type, int aligned, int strid
     }
 }
 
-void run_dot_product_experiment(size_t n, data_type_t data_type, int aligned, int stride,
+void run_dot_product_experiment(results_collector_t* collector, size_t n, data_type_t data_type, int aligned, int stride,
                                implementation_t impl, int run_id, const char* compiler_flags) {
     experiment_data_t data;
     data.n = n;
@@ -791,7 +675,7 @@ void run_dot_product_experiment(size_t n, data_type_t data_type, int aligned, in
     }
 }
 
-void run_elementwise_multiply_experiment(size_t n, data_type_t data_type, int aligned, int stride,
+void run_elementwise_multiply_experiment(results_collector_t* collector, size_t n, data_type_t data_type, int aligned, int stride,
                                         implementation_t impl, int run_id, const char* compiler_flags) {
     experiment_data_t data;
     data.n = n;
@@ -948,8 +832,8 @@ void set_cpu_affinity(int core_id) {
     
     // Verify the affinity was set
     if (GetProcessAffinityMask(current_process, &process_affinity_mask, &system_affinity_mask)) {
-        printf("Process affinity mask: 0x%I64x\n", process_affinity_mask);
-        printf("System affinity mask: 0x%I64x\n", system_affinity_mask);
+        printf("Process affinity mask: 0x%lx\n", process_affinity_mask);
+        printf("System affinity mask: 0x%lx\n", system_affinity_mask);
     }
 }
 
@@ -1004,7 +888,7 @@ void print_cpu_info() {
     GetSystemInfo(&sys_info);
     
     printf("CPU Information:\n");
-    printf("  Number of processors: %d\n", sys_info.dwNumberOfProcessors);
+    printf("  Number of processors: %lu\n", sys_info.dwNumberOfProcessors);
     printf("  Processor architecture: %d\n", sys_info.wProcessorArchitecture);
     printf("  Page size: %lu bytes\n", sys_info.dwPageSize);
     
@@ -1054,7 +938,7 @@ void disable_smt() {
         
         HANDLE current_process = GetCurrentProcess();
         if (SetProcessAffinityMask(current_process, affinity_mask)) {
-            printf("Using physical cores only (mask: 0x%I64x)\n", affinity_mask);
+            printf("Using physical cores only (mask: 0x%lx)\n", affinity_mask);
         }
     }
 }
@@ -1082,7 +966,7 @@ void fix_cpu_frequency() {
 
 // ==================== EXPERIMENT SETS ====================
 
-void run_comprehensive_experiments(const char* compiler_flags) {
+void run_comprehensive_experiments(results_collector_t* collector, const char* compiler_flags) {
     printf("Running comprehensive experiments with flags: %s\n", compiler_flags);
     
     size_t sizes[] = {1024, 4096, 16384, 65536, 262144, 1048576, 4194304, 16777216};
@@ -1098,11 +982,9 @@ void run_comprehensive_experiments(const char* compiler_flags) {
                 for (int aligned = 0; aligned <= 1; aligned++) {
                     for (int impl = IMPL_SCALAR; impl <= IMPL_VECTORIZED; impl++) {
                         // Test all kernels
-                        run_axpy_experiment(n, data_type, aligned, 1, impl, run_id++, compiler_flags);
-                        run_dot_product_experiment(n, data_type, aligned, 1, impl, run_id++, compiler_flags);
-                        run_elementwise_multiply_experiment(n, data_type, aligned, 1, impl, run_id++, compiler_flags);
-                        //run_stencil_experiment(n, data_type, aligned, 1, impl, run_id++, compiler_flags);
-                        //run_memory_bandwidth_experiment(n, data_type, aligned, 1, impl, run_id++, compiler_flags);
+                        run_axpy_experiment(collector, n, data_type, aligned, 1, impl, run_id++, compiler_flags);
+                        run_dot_product_experiment(collector, n, data_type, aligned, 1, impl, run_id++, compiler_flags);
+                        run_elementwise_multiply_experiment(collector, n, data_type, aligned, 1, impl, run_id++, compiler_flags);
                     }
                 }
             }
@@ -1110,7 +992,7 @@ void run_comprehensive_experiments(const char* compiler_flags) {
     }
 }
 
-void run_locality_sweep(const char* compiler_flags) {
+void run_locality_sweep(results_collector_t* collector, const char* compiler_flags) {
     printf("Running locality sweep with flags: %s\n", compiler_flags);
     
     // Sweep through sizes that cross cache boundaries
@@ -1140,16 +1022,15 @@ void run_locality_sweep(const char* compiler_flags) {
             // Test with different data types and implementations
             for (int data_type = TYPE_F32; data_type <= TYPE_F64; data_type++) {
                 for (int impl = IMPL_SCALAR; impl <= IMPL_VECTORIZED; impl++) {
-                    run_axpy_experiment(n, data_type, 1, 1, impl, run_id++, compiler_flags);
-                    run_dot_product_experiment(n, data_type, 1, 1, impl, run_id++, compiler_flags);
-                    //run_memory_bandwidth_experiment(n, data_type, 1, 1, impl, run_id++, compiler_flags);
+                    run_axpy_experiment(collector, n, data_type, 1, 1, impl, run_id++, compiler_flags);
+                    run_dot_product_experiment(collector, n, data_type, 1, 1, impl, run_id++, compiler_flags);
                 }
             }
         }
     }
 }
 
-void run_alignment_study(const char* compiler_flags) {
+void run_alignment_study(results_collector_t* collector, const char* compiler_flags) {
     printf("Running alignment study with flags: %s\n", compiler_flags);
     
     size_t sizes[] = {1024, 4096, 16384, 65536, 262144};
@@ -1164,8 +1045,8 @@ void run_alignment_study(const char* compiler_flags) {
             for (int aligned = 0; aligned <= 1; aligned++) {
                 for (int data_type = TYPE_F32; data_type <= TYPE_F64; data_type++) {
                     for (int impl = IMPL_SCALAR; impl <= IMPL_VECTORIZED; impl++) {
-                        run_axpy_experiment(n, data_type, aligned, 1, impl, run_id++, compiler_flags);
-                        run_dot_product_experiment(n, data_type, aligned, 1, impl, run_id++, compiler_flags);
+                        run_axpy_experiment(collector, n, data_type, aligned, 1, impl, run_id++, compiler_flags);
+                        run_dot_product_experiment(collector, n, data_type, aligned, 1, impl, run_id++, compiler_flags);
                     }
                 }
             }
@@ -1173,7 +1054,7 @@ void run_alignment_study(const char* compiler_flags) {
     }
 }
 
-void run_stride_study(const char* compiler_flags) {
+void run_stride_study(results_collector_t* collector, const char* compiler_flags) {
     printf("Running stride study with flags: %s\n", compiler_flags);
     
     size_t n = 1048576; // Fixed size for stride study
@@ -1187,15 +1068,16 @@ void run_stride_study(const char* compiler_flags) {
             
             for (int data_type = TYPE_F32; data_type <= TYPE_F64; data_type++) {
                 for (int impl = IMPL_SCALAR; impl <= IMPL_VECTORIZED; impl++) {
-                    run_axpy_experiment(n, data_type, 1, stride, impl, run_id++, compiler_flags);
-                    run_dot_product_experiment(n, data_type, 1, stride, impl, run_id++, compiler_flags);
+                    run_axpy_experiment(collector, n, data_type, 1, stride, impl, run_id++, compiler_flags);
+                    run_dot_product_experiment(collector, n, data_type, 1, stride, impl, run_id++, compiler_flags);
+                    run_elementwise_multiply_experiment(collector, n, data_type, 1, stride, impl, run_id++, compiler_flags);
                 }
             }
         }
     }
 }
 
-void run_data_type_study(const char* compiler_flags) {
+void run_data_type_study(results_collector_t* collector, const char* compiler_flags) {
     printf("Running data type study with flags: %s\n", compiler_flags);
     
     size_t sizes[] = {1024, 4096, 16384, 65536, 262144, 1048576};
@@ -1209,13 +1091,34 @@ void run_data_type_study(const char* compiler_flags) {
             // Test with different data types
             for (int data_type = TYPE_F32; data_type <= TYPE_F64; data_type++) {
                 for (int impl = IMPL_SCALAR; impl <= IMPL_VECTORIZED; impl++) {
-                    run_axpy_experiment(n, data_type, 1, 1, impl, run_id++, compiler_flags);
-                    run_dot_product_experiment(n, data_type, 1, 1, impl, run_id++, compiler_flags);
-                    run_elementwise_multiply_experiment(n, data_type, 1, 1, impl, run_id++, compiler_flags);
+                    run_axpy_experiment(collector, n, data_type, 1, 1, impl, run_id++, compiler_flags);
+                    run_dot_product_experiment(collector, n, data_type, 1, 1, impl, run_id++, compiler_flags);
+                    run_elementwise_multiply_experiment(collector, n, data_type, 1, 1, impl, run_id++, compiler_flags);
                 }
             }
         }
     }
+}
+
+void results_flush(results_collector_t* collector) {
+    if (collector->count == 0) return;
+    
+    char filename[256];
+    snprintf(filename, sizeof(filename), "simd_performance_%s.csv", 
+             collector->compiler_version);
+    
+    // Use the updated results_save_csv function
+    results_save_csv(collector, filename);
+    
+    // Reset buffer
+    collector->count = 0;
+}
+
+void results_finalize(results_collector_t* collector) {
+    // Flush any remaining results
+    results_flush(collector);
+    
+    printf("Results collection finalized. Total measurements: %d\n", collector->count);
 }
 
 // ==================== MAIN FUNCTION ====================
@@ -1223,7 +1126,7 @@ void run_data_type_study(const char* compiler_flags) {
 int main(int argc, char* argv[]) {
     printf("SIMD Performance Analysis Project\n");
     printf("=================================\n\n");
-    
+    printf("%s", argv[0]);
     // CPU configuration
     print_cpu_info();
     
@@ -1265,10 +1168,10 @@ int main(int argc, char* argv[]) {
     }
     
     // Initialize results collector
-    results_collector_t global_collector;
+    //results_collector_t global_collector;
     results_init(&global_collector, cpu_freq_ghz, compiler_flags);
     
-    // Run different experiment sets
+    // Run different experiment sets - FIXED: Now passing correct parameters
     run_comprehensive_experiments(&global_collector, compiler_flags);
     run_locality_sweep(&global_collector, compiler_flags);
     run_alignment_study(&global_collector, compiler_flags);
@@ -1278,9 +1181,14 @@ int main(int argc, char* argv[]) {
     // Calculate speedups
     calculate_speedups(&global_collector);
     
+   // Save final combined CSV
+    char final_filename[256];
+    snprintf(final_filename, sizeof(final_filename), "simd_performance_%s.csv", compiler_flags);
+    results_save_csv(&global_collector, final_filename);
+    
     // Finalize and save any remaining results
     results_finalize(&global_collector);
-    
+
     printf("\nExperiment completed successfully!\n");
     
     // Restore normal priority (optional)

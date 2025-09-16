@@ -80,8 +80,7 @@ def run_compiler_vectorization_report():
 
 def create_test_file(test_file_path):
     """Create a simple test file with just the kernel functions"""
-    test_code = """
-#include <stdlib.h>
+    test_code = """#include <stdlib.h>
 
 typedef float f32;
 typedef double f64;
@@ -267,59 +266,63 @@ def analyze_assembly_code(assembly_code, config_name):
         'vector_sets': set()
     }
     
-    # Vector instruction patterns for different ISAs
+    # More comprehensive vector instruction patterns
     vector_patterns = {
         'SSE': [
-            r'mov(aps|apd|ups|upd|hps|hpd|lps|lpd)',
-            r'addps|addpd|subps|subpd|mulps|mulpd|divps|divpd',
-            r'shufps|unpcklps|unpckhps|unpcklpd|unpckhpd',
-            r'cmpps|cmppd|maxps|maxpd|minps|minpd',
-            r'sqrtps|sqrtpd|rsqrtps|rcpps'
+            r'\b(mov(aps|apd|ups|upd|hps|hpd|lps|lpd)|addp[sd]|subp[sd]|mulp[sd]|divp[sd]|'
+            r'shufp[sd]|unpcklps|unpckhps|unpcklpd|unpckhpd|'
+            r'cmpp[sd]|maxp[sd]|minp[sd]|sqrtp[sd]|rsqrtps|rcpps|'
+            r'padd|psub|pmul|pdiv|pand|por|pxor|psll|psrl|psra|'
+            r'punpck|pack|pcmp|pmax|pmin)\b'
         ],
         'AVX': [
-            r'vmov(aps|apd|ups|upd)',
-            r'vaddps|vaddpd|vsubps|vsubpd|vmulps|vmulpd|vdivps|vdivpd',
-            r'vshufps|vunpcklps|vunpckhps|vunpcklpd|vunpckhpd',
-            r'vcmpps|vcmppd|vmaxps|vmaxpd|vminps|vminpd',
-            r'vsqrtps|vsqrtpd|vrsqrtps|vrcpps',
-            r'vinsertf128|vextractf128|vperm2f128'
+            r'\b(vmov(aps|apd|ups|upd)|vaddp[sd]|vsubp[sd]|vmulp[sd]|vdivp[sd]|'
+            r'vshufp[sd]|vunpcklps|vunpckhps|vunpcklpd|vunpckhpd|'
+            r'vcmpp[sd]|vmaxp[sd]|vminp[sd]|vsqrtp[sd]|vrsqrtps|vrcpps|'
+            r'vinsertf128|vextractf128|vperm2f128|'
+            r'vpadd|vpsub|vpmul|vpand|vpor|vpxor|vpsll|vpsrl|vpsra|'
+            r'vpunpck|vpack|vpcmp|vpmax|vpmin)\b'
         ],
         'AVX2': [
-            r'vfmadd(132|213|231)(ps|pd)',
-            r'vbroadcast(ss|sd|s|d)',
-            r'vpermd|vpermps|vpermpd',
-            r'vpgather|vgatherdp|vgatherqp',
-            r'vpbroadcast'
+            r'\b(vfmadd(132|213|231)(ps|pd)|vbroadcast(ss|sd)|'
+            r'vpermd|vpermps|vpermpd|vpgather|vgatherdp|vgatherqp|'
+            r'vpbroadcast|vpmaskmov|vpsllv|vpsrlv|vpsrav)\b'
         ],
         'AVX512': [
-            r'vadd[0-9]*ps|vadd[0-9]*pd',
-            r'vmul[0-9]*ps|vmul[0-9]*pd',
-            r'vfmadd[0-9]*ps|vfmadd[0-9]*pd',
-            r'vperm[it]2[dp]',
-            r'vscatter|vgather'
+            r'\b(vadd[0-9]*ps|vadd[0-9]*pd|vmul[0-9]*ps|vmul[0-9]*pd|'
+            r'vfmadd[0-9]*ps|vfmadd[0-9]*pd|vperm[it]2[dp]|'
+            r'vscatter|vgather|vbroadcast[sf]|vpmov|vpcmp|vptest|'
+            r'vcompress|vexpand|vpro[lr]v|vpsrav[qw])\b'
+        ],
+        'NEON': [
+            r'\b(vld[1-4]|vst[1-4]|vadd|vsub|vmul|vdiv|vmla|vmls|'
+            r'vshl|vshr|vand|vorr|veor|vmax|vmin|vabs|vneg|'
+            r'vcvt|vzip|vuzp|vtrn|vdup|vmov|vtbl|vtbx)\b'
         ]
     }
     
     lines = assembly_code.split('\n')
     
     for line in lines:
-        # Skip comments and directives
-        if line.strip().startswith(('.', '#', '@')):
+        # Skip comments, directives, and labels
+        if (line.strip().startswith(('.', '#', '@', '/')) or 
+            line.strip().endswith(':') or
+            not line.strip()):
             continue
         
-        # Count total instructions (lines with colons and tabs)
-        if ':' in line and '\t' in line:
+        # Count total instructions
+        if re.search(r'\b([a-z][a-z0-9]*)\b', line, re.IGNORECASE):
             analysis['total_instructions'] += 1
-            instruction = line.split('\t')[-1].split()[0] if '\t' in line else line.split()[-1]
             
             # Check for vector instructions
+            instruction = line.split('#')[0].split('//')[0].strip()  # Remove comments
             for isa, patterns in vector_patterns.items():
                 for pattern in patterns:
                     if re.search(pattern, instruction, re.IGNORECASE):
                         analysis['total_vector_instructions'] += 1
                         analysis['vector_instructions'][isa] = analysis['vector_instructions'].get(isa, 0) + 1
                         analysis['vector_sets'].add(isa)
-                        break
+                        break  # Break inner loop once found
     
     if analysis['total_instructions'] > 0:
         analysis['vectorization_ratio'] = (analysis['total_vector_instructions'] / analysis['total_instructions']) * 100

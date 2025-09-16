@@ -140,9 +140,9 @@ def check_and_clean_data(df):
         df_clean = df_clean.drop_duplicates()
     
     # Check data types
-    print("\nData types:")
+    '''print("\nData types:")
     for col in df_clean.columns:
-        print(f"  {col}: {df_clean[col].dtype}")
+        print(f"  {col}: {df_clean[col].dtype}")'''
     
     # Convert appropriate columns to categorical using .loc to avoid warnings
     categorical_cols = ['kernel', 'implementation', 'data_type', 'aligned', 'stride', 'compiler_flags']
@@ -1269,9 +1269,9 @@ def generate_vectorization_verification(df, output_dir):
                         dtype_speedup = dtype_data['speedup'].mean()
                         expected = expected_speedup.get(dtype, 1.0)
                         if dtype_speedup >= expected * 0.5:  # At least 50% of theoretical
-                            f.write(f" ({dtype}: {dtype_speedup:.2f}x ✓)")
+                            f.write(f" ({dtype}: {dtype_speedup:.2f}) reasonable")
                         else:
-                            f.write(f" ({dtype}: {dtype_speedup:.2f}x ⚠)")
+                            f.write(f" ({dtype}: {dtype_speedup:.2f}) unreasonable")
                 f.write("\n")
             
             f.write("\nEVIDENCE OF VECTORIZATION:\n")
@@ -1280,19 +1280,19 @@ def generate_vectorization_verification(df, output_dir):
             # Look for patterns that indicate vectorization
             significant_speedups = speedup_df[speedup_df['speedup'] > 2.0]
             if len(significant_speedups) > 0:
-                f.write(f"✓ Found {len(significant_speedups)} measurements with >2x speedup\n")
-                f.write(f"  Maximum speedup: {significant_speedups['speedup'].max():.2f}x\n")
+                f.write(f"Found {len(significant_speedups)} measurements with >2x speedup\n")
+                f.write(f"Maximum speedup: {significant_speedups['speedup'].max():.2f}x\n")
                 
                 # Check if speedup correlates with data type (should be higher for f32)
                 f32_speedup = speedup_df[speedup_df['dtype'] == 'f32']['speedup'].mean()
                 f64_speedup = speedup_df[speedup_df['dtype'] == 'f64']['speedup'].mean()
                 
                 if f32_speedup > f64_speedup * 1.5:  # f32 should be ~2x f64 for AVX2
-                    f.write("✓ f32 speedup > f64 speedup (consistent with vectorization)\n")
+                    f.write("f32 speedup > f64 speedup (consistent with vectorization)\n")
                 else:
-                    f.write("⚠ f32 and f64 speedups are similar (may indicate limited vectorization)\n")
+                    f.write("f32 and f64 speedups are similar (may indicate limited vectorization)\n")
             else:
-                f.write("⚠ No significant speedup detected (>2x)\n")
+                f.write("No significant speedup detected (>2x)\n")
         
         f.write("\nRECOMMENDATIONS FOR VERIFICATION:\n")
         f.write("-" * 35 + "\n")

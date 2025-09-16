@@ -17,7 +17,7 @@
 #define ITERATIONS 100
 #define WARMUP_ITERATIONS 10
 #define ALIGNMENT 64
-#define MAX_RESULTS 5000
+#define MAX_RESULTS 3000
 #define NUM_RUNS 3  // For statistical reliability
 
 // Data types
@@ -101,25 +101,29 @@ void results_add(results_collector_t* collector, result_t result);
 void results_save_csv(const results_collector_t* collector, const char* filename);
 void results_print_summary(const results_collector_t* collector);
 void calculate_speedups(results_collector_t* collector);
+void results_flush(results_collector_t* collector);
+void results_finalize(results_collector_t* collector);
+
 
 // Kernel functions
-void run_axpy_experiment(size_t n, data_type_t data_type, int aligned, int stride, 
+void run_axpy_experiment(results_collector_t* collector, size_t n, data_type_t data_type, int aligned, int stride, 
                          implementation_t impl, int run_id, const char* compiler_flags);
-void run_dot_product_experiment(size_t n, data_type_t data_type, int aligned, int stride,
+void run_dot_product_experiment(results_collector_t* collector, size_t n, data_type_t data_type, int aligned, int stride,
                                implementation_t impl, int run_id, const char* compiler_flags);
-void run_elementwise_multiply_experiment(size_t n, data_type_t data_type, int aligned, int stride,
+void run_elementwise_multiply_experiment(results_collector_t* collector, size_t n, data_type_t data_type, int aligned, int stride,
                                         implementation_t impl, int run_id, const char* compiler_flags);
 /*void run_stencil_experiment(size_t n, data_type_t data_type, int aligned, int stride,
                            implementation_t impl, int run_id, const char* compiler_flags);
 void run_memory_bandwidth_experiment(size_t n, data_type_t data_type, int aligned, int stride,
                                     implementation_t impl, int run_id, const char* compiler_flags);*/
 
-// Experiment runners
-void run_comprehensive_experiments(const char* compiler_flags);
-void run_locality_sweep(const char* compiler_flags);
-void run_alignment_study(const char* compiler_flags);
-void run_stride_study(const char* compiler_flags);
-void run_data_type_study(const char* compiler_flags);
+// Experiment runnersr
+void run_comprehensive_experiments(results_collector_t* collector, const char* compiler_flags);
+void run_locality_sweep(results_collector_t* collector, const char* compiler_flags);
+void run_alignment_study(results_collector_t* collector, const char* compiler_flags);
+void run_stride_study(results_collector_t* collector, const char* compiler_flags);
+void run_data_type_study(results_collector_t* collector, const char* compiler_flags);
+
 
 // Core pinning
 void set_cpu_affinity(int core_id);

@@ -2,50 +2,50 @@ Locality Sweep Analysis Report
 ========================================
 
 Kernel: axpy
-Data points: 1186
+Data points: 1188
 
 Performance Analysis by Cache Region:
 ----------------------------------------
 
 L1 Cache Region:
   Scalar:
-    Avg GFLOP/s: 152893.49
-    Avg Bandwidth: 207.01 GB/s
-    Avg CPE: 0.70
+    Avg GFLOP/s: 160921.41
+    Avg Bandwidth: 228.41 GB/s
+    Avg CPE: 0.67
   Vectorized:
-    Avg GFLOP/s: 154692.66
-    Avg Bandwidth: 210.59 GB/s
-    Avg CPE: 0.69
+    Avg GFLOP/s: 162724.31
+    Avg Bandwidth: 231.80 GB/s
+    Avg CPE: 0.67
 
 L2 Cache Region:
   Scalar:
-    Avg GFLOP/s: 1176849.26
-    Avg Bandwidth: 138.91 GB/s
-    Avg CPE: 0.81
+    Avg GFLOP/s: 1250773.93
+    Avg Bandwidth: 144.34 GB/s
+    Avg CPE: 0.77
   Vectorized:
-    Avg GFLOP/s: 1197329.51
-    Avg Bandwidth: 138.01 GB/s
-    Avg CPE: 0.80
+    Avg GFLOP/s: 1247207.42
+    Avg Bandwidth: 144.21 GB/s
+    Avg CPE: 0.77
 
 L3 Cache Region:
   Scalar:
-    Avg GFLOP/s: 7910055.98
-    Avg Bandwidth: 57.40 GB/s
-    Avg CPE: 1.34
+    Avg GFLOP/s: 7898078.09
+    Avg Bandwidth: 57.58 GB/s
+    Avg CPE: 1.35
   Vectorized:
-    Avg GFLOP/s: 7919770.58
-    Avg Bandwidth: 57.47 GB/s
+    Avg GFLOP/s: 7946348.14
+    Avg Bandwidth: 57.95 GB/s
     Avg CPE: 1.34
 
 DRAM Cache Region:
   Scalar:
-    Avg GFLOP/s: 47144383.38
-    Avg Bandwidth: 27.13 GB/s
-    Avg CPE: 2.49
+    Avg GFLOP/s: 47104471.97
+    Avg Bandwidth: 27.17 GB/s
+    Avg CPE: 2.47
   Vectorized:
-    Avg GFLOP/s: 47164109.25
-    Avg Bandwidth: 27.18 GB/s
-    Avg CPE: 2.48
+    Avg GFLOP/s: 47123745.29
+    Avg Bandwidth: 27.15 GB/s
+    Avg CPE: 2.47
 
 SIMD Gains Compression Analysis:
 ----------------------------------------

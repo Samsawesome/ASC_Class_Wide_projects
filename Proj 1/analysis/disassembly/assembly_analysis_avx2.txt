@@ -5,7 +5,10 @@ File: C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_pr
 
 VECTOR INSTRUCTIONS FOUND:
 ------------------------------
+AVX2: 24 instructions
+AVX: 46 instructions
+AVX512: 26 instructions
 
-TOTAL VECTOR INSTRUCTIONS: 0
-TOTAL INSTRUCTIONS: 0
-VECTORIZATION RATIO: 0.0%
+TOTAL VECTOR INSTRUCTIONS: 96
+TOTAL INSTRUCTIONS: 376
+VECTORIZATION RATIO: 25.5%

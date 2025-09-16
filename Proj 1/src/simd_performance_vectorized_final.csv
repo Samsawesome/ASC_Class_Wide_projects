@@ -1,0 +1,5 @@
+# CPU: 12th Gen Intel(R) Core(TM) i5-12600KF
+# CPU Frequency: 3.69 GHz
+# Compiler: Clang 19.1.5
+# 
+kernel,implementation,data_type,array_size,aligned,stride,time_seconds,gflops,cpe,bandwidth_gbs,speedup,run_id,compiler_flags
