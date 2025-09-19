@@ -424,26 +424,29 @@ typedef struct {
 } experiment_data_t;
 
 void run_kernel(experiment_data_t* data, perf_metrics_t* metrics) {
-    uint64_t operations = 0;
-    size_t bytes_accessed = 0;
+    uint64_t operations_per_iteration = 0;
+    size_t bytes_accessed_per_iteration = 0;
     
     // Calculate operations and bytes accessed based on kernel type
     switch (data->kernel) {
         case KERNEL_AXPY:
-            operations = data->n * 2; // 2 FLOPs per element
-            bytes_accessed = data->n * 3 * ((data->data_type == TYPE_F32) ? sizeof(f32) : sizeof(f64));
+            operations_per_iteration = data->n * 2; // 2 FLOPs per element
+            bytes_accessed_per_iteration = data->n * 3 * ((data->data_type == TYPE_F32) ? sizeof(f32) : sizeof(f64));
             break;
         case KERNEL_DOT_PRODUCT:
-            operations = data->n * 2; // 2 FLOPs per element
-            bytes_accessed = data->n * 2 * ((data->data_type == TYPE_F32) ? sizeof(f32) : sizeof(f64));
+            operations_per_iteration = data->n * 2; // 2 FLOPs per element
+            bytes_accessed_per_iteration = data->n * 2 * ((data->data_type == TYPE_F32) ? sizeof(f32) : sizeof(f64));
             break;
         case KERNEL_ELEMENTWISE_MULTIPLY:
-            operations = data->n * 1; // 1 FLOP per element
-            bytes_accessed = data->n * 3 * ((data->data_type == TYPE_F32) ? sizeof(f32) : sizeof(f64));
+            operations_per_iteration = data->n * 1; // 1 FLOP per element
+            bytes_accessed_per_iteration = data->n * 3 * ((data->data_type == TYPE_F32) ? sizeof(f32) : sizeof(f64));
             break;
     }
     
-    perf_init(metrics, operations * ITERATIONS, data->n, global_collector.cpu_freq_ghz);
+    uint64_t total_operations = operations_per_iteration * ITERATIONS;
+    uint64_t total_bytes_accessed = bytes_accessed_per_iteration * ITERATIONS;
+
+    perf_init(metrics, total_operations, data->n, global_collector.cpu_freq_ghz);
     
     // Warm-up
     for (int i = 0; i < WARMUP_ITERATIONS; i++) {
@@ -493,6 +496,7 @@ void run_kernel(experiment_data_t* data, perf_metrics_t* metrics) {
     }
     
     // Actual measurement
+    double total_time = 0.0;
     double start = get_time();
     for (int i = 0; i < ITERATIONS; i++) {
         switch (data->kernel) {
@@ -538,14 +542,20 @@ void run_kernel(experiment_data_t* data, perf_metrics_t* metrics) {
                 }
                 break;
         }
+        double end = get_time();
+        total_time += (end - start);
+
+        // Add memory barrier to prevent reordering
+        _ReadWriteBarrier();
     }
-    double end = get_time();
     
-    metrics->time_seconds = (end - start) / ITERATIONS;
-    metrics->gflops = (operations * data->n / 1e9) / metrics->time_seconds;
+    
+    metrics->time_seconds = total_time / (ITERATIONS);
+    metrics->gflops = (total_operations / 1e9) / metrics->time_seconds;
     metrics->cpe = (metrics->time_seconds * global_collector.cpu_freq_ghz * 1e9) / data->n;
-    metrics->bandwidth_gbs = (bytes_accessed / 1e9) / metrics->time_seconds;
+    metrics->bandwidth_gbs = (total_bytes_accessed / 1e9) / metrics->time_seconds;
 }
+
 
 void run_experiment(experiment_data_t* data) {
     perf_metrics_t metrics;
@@ -719,83 +729,6 @@ void run_elementwise_multiply_experiment(results_collector_t* collector, size_t 
     }
 }
 
-/*void run_stencil_experiment(size_t n, data_type_t data_type, int aligned, int stride,
-                           implementation_t impl, int run_id, const char* compiler_flags) {
-    experiment_data_t data;
-    data.n = n;
-    data.data_type = data_type;
-    data.aligned = aligned;
-    data.stride = stride;
-    data.kernel = KERNEL_STENCIL_3POINT;
-    data.implementation = impl;
-    data.run_id = run_id;
-    data.compiler_flags = compiler_flags;
-    
-    // Allocate memory
-    size_t elem_size = (data_type == TYPE_F32) ? sizeof(f32) : sizeof(f64);
-    size_t alloc_size = n * elem_size;
-    
-    if (aligned) {
-        data.x = aligned_malloc(alloc_size, ALIGNMENT);
-        data.y = aligned_malloc(alloc_size, ALIGNMENT);
-    } else {
-        data.x = malloc(alloc_size);
-        data.y = malloc(alloc_size);
-    }
-    
-    // Initialize data
-    initialize_data(data.x, n, data_type, run_id);
-    
-    run_experiment(&data);
-    
-    // Cleanup
-    if (aligned) {
-        aligned_free(data.x);
-        aligned_free(data.y);
-    } else {
-        free(data.x);
-        free(data.y);
-    }
-}
-
-void run_memory_bandwidth_experiment(size_t n, data_type_t data_type, int aligned, int stride,
-                                    implementation_t impl, int run_id, const char* compiler_flags) {
-    experiment_data_t data;
-    data.n = n;
-    data.data_type = data_type;
-    data.aligned = aligned;
-    data.stride = stride;
-    data.kernel = KERNEL_MEMORY_BANDWIDTH;
-    data.implementation = impl;
-    data.run_id = run_id;
-    data.compiler_flags = compiler_flags;
-    
-    // Allocate memory
-    size_t elem_size = (data_type == TYPE_F32) ? sizeof(f32) : sizeof(f64);
-    size_t alloc_size = n * elem_size;
-    
-    if (aligned) {
-        data.x = aligned_malloc(alloc_size, ALIGNMENT);
-        data.y = aligned_malloc(alloc_size, ALIGNMENT);
-    } else {
-        data.x = malloc(alloc_size);
-        data.y = malloc(alloc_size);
-    }
-    
-    // Initialize data
-    initialize_data(data.x, n, data_type, run_id);
-    
-    run_experiment(&data);
-    
-    // Cleanup
-    if (aligned) {
-        aligned_free(data.x);
-        aligned_free(data.y);
-    } else {
-        free(data.x);
-        free(data.y);
-    }
-}*/
 
 // ==================== CPU AFFINITY AND PRIORITY FUNCTIONS ====================
 
@@ -1166,6 +1099,7 @@ int main(int argc, char* argv[]) {
     if (argc > 1) {
         compiler_flags = argv[1];
     }
+
     
     // Initialize results collector
     //results_collector_t global_collector;
@@ -1180,12 +1114,12 @@ int main(int argc, char* argv[]) {
     
     // Calculate speedups
     calculate_speedups(&global_collector);
-    
+
    // Save final combined CSV
     char final_filename[256];
     snprintf(final_filename, sizeof(final_filename), "simd_performance_%s.csv", compiler_flags);
     results_save_csv(&global_collector, final_filename);
-    
+
     // Finalize and save any remaining results
     results_finalize(&global_collector);
 

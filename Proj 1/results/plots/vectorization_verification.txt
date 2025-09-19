@@ -6,7 +6,7 @@ SPEEDUP ANALYSIS (Evidence of Vectorization)
 
 Average Speedup by Kernel:
   axpy: 1.00x (f32: 1.01) unreasonable (f64: 1.00) unreasonable
-  dot_product: 1.01x (f32: 1.01) unreasonable (f64: 1.01) unreasonable
+  dot_product: 1.00x (f32: 1.01) unreasonable (f64: 1.00) unreasonable
   elementwise_multiply: 1.00x (f32: 1.01) unreasonable (f64: 1.00) unreasonable
 
 EVIDENCE OF VECTORIZATION:

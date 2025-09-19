@@ -2,7 +2,7 @@ SIMD Performance Analysis Summary Report
 ==================================================
 
 Basic Statistics:
-Total measurements: 4568
+Total measurements: 4571
 Number of kernels: 3
 Number of compiler configurations: 3
 Data types: f32, f64
@@ -11,31 +11,31 @@ Performance Summary by Kernel:
 ----------------------------------------
 
 axpy:
-  scalar: 7332576.65 GFLOP/s
-  vectorized: 7338225.71 GFLOP/s, Speedup: 1.05x
+  scalar: 26.80 GFLOP/s
+  vectorized: 27.20 GFLOP/s, Speedup: 1.03x
 
 dot_product:
-  scalar: 9145311.24 GFLOP/s
-  vectorized: 9160347.03 GFLOP/s, Speedup: 1.04x
+  scalar: 25.88 GFLOP/s
+  vectorized: 26.09 GFLOP/s, Speedup: 1.03x
 
 elementwise_multiply:
-  scalar: 3157861.34 GFLOP/s
-  vectorized: 3174401.95 GFLOP/s, Speedup: 1.05x
+  scalar: 10.61 GFLOP/s
+  vectorized: 10.72 GFLOP/s, Speedup: 1.02x
 
 Best and Worst Cases:
 ----------------------------------------
-Best performance: 108135126.27 GFLOP/s (dot_product, vectorized, f32, size=16777216)
-Worst performance: 2651.27 GFLOP/s (dot_product, vectorized, f32, size=1024)
+Best performance: 131.05 GFLOP/s (axpy, vectorized, f32, size=4096)
+Worst performance: 1.61 GFLOP/s (elementwise_multiply, vectorized, f64, size=16777216)
 
 Speedup Analysis (Vectorized vs Scalar):
 ----------------------------------------
-Average speedup: 1.05x
-Maximum speedup: 2.35x
-Minimum speedup: 0.29x
+Average speedup: 1.03x
+Maximum speedup: 2.26x
+Minimum speedup: 0.47x
 
 Speedup by kernel:
-  axpy: 1.05x
-  dot_product: 1.04x
-  elementwise_multiply: 1.05x
+  axpy: 1.03x
+  dot_product: 1.03x
+  elementwise_multiply: 1.02x
 
 Report generated successfully!

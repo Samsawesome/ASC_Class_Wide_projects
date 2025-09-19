@@ -16,6 +16,41 @@ AVX2 Configuration:
   Vectorized loops: 6
   Missed optimizations: 18
 
+ASSEMBLY ANALYSIS
+----------------------------------------
+
+AVX2 Configuration:
+  Total instructions: 376
+  Vector instructions: 96
+  Vectorization ratio: 25.5%
+  Vector instruction sets: AVX, AVX2, AVX512
+  Instruction counts by set:
+    - AVX2: 24
+    - AVX: 46
+    - AVX512: 26
+
+SCALAR Configuration:
+  Total instructions: 262
+  Vector instructions: 0
+  Vectorization ratio: 0.0%
+
+VECTORIZED Configuration:
+  Total instructions: 464
+  Vector instructions: 96
+  Vectorization ratio: 20.7%
+  Vector instruction sets: AVX, AVX2, AVX512
+  Instruction counts by set:
+    - AVX2: 24
+    - AVX: 46
+    - AVX512: 26
+
+KEY FINDINGS
+----------------------------------------
+
+Vectorization effectiveness:
+  Scalar config: 0.0% vector instructions
+  Vectorized config: 20.7% vector instructions
+  Significant vectorization improvement detected
 
 VECTORIZATION VERIFICATION:
 ------------------------------

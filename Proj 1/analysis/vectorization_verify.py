@@ -366,7 +366,7 @@ def generate_vectorization_summary(compiler_analysis, assembly_analysis):
             
             f.write("\n")
         
-        '''f.write("ASSEMBLY ANALYSIS\n")
+        f.write("ASSEMBLY ANALYSIS\n")
         f.write("-" * 40 + "\n\n")
         
         for config_name, analysis in assembly_analysis.items():
@@ -386,8 +386,8 @@ def generate_vectorization_summary(compiler_analysis, assembly_analysis):
                     f.write(f"    - {isa}: {count}\n")
             
             f.write("\n")
-        '''
-        '''
+        
+        
         f.write("KEY FINDINGS\n")
         f.write("-" * 40 + "\n\n")
         
@@ -407,7 +407,7 @@ def generate_vectorization_summary(compiler_analysis, assembly_analysis):
                 f.write("  Significant vectorization improvement detected\n")
             else:
                 f.write("  Limited vectorization improvement\n")
-        '''
+        
         f.write("\nVECTORIZATION VERIFICATION:\n")
         f.write("-" * 30 + "\n")
         

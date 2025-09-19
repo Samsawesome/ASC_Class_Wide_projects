@@ -98,18 +98,43 @@ def calculate_arithmetic_intensity(kernel, data_type):
         # 1 FLOP, 3 memory accesses (2 loads, 1 store)
         flops = 1
         bytes_accessed = 3 * elem_size
-    elif kernel == 'stencil_3point':
-        # 5 FLOPs, 3 memory accesses (3 loads)
-        flops = 5
-        bytes_accessed = 3 * elem_size
-    elif kernel == 'memory_bandwidth':
-        # 0 FLOPs, 2 memory accesses (1 load, 1 store)
-        flops = 0
-        bytes_accessed = 2 * elem_size
     else:
         return 0
     
     return flops / bytes_accessed if bytes_accessed > 0 else 0
+
+def get_peak_performance_i5_12600KF():
+    """Return accurate peak performance for i5-12600KF with DDR4-3600"""
+    
+     # Core configuration
+    p_core_count = 6
+    e_core_count = 4
+    
+    # Clock speeds
+    p_core_freq = 3.7  # GHz
+    e_core_freq = 2.8  # GHz (approximate for E-cores)
+    
+    # FMA throughput
+    p_core_flops_per_cycle = 2 * 8  # 2 FMAs × 8 SP FLOPs (AVX2 256-bit)
+    e_core_flops_per_cycle = 1 * 4  # 1 FMA × 4 SP FLOPs (AVX2 128-bit)
+    
+    # Compute peak FLOPs
+    peak_flops_p = p_core_count * p_core_flops_per_cycle * p_core_freq
+    peak_flops_e = e_core_count * e_core_flops_per_cycle * e_core_freq
+    total_peak_flops = peak_flops_p + peak_flops_e
+    
+    # Memory bandwidth (DDR4-3200 dual channel)
+    theoretical_bandwidth = 2 * 3200 * 8 / 8  # 51.2 GB/s
+    realistic_bandwidth = theoretical_bandwidth * 0.80  # Assume 80% efficiency
+    
+    print(f"i5-12600KF Peak Performance:")
+    print(f"  P-core peak: {peak_flops_p:.1f} GFLOP/s")
+    print(f"  E-core peak: {peak_flops_e:.1f} GFLOP/s")
+    print(f"  Total peak: {total_peak_flops:.1f} GFLOP/s")
+    print(f"  Theoretical Bandwidth: {theoretical_bandwidth:.1f} GB/s")
+    print(f"  Realistic Bandwidth: {realistic_bandwidth:.1f} GB/s")
+    
+    return total_peak_flops, realistic_bandwidth
 
 def plot_roofline_model(df, peak_flops, peak_bandwidth, output_dir):
     """Plot roofline model for performance analysis"""
@@ -128,6 +153,7 @@ def plot_roofline_model(df, peak_flops, peak_bandwidth, output_dir):
     gflops_values = []
     kernel_types = []
     data_types = []
+    array_sizes = []
     
     for _, row in filtered_df.iterrows():
         ai = calculate_arithmetic_intensity(row['kernel'], row['data_type'])
@@ -135,55 +161,74 @@ def plot_roofline_model(df, peak_flops, peak_bandwidth, output_dir):
         gflops_values.append(row['gflops'])
         kernel_types.append(row['kernel'])
         data_types.append(row['data_type'])
+        array_sizes.append(row['array_size'])
     
     # Create roofline model
-    ai_range = np.logspace(-3, 2, 100)
+    ai_range = np.logspace(-3, 1, 100)  # Reduced range to better show our data
     compute_bound = np.full_like(ai_range, peak_flops)
     memory_bound = peak_bandwidth * ai_range
     
     roofline = np.minimum(compute_bound, memory_bound)
     
     # Plot roofline
-    plt.loglog(ai_range, roofline, 'k-', label='Roofline', linewidth=2)
-    plt.loglog(ai_range, compute_bound, 'r--', label='Compute Bound')
-    plt.loglog(ai_range, memory_bound, 'b--', label='Memory Bound')
+    plt.loglog(ai_range, roofline, 'k-', label='Theoretical Roofline', linewidth=2)
+    plt.loglog(ai_range, compute_bound, 'r--', label='Compute Bound', alpha=0.7)
+    plt.loglog(ai_range, memory_bound, 'b--', label='Memory Bound', alpha=0.7)
     
-    # Plot actual measurements
-    unique_kernels = list(set(kernel_types))
-    colors = plt.cm.tab10(np.linspace(0, 1, len(unique_kernels)))
+    # Plot actual measurements with KERNEL-based coloring
+    unique_kernels = sorted(list(set(kernel_types)))
+    colors = plt.cm.Set1(np.linspace(0, 1, len(unique_kernels)))
     
+    # Create a mapping from kernel to color
+    kernel_color_map = {}
     for i, kernel in enumerate(unique_kernels):
+        kernel_color_map[kernel] = colors[i]
+    
+    # Plot each kernel with its assigned color
+    for kernel in unique_kernels:
         kernel_ai = [ai for ai, k in zip(ai_values, kernel_types) if k == kernel]
         kernel_gflops = [gf for gf, k in zip(gflops_values, kernel_types) if k == kernel]
+        kernel_sizes = [size for size, k in zip(array_sizes, kernel_types) if k == kernel]
         
         if kernel_ai and kernel_gflops:
-            plt.scatter(kernel_ai, kernel_gflops, color=colors[i], label=kernel, 
-                       alpha=0.7, s=50, edgecolors='black', linewidth=0.5)
+            plt.scatter(kernel_ai, kernel_gflops, color=kernel_color_map[kernel], 
+                       label=kernel, alpha=0.7, s=60, edgecolors='black', linewidth=0.5)
     
     plt.xlabel('Arithmetic Intensity (FLOPs/Byte)')
     plt.ylabel('Performance (GFLOP/s)')
-    plt.title('Roofline Model Analysis')
+    plt.title('Roofline Model Analysis - i5-12600KF (DDR4-3600)')
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+    
+    # Add compute/memory boundary line
+    boundary_ai = peak_flops / peak_bandwidth
+    plt.axvline(x=boundary_ai, color='green', linestyle=':', alpha=0.7, linewidth=2)
+    plt.text(boundary_ai * 1.1, peak_flops * 0.1, 
+             f'Compute/Memory Boundary\n(AI = {boundary_ai:.3f} FLOPs/Byte)',
+             rotation=90, verticalalignment='bottom', fontsize=9,
+             bbox=dict(boxstyle="round,pad=0.3", fc="white", alpha=0.7))
+    
     plt.grid(True, which="both", ls="--", alpha=0.3)
-    
-    # Add annotations for compute-bound and memory-bound regions
-    plt.axvline(x=peak_flops/peak_bandwidth, color='green', linestyle=':', alpha=0.7)
-    plt.text(peak_flops/peak_bandwidth * 1.1, peak_flops * 0.1, 
-             'Compute/Memory Boundary', rotation=90, verticalalignment='bottom')
-    
     plt.tight_layout()
+    
     output_path = output_dir / 'roofline_analysis.png'
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
     plt.close()
     
-    # Print analysis
+    # Print detailed analysis
     print("\nRoofline Analysis:")
     print("==================")
+    print(f"Peak Compute: {peak_flops:.1f} GFLOP/s")
+    print(f"Peak Bandwidth: {peak_bandwidth:.1f} GB/s")
+    print(f"Compute/Memory Boundary: AI = {boundary_ai:.3f} FLOPs/Byte")
+    print()
+    
     for kernel in unique_kernels:
-        kernel_ai = [ai for ai, k in zip(ai_values, kernel_types) if k == kernel]
-        kernel_gflops = [gf for gf, k in zip(gflops_values, kernel_types) if k == kernel]
-        
-        if kernel_ai and kernel_gflops:
+        kernel_indices = [j for j, k in enumerate(kernel_types) if k == kernel]
+        if kernel_indices:
+            kernel_ai = [ai_values[j] for j in kernel_indices]
+            kernel_gflops = [gflops_values[j] for j in kernel_indices]
+            kernel_sizes = [array_sizes[j] for j in kernel_indices]
+            
             avg_ai = np.mean(kernel_ai)
             avg_gflops = np.mean(kernel_gflops)
             
@@ -199,43 +244,8 @@ def plot_roofline_model(df, peak_flops, peak_bandwidth, output_dir):
             print(f"  Expected={expected_perf:.2f} GFLOP/s")
             print(f"  Efficiency={efficiency:.1f}%")
             print(f"  Characterization: {bound_type}")
+            print(f"  Typical sizes: {min(kernel_sizes):,} to {max(kernel_sizes):,} elements")
             print()
-
-def estimate_peak_performance(df):
-    """Estimate peak performance based on the data"""
-    print("Estimating peak performance from data...")
-    
-    # Get memory bandwidth from memory_bandwidth tests
-    bw_tests = df[df['kernel'] == 'memory_bandwidth']
-    if not bw_tests.empty:
-        peak_bandwidth = bw_tests['bandwidth_gbs'].max() * 1.1  # Add 10% margin
-        print(f"Estimated peak bandwidth: {peak_bandwidth:.2f} GB/s (from memory tests)")
-    else:
-        # Fallback estimation
-        peak_bandwidth = 25.0  # GB/s (typical for DDR4)
-        print(f"Using default peak bandwidth: {peak_bandwidth:.2f} GB/s")
-    
-    # Estimate peak FLOPs based on CPU frequency and vector width
-    try:
-        # Try to get CPU frequency from metadata
-        if 'CPU Frequency' in df.columns:
-            freq_str = df['CPU Frequency'].iloc[0]
-            if 'GHz' in freq_str:
-                cpu_freq = float(freq_str.replace('GHz', '').strip())
-            else:
-                cpu_freq = float(freq_str)
-        else:
-            cpu_freq = 2.5  # Default fallback
-        
-        # Conservative estimate: 4 FLOPs/cycle/core for AVX2 + FMA
-        peak_flops = cpu_freq * 4 * 1.1  # Add 10% margin
-        print(f"Estimated peak FLOPs: {peak_flops:.2f} GFLOP/s ({cpu_freq} GHz × 4 FLOPs/cycle)")
-        
-    except:
-        peak_flops = 10.0  # Default fallback
-        print(f"Using default peak FLOPs: {peak_flops:.2f} GFLOP/s")
-    
-    return peak_flops, peak_bandwidth
 
 def main():
     # Set up directories
@@ -256,8 +266,8 @@ def main():
     
     print(f"Loaded {len(df)} rows for analysis")
     
-    # Estimate peak performance
-    peak_flops, peak_bandwidth = estimate_peak_performance(df)
+    # Use accurate peak performance for i5-12600KF
+    peak_flops, peak_bandwidth = get_peak_performance_i5_12600KF()
     
     # Run roofline analysis
     plot_roofline_model(df, peak_flops, peak_bandwidth, plots_dir)

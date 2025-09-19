@@ -9,43 +9,43 @@ Performance Analysis by Cache Region:
 
 L1 Cache Region:
   Scalar:
-    Avg GFLOP/s: 160921.41
-    Avg Bandwidth: 228.41 GB/s
-    Avg CPE: 0.67
+    Avg GFLOP/s: 45.01
+    Avg Bandwidth: 358.89 GB/s
+    Avg CPE: 35.85
   Vectorized:
-    Avg GFLOP/s: 162724.31
-    Avg Bandwidth: 231.80 GB/s
-    Avg CPE: 0.67
+    Avg GFLOP/s: 46.62
+    Avg Bandwidth: 369.46 GB/s
+    Avg CPE: 35.49
 
 L2 Cache Region:
   Scalar:
-    Avg GFLOP/s: 1250773.93
-    Avg Bandwidth: 144.34 GB/s
-    Avg CPE: 0.77
+    Avg GFLOP/s: 34.49
+    Avg Bandwidth: 270.90 GB/s
+    Avg CPE: 40.16
   Vectorized:
-    Avg GFLOP/s: 1247207.42
-    Avg Bandwidth: 144.21 GB/s
-    Avg CPE: 0.77
+    Avg GFLOP/s: 34.35
+    Avg Bandwidth: 270.26 GB/s
+    Avg CPE: 40.06
 
 L3 Cache Region:
   Scalar:
-    Avg GFLOP/s: 7898078.09
-    Avg Bandwidth: 57.58 GB/s
-    Avg CPE: 1.35
+    Avg GFLOP/s: 13.85
+    Avg Bandwidth: 99.14 GB/s
+    Avg CPE: 68.98
   Vectorized:
-    Avg GFLOP/s: 7946348.14
-    Avg Bandwidth: 57.95 GB/s
-    Avg CPE: 1.34
+    Avg GFLOP/s: 13.81
+    Avg Bandwidth: 99.04 GB/s
+    Avg CPE: 69.15
 
 DRAM Cache Region:
   Scalar:
-    Avg GFLOP/s: 47104471.97
-    Avg Bandwidth: 27.17 GB/s
-    Avg CPE: 2.47
+    Avg GFLOP/s: 6.67
+    Avg Bandwidth: 5.95 GB/s
+    Avg CPE: 125.82
   Vectorized:
-    Avg GFLOP/s: 47123745.29
-    Avg Bandwidth: 27.15 GB/s
-    Avg CPE: 2.47
+    Avg GFLOP/s: 6.65
+    Avg Bandwidth: 5.92 GB/s
+    Avg CPE: 126.43
 
 SIMD Gains Compression Analysis:
 ----------------------------------------
