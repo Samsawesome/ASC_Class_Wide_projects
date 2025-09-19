@@ -1,0 +1,4 @@
+Size: 32768 bytes, Latency: 0.0001 ns
+Size: 262144 bytes, Latency: 0.0001 ns
+Size: 8388608 bytes, Latency: 0 ns
+Size: 67108864 bytes, Latency: 0.0001 ns

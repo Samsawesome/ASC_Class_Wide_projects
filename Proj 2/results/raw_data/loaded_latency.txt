@@ -1,0 +1,16 @@
+=== Loaded Latency Tests ===
+Threads: 1, Stride: 64, Throughput: 63.1173 MB/s, Latency: 967.011 ns/op
+Threads: 1, Stride: 256, Throughput: 63.8202 MB/s, Latency: 3825.44 ns/op
+Threads: 1, Stride: 1024, Throughput: 63.928 MB/s, Latency: 15276 ns/op
+Threads: 2, Stride: 64, Throughput: 127.929 MB/s, Latency: 477.103 ns/op
+Threads: 2, Stride: 256, Throughput: 127.872 MB/s, Latency: 1909.26 ns/op
+Threads: 2, Stride: 1024, Throughput: 126.302 MB/s, Latency: 7731.97 ns/op
+Threads: 4, Stride: 64, Throughput: 255.129 MB/s, Latency: 239.232 ns/op
+Threads: 4, Stride: 256, Throughput: 254.931 MB/s, Latency: 957.673 ns/op
+Threads: 4, Stride: 1024, Throughput: 252.221 MB/s, Latency: 3871.85 ns/op
+Threads: 8, Stride: 64, Throughput: 510.809 MB/s, Latency: 119.487 ns/op
+Threads: 8, Stride: 256, Throughput: 510.949 MB/s, Latency: 477.818 ns/op
+Threads: 8, Stride: 1024, Throughput: 509.339 MB/s, Latency: 1917.31 ns/op
+Threads: 16, Stride: 64, Throughput: 1021.18 MB/s, Latency: 59.7692 ns/op
+Threads: 16, Stride: 256, Throughput: 1019.02 MB/s, Latency: 239.585 ns/op
+Threads: 16, Stride: 1024, Throughput: 1019.53 MB/s, Latency: 957.855 ns/op

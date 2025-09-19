@@ -1,0 +1,12 @@
+Stride: 64B, Read Ratio: 1, Bandwidth: 3807.12 MB/s
+Stride: 64B, Read Ratio: 0.7, Bandwidth: 2996.49 MB/s
+Stride: 64B, Read Ratio: 0.5, Bandwidth: 2661.13 MB/s
+Stride: 64B, Read Ratio: 0, Bandwidth: 3984.89 MB/s
+Stride: 256B, Read Ratio: 1, Bandwidth: 5938.63 MB/s
+Stride: 256B, Read Ratio: 0.7, Bandwidth: 5646.27 MB/s
+Stride: 256B, Read Ratio: 0.5, Bandwidth: 5981.63 MB/s
+Stride: 256B, Read Ratio: 0, Bandwidth: 7020.49 MB/s
+Stride: 1024B, Read Ratio: 1, Bandwidth: 9344.77 MB/s
+Stride: 1024B, Read Ratio: 0.7, Bandwidth: 7242.05 MB/s
+Stride: 1024B, Read Ratio: 0.5, Bandwidth: 8444.08 MB/s
+Stride: 1024B, Read Ratio: 0, Bandwidth: 9441.97 MB/s
