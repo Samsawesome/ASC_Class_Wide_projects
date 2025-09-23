@@ -1,28 +1,24 @@
 #include "../include/memory_utils.h"
+#include <windows.h> 
 #include <chrono>
 #include <iostream>
+#include <iomanip>
 #include <vector>
-#include <algorithm>
 #include <random>
-#include <windows.h>
+#include <algorithm>
 
 // Set process affinity to core 0 and highest priority
 void set_high_priority_affinity() {
     HANDLE process = GetCurrentProcess();
     HANDLE thread = GetCurrentThread();
     
-    // Set to high priority class
     SetPriorityClass(process, HIGH_PRIORITY_CLASS);
     SetThreadPriority(thread, THREAD_PRIORITY_HIGHEST);
     
-    // Set affinity to core 0
-    DWORD_PTR affinityMask = 1; // Core 0
-    DWORD_PTR previousAffinity = SetThreadAffinityMask(thread, affinityMask);
-    
-    // Set ideal processor to core 0
+    DWORD_PTR affinityMask = 1;
+    SetThreadAffinityMask(thread, affinityMask);
     SetThreadIdealProcessor(thread, 0);
     
-    // Disable power throttling
     PROCESS_POWER_THROTTLING_STATE powerThrottling = {};
     powerThrottling.Version = PROCESS_POWER_THROTTLING_CURRENT_VERSION;
     powerThrottling.ControlMask = PROCESS_POWER_THROTTLING_EXECUTION_SPEED;
@@ -36,76 +32,95 @@ double test_bandwidth_single_run(int stride, float read_ratio) {
     const size_t size = 256 * 1024 * 1024; // 256MB
     char* memory = (char*)aligned_alloc(CACHE_LINE_SIZE, size);
     
-    // Initialize memory
-    for (size_t i = 0; i < size; ++i) {
-        memory[i] = (char)(i % 256);
+    // Initialize memory with random data
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, 255);
+    for (size_t i = 0; i < size; i++) {
+        memory[i] = static_cast<char>(dis(gen));
     }
+    
+    const int iterations = 100000;
+    volatile char sink;
     
     // Warm-up run
-    for (size_t i = 0; i < size / 10; i += stride) {
+    int length = 0;
+    if (1000 < static_cast<int>(size/stride)) {
+        length = 1000;
+    } else {
+        length = static_cast<int>(size/stride);
+    }
+
+    for (int i = 0; i < length; i++) {
+        size_t idx = (i * stride) % size;
         if (rand() % 100 < read_ratio * 100) {
-            volatile char read = memory[i];
+            sink = memory[idx];
         } else {
-            memory[i] = i;
+            memory[idx] = i & 0xFF;
         }
     }
     
-    flush_cache(); // Clear cache after warm-up
+    flush_cache(); // Add cache flush before measurement
     
+    // Actual measurement
     auto start = std::chrono::high_resolution_clock::now();
-    for (size_t i = 0; i < size; i += stride) {
+    
+    for (int i = 0; i < iterations; i++) {
+        size_t idx = (i * stride) % size;
         if (rand() % 100 < read_ratio * 100) {
-            volatile char read = memory[i];
+            sink = memory[idx];
         } else {
-            memory[i] = i;
+            memory[idx] = i & 0xFF;
         }
     }
+    
     auto end = std::chrono::high_resolution_clock::now();
     
-    double time_ms = std::chrono::duration<double, std::milli>(end - start).count();
-    double bandwidth = (size / (1024.0 * 1024.0)) / (time_ms / 1000.0); // MB/s
+    double total_time_ns = std::chrono::duration<double, std::nano>(end - start).count();
+    double avg_latency_ns = total_time_ns / iterations;
     
     aligned_free(memory);
-    return bandwidth;
+    return avg_latency_ns;
 }
 
 void test_bandwidth(int stride, float read_ratio) {
     const int NUM_RUNS = 3;
-    double total_bandwidth = 0.0;
+    double total_latency = 0.0;
     
     for (int run = 0; run < NUM_RUNS; ++run) {
-        double bandwidth = test_bandwidth_single_run(stride, read_ratio);
-        total_bandwidth += bandwidth;
+        total_latency += test_bandwidth_single_run(stride, read_ratio);
     }
     
-    double avg_bandwidth = total_bandwidth / NUM_RUNS;
+    double avg_latency = total_latency / NUM_RUNS;
     
-    std::cout << "Stride: " << stride << "B, Read Ratio: " << read_ratio 
-              << ", Bandwidth: " << avg_bandwidth << " MB/s\n";
+    std::cout << "Stride: " << stride << ", ReadRatio: " << std::fixed << std::setprecision(1) << read_ratio 
+              << ", Latency: " << std::fixed << std::setprecision(2) << avg_latency << " ns" << std::endl;
 }
 
 int main() {
     set_high_priority_affinity();
     
-    int strides[] = {64, 256, 1024};
-    float ratios[] = {1.0f, 0.7f, 0.5f, 0.2f, 0.0f};
+    std::vector<int> strides = {64, 128, 256, 512, 1024, 2048, 4096};
+    std::vector<float> read_ratios = {0.0f, 0.25f, 0.5f, 0.75f, 1.0f};
     
-    // Create all test combinations
+    // Create and randomize test order
     std::vector<std::pair<int, float>> tests;
     for (int stride : strides) {
-        for (float ratio : ratios) {
+        for (float ratio : read_ratios) {
             tests.emplace_back(stride, ratio);
         }
     }
     
-    // Randomize test order
     std::random_device rd;
     std::mt19937 g(rd());
     std::shuffle(tests.begin(), tests.end(), g);
     
+    std::cout << "Starting pattern latency measurements..." << std::endl;
     for (const auto& test : tests) {
         test_bandwidth(test.first, test.second);
     }
+    
+    std::cout << "Pattern latency measurements completed." << std::endl;
     
     return 0;
 }

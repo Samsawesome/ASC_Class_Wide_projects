@@ -1,4 +1,11 @@
-Size: 32768 bytes, Latency: 0.0001 ns
-Size: 262144 bytes, Latency: 0.0001 ns
-Size: 8388608 bytes, Latency: 0 ns
-Size: 67108864 bytes, Latency: 0.0001 ns
+=== Improved Custom Measurements ===
+Level: L1, Size: 32768 bytes, Latency: 17.7934 ns
+Never happens
+Level: L2, Size: 262144 bytes, Latency: 18.3424 ns
+Level: L3, Size: 8388608 bytes, Latency: 78.5146 ns
+Never happens
+Level: DRAM, Size: 67108864 bytes, Latency: 114.705 ns
+
+Found MLC at: C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 2\scripts\..\scripts\mlc.exe
+Executing: "C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 2\scripts\..\scripts\mlc.exe" --latency_matrix > mlc_output.txt 2>&1
+MLC executed successfully!
