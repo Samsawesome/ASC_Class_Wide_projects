@@ -1,16 +1,16 @@
 === Loaded Latency Tests ===
-Threads: 8, Stride: 256, Throughput: 34815.4 MB/s, Latency: 7.0128 ns/op
-Threads: 8, Stride: 64, Throughput: 14613.6 MB/s, Latency: 4.17659 ns/op
-Threads: 16, Stride: 64, Throughput: 14663.3 MB/s, Latency: 4.16253 ns/op
-Threads: 1, Stride: 1024, Throughput: 141731 MB/s, Latency: 6.89028 ns/op
-Threads: 1, Stride: 256, Throughput: 34984.5 MB/s, Latency: 6.9786 ns/op
-Threads: 16, Stride: 256, Throughput: 33784.7 MB/s, Latency: 7.23713 ns/op
-Threads: 2, Stride: 256, Throughput: 30730.9 MB/s, Latency: 7.98661 ns/op
-Threads: 16, Stride: 1024, Throughput: 122569 MB/s, Latency: 8.04358 ns/op
-Threads: 8, Stride: 1024, Throughput: 136798 MB/s, Latency: 7.13914 ns/op
-Threads: 4, Stride: 256, Throughput: 27360.2 MB/s, Latency: 8.96113 ns/op
-Threads: 2, Stride: 1024, Throughput: 125483 MB/s, Latency: 7.78365 ns/op
-Threads: 2, Stride: 64, Throughput: 11634.3 MB/s, Latency: 5.24906 ns/op
-Threads: 4, Stride: 1024, Throughput: 125219 MB/s, Latency: 7.80781 ns/op
-Threads: 4, Stride: 64, Throughput: 13172.8 MB/s, Latency: 4.63403 ns/op
-Threads: 1, Stride: 64, Throughput: 12990.2 MB/s, Latency: 4.69983 ns/op
+Threads: 2, Stride: 1024, Throughputs: 129168 MB/s, 127910 MB/s, 127734 MB/s, Latencies: 7.56042 ns/op, 7.63474 ns/op, 7.64531 ns/op
+Threads: 1, Stride: 256, Throughputs: 30935.3 MB/s, 31532.4 MB/s, 31839.7 MB/s, Latencies: 7.89197 ns/op, 7.74253 ns/op, 7.66781 ns/op
+Threads: 8, Stride: 64, Throughputs: 13716.4 MB/s, 13554.5 MB/s, 12622.3 MB/s, Latencies: 4.44981 ns/op, 4.50296 ns/op, 4.83552 ns/op
+Threads: 2, Stride: 256, Throughputs: 30567.5 MB/s, 31453.9 MB/s, 30861.9 MB/s, Latencies: 7.98693 ns/op, 7.76186 ns/op, 7.91074 ns/op
+Threads: 4, Stride: 64, Throughputs: 13780.3 MB/s, 12864.8 MB/s, 12987.3 MB/s, Latencies: 4.42917 ns/op, 4.74434 ns/op, 4.6996 ns/op
+Threads: 8, Stride: 256, Throughputs: 32006.8 MB/s, 31658.6 MB/s, 31404.7 MB/s, Latencies: 7.62777 ns/op, 7.71168 ns/op, 7.77401 ns/op
+Threads: 4, Stride: 1024, Throughputs: 129411 MB/s, 128973 MB/s, 130247 MB/s, Latencies: 7.54619 ns/op, 7.57183 ns/op, 7.49779 ns/op
+Threads: 1, Stride: 64, Throughputs: 13835.4 MB/s, 13878.1 MB/s, 13727.6 MB/s, Latencies: 4.41154 ns/op, 4.39794 ns/op, 4.44616 ns/op
+Threads: 1, Stride: 1024, Throughputs: 128416 MB/s, 128440 MB/s, 128729 MB/s, Latencies: 7.60466 ns/op, 7.60328 ns/op, 7.58618 ns/op
+Threads: 16, Stride: 256, Throughputs: 31408 MB/s, 31584.4 MB/s, 31954.3 MB/s, Latencies: 7.7732 ns/op, 7.72978 ns/op, 7.64031 ns/op
+Threads: 8, Stride: 1024, Throughputs: 129940 MB/s, 130575 MB/s, 130225 MB/s, Latencies: 7.51551 ns/op, 7.47897 ns/op, 7.49903 ns/op
+Threads: 4, Stride: 256, Throughputs: 31425.7 MB/s, 31477.7 MB/s, 30707.9 MB/s, Latencies: 7.76883 ns/op, 7.756 ns/op, 7.95041 ns/op
+Threads: 2, Stride: 64, Throughputs: 13518.6 MB/s, 13954.1 MB/s, 13791.2 MB/s, Latencies: 4.5149 ns/op, 4.37399 ns/op, 4.42566 ns/op
+Threads: 16, Stride: 64, Throughputs: 13983.7 MB/s, 13966.1 MB/s, 13967.6 MB/s, Latencies: 4.36473 ns/op, 4.37025 ns/op, 4.36978 ns/op
+Threads: 16, Stride: 1024, Throughputs: 128984 MB/s, 129587 MB/s, 128273 MB/s, Latencies: 7.57116 ns/op, 7.53596 ns/op, 7.61318 ns/op

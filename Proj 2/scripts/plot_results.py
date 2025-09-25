@@ -366,31 +366,95 @@ def plot_bandwidth():
     plt.close()
 
 def parse_loaded_latency():
-    """Parse loaded latency data with support for multiple runs and error bars"""
+    """Parse loaded latency data with corrected format handling"""
     data = {}
-    current_config = None
-    run_data = []
     
-    with open('../results/raw_data/loaded_latency.txt') as f:
-        for line in f:
-            if 'Threads:' in line:
-                parts = line.split(',')
-                threads = int(parts[0].split(': ')[1].strip())
-                stride = int(parts[1].split(': ')[1].replace('B', '').strip())
-                throughput_str = parts[2].split(': ')[1].split(' ')[0].strip()
-                latency_str = parts[3].split(': ')[1].split(' ')[0].strip()
-                
-                throughput = float(throughput_str)
-                latency = float(latency_str)
-                
-                # Create unique key for this configuration
-                config_key = (threads, stride)
-                
-                if config_key not in data:
-                    data[config_key] = {'throughput': [], 'latency': []}
-                
-                data[config_key]['throughput'].append(throughput)
-                data[config_key]['latency'].append(latency)
+    try:
+        with open('../results/raw_data/loaded_latency.txt') as f:
+            for line in f:
+                line = line.strip()
+                # Skip header lines and empty lines
+                if not line or '===' in line:
+                    continue
+                    
+                if 'Threads:' in line and 'Throughputs:' in line and 'Latencies:' in line:
+                    try:
+                        # Extract threads and stride using more robust parsing
+                        parts = line.split(',')
+                        if len(parts) < 4:
+                            continue
+                            
+                        # Extract threads
+                        threads_str = parts[0].split('Threads: ')[1].strip()
+                        threads = int(threads_str)
+                        
+                        # Extract stride
+                        stride_str = parts[1].split('Stride: ')[1].replace('B', '').strip()
+                        stride = int(stride_str)
+                        
+                        # Find the throughputs and latencies sections
+                        throughputs_section = None
+                        latencies_section = None
+                        
+                        for i, part in enumerate(parts):
+                            if 'Throughputs:' in part:
+                                throughputs_section = part.split('Throughputs: ')[1]
+                                # Check if there are more throughputs in subsequent parts
+                                for j in range(i+1, len(parts)):
+                                    if 'Latencies:' in parts[j]:
+                                        break
+                                    throughputs_section += ',' + parts[j]
+                            elif 'Latencies:' in part:
+                                latencies_section = part.split('Latencies: ')[1]
+                                # Check if there are more latencies in subsequent parts
+                                for j in range(i+1, len(parts)):
+                                    latencies_section += ',' + parts[j]
+                        
+                        if not throughputs_section or not latencies_section:
+                            continue
+                            
+                        # Extract individual throughput values
+                        throughput_values = []
+                        for tp_part in throughputs_section.split(','):
+                            tp_clean = tp_part.replace('MB/s', '').strip()
+                            if tp_clean and tp_clean not in ['Latencies:', '']:
+                                try:
+                                    throughput_values.append(float(tp_clean))
+                                except ValueError:
+                                    continue
+                        
+                        # Extract individual latency values
+                        latency_values = []
+                        for lat_part in latencies_section.split(','):
+                            lat_clean = lat_part.replace('ns/op', '').strip()
+                            if lat_clean and lat_clean not in ['', ' ']:
+                                try:
+                                    latency_values.append(float(lat_clean))
+                                except ValueError:
+                                    continue
+                        
+                        # Only proceed if we have valid data
+                        if throughput_values and latency_values and len(throughput_values) == len(latency_values):
+                            config_key = (threads, stride)
+                            
+                            if config_key not in data:
+                                data[config_key] = {'throughput': [], 'latency': []}
+                            
+                            data[config_key]['throughput'].extend(throughput_values)
+                            data[config_key]['latency'].extend(latency_values)
+                            
+                    except (ValueError, IndexError) as e:
+                        print(f"Error parsing line: {line} - {e}")
+                        continue
+                        
+    except FileNotFoundError:
+        print("Error: loaded_latency.txt file not found")
+        return {}
+    
+    # Debug: Print what we parsed
+    print(f"Parsed loaded latency data: {len(data)} configurations")
+    for (threads, stride), values in data.items():
+        print(f"  Threads: {threads}, Stride: {stride}B -> {len(values['throughput'])} throughputs, {len(values['latency'])} latencies")
     
     # Reorganize data by stride
     organized_data = {}
@@ -403,147 +467,526 @@ def parse_loaded_latency():
             }
         
         # Calculate means and standard deviations
-        throughput_mean = statistics.mean(values['throughput'])
-        throughput_std = statistics.stdev(values['throughput']) if len(values['throughput']) > 1 else 0
-        latency_mean = statistics.mean(values['latency'])
-        latency_std = statistics.stdev(values['latency']) if len(values['latency']) > 1 else 0
-        
-        organized_data[stride]['threads'].append(threads)
-        organized_data[stride]['throughput_mean'].append(throughput_mean)
-        organized_data[stride]['throughput_std'].append(throughput_std)
-        organized_data[stride]['latency_mean'].append(latency_mean)
-        organized_data[stride]['latency_std'].append(latency_std)
+        if values['throughput'] and values['latency']:
+            throughput_mean = statistics.mean(values['throughput'])
+            throughput_std = statistics.stdev(values['throughput']) if len(values['throughput']) > 1 else 0
+            latency_mean = statistics.mean(values['latency'])
+            latency_std = statistics.stdev(values['latency']) if len(values['latency']) > 1 else 0
+            
+            organized_data[stride]['threads'].append(threads)
+            organized_data[stride]['throughput_mean'].append(throughput_mean)
+            organized_data[stride]['throughput_std'].append(throughput_std)
+            organized_data[stride]['latency_mean'].append(latency_mean)
+            organized_data[stride]['latency_std'].append(latency_std)
+    
+    # Debug: Print organized data
+    print(f"Organized by stride: {len(organized_data)} strides")
+    for stride, values in organized_data.items():
+        print(f"  Stride {stride}B: {len(values['threads'])} thread configurations")
     
     return organized_data
 
 def plot_loaded_latency():
     data = parse_loaded_latency()
     
-    plt.figure(figsize=(18, 5))
+    if not data:
+        print("No loaded latency data found!")
+        return
+    
+    # Create the main figure with 2 subplots
+    plt.figure(figsize=(15, 6))
     
     # Throughput vs Threads
-    plt.subplot(1, 3, 1)
-    for stride, values in data.items():
-        # Sort by threads for proper x-axis ordering
-        sorted_data = sorted(zip(values['threads'], values['throughput_mean'], values['throughput_std']))
-        threads_sorted, mean_sorted, std_sorted = zip(*sorted_data)
-        
-        plt.errorbar(threads_sorted, mean_sorted, yerr=std_sorted, 
-                    marker='o', linewidth=2, markersize=6, capsize=5, capthick=2,
-                    label=f'Stride {stride}B')
+    plt.subplot(1, 2, 1)
+    has_data = False
+    colors = ['blue', 'red', 'green', 'orange', 'purple', 'brown']
+    markers = ['o', 's', '^', 'D', 'v', '<']
     
-    plt.xlabel('Number of Threads')
-    plt.ylabel('Throughput (MB/s)')
-    plt.title('Throughput vs Concurrency\n(with Error Bars from 3 Runs)')
-    plt.legend()
-    plt.grid(True)
+    for i, (stride, values) in enumerate(data.items()):
+        if values['threads']:
+            # Sort by threads for proper x-axis ordering
+            sorted_data = sorted(zip(values['threads'], values['throughput_mean'], values['throughput_std']))
+            threads_sorted, mean_sorted, std_sorted = zip(*sorted_data)
+            
+            plt.errorbar(threads_sorted, mean_sorted, yerr=std_sorted, 
+                        marker=markers[i % len(markers)], 
+                        color=colors[i % len(colors)],
+                        linewidth=2, markersize=6, capsize=5, capthick=2,
+                        label=f'Stride {stride}B')
+            has_data = True
+    
+    if has_data:
+        plt.xlabel('Number of Threads')
+        plt.ylabel('Throughput (MB/s)')
+        plt.title('Throughput vs Concurrency\n(with Error Bars from 3 Runs)')
+        plt.legend()
+        plt.grid(True)
+    else:
+        plt.text(0.5, 0.5, 'No data available', ha='center', va='center', transform=plt.gca().transAxes)
+        plt.title('Throughput vs Concurrency (No Data)')
     
     # Latency vs Threads
-    plt.subplot(1, 3, 2)
-    for stride, values in data.items():
-        # Sort by threads for proper x-axis ordering
-        sorted_data = sorted(zip(values['threads'], values['latency_mean'], values['latency_std']))
-        threads_sorted, mean_sorted, std_sorted = zip(*sorted_data)
-        
-        plt.errorbar(threads_sorted, mean_sorted, yerr=std_sorted,
-                    marker='s', linewidth=2, markersize=6, capsize=5, capthick=2,
-                    label=f'Stride {stride}B')
+    plt.subplot(1, 2, 2)
+    has_data = False
+    for i, (stride, values) in enumerate(data.items()):
+        if values['threads']:
+            # Sort by threads for proper x-axis ordering
+            sorted_data = sorted(zip(values['threads'], values['latency_mean'], values['latency_std']))
+            threads_sorted, mean_sorted, std_sorted = zip(*sorted_data)
+            
+            plt.errorbar(threads_sorted, mean_sorted, yerr=std_sorted,
+                        marker=markers[i % len(markers)], 
+                        color=colors[i % len(colors)],
+                        linewidth=2, markersize=6, capsize=5, capthick=2,
+                        label=f'Stride {stride}B')
+            has_data = True
     
-    plt.xlabel('Number of Threads')
-    plt.ylabel('Latency (ns/op)')
-    plt.title('Latency vs Concurrency\n(with Error Bars from 3 Runs)')
-    plt.legend()
-    plt.grid(True)
-    
-    # Throughput vs Latency curve for intensity sweep
-    plt.subplot(1, 3, 3)
-    for stride, values in data.items():
-        # Sort by threads to maintain proper progression
-        sorted_data = sorted(zip(values['threads'], values['throughput_mean'], values['latency_mean']))
-        _, throughput_sorted, latency_sorted = zip(*sorted_data)
-        
-        plt.plot(latency_sorted, throughput_sorted, 'o-', linewidth=2, markersize=6,
-                label=f'Stride {stride}B')
-    
-    plt.xlabel('Latency (ns/op)')
-    plt.ylabel('Throughput (MB/s)')
-    plt.title('Throughput vs Latency (Intensity Sweep)')
-    plt.legend()
-    plt.grid(True)
+    if has_data:
+        plt.xlabel('Number of Threads')
+        plt.ylabel('Latency (ns/op)')
+        plt.title('Latency vs Concurrency\n(with Error Bars from 3 Runs)')
+        plt.legend()
+        plt.grid(True)
+    else:
+        plt.text(0.5, 0.5, 'No data available', ha='center', va='center', transform=plt.gca().transAxes)
+        plt.title('Latency vs Concurrency (No Data)')
     
     plt.tight_layout()
     plt.savefig('../results/plots/intensity_sweep.png', dpi=300, bbox_inches='tight')
     plt.close()
+    
+    # Create the faceted plot
+    create_faceted_intensity_plot(data)
 
-def parse_pattern_latency():
-    """Parse pattern latency data with support for multiple runs and error bars"""
-    data = {}
-    current_config = None
-    run_data = []
+def create_faceted_intensity_plot(data):
+    """Create a faceted plot showing throughput vs latency for each stride separately"""
+    if not data:
+        print("No data provided for faceted plot")
+        return
     
-    with open('../results/raw_data/pattern_latency.txt') as f:
-        for line in f:
-            if 'Stride:' in line:
-                parts = line.split(',')
-                stride = int(parts[0].split(': ')[1].replace('B', '').strip())
-                read_ratio = float(parts[1].split(': ')[1].strip())
-                latency_str = parts[2].split(': ')[1].split(' ')[0].strip()
-                latency = float(latency_str)
-                
-                # Create unique key for this configuration
-                config_key = (stride, read_ratio)
-                
-                if config_key not in data:
-                    data[config_key] = []
-                
-                data[config_key].append(latency)
+    # Filter out strides with no data
+    valid_strides = {stride: values for stride, values in data.items() if values['threads']}
     
-    # Reorganize data by read ratio with error bar information
-    organized_data = {}
-    for (stride, read_ratio), latencies in data.items():
-        if read_ratio not in organized_data:
-            organized_data[read_ratio] = {'strides': [], 'latency_mean': [], 'latency_std': []}
+    if not valid_strides:
+        print("No valid data for faceted plot")
+        return
+    
+    n_strides = len(valid_strides)
+    print(f"Creating faceted plot with {n_strides} strides")
+    
+    # Calculate layout for facets
+    n_cols = min(3, n_strides)  # Maximum 3 columns
+    n_rows = (n_strides + n_cols - 1) // n_cols  # Calculate needed rows
+    
+    # Create figure for faceted plot
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(5*n_cols, 4*n_rows))
+    
+    # Handle single subplot case
+    if n_rows == 1 and n_cols == 1:
+        axes = np.array([axes])
+    elif n_rows == 1:
+        axes = axes.reshape(1, -1)
+    elif n_cols == 1:
+        axes = axes.reshape(-1, 1)
+    
+    # Flatten the axes array for easier indexing
+    axes_flat = axes.flatten()
+    
+    # Initialize limits for consistent scaling
+    all_latencies = []
+    all_throughputs = []
+    
+    # First pass: collect all data for consistent scaling
+    for stride, values in valid_strides.items():
+        if values['threads']:
+            sorted_data = sorted(zip(values['threads'], values['throughput_mean'], values['latency_mean']))
+            _, throughput_sorted, latency_sorted = zip(*sorted_data)
+            all_latencies.extend(latency_sorted)
+            all_throughputs.extend(throughput_sorted)
+    
+    if all_latencies and all_throughputs:
+        x_margin = (max(all_latencies) - min(all_latencies)) * 0.1
+        y_margin = (max(all_throughputs) - min(all_throughputs)) * 0.1
+        xlim = (max(0, min(all_latencies) - x_margin), max(all_latencies) + x_margin)
+        ylim = (max(0, min(all_throughputs) - y_margin), max(all_throughputs) + y_margin)
+    else:
+        xlim = (0, 10)
+        ylim = (0, 150000)
+    
+    # Plot each stride in its own subplot
+    for i, (stride, values) in enumerate(valid_strides.items()):
+        if i >= len(axes_flat):
+            break
+            
+        ax = axes_flat[i]
         
-        # Calculate mean and standard deviation
-        mean_lat = statistics.mean(latencies)
-        std_lat = statistics.stdev(latencies) if len(latencies) > 1 else 0
+        # Sort by threads to maintain proper progression
+        sorted_data = sorted(zip(values['threads'], values['throughput_mean'], values['latency_mean']))
+        threads_sorted, throughput_sorted, latency_sorted = zip(*sorted_data)
         
-        organized_data[read_ratio]['strides'].append(stride)
-        organized_data[read_ratio]['latency_mean'].append(mean_lat)
-        organized_data[read_ratio]['latency_std'].append(std_lat)
+        print(f"Plotting stride {stride}B: {len(threads_sorted)} data points")
+        
+        # Create scatter plot colored by thread count
+        scatter = ax.scatter(latency_sorted, throughput_sorted, 
+                           c=threads_sorted, 
+                           cmap='viridis', 
+                           s=100, alpha=0.7,
+                           edgecolors='black', linewidth=0.5)
+        
+        # Connect points with lines
+        ax.plot(latency_sorted, throughput_sorted, 'o-', 
+               alpha=0.7, linewidth=2, markersize=6)
+        
+        # Annotate each point with thread count
+        for j, (thread, lat, tp) in enumerate(zip(threads_sorted, latency_sorted, throughput_sorted)):
+            ax.annotate(f'{thread}t', (lat, tp), 
+                      xytext=(5, 5), textcoords='offset points',
+                      fontsize=9, fontweight='bold',
+                      bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.7))
+        
+        ax.set_xlabel('Latency (ns/op)', fontsize=10)
+        ax.set_ylabel('Throughput (MB/s)', fontsize=10)
+        ax.set_title(f'Stride {stride}B\nThroughput vs Latency', fontweight='bold')
+        ax.grid(True, alpha=0.3)
+        
+        # Set consistent axis limits
+        ax.set_xlim(xlim)
+        ax.set_ylim(ylim)
+        
+        # Add colorbar for thread count
+        cbar = plt.colorbar(scatter, ax=ax)
+        cbar.set_label('Thread Count', fontsize=9)
     
-    return organized_data
+    # Hide any empty subplots
+    for i in range(len(valid_strides), len(axes_flat)):
+        axes_flat[i].set_visible(False)
+    
+    plt.suptitle('Throughput vs Latency by Stride and Thread Count\n(Intensity Sweep Analysis)', 
+                fontsize=14, fontweight='bold', y=0.98)
+    plt.tight_layout(rect=[0, 0, 1, 0.96])  # Make room for suptitle
+    plt.savefig('../results/plots/intensity_sweep_faceted.png', dpi=300, bbox_inches='tight')
+    plt.close()
+    
+    print("Faceted plot created successfully")
+    
+    # Also create a combined version
+    create_combined_intensity_plot(valid_strides)
 
-def plot_pattern_latency():
-    data = parse_pattern_latency()
-    
+def create_combined_intensity_plot(data):
+    """Create a combined plot showing all strides together with different markers"""
+    if not data:
+        return
+        
     plt.figure(figsize=(12, 8))
     
-    colors = ['blue', 'red', 'green', 'orange', 'purple', 'brown']
-    markers = ['o', 's', '^', 'D', 'v', '<']
+    colors = plt.cm.tab10(np.linspace(0, 1, len(data)))
+    markers = ['o', 's', '^', 'D', 'v', '<', '>', 'p', '*', 'h']
     
-    for i, (read_ratio, values) in enumerate(data.items()):
-        # Sort by stride for proper x-axis ordering
-        sorted_data = sorted(zip(values['strides'], values['latency_mean'], values['latency_std']))
-        strides_sorted, mean_sorted, std_sorted = zip(*sorted_data)
-        
-        plt.errorbar(strides_sorted, mean_sorted, yerr=std_sorted,
-                    marker=markers[i % len(markers)], 
-                    color=colors[i % len(colors)], 
-                    linewidth=2, markersize=8, capsize=5, capthick=2,
-                    label=f'{int(read_ratio*100)}% Read')
+    for i, (stride, values) in enumerate(data.items()):
+        if values['threads']:
+            # Sort by threads to maintain proper progression
+            sorted_data = sorted(zip(values['threads'], values['throughput_mean'], values['latency_mean']))
+            threads_sorted, throughput_sorted, latency_sorted = zip(*sorted_data)
+            
+            # Plot with unique marker and color
+            for j, (thread, lat, tp) in enumerate(zip(threads_sorted, latency_sorted, throughput_sorted)):
+                plt.scatter(lat, tp, 
+                          c=[colors[i]], 
+                          marker=markers[i % len(markers)],
+                          s=thread*80,  # Size proportional to thread count
+                          alpha=0.7, 
+                          edgecolors='black', 
+                          linewidth=0.5,
+                          label=f'Stride {stride}B' if j == 0 else "")
+            
+            # Connect points with lines
+            plt.plot(latency_sorted, throughput_sorted, '--', 
+                    color=colors[i], alpha=0.5, linewidth=1)
+            
+            # Annotate the highest thread count point for each stride
+            max_thread_idx = threads_sorted.index(max(threads_sorted))
+            plt.annotate(f'{threads_sorted[max_thread_idx]}t', 
+                        (latency_sorted[max_thread_idx], throughput_sorted[max_thread_idx]),
+                        xytext=(10, 10), textcoords='offset points',
+                        fontsize=9, fontweight='bold',
+                        bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.8))
     
-    plt.xlabel('Stride (Bytes)')
-    plt.ylabel('Latency (ns)')
-    plt.title('Memory Latency vs Access Stride and Read/Write Ratio\n(with Error Bars from 3 Runs)')
-    plt.legend()
+    plt.xlabel('Latency (ns/op)', fontsize=12, fontweight='bold')
+    plt.ylabel('Throughput (MB/s)', fontsize=12, fontweight='bold')
+    plt.title('Throughput vs Latency - All Strides Combined\n(Point size = Thread count)', 
+              fontsize=14, fontweight='bold')
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.grid(True, alpha=0.3)
-    plt.xscale('log')
-    plt.xticks([64, 256, 1024], ['64', '256', '1024'])
     
     plt.tight_layout()
+    plt.savefig('../results/plots/intensity_sweep_combined.png', dpi=300, bbox_inches='tight')
+    plt.close()
+    print("Combined plot created successfully")
+
+def create_faceted_intensity_plot(data):
+    """Create a faceted plot showing throughput vs latency for each stride separately"""
+    if not data:
+        return
+    
+    n_strides = len(data)
+    if n_strides == 0:
+        return
+    
+    # Calculate layout for facets
+    n_cols = min(3, n_strides)  # Maximum 3 columns
+    n_rows = (n_strides + n_cols - 1) // n_cols  # Calculate needed rows
+    
+    # Create figure for faceted plot
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(5*n_cols, 4*n_rows))
+    
+    # If only one row or one column, make sure axes is iterable
+    if n_rows == 1 and n_cols == 1:
+        axes = np.array([axes])
+    elif n_rows == 1:
+        axes = axes.reshape(1, -1)
+    elif n_cols == 1:
+        axes = axes.reshape(-1, 1)
+    
+    # Flatten the axes array for easier indexing
+    axes_flat = axes.flatten()
+    
+    # Plot each stride in its own subplot
+    for i, (stride, values) in enumerate(data.items()):
+        if i >= len(axes_flat):
+            break  # Safety check
+            
+        ax = axes_flat[i]
+        
+        if values['threads']:
+            # Sort by threads to maintain proper progression
+            sorted_data = sorted(zip(values['threads'], values['throughput_mean'], values['latency_mean']))
+            threads_sorted, throughput_sorted, latency_sorted = zip(*sorted_data)
+            
+            # Create scatter plot colored by thread count
+            scatter = ax.scatter(latency_sorted, throughput_sorted, 
+                               c=threads_sorted, 
+                               cmap='viridis', 
+                               s=100, alpha=0.7,
+                               edgecolors='black', linewidth=0.5)
+            
+            # Connect points with lines
+            ax.plot(latency_sorted, throughput_sorted, 'o-', 
+                   alpha=0.7, linewidth=2, markersize=6)
+            
+            # Annotate each point with thread count
+            for j, (thread, lat, tp) in enumerate(zip(threads_sorted, latency_sorted, throughput_sorted)):
+                ax.annotate(f'{thread}t', (lat, tp), 
+                          xytext=(5, 5), textcoords='offset points',
+                          fontsize=9, fontweight='bold',
+                          bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.7))
+            
+            ax.set_xlabel('Latency (ns/op)', fontsize=10)
+            ax.set_ylabel('Throughput (MB/s)', fontsize=10)
+            ax.set_title(f'Stride {stride}B\nThroughput vs Latency', fontweight='bold')
+            ax.grid(True, alpha=0.3)
+            
+            # Add colorbar for thread count
+            cbar = plt.colorbar(scatter, ax=ax)
+            cbar.set_label('Thread Count', fontsize=9)
+            
+            # Set consistent axis limits across subplots for better comparison
+            if i == 0:  # Use first plot to determine good limits
+                x_margin = (max(latency_sorted) - min(latency_sorted)) * 0.1
+                y_margin = (max(throughput_sorted) - min(throughput_sorted)) * 0.1
+                xlim = (min(latency_sorted) - x_margin, max(latency_sorted) + x_margin)
+                ylim = (min(throughput_sorted) - y_margin, max(throughput_sorted) + y_margin)
+            
+            ax.set_xlim(xlim)
+            ax.set_ylim(ylim)
+        else:
+            ax.text(0.5, 0.5, 'No data', ha='center', va='center', 
+                   transform=ax.transAxes, fontsize=12)
+            ax.set_title(f'Stride {stride}B (No Data)')
+    
+    # Hide any empty subplots
+    for i in range(len(data), len(axes_flat)):
+        axes_flat[i].set_visible(False)
+    
+    plt.suptitle('Throughput vs Latency by Stride and Thread Count\n(Intensity Sweep Analysis)', 
+                fontsize=14, fontweight='bold', y=0.98)
+    plt.tight_layout(rect=[0, 0, 1, 0.96])  # Make room for suptitle
+    #plt.savefig('../results/plots/intensity_sweep_faceted.png', dpi=300, bbox_inches='tight')
+    plt.close()
+    
+    # Also create a combined version in a single plot for overview
+    create_combined_intensity_plot(data)
+
+def create_combined_intensity_plot(data):
+    """Create a combined plot showing all strides together with different markers"""
+    if not data:
+        return
+        
+    plt.figure(figsize=(12, 8))
+    
+    colors = plt.cm.tab10(np.linspace(0, 1, len(data)))
+    markers = ['o', 's', '^', 'D', 'v', '<', '>', 'p', '*', 'h']
+    
+    for i, (stride, values) in enumerate(data.items()):
+        if values['threads']:
+            # Sort by threads to maintain proper progression
+            sorted_data = sorted(zip(values['threads'], values['throughput_mean'], values['latency_mean']))
+            threads_sorted, throughput_sorted, latency_sorted = zip(*sorted_data)
+            
+            # Plot with unique marker and color
+            for j, (thread, lat, tp) in enumerate(zip(threads_sorted, latency_sorted, throughput_sorted)):
+                plt.scatter(lat, tp, 
+                          c=[colors[i]], 
+                          marker=markers[i % len(markers)],
+                          s=thread*80,  # Size proportional to thread count
+                          alpha=0.7, 
+                          edgecolors='black', 
+                          linewidth=0.5,
+                          label=f'Stride {stride}B' if j == 0 else "")
+            
+            # Connect points with lines
+            plt.plot(latency_sorted, throughput_sorted, '--', 
+                    color=colors[i], alpha=0.5, linewidth=1)
+            
+            # Annotate the highest thread count point for each stride
+            max_thread_idx = threads_sorted.index(max(threads_sorted))
+            plt.annotate(f'{threads_sorted[max_thread_idx]}t', 
+                        (latency_sorted[max_thread_idx], throughput_sorted[max_thread_idx]),
+                        xytext=(10, 10), textcoords='offset points',
+                        fontsize=9, fontweight='bold',
+                        bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.8))
+    
+    plt.xlabel('Latency (ns/op)', fontsize=12, fontweight='bold')
+    plt.ylabel('Throughput (MB/s)', fontsize=12, fontweight='bold')
+    plt.title('Throughput vs Latency - All Strides Combined\n(Point size = Thread count)', 
+              fontsize=14, fontweight='bold')
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+    plt.grid(True, alpha=0.3)
+    
+    plt.tight_layout()
+    plt.savefig('../results/plots/intensity_sweep_combined.png', dpi=300, bbox_inches='tight')
+    plt.close()
+
+def parse_pattern_latency():
+    """Parse pattern latency data - fixed version for the actual file format"""
+    pattern_data = {}
+    
+    try:
+        with open('../results/raw_data/pattern_latency.txt') as f:
+            for line in f:
+                line = line.strip()
+                if 'Pattern:' in line and 'Latencies:' in line:
+                    try:
+                        # Extract pattern name
+                        pattern_start = line.find('Pattern:') + len('Pattern:')
+                        pattern_end = line.find(', Size:')
+                        pattern_name = line[pattern_start:pattern_end].strip()
+                        
+                        # Extract size (though it's the same for all)
+                        size_start = line.find('Size:') + len('Size:')
+                        size_end = line.find('bytes,')
+                        size_str = line[size_start:size_end].strip()
+                        size = int(size_str)
+                        
+                        # Extract latencies
+                        latencies_start = line.find('Latencies:') + len('Latencies:')
+                        latencies_str = line[latencies_start:].strip()
+                        
+                        # Split individual latency values
+                        latency_values = []
+                        for lat_str in latencies_str.split(','):
+                            lat_str_clean = lat_str.replace('ns', '').strip()
+                            if lat_str_clean:
+                                latency_values.append(float(lat_str_clean))
+                        
+                        if pattern_name not in pattern_data:
+                            pattern_data[pattern_name] = []
+                        
+                        pattern_data[pattern_name].extend(latency_values)
+                        
+                    except (ValueError, IndexError) as e:
+                        print(f"Error parsing line: {line} - {e}")
+                        continue
+                        
+    except FileNotFoundError:
+        print("Error: pattern_latency.txt file not found")
+        return {}
+    
+    return pattern_data
+
+def plot_pattern_latency():
+    """Plot pattern latency data - fixed version with correct bar parameters"""
+    pattern_data = parse_pattern_latency()
+    
+    if not pattern_data:
+        print("No pattern latency data found!")
+        return
+    
+    # Prepare data for plotting
+    patterns = []
+    means = []
+    stds = []
+    all_latencies = []
+    
+    for pattern_name, latencies in pattern_data.items():
+        patterns.append(pattern_name)
+        means.append(statistics.mean(latencies))
+        stds.append(statistics.stdev(latencies) if len(latencies) > 1 else 0)
+        all_latencies.extend(latencies)
+    
+    if not patterns:
+        print("No valid pattern data to plot")
+        return
+    
+    # Create the plot
+    plt.figure(figsize=(14, 8))
+    
+    # Create bar positions
+    x_pos = np.arange(len(patterns))
+    
+    # Create bars with error bars - FIXED: use error_kw parameter
+    bars = plt.bar(x_pos, means, yerr=stds, capsize=5, 
+                   error_kw={'elinewidth': 2, 'capthick': 2},  # Fixed: use error_kw dictionary
+                   color=plt.cm.Set3(np.linspace(0, 1, len(patterns))),
+                   alpha=0.7, edgecolor='black', linewidth=1)
+    
+    # Add value labels on bars
+    max_latency = max(means) if means else 1
+    for i, (bar, mean, std) in enumerate(zip(bars, means, stds)):
+        height = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width()/2., height + max_latency * 0.02,
+                f'{mean:.1f} ± {std:.1f} ns', ha='center', va='bottom', 
+                fontweight='bold', fontsize=10)
+    
+    # Customize the plot
+    plt.xlabel('Access Pattern', fontsize=12, fontweight='bold')
+    plt.ylabel('Latency (ns)', fontsize=12, fontweight='bold')
+    plt.title('Memory Access Pattern Latency Comparison\n(64MB Working Set, 3 Runs Each)', 
+              fontsize=14, fontweight='bold', pad=20)
+    
+    # Set x-axis labels with pattern names
+    plt.xticks(x_pos, patterns, rotation=45, ha='right')
+    
+    # Add grid
+    plt.grid(True, alpha=0.3, axis='y')
+    
+    # Adjust layout to prevent label cutoff
+    plt.tight_layout()
+    
+    # Save the plot
     plt.savefig('../results/plots/pattern_stride_latency.png', dpi=300, bbox_inches='tight')
     plt.close()
+    
+    # Print summary statistics
+    print("\n" + "="*60)
+    print("PATTERN LATENCY SUMMARY")
+    print("="*60)
+    for pattern, mean, std in zip(patterns, means, stds):
+        print(f"{pattern:>12}: {mean:6.1f} ± {std:4.1f} ns")
+    print("="*60)
+    print(f"Fastest pattern: {patterns[np.argmin(means)]} ({min(means):.1f} ns)")
+    print(f"Slowest pattern: {patterns[np.argmax(means)]} ({max(means):.1f} ns)")
+    print(f"Ratio (slowest/fastest): {max(means)/min(means):.1f}x")
+    print("="*60)
 
 def parse_kernel_bench():
     """Parse kernel benchmark data with support for multiple runs"""
@@ -564,12 +1007,21 @@ def parse_kernel_bench():
                 elif 'TLB Impact' in line:
                     current_section = 'tlb'
             elif line and current_section == 'cache' and 'Size:' in line:
+                # Fix: Handle the format "300ns(4.26667e+08ops/s)"
                 parts = line.split(',')
                 size = int(parts[0].split(': ')[1].replace('B', '').strip())
                 stride = int(parts[1].split(': ')[1].strip())
                 random = parts[2].split(': ')[1].strip() == 'Yes'
-                time = float(parts[3].split(': ')[1].replace('ns', '').strip())
-                perf = float(parts[4].split(': ')[1].split(' ')[0].strip())
+                
+                # Fix: Extract time from format like "300ns(4.26667e+08ops/s)"
+                time_perf_str = parts[3].split(': ')[1].strip()
+                # Extract just the time part before "ns"
+                time_str = time_perf_str.split('ns')[0].strip()
+                time = float(time_str)
+                
+                # Extract performance from parentheses
+                perf_str = time_perf_str.split('(')[1].split('ops')[0].strip()
+                perf = float(perf_str)
                 
                 # Create unique key for this configuration
                 config_key = (size, stride, random)
@@ -580,11 +1032,20 @@ def parse_kernel_bench():
                 cache_runs[config_key]['perf'].append(perf)
                 
             elif line and current_section == 'tlb' and 'Size:' in line:
+                # Fix: Handle the format "1.84278e+07ns(2.84509e+07ops/s)"
                 parts = line.split(',')
                 size = int(parts[0].split(': ')[1].replace('B', '').strip())
                 huge_pages = parts[1].split(': ')[1].strip() == 'Yes'
-                time = float(parts[2].split(': ')[1].replace('ns', '').strip())
-                perf = float(parts[3].split(': ')[1].split(' ')[0].strip())
+                
+                # Fix: Extract time from format like "1.84278e+07ns(2.84509e+07ops/s)"
+                time_perf_str = parts[2].split(': ')[1].strip()
+                # Extract just the time part before "ns"
+                time_str = time_perf_str.split('ns')[0].strip()
+                time = float(time_str)
+                
+                # Extract performance from parentheses
+                perf_str = time_perf_str.split('(')[1].split('ops')[0].strip()
+                perf = float(perf_str)
                 
                 # Create unique key for this configuration
                 config_key = (size, huge_pages)
@@ -693,7 +1154,7 @@ def plot_kernel_bench():
     create_cache_subplots(cache_data)
     
     # Plot TLB impact
-    plot_tlb_impact_individual()
+    plot_tlb_impact_individual(tlb_data)
 
 def create_cache_subplots(cache_data):
     """Create additional subplots for cache analysis"""
@@ -735,6 +1196,7 @@ def plot_sequential_vs_random(cache_data, random=False, title="", cache_sizes=No
     
     colors = get_distinct_colors(len(unique_strides))
     
+    has_data = False
     for i, stride in enumerate(unique_strides):
         sizes_for_stride = []
         perf_for_stride = []
@@ -757,16 +1219,19 @@ def plot_sequential_vs_random(cache_data, random=False, title="", cache_sizes=No
                     color=colors[i % len(colors)],
                     label=f'Stride {stride}',
                     linewidth=2, markersize=6)
+            has_data = True
     
     plt.xscale('log')
     plt.xlabel('Working Set Size (bytes)')
     plt.ylabel('Performance (ops/s)')
     plt.title(title)
     plt.grid(True, alpha=0.3)
-    plt.legend(fontsize=8)
+    
+    if has_data:
+        plt.legend(fontsize=8)
     
     # Add cache boundaries if sizes are provided
-    if cache_sizes:
+    if cache_sizes and has_data:
         for level, size in cache_sizes.items():
             plt.axvline(x=size, color='gray', linestyle='--', alpha=0.7, label=f'{level} Cache')
         plt.legend(fontsize=8)
@@ -778,6 +1243,7 @@ def plot_performance_ratio(cache_data, cache_sizes=None):
     
     colors = get_distinct_colors(len(unique_strides))
     
+    has_data = False
     for i, stride in enumerate(unique_strides):
         sizes_for_stride = []
         ratios = []
@@ -810,6 +1276,7 @@ def plot_performance_ratio(cache_data, cache_sizes=None):
                     color=colors[i % len(colors)],
                     label=f'Stride {stride}',
                     linewidth=2, markersize=6)
+            has_data = True
     
     plt.xscale('log')
     plt.xlabel('Working Set Size (bytes)')
@@ -817,10 +1284,12 @@ def plot_performance_ratio(cache_data, cache_sizes=None):
     plt.title('Performance Degradation from Random Access')
     plt.grid(True, alpha=0.3)
     plt.axhline(y=1.0, color='red', linestyle='--', alpha=0.7)
-    plt.legend(fontsize=8)
+    
+    if has_data:
+        plt.legend(fontsize=8)
     
     # Add cache boundaries if sizes are provided
-    if cache_sizes:
+    if cache_sizes and has_data:
         for level, size in cache_sizes.items():
             plt.axvline(x=size, color='gray', linestyle='--', alpha=0.7, label=f'{level} Cache')
         plt.legend(fontsize=8)
@@ -832,6 +1301,7 @@ def plot_best_case_performance(cache_data, cache_sizes=None):
     best_seq_perf = []
     best_rand_perf = []
     
+    has_data = False
     for size in unique_sizes:
         # Best sequential performance (min stride)
         seq_indices = [idx for idx in range(len(cache_data['size'])) 
@@ -839,6 +1309,7 @@ def plot_best_case_performance(cache_data, cache_sizes=None):
         if seq_indices:
             best_seq = max([cache_data['perf'][idx] for idx in seq_indices])
             best_seq_perf.append(best_seq)
+            has_data = True
         else:
             best_seq_perf.append(0)
         
@@ -848,48 +1319,76 @@ def plot_best_case_performance(cache_data, cache_sizes=None):
         if rand_indices:
             best_rand = max([cache_data['perf'][idx] for idx in rand_indices])
             best_rand_perf.append(best_rand)
+            has_data = True
         else:
             best_rand_perf.append(0)
     
-    plt.plot(unique_sizes, best_seq_perf, 'o-', label='Best Sequential', linewidth=2)
-    plt.plot(unique_sizes, best_rand_perf, 's-', label='Best Random', linewidth=2)
-    
-    plt.xscale('log')
-    plt.xlabel('Working Set Size (bytes)')
-    plt.ylabel('Best Performance (ops/s)')
-    plt.title('Best-Case Performance by Working Set Size')
-    plt.grid(True, alpha=0.3)
-    plt.legend()
-    
-    # Add cache boundaries if sizes are provided
-    if cache_sizes:
-        for level, size in cache_sizes.items():
-            plt.axvline(x=size, color='gray', linestyle='--', alpha=0.7, label=f'{level} Cache')
-        plt.legend(fontsize=8)
+    if has_data:
+        plt.plot(unique_sizes, best_seq_perf, 'o-', label='Best Sequential', linewidth=2)
+        plt.plot(unique_sizes, best_rand_perf, 's-', label='Best Random', linewidth=2)
+        
+        plt.xscale('log')
+        plt.xlabel('Working Set Size (bytes)')
+        plt.ylabel('Best Performance (ops/s)')
+        plt.title('Best-Case Performance by Working Set Size')
+        plt.grid(True, alpha=0.3)
+        plt.legend()
+        
+        # Add cache boundaries if sizes are provided
+        if cache_sizes:
+            for level, size in cache_sizes.items():
+                plt.axvline(x=size, color='gray', linestyle='--', alpha=0.7, label=f'{level} Cache')
+            plt.legend(fontsize=8)
+    else:
+        plt.text(0.5, 0.5, 'No data available', ha='center', va='center', transform=plt.gca().transAxes)
+        plt.title('Best-Case Performance (No Data)')
 
 def parse_tlb_impact():
+    """Parse TLB impact data - fixed version"""
     sizes, huge_pages, times, perfs = [], [], [], []
-    with open('../results/raw_data/kernel_bench.txt') as f:
-        current_section = None
-        for line in f:
-            line = line.strip()
-            if '=== TLB Impact Tests ===' in line:
-                current_section = 'tlb'
-            elif current_section == 'tlb' and 'Size:' in line and 'Huge Pages:' in line:
-                parts = line.split(',')
-                size = int(parts[0].split(': ')[1].replace('B', '').strip())
-                huge_page = parts[1].split(': ')[1].strip() == 'Yes'
-                time = float(parts[2].split(': ')[1].replace('ns', '').strip())
-                perf = float(parts[3].split(': ')[1].split(' ')[0].strip())
-                
-                sizes.append(size)
-                huge_pages.append(huge_page)
-                times.append(time)
-                perfs.append(perf)
+    try:
+        with open('../results/raw_data/kernel_bench.txt') as f:
+            current_section = None
+            for line in f:
+                line = line.strip()
+                if '=== TLB Impact Tests ===' in line:
+                    current_section = 'tlb'
+                elif current_section == 'tlb' and 'Size:' in line and 'Huge Pages:' in line:
+                    parts = line.split(',')
+                    if len(parts) < 3:
+                        continue
+                        
+                    size = int(parts[0].split(': ')[1].replace('B', '').strip())
+                    huge_page = parts[1].split(': ')[1].strip() == 'Yes'
+                    
+                    # Fix: Handle the format "1.84278e+07ns(2.84509e+07ops/s)"
+                    time_perf_str = parts[2].split(': ')[1].strip()
+                    
+                    # Extract just the time part before "ns"
+                    time_str = time_perf_str.split('ns')[0].strip()
+                    time = float(time_str)
+                    
+                    # Extract performance from parentheses
+                    perf_str = time_perf_str.split('(')[1].split('ops')[0].strip()
+                    perf = float(perf_str)
+                    
+                    sizes.append(size)
+                    huge_pages.append(huge_page)
+                    times.append(time)
+                    perfs.append(perf)
+    except Exception as e:
+        print(f"Error parsing TLB impact data: {e}")
+    
     return sizes, huge_pages, times, perfs
 
-def plot_tlb_impact_individual():
-    sizes, huge_pages, times, perfs = parse_tlb_impact()
+def plot_tlb_impact_individual(tlb_data=None):
+    """Plot TLB impact - fixed version"""
+    if tlb_data is None:
+        sizes, huge_pages, times, perfs = parse_tlb_impact()
+    else:
+        sizes = tlb_data['size']
+        huge_pages = tlb_data['huge_pages']
+        perfs = tlb_data['perf']
     
     if not sizes:
         print("No TLB impact data found!")
@@ -901,11 +1400,14 @@ def plot_tlb_impact_individual():
     regular_data = sorted([(size, perf) for size, perf, hp in zip(sizes, perfs, huge_pages) if not hp])
     huge_data = sorted([(size, perf) for size, perf, hp in zip(sizes, perfs, huge_pages) if hp])
     
-    if regular_data:
+    has_regular = len(regular_data) > 0
+    has_huge = len(huge_data) > 0
+    
+    if has_regular:
         regular_sizes, regular_perfs = zip(*regular_data)
         plt.plot(regular_sizes, regular_perfs, 'o-', linewidth=2, markersize=8, 
                 label='Regular Pages (4KB)', color='#E74C3C')
-    if huge_data:
+    if has_huge:
         huge_sizes, huge_perfs = zip(*huge_data)
         plt.plot(huge_sizes, huge_perfs, 's-', linewidth=2, markersize=8,
                 label='Huge Pages (2MB)', color='#3498DB')
@@ -913,7 +1415,10 @@ def plot_tlb_impact_individual():
     plt.xlabel('Working Set Size (bytes)', fontsize=12)
     plt.ylabel('Performance (operations/second)', fontsize=12)
     plt.title('TLB Impact on SAXPY Performance', fontsize=14, fontweight='bold')
-    plt.legend(fontsize=11)
+    
+    if has_regular or has_huge:
+        plt.legend(fontsize=11)
+    
     plt.xscale('log')
     plt.grid(True, alpha=0.3)
     
@@ -922,7 +1427,9 @@ def plot_tlb_impact_individual():
     plt.axvline(x=256*1024, color='gray', linestyle='-.', alpha=0.7, label='L2 Cache (~256KB)')
     plt.axvline(x=8*1024*1024, color='gray', linestyle=':', alpha=0.7, label='L3 Cache (~8MB)')
     
-    plt.legend(fontsize=10)
+    if has_regular or has_huge:
+        plt.legend(fontsize=10)
+    
     plt.tight_layout()
     plt.savefig('../results/plots/tlb_miss_impact.png', dpi=300, bbox_inches='tight')
     plt.close()
@@ -964,6 +1471,8 @@ if __name__ == '__main__':
         print("Pattern latency plot created successfully")
     except Exception as e:
         print(f"Error creating pattern latency plot: {e}")
+        import traceback
+        traceback.print_exc()
     
     try:
         plot_tlb_impact_individual()

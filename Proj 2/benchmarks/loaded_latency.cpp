@@ -57,7 +57,7 @@ void memory_worker(char* buffer, size_t size, int stride, std::atomic<bool>& sta
     operations += local_ops;
 }
 
-std::pair<double, double> loaded_latency_test_single_run(int num_threads, int stride) {
+std::pair<std::vector<double>, std::vector<double>> loaded_latency_test_single_run(int num_threads, int stride) {
     char* buffer = (char*)aligned_alloc(CACHE_LINE_SIZE, BUFFER_SIZE);
     
     // Initialize buffer
@@ -120,13 +120,13 @@ std::pair<double, double> loaded_latency_test_single_run(int num_threads, int st
     double avg_latency = (total_operations > 0) ? (elapsed_ns / total_operations) : 0.0; // Nanoseconds per operation
     
     aligned_free(buffer);
-    return std::make_pair(throughput, avg_latency);
+    return std::make_pair(std::vector<double>{throughput}, std::vector<double>{avg_latency});
 }
 
 void loaded_latency_test(int num_threads, int stride) {
     const int NUM_RUNS = 3;
-    double total_throughput = 0.0;
-    double total_latency = 0.0;
+    std::vector<double> throughputs;
+    std::vector<double> latencies;
     
     for (int run = 0; run < NUM_RUNS; ++run) {
         // Warm-up run
@@ -134,16 +134,30 @@ void loaded_latency_test(int num_threads, int stride) {
         flush_cache();
         
         auto result = loaded_latency_test_single_run(num_threads, stride);
-        total_throughput += result.first;
-        total_latency += result.second;
+        throughputs.insert(throughputs.end(), result.first.begin(), result.first.end());
+        latencies.insert(latencies.end(), result.second.begin(), result.second.end());
         
         // Small delay between runs
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
     
+    // Output all three measurements
     std::cout << "Threads: " << num_threads << ", Stride: " << stride 
-              << ", Throughput: " << (total_throughput / NUM_RUNS) / (1024*1024) << " MB/s"
-              << ", Latency: " << total_latency / NUM_RUNS << " ns/op" << std::endl;
+              << ", Throughputs: ";
+    for (size_t i = 0; i < throughputs.size(); ++i) {
+        std::cout << (throughputs[i] / (1024*1024)) << " MB/s";
+        if (i < throughputs.size() - 1) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << ", Latencies: ";
+    for (size_t i = 0; i < latencies.size(); ++i) {
+        std::cout << latencies[i] << " ns/op";
+        if (i < latencies.size() - 1) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << std::endl;
 }
 
 int main() {

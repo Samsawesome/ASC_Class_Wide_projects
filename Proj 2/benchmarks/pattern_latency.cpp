@@ -6,6 +6,9 @@
 #include <vector>
 #include <random>
 #include <algorithm>
+#include <malloc.h>  // Add for _aligned_malloc
+#include <emmintrin.h>  // Add for _mm_mfence
+#include <functional>
 
 // Set process affinity to core 0 and highest priority
 void set_high_priority_affinity() {
@@ -28,99 +31,173 @@ void set_high_priority_affinity() {
                          &powerThrottling, sizeof(powerThrottling));
 }
 
-double test_bandwidth_single_run(int stride, float read_ratio) {
-    const size_t size = 256 * 1024 * 1024; // 256MB
-    char* memory = (char*)aligned_alloc(CACHE_LINE_SIZE, size);
+class HighResTimer {
+private:
+    LARGE_INTEGER frequency;
+    LARGE_INTEGER startTime;
     
-    // Initialize memory with random data
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(0, 255);
-    for (size_t i = 0; i < size; i++) {
-        memory[i] = static_cast<char>(dis(gen));
+public:
+    HighResTimer() {
+        QueryPerformanceFrequency(&frequency);
     }
     
-    const int iterations = 100000;
-    volatile char sink;
-    
-    // Warm-up run
-    int length = 0;
-    if (1000 < static_cast<int>(size/stride)) {
-        length = 1000;
-    } else {
-        length = static_cast<int>(size/stride);
+    void start() {
+        QueryPerformanceCounter(&startTime);
     }
+    
+    double stop() {
+        LARGE_INTEGER endTime;
+        QueryPerformanceCounter(&endTime);
+        return (endTime.QuadPart - startTime.QuadPart) * 1000000000.0 / frequency.QuadPart; // ns
+    }
+};
 
-    for (int i = 0; i < length; i++) {
-        size_t idx = (i * stride) % size;
-        if (rand() % 100 < read_ratio * 100) {
-            sink = memory[idx];
-        } else {
-            memory[idx] = i & 0xFF;
-        }
-    }
-    
-    flush_cache(); // Add cache flush before measurement
-    
-    // Actual measurement
-    auto start = std::chrono::high_resolution_clock::now();
-    
-    for (int i = 0; i < iterations; i++) {
-        size_t idx = (i * stride) % size;
-        if (rand() % 100 < read_ratio * 100) {
-            sink = memory[idx];
-        } else {
-            memory[idx] = i & 0xFF;
-        }
-    }
-    
-    auto end = std::chrono::high_resolution_clock::now();
-    
-    double total_time_ns = std::chrono::duration<double, std::nano>(end - start).count();
-    double avg_latency_ns = total_time_ns / iterations;
-    
-    aligned_free(memory);
-    return avg_latency_ns;
+// Windows-compatible aligned_alloc and aligned_free
+void* windows_aligned_alloc(size_t alignment, size_t size) {
+    return _aligned_malloc(size, alignment);
 }
 
-void test_bandwidth(int stride, float read_ratio) {
-    const int NUM_RUNS = 3;
-    double total_latency = 0.0;
+void windows_aligned_free(void* ptr) {
+    _aligned_free(ptr);
+}
+
+constexpr int ITERATIONS = 1000000;
+constexpr int WARMUP = 1000;
+
+// Generate access patterns
+std::vector<size_t> generate_sequential(size_t size, int stride) {
+    std::vector<size_t> indices;
+    for (size_t i = 0; i < size; i += stride) {
+        indices.push_back(i);
+    }
+    return indices;
+}
+
+std::vector<size_t> generate_random(size_t size, int stride) {
+    auto indices = generate_sequential(size, stride);
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(indices.begin(), indices.end(), g);
+    return indices;
+}
+
+std::vector<size_t> generate_strided(size_t size, int stride, int pattern_stride) {
+    std::vector<size_t> indices;
+    for (size_t i = 0; i < size; i += stride) {
+        indices.push_back((i * pattern_stride) % size);
+    }
+    return indices;
+}
+
+std::vector<size_t> generate_cluster(size_t size, int stride, int cluster_size) {
+    std::vector<size_t> indices;
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::uniform_int_distribution<size_t> dist(0, size - cluster_size * stride);
     
-    for (int run = 0; run < NUM_RUNS; ++run) {
-        total_latency += test_bandwidth_single_run(stride, read_ratio);
+    for (int cluster = 0; cluster < size / (cluster_size * stride); ++cluster) {
+        size_t base = dist(g);
+        for (int i = 0; i < cluster_size; ++i) {
+            indices.push_back((base + i * stride) % size);
+        }
+    }
+    return indices;
+}
+
+std::vector<double> measure_pattern_latency_single_run(char* memory, const std::vector<size_t>& pattern) {
+    HighResTimer timer;
+    volatile char result = 0;
+    
+    // Warm-up
+    for (int i = 0; i < WARMUP && i < (int)pattern.size(); ++i) {
+        result += memory[pattern[i]];
     }
     
-    double avg_latency = total_latency / NUM_RUNS;
+    flush_cache();
     
-    std::cout << "Stride: " << stride << ", ReadRatio: " << std::fixed << std::setprecision(1) << read_ratio 
-              << ", Latency: " << std::fixed << std::setprecision(2) << avg_latency << " ns" << std::endl;
+    timer.start();
+    for (int i = 0; i < ITERATIONS; ++i) {
+        size_t index = pattern[i % pattern.size()];
+        result += memory[index];
+        _mm_mfence();
+    }
+    double total_ns = timer.stop();
+    
+    if (result == 0) {
+        std::cout << "Never happens" << std::endl;
+    }
+    
+    return {total_ns / ITERATIONS};
+}
+
+void test_access_pattern(const std::string& pattern_name, const std::vector<size_t>& pattern, 
+                        char* memory, size_t size) {
+    const int NUM_RUNS = 3;
+    std::vector<double> latencies;
+    
+    for (int run = 0; run < NUM_RUNS; ++run) {
+        auto run_latencies = measure_pattern_latency_single_run(memory, pattern);
+        latencies.insert(latencies.end(), run_latencies.begin(), run_latencies.end());
+        flush_cache();
+    }
+    
+    // Output all three measurements
+    std::cout << "Pattern: " << std::setw(12) << pattern_name 
+              << ", Size: " << std::setw(8) << size << " bytes, Latencies: ";
+    for (size_t i = 0; i < latencies.size(); ++i) {
+        std::cout << latencies[i] << " ns";
+        if (i < latencies.size() - 1) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << std::endl;
 }
 
 int main() {
     set_high_priority_affinity();
     
-    std::vector<int> strides = {64, 128, 256, 512, 1024, 2048, 4096};
-    std::vector<float> read_ratios = {0.0f, 0.25f, 0.5f, 0.75f, 1.0f};
+    const size_t TEST_SIZE = 64 * 1024 * 1024; // 64MB
+    char* memory = (char*)windows_aligned_alloc(CACHE_LINE_SIZE, TEST_SIZE);
     
-    // Create and randomize test order
-    std::vector<std::pair<int, float>> tests;
-    for (int stride : strides) {
-        for (float ratio : read_ratios) {
-            tests.emplace_back(stride, ratio);
-        }
+    if (!memory) {
+        std::cerr << "Failed to allocate memory!" << std::endl;
+        return 1;
     }
     
+    // Initialize memory
+    for (size_t i = 0; i < TEST_SIZE; ++i) {
+        memory[i] = (char)(i % 256);
+    }
+    
+    // Define test configurations
+    struct PatternTest {
+        std::string name;
+        std::function<std::vector<size_t>(size_t, int)> generator;
+        int param;
+    };
+    
+    std::vector<PatternTest> tests = {
+        {"Sequential", generate_sequential, 64},
+        {"Random", generate_random, 64},
+        {"Stride-2", [](size_t s, int st) { return generate_strided(s, st, 2); }, 64},
+        {"Stride-4", [](size_t s, int st) { return generate_strided(s, st, 4); }, 64},
+        {"Stride-8", [](size_t s, int st) { return generate_strided(s, st, 8); }, 64},
+        {"Cluster-4", [](size_t s, int st) { return generate_cluster(s, st, 4); }, 64},
+        {"Cluster-16", [](size_t s, int st) { return generate_cluster(s, st, 16); }, 64}
+    };
+    
+    // Randomize test order
     std::random_device rd;
     std::mt19937 g(rd());
     std::shuffle(tests.begin(), tests.end(), g);
     
-    std::cout << "Starting pattern latency measurements..." << std::endl;
+    std::cout << "=== Memory Access Pattern Latency Tests ===" << std::endl;
+    
     for (const auto& test : tests) {
-        test_bandwidth(test.first, test.second);
+        auto pattern = test.generator(TEST_SIZE, test.param);
+        test_access_pattern(test.name, pattern, memory, TEST_SIZE);
     }
     
-    std::cout << "Pattern latency measurements completed." << std::endl;
-    
+    windows_aligned_free(memory);
     return 0;
 }

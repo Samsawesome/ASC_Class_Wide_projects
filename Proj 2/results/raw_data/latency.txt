@@ -1,10 +1,10 @@
 === Improved Custom Measurements ===
-Level: L1, Size: 32768 bytes, Latency: 17.7934 ns
+Level: L1, Size: 32768 bytes, Latencies: 17.5481 ns, 17.5319 ns, 17.4877 ns
+Level: L2, Size: 262144 bytes, Latencies: 18.3528 ns, 19.7194 ns, 19.1118 ns
 Never happens
-Level: L2, Size: 262144 bytes, Latency: 18.3424 ns
-Level: L3, Size: 8388608 bytes, Latency: 78.5146 ns
+Level: L3, Size: 8388608 bytes, Latencies: 106.363 ns, 102.397 ns, 106.201 ns
 Never happens
-Level: DRAM, Size: 67108864 bytes, Latency: 114.705 ns
+Level: DRAM, Size: 67108864 bytes, Latencies: 107.109 ns, 104.959 ns, 102.451 ns
 
 Found MLC at: C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 2\scripts\..\scripts\mlc.exe
 Executing: "C:\Users\samsa\OneDrive\Desktop\Advance Computer Systems\ASC_Class_Wide_projects\Proj 2\scripts\..\scripts\mlc.exe" --latency_matrix > mlc_output.txt 2>&1

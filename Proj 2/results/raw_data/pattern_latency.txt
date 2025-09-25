@@ -1,37 +1,20 @@
-Starting pattern latency measurements...
-Stride: 4096, ReadRatio: 0.8, Latency: 28.25 ns
-Stride: 512, ReadRatio: 1.0, Latency: 11.01 ns
-Stride: 64, ReadRatio: 1.0, Latency: 9.49 ns
-Stride: 2048, ReadRatio: 0.2, Latency: 30.81 ns
-Stride: 256, ReadRatio: 1.0, Latency: 11.59 ns
-Stride: 1024, ReadRatio: 0.0, Latency: 12.32 ns
-Stride: 128, ReadRatio: 1.0, Latency: 9.80 ns
-Stride: 2048, ReadRatio: 0.5, Latency: 26.47 ns
-Stride: 256, ReadRatio: 0.0, Latency: 11.23 ns
-Stride: 128, ReadRatio: 0.8, Latency: 13.64 ns
-Stride: 4096, ReadRatio: 1.0, Latency: 21.41 ns
-Stride: 64, ReadRatio: 0.0, Latency: 8.97 ns
-Stride: 512, ReadRatio: 0.8, Latency: 14.65 ns
-Stride: 256, ReadRatio: 0.5, Latency: 18.72 ns
-Stride: 4096, ReadRatio: 0.0, Latency: 16.31 ns
-Stride: 512, ReadRatio: 0.5, Latency: 19.86 ns
-Stride: 128, ReadRatio: 0.2, Latency: 14.56 ns
-Stride: 64, ReadRatio: 0.5, Latency: 16.58 ns
-Stride: 256, ReadRatio: 0.8, Latency: 15.11 ns
-Stride: 4096, ReadRatio: 0.2, Latency: 26.12 ns
-Stride: 1024, ReadRatio: 1.0, Latency: 12.64 ns
-Stride: 2048, ReadRatio: 1.0, Latency: 17.90 ns
-Stride: 64, ReadRatio: 0.8, Latency: 13.09 ns
-Stride: 64, ReadRatio: 0.2, Latency: 14.75 ns
-Stride: 1024, ReadRatio: 0.8, Latency: 15.87 ns
-Stride: 128, ReadRatio: 0.5, Latency: 16.82 ns
-Stride: 1024, ReadRatio: 0.5, Latency: 23.04 ns
-Stride: 512, ReadRatio: 0.0, Latency: 10.37 ns
-Stride: 256, ReadRatio: 0.2, Latency: 16.29 ns
-Stride: 512, ReadRatio: 0.2, Latency: 17.52 ns
-Stride: 2048, ReadRatio: 0.8, Latency: 19.88 ns
-Stride: 2048, ReadRatio: 0.0, Latency: 13.37 ns
-Stride: 1024, ReadRatio: 0.2, Latency: 23.13 ns
-Stride: 128, ReadRatio: 0.0, Latency: 10.96 ns
-Stride: 4096, ReadRatio: 0.5, Latency: 30.50 ns
-Pattern latency measurements completed.
+=== Memory Access Pattern Latency Tests ===
+Never happens
+Never happens
+Never happens
+Pattern:     Stride-8, Size: 67108864 bytes, Latencies: 17.6213 ns, 17.1237 ns, 16.896 ns
+Pattern:       Random, Size: 67108864 bytes, Latencies: 113.155 ns, 113.998 ns, 114.295 ns
+Pattern:   Cluster-16, Size: 67108864 bytes, Latencies: 24.2172 ns, 24.0177 ns, 24.4398 ns
+Never happens
+Never happens
+Never happens
+Pattern:     Stride-2, Size: 67108864 bytes, Latencies: 15.7114 ns, 15.7687 ns, 15.7216 ns
+Never happens
+Never happens
+Never happens
+Pattern:     Stride-4, Size: 67108864 bytes, Latencies: 16.3287 ns, 16.115 ns, 16.1311 ns
+Never happens
+Never happens
+Never happens
+Pattern:   Sequential, Size: 67108864 bytes, Latencies: 15.7734 ns, 15.7606 ns, 17.651 ns
+Pattern:    Cluster-4, Size: 67108864 bytes, Latencies: 41.1688 ns, 40.5457 ns, 41.3123 ns

@@ -80,8 +80,8 @@ void saxpy(int n, float a, float* x, float* y) {
 }
 
 template<typename TestFunc, typename... Args>
-double run_test_multiple_times(int num_runs, TestFunc&& test_func, Args&&... args) {
-    double total_time = 0.0;
+std::vector<double> run_test_multiple_times(int num_runs, TestFunc&& test_func, Args&&... args) {
+    std::vector<double> times;
     
     for (int run = 0; run < num_runs; ++run) {
         // Warm-up run
@@ -92,12 +92,11 @@ double run_test_multiple_times(int num_runs, TestFunc&& test_func, Args&&... arg
         test_func(std::forward<Args>(args)...);
         auto end = std::chrono::high_resolution_clock::now();
         
-        total_time += std::chrono::duration<double, std::nano>(end - start).count();
+        times.push_back(std::chrono::duration<double, std::nano>(end - start).count());
     }
     
-    return total_time / num_runs;
+    return times;
 }
-
 
 // Test with different access patterns to vary cache miss rates
 void test_cache_miss_impact(size_t working_set_size, int stride, bool random_access) {
@@ -132,13 +131,21 @@ void test_cache_miss_impact(size_t working_set_size, int stride, bool random_acc
         }
     };
     
-    double avg_time_ns = run_test_multiple_times(3, test_lambda);
+    std::vector<double> times_ns = run_test_multiple_times(3, test_lambda);
     double operations = n / static_cast<double>(stride);
-    double performance = operations / (avg_time_ns / 1e9);
     
+    // Output all three measurements
     std::cout << "Size: " << working_set_size << "B, Stride: " << stride 
               << ", Random: " << (random_access ? "Yes" : "No")
-              << ", Time: " << avg_time_ns << " ns, Perf: " << performance << " ops/s" << std::endl;
+              << ", Times: ";
+    for (size_t i = 0; i < times_ns.size(); ++i) {
+        double performance = operations / (times_ns[i] / 1e9);
+        std::cout << times_ns[i] << "ns(" << performance << "ops/s)";
+        if (i < times_ns.size() - 1) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << std::endl;
     
     aligned_free(x);
     aligned_free(y);
@@ -192,20 +199,24 @@ void test_tlb_impact(size_t working_set_size, bool use_huge_pages) {
         y[i] = static_cast<float>(n - i);
     }
     
-    flush_cache(); // Clear cache before measurement
-    
-    auto start = std::chrono::high_resolution_clock::now();
-    
-    // Perform SAXPY operation
     auto test_lambda = [&]() {
+        flush_cache(); // Clear cache before measurement
         saxpy(n, a, x, y);
     };
     
-    double avg_time_ns = run_test_multiple_times(3, test_lambda);
-    double performance = n / (avg_time_ns / 1e9);
+    std::vector<double> times_ns = run_test_multiple_times(3, test_lambda);
     
+    // Output all three measurements
     std::cout << "Size: " << working_set_size << "B, Huge Pages: " << (use_huge_pages ? "Yes" : "No")
-              << ", Time: " << avg_time_ns << " ns, Perf: " << performance << " ops/s" << std::endl;
+              << ", Times: ";
+    for (size_t i = 0; i < times_ns.size(); ++i) {
+        double performance = n / (times_ns[i] / 1e9);
+        std::cout << times_ns[i] << "ns(" << performance << "ops/s)";
+        if (i < times_ns.size() - 1) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << std::endl;
     
     VirtualFree(x, 0, MEM_RELEASE);
     VirtualFree(y, 0, MEM_RELEASE);

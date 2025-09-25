@@ -9,7 +9,17 @@
 #include <string>
 #include <regex>
 #include <filesystem>
+#include <malloc.h>  // Add for _aligned_malloc
+#include <emmintrin.h>  // Add for _mm_mfence
 
+// Windows-compatible aligned_alloc and aligned_free
+void* windows_aligned_alloc(size_t alignment, size_t size) {
+    return _aligned_malloc(size, alignment);
+}
+
+void windows_aligned_free(void* ptr) {
+    _aligned_free(ptr);
+}
 
 // Set process affinity to core 0 and highest priority
 void set_high_priority_affinity() {
@@ -31,7 +41,6 @@ void set_high_priority_affinity() {
     SetProcessInformation(process, ProcessPowerThrottling, 
                          &powerThrottling, sizeof(powerThrottling));
 }
-
 
 // Use Windows high-performance counters for better resolution
 class HighResTimer {
@@ -65,7 +74,7 @@ void memory_access(volatile char* ptr) {
 }
 #pragma optimize("", on)
 
-double measure_latency_improved(char* memory, size_t size, int access_stride) {
+std::vector<double> measure_latency_improved(char* memory, size_t size, int access_stride) {
     HighResTimer timer;
     volatile char result = 0;
     
@@ -84,7 +93,7 @@ double measure_latency_improved(char* memory, size_t size, int access_stride) {
     }
     
     const int NUM_RUNS = 3;
-    double total_latency = 0.0;
+    std::vector<double> latencies;
     
     for (int run = 0; run < NUM_RUNS; ++run) {
         flush_cache();
@@ -95,19 +104,19 @@ double measure_latency_improved(char* memory, size_t size, int access_stride) {
             result += memory[index];
             _mm_mfence();
         }
-        total_latency += timer.stop() / ITERATIONS;
+        latencies.push_back(timer.stop() / ITERATIONS);
     }
     
     if (result == 0) {
         std::cout << "Never happens" << std::endl;
     }
     
-    return total_latency / NUM_RUNS;
+    return latencies;
 }
 
 void test_memory_level_improved(size_t size, const char* level_name) {
     const size_t buffer_size = size * 2; // Ensure larger than cache
-    char* memory = (char*)aligned_alloc(64, buffer_size);
+    char* memory = (char*)windows_aligned_alloc(64, buffer_size);
     
     if (!memory) {
         std::cerr << "Allocation failed for " << level_name << std::endl;
@@ -128,12 +137,19 @@ void test_memory_level_improved(size_t size, const char* level_name) {
         stride = 4096;
     }
     
-    double latency = measure_latency_improved(memory, buffer_size, stride);
+    std::vector<double> latencies = measure_latency_improved(memory, buffer_size, stride);
     
-    std::cout << "Level: " << level_name << ", Size: " << size << " bytes, Latency: " 
-              << latency << " ns" << std::endl;
+    // Output all three measurements
+    std::cout << "Level: " << level_name << ", Size: " << size << " bytes, Latencies: ";
+    for (size_t i = 0; i < latencies.size(); ++i) {
+        std::cout << latencies[i] << " ns";
+        if (i < latencies.size() - 1) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << std::endl;
     
-    aligned_free(memory);
+    windows_aligned_free(memory);
 }
 
 struct LatencyResult {

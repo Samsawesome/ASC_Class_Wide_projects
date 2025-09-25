@@ -71,17 +71,23 @@ double test_bandwidth_single_run(int stride, float read_ratio) {
 
 void test_bandwidth(int stride, float read_ratio) {
     const int NUM_RUNS = 3;
-    double total_bandwidth = 0.0;
+    std::vector<double> bandwidths;
     
     for (int run = 0; run < NUM_RUNS; ++run) {
         double bandwidth = test_bandwidth_single_run(stride, read_ratio);
-        total_bandwidth += bandwidth;
+        bandwidths.push_back(bandwidth);
     }
     
-    double avg_bandwidth = total_bandwidth / NUM_RUNS;
-    
+    // Output all three measurements for plotting with error bars
     std::cout << "Stride: " << stride << "B, Read Ratio: " << read_ratio 
-              << ", Bandwidth: " << avg_bandwidth << " MB/s\n";
+              << ", Bandwidths: ";
+    for (size_t i = 0; i < bandwidths.size(); ++i) {
+        std::cout << bandwidths[i];
+        if (i < bandwidths.size() - 1) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << " MB/s\n";
 }
 
 int main() {
@@ -109,3 +115,4 @@ int main() {
     
     return 0;
 }
+
