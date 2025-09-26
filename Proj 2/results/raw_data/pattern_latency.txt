@@ -2,19 +2,19 @@
 Never happens
 Never happens
 Never happens
-Pattern:     Stride-8, Size: 67108864 bytes, Latencies: 17.6213 ns, 17.1237 ns, 16.896 ns
-Pattern:       Random, Size: 67108864 bytes, Latencies: 113.155 ns, 113.998 ns, 114.295 ns
-Pattern:   Cluster-16, Size: 67108864 bytes, Latencies: 24.2172 ns, 24.0177 ns, 24.4398 ns
+Pattern:     Stride-4, Size: 67108864 bytes, Latencies: 16.5074 ns, 16.1533 ns, 16.0733 ns
 Never happens
 Never happens
 Never happens
-Pattern:     Stride-2, Size: 67108864 bytes, Latencies: 15.7114 ns, 15.7687 ns, 15.7216 ns
+Pattern:     Stride-2, Size: 67108864 bytes, Latencies: 15.7627 ns, 15.7991 ns, 15.7638 ns
+Pattern:       Random, Size: 67108864 bytes, Latencies: 111.255 ns, 117.646 ns, 111.643 ns
+Pattern:    Cluster-4, Size: 67108864 bytes, Latencies: 39.8822 ns, 39.9749 ns, 39.6305 ns
 Never happens
 Never happens
 Never happens
-Pattern:     Stride-4, Size: 67108864 bytes, Latencies: 16.3287 ns, 16.115 ns, 16.1311 ns
+Pattern:   Sequential, Size: 67108864 bytes, Latencies: 15.8239 ns, 15.8094 ns, 15.7761 ns
 Never happens
 Never happens
 Never happens
-Pattern:   Sequential, Size: 67108864 bytes, Latencies: 15.7734 ns, 15.7606 ns, 17.651 ns
-Pattern:    Cluster-4, Size: 67108864 bytes, Latencies: 41.1688 ns, 40.5457 ns, 41.3123 ns
+Pattern:     Stride-8, Size: 67108864 bytes, Latencies: 16.7194 ns, 16.959 ns, 16.8116 ns
+Pattern:   Cluster-16, Size: 67108864 bytes, Latencies: 24.0729 ns, 23.6244 ns, 23.5551 ns

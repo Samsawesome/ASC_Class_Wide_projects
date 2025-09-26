@@ -7,7 +7,7 @@
 #include <windows.h>
 #include <algorithm>
 #include <random>
-#include <functional>  // Add this for std::ref
+#include <functional> 
 
 constexpr int MAX_THREADS = 16;
 constexpr size_t BUFFER_SIZE = 64 * 1024 * 1024; // 64MB
@@ -116,7 +116,9 @@ std::pair<std::vector<double>, std::vector<double>> loaded_latency_test_single_r
     }
     
     double elapsed_ns = std::chrono::duration<double, std::nano>(end_time - start_time).count();
-    double throughput = (total_operations * stride) / (elapsed_ns / 1e9); // Bytes per second
+    //double throughput = (total_operations * (stride)) / (elapsed_ns / 1e9); // Bytes per second
+    double throughput = (total_operations * (64)) / (elapsed_ns / 1e9); // Bytes per second
+    // cache miss is 64 bytes, stride is much bigger than 64 bytes. can not read in 1024 bytes at once
     double avg_latency = (total_operations > 0) ? (elapsed_ns / total_operations) : 0.0; // Nanoseconds per operation
     
     aligned_free(buffer);

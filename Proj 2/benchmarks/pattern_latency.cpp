@@ -6,8 +6,8 @@
 #include <vector>
 #include <random>
 #include <algorithm>
-#include <malloc.h>  // Add for _aligned_malloc
-#include <emmintrin.h>  // Add for _mm_mfence
+#include <malloc.h>
+#include <emmintrin.h> 
 #include <functional>
 
 // Set process affinity to core 0 and highest priority

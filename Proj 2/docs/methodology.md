@@ -1,4 +1,4 @@
-# NEEDS TO BE EDITTED
+# Cache & Memory Performance Methodology
 
 ## Experimental Setup
 
@@ -10,10 +10,8 @@
 
 ### Software Configuration
 - **Compiler**: Clang 19.1.5
-- **Compiler Flags**:
-  - Scalar: `-O2 -fno-tree-vectorize -mno-sse -mno-avx`
-  - Vectorized: `-O3 -march=native -ffast-math`
-  - AVX2: `-O3 -mavx2 -mfma -ffast-math`
+- **Compiler Flags**: `-O2 -lpdh -olatency.exe -lAdvapi32`
+
 
 ### Measurement Methodology
 1. **Warm-up**: 10 iterations to populate caches
@@ -27,24 +25,22 @@
 3. **Elementwise Multiply**: z_i ← x_i * y_i
 
 ### Experimental Variables
-- **Data Types**: float32, float64
-- **Alignment**: Aligned (64-byte) vs unaligned
-- **Stride**: 1, 2, 4, 8, 16
-- **Array Sizes**: 1K to 16M elements (covering L1, L2, L3, DRAM)
-- **Compiler Optimizations**: Scalar, auto-vectorized, AVX2-targeted
+- **Access pattern/granularity**: sequential vs. random; strides ≈64B / ≈256B / ≈1024B.
+- **Read/write ratio**: 100%R, 100%W, 70/30, 50/50, 20/80.
+- **Concurrency**: MLC’s loaded-latency mode.
+
 
 ## Analysis Methods
 
 ### Performance Metrics
 - **Time**: Execution time in seconds
-- **GFLOP/s**: Billions of floating-point operations per second
-- **CPE**: Cycles per element
-- **Bandwidth**: Memory bandwidth in GB/s
-- **Speedup**: Scalar time / Vectorized time
+- **Bandwidth**: Memory bandwidth in MB/s
+- **Performance**: Operations / second
+- **Throughput**: MB / second
+- **Latency**: ns / operation, or clock cycles
 
 ### SMT Control
 - **Default**: Enabled
-- **Controlled**: Disabled via command line argument `nosmt`
 
 ### CPU Affinity and Priority
 - **Process**: Pinned to specific core
@@ -63,11 +59,6 @@
 - Mean and standard deviation across multiple runs
 - Error bars in plots represent one standard deviation
 
-### Roofline Model
-- **Arithmetic Intensity**: FLOPs per byte accessed
-- **Peak Performance**: Theoretical maximum based on CPU specifications
-- **Performance Characterization**: Compute-bound vs memory-bound
-
 ## Limitations
 
 ### Known Issues
@@ -82,15 +73,3 @@
 3. **Constant Frequency**: Disable CPU frequency scaling in BIOS if possible
 4. **Power Settings**: Use high-performance power plan
 5. **Cooling**: Ensure consistent thermal conditions with adequate cooling
-
-## Verification
-
-### Vectorization Verification'
-- Compiler reports (using `-Rpass=vector, -Rpass-missed=vectorize, -Rpass-analysis=vectorize` flags)
-- Assembly inspection for vector instructions
-- Performance patterns consistent with SIMD acceleration
-
-### Correctness Verification
-- Comparison against reference implementations
-- Validation of numerical results
-- Consistency across multiple runs

@@ -9,8 +9,8 @@
 #include <string>
 #include <regex>
 #include <filesystem>
-#include <malloc.h>  // Add for _aligned_malloc
-#include <emmintrin.h>  // Add for _mm_mfence
+#include <malloc.h>
+#include <emmintrin.h>
 
 // Windows-compatible aligned_alloc and aligned_free
 void* windows_aligned_alloc(size_t alignment, size_t size) {

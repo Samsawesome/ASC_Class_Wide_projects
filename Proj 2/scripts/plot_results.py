@@ -932,6 +932,8 @@ def plot_pattern_latency():
         means.append(statistics.mean(latencies))
         stds.append(statistics.stdev(latencies) if len(latencies) > 1 else 0)
         all_latencies.extend(latencies)
+
+    patterns.sort()
     
     if not patterns:
         print("No valid pattern data to plot")
