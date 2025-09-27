@@ -1,0 +1,6 @@
+# Run as Administrator
+.\scripts\setup_environment.ps1
+
+pip install -r requirements.txt
+
+py run_benchmarks.py --drive D: --size 10G --runs 3

@@ -1,0 +1,10 @@
+[global]
+ioengine=windowsaio
+size=100M
+filename=D:\simple_test.file
+
+[test]
+rw=read
+bs=4k
+iodepth=1
+runtime=10s

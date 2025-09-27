@@ -1,0 +1,63 @@
+; Detailed tail latency characterization
+[global]
+ioengine=windowsaio
+direct=1
+size=10G
+filename=D:\testfile
+runtime=60s
+ramp_time=10s
+group_reporting=1
+stonewall
+thread
+lat_percentiles=1
+write_lat_log=tail_latency
+
+; Low queue depth for baseline tail latency
+[tail_latency_qd1]
+rw=randread
+bs=4k
+iodepth=1
+numjobs=1
+
+; Medium queue depth
+[tail_latency_qd8]  
+rw=randread
+bs=4k
+iodepth=8
+numjobs=1
+
+; High queue depth (near knee point)
+[tail_latency_qd32]
+rw=randread
+bs=4k
+iodepth=32
+numjobs=1
+
+; Very high queue depth (saturated)
+[tail_latency_qd64]
+rw=randread
+bs=4k
+iodepth=64
+numjobs=1
+
+; With multiple jobs
+[tail_latency_qd8_jobs4]
+rw=randread
+bs=4k
+iodepth=8
+numjobs=4
+
+; Write tail latency
+[tail_latency_write_qd32]
+rw=randwrite
+bs=4k
+iodepth=32
+numjobs=1
+
+; Mixed workload tail latency
+[tail_latency_mixed_qd32]
+rw=randrw
+bs=4k
+iodepth=32
+numjobs=1
+rwmixread=70

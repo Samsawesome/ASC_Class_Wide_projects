@@ -1,0 +1,76 @@
+; Read/Write mix sweep with fixed conditions
+[global]
+ioengine=windowsaio
+direct=1
+size=10G
+filename=D:\testfile
+runtime=30s
+ramp_time=5s
+group_reporting=1
+stonewall
+thread
+
+; 100% Read
+[rw_100_0]
+rw=randread
+bs=4k
+iodepth=32
+numjobs=1
+rwmixread=100
+
+; 100% Write  
+[rw_0_100]
+rw=randwrite
+bs=4k
+iodepth=32
+numjobs=1
+rwmixread=0
+
+; 70% Read / 30% Write
+[rw_70_30]
+rw=randrw
+bs=4k
+iodepth=32
+numjobs=1
+rwmixread=70
+rwmixwrite=30
+
+; 50% Read / 50% Write
+[rw_50_50]
+rw=randrw
+bs=4k
+iodepth=32
+numjobs=1
+rwmixread=50
+rwmixwrite=50
+
+; Sequential variants
+[seq_rw_100_0]
+rw=read
+bs=128k
+iodepth=32
+numjobs=1
+rwmixread=100
+
+[seq_rw_0_100]
+rw=write
+bs=128k
+iodepth=32
+numjobs=1
+rwmixread=0
+
+[seq_rw_70_30]
+rw=rw
+bs=128k
+iodepth=32
+numjobs=1
+rwmixread=70
+rwmixwrite=30
+
+[seq_rw_50_50]
+rw=rw
+bs=128k
+iodepth=32
+numjobs=1
+rwmixread=50
+rwmixwrite=50
