@@ -67,7 +67,9 @@ class ResultParser:
                 rows.append(row)
         
         df = pd.DataFrame(rows)
-        return self._calculate_derived_metrics(df)
+        df = self._calculate_derived_metrics(df)
+        df = self._clean_nan_values(df)
+        return df
     
     def _parse_job_name_improved(self, job_name: str, job_data: Dict) -> Dict:
         """Improved job name parser that handles various FIO job name formats"""
@@ -116,7 +118,32 @@ class ResultParser:
             else:
                 params['pattern'] = 'sequential'
         
+        # Extract read mix for rw_mix jobs
+        if 'rw_' in job_name.lower():
+            mix_match = re.search(r'rw_(\d+)_(\d+)', job_name.lower())
+            if mix_match:
+                params['read_mix'] = int(mix_match.group(1))
+            elif '100_0' in job_name.lower():
+                params['read_mix'] = 100
+            elif '0_100' in job_name.lower():
+                params['read_mix'] = 0
+            elif '70_30' in job_name.lower():
+                params['read_mix'] = 70
+            elif '50_50' in job_name.lower():
+                params['read_mix'] = 50
+        
         return params
+    
+    def _clean_nan_values(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Clean NaN values from the dataframe"""
+        # Replace infinite values with NaN first
+        df = df.replace([np.inf, -np.inf], np.nan)
+        
+        # For numeric columns, fill NaN with 0 (appropriate for performance metrics)
+        numeric_cols = df.select_dtypes(include=[np.number]).columns
+        df[numeric_cols] = df[numeric_cols].fillna(0)
+    
+        return df
     
     def _calculate_derived_metrics(self, df: pd.DataFrame) -> pd.DataFrame:
         """Calculate derived metrics like MB/s, us latency"""

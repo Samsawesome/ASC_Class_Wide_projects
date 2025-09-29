@@ -24,7 +24,7 @@ def check_fio_available():
     try:
         result = subprocess.run(['fio', '--version'], 
                               capture_output=True, text=True, timeout=30, check=True)
-        print(f"✓ FIO detected: {result.stdout.strip()}")
+        print(f"FIO detected: {result.stdout.strip()}")
         return True
     except (subprocess.CalledProcessError, FileNotFoundError, subprocess.TimeoutExpired) as e:
         print(f"ERROR: FIO check failed: {e}")
@@ -110,21 +110,21 @@ def main():
                 
                 output_file = f'results/{config_name}_{timestamp}.csv'
                 df.to_csv(output_file, index=False)
-                print(f"✓ Saved results to {output_file}")
+                print(f"Saved results to {output_file}")
                 
                 # Generate plots if requested
                 if not args.skip_plots:
                     plotter.generate_plots(df, config_name)
-                    print(f"✓ Generated plots for {description}")
+                    print(f"Generated plots for {description}")
                 else:
-                    print(f"⏭️  Skipped plots for {description}")
+                    print(f"Skipped plots for {description}")
                     
             else:
-                print(f"✗ No results for {description}")
+                print(f"No results for {description}")
                 all_successful = False
                 
         except Exception as e:
-            print(f"✗ Error running {description}: {e}")
+            print(f"Error running {description}: {e}")
             import traceback
             traceback.print_exc()
             all_successful = False

@@ -60,7 +60,7 @@ class FioRunner:
             # Try to parse JSON
             try:
                 data = json.loads(json_output)
-                print("✓ JSON parsed successfully")
+                print("JSON parsed successfully")
                 return data
             except json.JSONDecodeError as e:
                 print(f"ERROR: Failed to parse cleaned JSON: {e}")
@@ -142,9 +142,9 @@ numjobs=4
                 for job in result['jobs']:
                     job['run_id'] = run
                 all_results.append(result)
-                print(f"✓ Run {run + 1} completed successfully")
+                print(f"Run {run + 1} completed successfully")
             else:
-                print(f"✗ Run {run + 1} failed")
+                print(f"Run {run + 1} failed")
                 # Don't continue if first run fails
                 if run == 0:
                     print("Stopping benchmark due to first run failure")
