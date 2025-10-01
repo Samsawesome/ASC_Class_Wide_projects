@@ -27,8 +27,11 @@ A comprehensive toolset for analyzing SSD performance characteristics using FIO.
 2. **Run all benchmarks:**
 ```bash py run_benchmarks.py --drive D: --size 10G --runs 3```
 
-3. **View results in results/ directory**
+3. **View results in results/ and plots/ directories**
 
 4. **View analysis and methodology in docs/ directory**
+
+## Additional Notes
+Two files are two big to upload to GitHub, so there will be missing files upon downloading this project from GitHub. A rerun of the experiments by running the quick start commands above is recommended to generate all files.
 
 

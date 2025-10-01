@@ -2,41 +2,43 @@
 
 A comprehensive program for analyzing vectorized SIMD cache speedups versus  scalar instructions.
 
-
 ## Features
+- Baseline scalar vesus SIMD speedup across multiple common kernels
+- Analysis across multiple common kernels for vector alignment and locality sweeps
+- Comparisons between different data types and stride impacts
+- Automated vectorization reports and disassemblies
+- Automated plotting and analysis
 
-- some features
 
 ## Prerequisites
 - Windows 10/11
 - Python 3.8+
-- idk
 - Administrator privileges for setup
-- smth else?
+- Python extensions: pandas, matplotlib, glob, numpy, seaborn, and other OS specific imports
 
 ## Quick Start
 # Run All as Administrator
-1. **below**
-scripts/run_intel_MLC.bat
+1. **Compile Step**
+```bash src\build.bat```
 
-2. **below**
+2. **Run experiments**
 
-scripts/run_experiments.bat
+```bash scripts/run_experiments.bat```
+3. **Analyze Data and Generate Plots**
 
-3. **View results in results/ directory**
+```bash py analysis\analyze_results.py```
 
+4. **Generate Roofline Analysis**
 
+```bash py analysis\roofline_analysis.py```
 
+5. **Generate Vectorization Verification Reports and Disassemblies**
 
+```bash analysis\run_vectorization_verify.bat```
 
-To run (in order):
-Run src\build.bat
-Run src\run_experiments.bat
-Run analysis\analyze_results.py
-Run analysis\roofline_analysis.py
-Run analysis\run_vectorization_verify.bat
+6. **View results in results/ directory**
 
+7. **View vectorization results in analysis/ directory**
 
-Methodology and my hypothesis/observations can be found in docs\
+8. **View analysis and methodology in docs/ directory**
 
-Python extensions might need to be personally installed (such as pandas)

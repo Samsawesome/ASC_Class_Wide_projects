@@ -2,26 +2,23 @@
 
 ## Known Limitations & Anomalies
 
-### 1. 256B Block Size Performance Anomaly
+### 1. 256B Sequential Block Size Performance Anomaly
 
-**Observation:** The 256B block size configuration exhibited unexpectedly lower bandwidth compared to adjacent block sizes, breaking the expected performance correlation.
+**Observation:** The 256B sequential block size configuration showed unexpectedly lower bandwidth compared to adjacent block sizes, breaking the expected positive correlation.
 
-**Hypothesis:** This anomaly likely results from cache thrashing effects in the processor's memory hierarchy. Modern CPU caches typically feature 4-way or 8-way associativity. When performing 256B accesses, the workload may be mapping to only 4 cache lines simultaneously, creating contention and reducing effective bandwidth utilization. The memory controller's prefetching algorithms may also be less effective at this specific block size, failing to optimize data movement patterns.
+**Hypothesis:** This likely results from cache thrashing effects in the processor's memory hierarchy. Modern CPU caches typically feature 4-way or 8-way associativity. When performing 256B accesses, the workload may be mapping to only 4 cache lines simultaneously, creating contention and reducing effective bandwidth utilization. This hints towards my CPU's caches using 4-way associativity.
 
 ### 2. IOPS Saturation at High Queue Depths
 
-**Observation:** The read/write mix analysis showed significant read latency variance only in the 100% read configuration, contrary to expected patterns.
+**Observation:** The queue depth sweep revealed a distinct IOPS saturation point where additional queue depth failed to significantly improve throughput.
 
-**Hypothesis:** This saturation represents the fundamental throughput limit of the storage controller. Beyond this point, the device has reached its maximum command processing capability, and additional queued commands only increase latency without improving throughput. This behavior is characteristic of Amdahl's Law in storage systems, where parallelization benefits diminish as system bottlenecks become dominant.
+**Hypothesis:** This saturation is the throughput limit of my storage controllers. Beyond this point, my device has reached its maximum processing capability, and additional queued commands increase only latency without improving IOPS. 
 
 ### 3. Read Latency Variance in Mixed Workloads
 
-**Observation:** Read in read/write sweep had only one non-negligable latency error when 100% read
+**Observation:** The read/write mix analysis showed significant read latency error only in the 100% read configuration, contrary to expected patterns.
 
-**Hypothesis:** This counterintuitive result may stem from the storage controller's quality-of-service (QoS) algorithms and background operations. During pure read workloads, the controller may opportunistically execute background maintenance tasks (garbage collection, wear leveling) that temporarily impact read latency. In mixed workloads, the controller's scheduling algorithms may prioritize maintaining consistent latency profiles across operation types.
-
-
-
+**Hypothesis:** This counterintuitive result may stem from the storage controller's algorithms and background operations. During pure read workloads, the controller may opportunistically execute background maintenance tasks that temporarily impact read latency, such as garbage collection. In mixed workloads, the controller's scheduling algorithms may prioritize maintaining consistent latency profiles for read operations.
 
 
 ## Block Size & Pattern Sweep Analysis
@@ -29,22 +26,23 @@
 ### Key Performance Characteristics
 
 **Random Access Pattern:**
-- Demonstrated strong negative correlation between IOPS and block size (R² = 0.94)
-- Performance dominated by command processing overhead at smaller block sizes
-- Exponential IOPS degradation as block size increases
+- Negative correlation between IOPS and block size 
+- Performance dominated at smaller block sizes
+- Increased latency as block size increases
+
 **Sequential Access Pattern:**
-- Exhibited positive correlation between bandwidth and block size (R² = 0.89)
-
-- Performance limited by interface bandwidth and controller efficiency at larger block sizes
-
+- Positive correlation between bandwidth and block size
+- Performance limited by bandwidth at larger block sizes
 - Linear bandwidth scaling until physical interface limits
+- Increased latency as block size increases
+
 ### Architectural Crossover Point
 
-**Critical Finding:** Both access patterns transitioned from IOPS-dominated to bandwidth-dominated regimes at the 64KB block size threshold.
+**Critical Finding:** Both access patterns transitioned from IOPS-dominated to bandwidth-dominated regimes around 64KB block size threshold.
 
 **Technical Explanation:**
-- IOPS-dominated regime (≤64KB): Performance is constrained by the storage controller's command processing capability and protocol overhead. Smaller transactions maximize the number of operations per second but underutilize available bandwidth.
-- Bandwidth-dominated regime (≥64KB): Performance becomes limited by the physical interface bandwidth (SATA/NVMe bandwidth) and NAND flash array throughput. Larger transactions minimize protocol overhead but reduce operational density.
+- IOPS-dominated regime (≤64KB): Performance is constrained by the storage controller's processing capability and latency. Smaller operations maximize IOPS but underutilize available bandwidth.
+- Bandwidth-dominated regime (≥64KB): Performance becomes limited by bandwidth. Larger operations maximize bandwidth usage and become limited by latency.
 
 **Fundamental Difference Between Patterns:** Sequential access optimizes for bandwidth efficiency by enabling prefetching and read-ahead algorithms, while random access maximizes IOPS by leveraging the controller's parallel command processing capabilities. This distinction arises from how each pattern interacts with the storage media's physical characteristics and the controller's scheduling algorithms.
 
@@ -52,28 +50,27 @@
 ## Read/Write Mix Sweep Analysis
 ### Performance Asymmetry Characteristics
 **Throughput Analysis:**
-- Read operations demonstrated 8-12% higher IOPS compared to write operations at equivalent queue depths
-- Optimal throughput balance achieved at 70% read / 30% write mix
-- Maximum aggregate IOPS observed at the 70/30 ratio (142K IOPS vs 135K at 100% read)
+- Read operations demonstrated ~10% higher IOPS compared to write operations
+- Maximum IOPS achieved at 70/30 read write mix
 
 **Latency Characteristics:**
-- Write operations exhibited 2.3× higher latency variance compared to reads
-- Read latency remained relatively stable across mix ratios (σ = 18.2μs)
-- Write latency showed significant sensitivity to workload composition (σ = 42.7μs)
+- Write operations had comparable latency to reads at 50/50 mix, but much higher relative latency at 70/30 read write mix
+- Write operations also had very high latency error
+- Read latency appearred parabolic, with 50/50 and 100% read having higher latency than 70/30 read write mix
 
 ### Architectural Explanations
 
-**Write Amplification Impact:** Write operations inherently suffer from write amplification in flash-based storage, where physical writes exceed logical writes due to garbage collection and wear leveling. This fundamental characteristic explains both the performance penalty and increased latency variance.
+**Write Latency Differences:** Write operations suffer from increased latency as the number of write operations increases, where physical writes exceed digital writes. This explains both the performance penalty and increased latency error.
 
-**Controller Buffer Dynamics:** The performance optimum at 70/30 mix suggests the controller's buffer management algorithms achieve optimal efficiency when balancing read and write command streams. This ratio likely maximizes concurrent execution opportunities while minimizing resource contention.
+**Performance Maximum:** The performance maximum at 70/30 read write mix hints that the memory controller's algorithms achieve maximum efficiency when balancing read and write commands. This ratio most likely optimizes parallel executions.
 
-**Error Variance Explanation:** The higher write latency variance stems from the non-deterministic nature of flash program/erase cycles and background maintenance operations. Read operations, being non-destructive, benefit from more predictable access patterns and controller optimizations.
+
 
 ## Queue Depth & Parallelism Analysis
 ### Scalability Characterization
 
 **Knee Point Identification:**
-Through systematic analysis, the performance knee point was identified at approximately 120 KIOPS, corresponding to a queue depth of 32.
+The knee point was identified to be at ~120 KIOPS, at a queue depth(QD) of 32.
 
 **Little's Law Validation:**
 At the identified knee point:
@@ -84,25 +81,25 @@ At the identified knee point:
 
 -Concurrency (L) = λ × W = 21.6
 
-This calculated concurrency of 21.66 is close to the actual queue depth of 32 in this region, validating Little's Law application to storage subsystem analysis. If a queue depth between 16 and 32 was added to the simulation, there is a strong chance the knee point would be found there instead.
+This calculated concurrency of 21.6 is close to the actual QD of 32 in this region. If a QD between 16 and 32 was added to the simulation, there is a strong possibility the knee point would be found there instead.
 
 
 ### Diminishing Returns Analysis
 
 **Performance Regions:**
-1. **Linear Scaling (QD 1-16):** Near-linear throughput improvement with minimal latency impact
+1. **Linear Scaling (QD 1-16):** Almost exponential IOPS improvement with almost no latency impact
 
-2. **Transition Zone (QD 16-32):** Diminishing throughput gains with moderate latency increases
+2. **Transition Zone (QD 16-32):** Diminishing IOPS gains with larger latency increases
 
-3. **Saturation Region (QD >32):** Negligible throughput improvement with exponential latency growth
+3. **Saturation Region (QD >32):** Minimal throughput improvement with massive latency growth
 
 **Tail Latency Implications:**
 
-The p95 and p99 latency percentiles exhibited significant degradation at the knee point:
+The p95 and p99 latency percentiles showed a large latency increase around the knee point:
 
 - p95 latency increased ~3× from QD8 to QD32
 
 - p99 latency also increased ~3x over the same range
 
-This demonstrates that while average throughput may appear stable, user-experienced latency can degrade substantially in saturated conditions.
+This shows that while average throughput may appear stable, latency can increase substantially in conditions with high queue depths.
 
